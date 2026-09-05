@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="../fonts/AirbnbCereal_W_Bk.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="../fonts/AirbnbCereal_W_Bd.otf" as="font" type="font/otf" crossorigin>
+  <title>VUI Design — Set Up Meetings by Voice | Shilue's Portfolio</title>
+  <meta name="description" content="Voice UI design exploration: setting up meetings with voice commands while driving." />
+  <link rel="icon" type="image/png" href="../images/avatar-header.png" />
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="../index.html" class="brand" aria-label="Shilue's Portfolio home">
+        <span class="brand-avatar"><img class="brand-avatar__default" src="../images/avatar-header.png" alt="Shilue logo" /><img class="brand-avatar__hover" src="../images/avatar-header-hover.png" alt="" /></span>
+        <span>Shilue's Portfolio</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="../index.html">Projects</a>
+        <a href="index.html" class="is-active">Playgrounds</a>
+        <a href="../resume.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="cs-hero" style="background:#1a1a2e;">
+      <img src="../images/11062b_4b7c9a8e48334d5aad2fd274fddba3bc~mv2.jpg" alt="VUI Design background" style="opacity:0.7;" />
+    </section>
+
+    <div class="cs-intro">
+      <p class="cs-label">Playground · Voice UI Design</p>
+      <h1 class="cs-title">VUI Design — Set Up Meetings with Voice</h1>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><strong>Context</strong><span>Driving scenario — hands-free interaction</span></div>
+        <div class="cs-meta-item"><strong>Type</strong><span>Voice User Interface Design</span></div>
+        <div class="cs-meta-item"><strong>Tags</strong><span>VUI · Interaction Design · Exploration</span></div>
+      </div>
+      <p class="cs-overview">
+        A voice interface design exploration for setting up meetings while driving. This project explores how to design a natural, efficient voice-first experience for scheduling — handling multi-participant meetings, conflict resolution, and confirmation flows entirely through voice commands.
+      </p>
+    </div>
+
+    <div class="cs-body">
+
+      <section class="cs-section">
+        <h2>Design Overview</h2>
+        <figure class="cs-img">
+          <img src="../images/efcc58_1f5801a412d24726ab71b10091e74a2b~mv2.png" alt="VUI flow overview" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_ce32c49e1fc84b56bb50b21e6b20e864~mv2.png" alt="Voice interaction diagram" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Interaction Patterns</h2>
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_92dc6fdffa084cf59847b04ad5d49c8f~mv2.png" alt="VUI interaction pattern — confirmation" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_8eb1229e3b8649c386ba989782435785~mv2.png" alt="VUI interaction pattern — error handling" />
+          </figure>
+        </div>
+        <figure class="cs-img">
+          <img src="../images/efcc58_335bb85e663f4aafaa09d327ac956da2~mv2.png" alt="Voice command flows" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Visual Design</h2>
+        <figure class="cs-img">
+          <img src="../images/efcc58_260d0bf67544413ab619f75527eb85d6~mv2.png" alt="Visual design components" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_92c01d774a17484e81cdf771965f34db~mv2.png" alt="Final VUI screens" />
+        </figure>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p><p class="wow-sig">SHILUE &nbsp;·&nbsp; 2026</p></p>
+    <nav class="footer-nav">
+      <a href="index.html">← Back to Playgrounds</a>
+    </nav>
+  </footer>
+
+
+<script>
+  // Prefetch same-origin html links on hover — near-instant navigation
+  (function(){
+    var prefetched = new Set();
+    document.addEventListener('mouseover', function(e){
+      var link = e.target.closest && e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.href;
+      if (!href || prefetched.has(href)) return;
+      // Only same-origin html
+      try { var u = new URL(href, location.href); if (u.origin !== location.origin) return; } catch(e){ return; }
+      if (!/\.html($|\?|#)/.test(u.pathname) && u.pathname !== '/' && !u.pathname.endsWith('/')) return;
+      var l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = href; l.as = 'document';
+      document.head.appendChild(l);
+      prefetched.add(href);
+    }, { passive: true });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="fonts/AirbnbCereal_W_Bk.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/AirbnbCereal_W_Bd.otf" as="font" type="font/otf" crossorigin>
+  <title>About | Shilue's Portfolio</title>
+  <meta name="description" content="Shilue Xue — Senior UX Designer at Trip.com. HCI graduate, Beihang University (Automation engineering), UT Austin (HCI). Previously LinkedIn and Alibaba Group." />
+  <link rel="icon" type="image/png" href="images/avatar-header.png" />
+  <style>
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 300; font-style: normal; src: url('fonts/AirbnbCereal_W_Lt.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 400; font-style: normal; src: url('fonts/AirbnbCereal_W_Bk.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 500; font-style: normal; src: url('fonts/AirbnbCereal_W_Md.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 700; font-style: normal; src: url('fonts/AirbnbCereal_W_Bd.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 800; font-style: normal; src: url('fonts/AirbnbCereal_W_XBd.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 900; font-style: normal; src: url('fonts/AirbnbCereal_W_Blk.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Cereal-fallback'; src: local('Arial'); size-adjust: 102%; ascent-override: 92%; descent-override: 22%; line-gap-override: 0%; }
+
+:root {
+  --color-text: #1C3142;
+  --color-text-deep: #0E1821;
+  --color-text-muted: #4A5868;
+  --color-bg: #FFFFFF;
+  --color-divider: #E5E7EB;
+  --color-accent: #C24A3A;
+  --font-sans: "Airbnb Cereal App", "Cereal-fallback", "Inter", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  --container-width: 800px;
+  --header-height: 80px;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { opacity: 0.85; transition: opacity .2s ease; }
+.brand:hover { opacity: 1; }
+img { max-width: 100%; display: block; }
+.container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0;
+  background: rgba(255,255,255,.94);
+  backdrop-filter: saturate(180%) blur(8px);
+  z-index: 100;
+  height: var(--header-height);
+  display: flex; align-items: center;
+}
+.site-header__inner {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+}
+.brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 700; color: var(--color-text); }
+.brand-avatar { position: relative; width: 38px; height: 40px; flex-shrink: 0; }
+.brand-avatar img { position: absolute; top: 0; left: 0; width: 38px; height: 40px; object-fit: cover; border-radius: 50%; transition: opacity .2s ease; }
+.brand-avatar__hover { opacity: 0; }
+.brand:hover .brand-avatar__default { opacity: 0; }
+.brand:hover .brand-avatar__hover { opacity: 1; }
+.nav { display: flex; gap: 60px; align-items: center; }
+.nav a { font-size: 16px; font-weight: 500; color: var(--color-text); transition: color .25s ease; }
+.nav a:hover { color: var(--color-text-muted); opacity: 1; }
+.nav a.is-active { color: #0A66C2; }
+
+/* About hero */
+.about-hero {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 72px 24px 56px;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 64px;
+  align-items: center;
+}
+.about-hero__copy h1 {
+  font-size: 44px; font-weight: 700; line-height: 1.15;
+  margin: 0 0 24px; color: var(--color-text-deep);
+  letter-spacing: -0.005em;
+}
+.about-hero__copy p {
+  font-size: 18px; line-height: 1.7;
+  color: var(--color-text); margin: 0 0 16px;
+}
+.about-hero__img img {
+  width: 100%; height: auto; border-radius: 8px;
+}
+
+/* Landscape photo */
+.about-photo {
+  width: 100%; overflow: hidden; margin: 0 0 56px;
+  max-height: 420px;
+}
+.about-photo img {
+  width: 100%; height: 420px; object-fit: cover; object-position: center 40%;
+}
+
+/* Content sections */
+.about-content { max-width: var(--container-width); margin: 0 auto; padding: 0 24px 80px; }
+
+.about-section { padding: 48px 0; border-bottom: 1px solid var(--color-divider); }
+.about-section:last-child { border-bottom: none; }
+.about-section h2 {
+  font-size: 26px; font-weight: 700;
+  margin: 0 0 24px; color: var(--color-text-deep);
+}
+.about-section p {
+  font-size: 16px; line-height: 1.75;
+  color: var(--color-text); margin: 0 0 16px;
+}
+.about-section ul { padding-left: 20px; margin: 0 0 16px; }
+.about-section li { font-size: 16px; line-height: 1.75; color: var(--color-text); margin-bottom: 8px; }
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 32px; margin-top: 8px; }
+.faq-item {}
+.faq-q {
+  font-size: 17px; font-weight: 600;
+  color: var(--color-text-deep); margin: 0 0 12px;
+  padding-left: 20px;
+  position: relative;
+}
+.faq-q::before {
+  content: "Q";
+  position: absolute; left: 0;
+  color: var(--color-accent); font-weight: 700;
+}
+.faq-a {
+  font-size: 16px; line-height: 1.75;
+  color: var(--color-text); margin: 0;
+  padding-left: 20px;
+}
+
+/* Experience timeline */
+.exp-list { display: flex; flex-direction: column; gap: 24px; }
+.exp-item { display: flex; gap: 24px; }
+.exp-year {
+  font-size: 13px; font-weight: 600; color: var(--color-text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  min-width: 80px; padding-top: 3px;
+}
+.exp-detail h3 { font-size: 16px; font-weight: 600; margin: 0 0 4px; color: var(--color-text-deep); }
+.exp-detail p { font-size: 15px; color: var(--color-text-muted); margin: 0; }
+
+/* Quote */
+.about-quote {
+  font-size: 22px; font-style: italic;
+  line-height: 1.6; color: var(--color-text-deep);
+  border-left: 3px solid var(--color-accent);
+  padding: 4px 0 4px 24px;
+  margin: 32px 0;
+}
+
+/* Footer */
+.site-footer {
+  padding: 48px 24px; text-align: center;
+  font-size: 15px; color: var(--color-text-muted);
+  border-top: 1px solid var(--color-divider);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .nav { gap: 36px; }
+}
+@media (max-width: 768px) {
+  :root { --container-width: 100%; }
+  .site-header { height: 68px; }
+  .brand-avatar { width: 34px; height: 36px; } .brand-avatar img { width: 34px; height: 36px; }
+  .nav { gap: 24px; }
+  .nav a { font-size: 15px; }
+  .about-hero {
+    grid-template-columns: 1fr;
+    padding: 48px 28px 40px;
+    gap: 32px;
+  }
+  .about-hero__copy h1 { font-size: 36px; }
+  .about-hero__img { max-width: 280px; }
+  .about-content { padding-left: 28px; padding-right: 28px; }
+  .about-photo { max-height: 280px; }
+  .about-photo img { height: 280px; }
+}
+@media (max-width: 600px) {
+  .site-header { height: 60px; }
+  .brand span { font-size: 15px; }
+  .nav { gap: 18px; }
+  .nav a { font-size: 14px; }
+  .about-hero { padding: 40px 20px 32px; }
+  .about-hero__copy h1 { font-size: 30px; }
+  .about-content { padding-left: 20px; padding-right: 20px; }
+  .about-section h2 { font-size: 22px; }
+}
+@media (max-width: 380px) {
+  .nav { gap: 14px; }
+  .nav a { font-size: 13px; }
+}
+  
+/* ============ Header unified — fixed max-width across all pages (kills nav jitter) ============ */
+.site-header__inner{max-width:1200px !important;margin:0 auto !important;padding:0 24px !important;width:100% !important;box-sizing:border-box}
+
+
+/* ============ Nav unified — same size/spacing across all pages & breakpoints (kills switch-jitter) ============ */
+.nav{display:flex !important;gap:48px !important;align-items:center !important}
+.nav a{font-size:16px !important;font-weight:500 !important;padding:6px 0 !important}
+@media (max-width:900px){.nav{gap:32px !important}}
+@media (max-width:600px){.nav{gap:20px !important}}
+
+
+
+
+/* ============ Cross-page View Transitions (Chrome/Edge 126+, Safari 18+) ============ */
+@view-transition { navigation: auto; }
+::view-transition-old(root),::view-transition-new(root){animation-duration:.18s;animation-timing-function:cubic-bezier(.4,0,.2,1);mix-blend-mode:normal}
+::view-transition-old(root){animation-name:vt-fade-out}
+::view-transition-new(root){animation-name:vt-fade-in}
+@keyframes vt-fade-out{to{opacity:0}}
+@keyframes vt-fade-in{from{opacity:0}}
+
+
+/* ============ About page — Batch 1 (Hero + Bio + Milestones + Beyond) ============ */
+.container{max-width:1140px;margin:0 auto;padding-left:24px;padding-right:24px;box-sizing:border-box}
+.ab-overline{font-size:11px;font-weight:700;color:#0A66C2;letter-spacing:0.22em;text-transform:uppercase;margin:0 0 20px;font-family:var(--font-sans)}
+.ab-p{font-size:17px;line-height:1.7;color:var(--color-text);margin:0 0 18px;font-weight:400}
+.ab-p:last-child{margin-bottom:0}
+.ab-p strong{color:var(--color-text-deep);font-weight:700}
+.ab-p em{font-style:italic;color:#0A66C2;font-weight:500}
+.ab-h2{font-size:28px;font-weight:700;color:var(--color-text-deep);letter-spacing:-0.005em;line-height:1.3;margin:0 0 32px}
+
+/* HERO */
+.ab-hero{padding:96px 24px 48px;display:grid;grid-template-columns:1fr 380px;gap:56px;align-items:center;max-width:900px;margin:0 auto}
+.ab-hero__copy .ab-overline{margin-bottom:32px}
+.ab-hero__name{font-size:64px;font-weight:700;color:var(--color-text-deep);line-height:1.05;letter-spacing:-0.02em;margin:0 0 28px;font-family:var(--font-sans)}
+.ab-hero__role{font-size:19px;line-height:1.55;color:var(--color-text);margin:0 0 8px;font-weight:400}
+.ab-hero__role strong{color:var(--color-text-deep);font-weight:700}
+.ab-hero__prev{font-size:15px;line-height:1.55;color:var(--color-text-muted);margin:0;font-weight:400}
+.ab-hero__portrait{max-width:300px}
+.ab-hero__portrait img{width:100%;height:auto;border-radius:14px;display:block;box-shadow:0 20px 44px -20px rgba(15,24,33,.20),0 4px 12px -4px rgba(15,24,33,.06)}
+
+/* STATEMENT — editorial lead paragraph, breathes on its own */
+.ab-statement{padding:48px 24px 72px;max-width:900px;margin:0 auto}
+.ab-statement__text{font-family:var(--font-sans);font-size:32px;font-weight:400;line-height:1.35;color:var(--color-text-deep);letter-spacing:-0.008em;margin:0;text-align:left}
+.ab-statement__text em{font-style:italic;color:#0A66C2;font-weight:500}
+
+/* BIO */
+.ab-bio{padding:56px 24px;display:grid;grid-template-columns:1fr 320px;gap:64px;align-items:start;border-top:1px solid var(--color-divider)}
+.ab-bio__col--main .ab-p{font-size:18px;line-height:1.75}
+.ab-pull-quote{font-family:var(--font-sans);font-size:20px;font-style:italic;line-height:1.45;color:var(--color-text-deep);padding:24px 0 24px 20px;margin:0;border-left:3px solid #0A66C2;font-weight:400;letter-spacing:-0.002em}
+
+/* MILESTONES + BEYOND — moved to editorial list below */
+
+@media (max-width:900px){
+  .ab-hero{grid-template-columns:1fr;padding:56px 24px 40px;gap:40px}
+  .ab-hero__portrait{max-width:260px;margin:0 auto}
+  .ab-hero__name{font-size:44px}
+  .ab-statement__text{font-size:24px}
+  .ab-bio{grid-template-columns:1fr;gap:32px}
+  .ab-milestones__grid{grid-template-columns:1fr 1fr}
+  .ab-beyond__grid{grid-template-columns:1fr;gap:32px}
+}
+@media (max-width:560px){
+  .ab-milestones__grid{grid-template-columns:1fr}
+  .ab-beyond__stats{grid-template-columns:1fr 1fr}
+  .ab-stat:nth-child(3){grid-column:1 / -1}
+  .ab-hero__name{font-size:36px}
+  .ab-statement__text{font-size:20px}
+  .ab-h2{font-size:22px}
+}
+
+
+/* ============ ABOUT — editorial long-form ============ */
+.ab-prose{max-width:900px;margin:0 auto;padding:16px 0}
+.ab-lead{font-family:var(--font-sans);font-size:22px;font-weight:400;line-height:1.55;color:var(--color-text-deep);letter-spacing:-0.005em;margin:0 0 28px}
+.ab-lead strong{font-weight:600;color:var(--color-text-deep)}
+.ab-body{font-size:17px;line-height:1.8;color:var(--color-text);margin:0 0 22px;font-weight:400}
+.ab-body:last-child{margin-bottom:0}
+.ab-body strong{color:var(--color-text-deep);font-weight:700}
+.ab-body em{font-style:italic;color:#0A66C2;font-weight:500}
+
+.ab-section{padding:64px 24px;border-top:1px solid var(--color-divider)}
+.ab-section .ab-h2{font-family:var(--font-sans);font-size:34px;font-weight:700;color:var(--color-text-deep);letter-spacing:-0.012em;margin:0 auto 32px;max-width:900px;line-height:1.2}
+.ab-section .ab-prose{padding:0}
+
+/* Inline scale callout inside beyond section */
+.ab-scale-note{display:flex;align-items:baseline;gap:16px;padding:20px 24px;margin:32px 0;background:#F9FAFB;border-left:3px solid #0A66C2;border-radius:0 8px 8px 0}
+.ab-scale-note__k{font-size:11px;font-weight:700;color:#0A66C2;letter-spacing:0.22em;text-transform:uppercase;font-family:var(--font-sans);flex-shrink:0}
+.ab-scale-note__v{font-size:15px;color:var(--color-text-deep);font-weight:500;line-height:1.5;font-family:var(--font-sans)}
+
+/* Milestones as editorial numbered list */
+.ab-milestone-list{list-style:none;padding:0;margin:0;max-width:900px;margin:0 auto;counter-reset:milestone}
+.ab-milestone-list li{padding:24px 0;border-top:1px solid var(--color-divider);display:block}
+.ab-milestone-list li:first-child{border-top:none;padding-top:8px}
+.ab-milestone-list__head{font-size:19px;font-weight:700;color:var(--color-text-deep);margin:0 0 8px;line-height:1.4;font-family:var(--font-sans);letter-spacing:-0.003em;display:flex;align-items:baseline;gap:16px}
+.ab-mm{font-family:var(--font-sans);font-size:12px;font-weight:700;color:#0A66C2;letter-spacing:0.15em;flex-shrink:0;min-width:24px}
+.ab-milestone-list__note{font-size:15px;line-height:1.6;color:var(--color-text-muted);margin:0 0 0 40px;font-weight:400}
+.ab-milestone-list__prev{font-size:14px;color:var(--color-text-muted);margin:32px auto 0;max-width:900px;font-family:var(--font-sans);font-weight:400}
+.ab-milestone-list__prev strong{color:var(--color-text-deep);font-weight:700}
+
+@media (max-width:900px){
+  .ab-lead{font-size:19px}
+  .ab-section .ab-h2{font-size:28px}
+  .ab-milestone-list__head{font-size:17px;flex-direction:column;gap:4px}
+  .ab-milestone-list__note{margin-left:0}
+}
+
+
+/* ============ Decorative touches — dots, quote marks, drop cap ============ */
+.ab-overline{display:inline-flex;align-items:center;gap:10px}
+.ab-overline__dot{width:6px;height:6px;background:#F5A623;border-radius:50%;display:inline-block}
+.ab-hero__name{position:relative;display:inline-block;cursor:pointer;user-select:none;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.ab-hero__name:hover{transform:translateX(2px)}
+.ab-hero__dot{display:inline-block;width:14px;height:14px;background:#F5A623;border-radius:50%;margin-left:4px;vertical-align:baseline;cursor:pointer;transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s ease;pointer-events:auto;border:none;padding:0}
+.ab-hero__copy:hover .ab-hero__dot{animation:wow-dot-pulse 1.8s ease-in-out infinite}
+.ab-hero__dot:hover{transform:scale(1.4);box-shadow:0 4px 14px -2px rgba(245,166,35,.7)}
+@keyframes wow-dot-pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(245,166,35,.5)}50%{transform:scale(1.2);box-shadow:0 0 0 8px rgba(245,166,35,0)}}
+
+/* Statement: magazine pull quote with big serif quote mark */
+.ab-statement__wrap{position:relative;padding-left:64px}
+.ab-statement__mark{position:absolute;left:0;top:-20px;font-family:Georgia,"Times New Roman",serif;font-size:120px;line-height:1;color:#0A66C2;opacity:0.14;font-weight:400}
+.ab-statement__text{font-family:var(--font-sans);font-size:34px;font-weight:400;line-height:1.35;color:var(--color-text-deep);letter-spacing:-0.008em;margin:0}
+
+/* Drop cap on first paragraph */
+.ab-lead--dropcap::first-letter{float:left;font-family:var(--font-sans);font-size:78px;font-weight:800;line-height:0.9;padding:8px 12px 0 0;color:#0A66C2;letter-spacing:-0.03em}
+
+/* Refine hero role/prev to look more editorial */
+.ab-hero__role{font-size:18px;font-weight:400;color:var(--color-text-deep);letter-spacing:-0.002em}
+.ab-hero__role strong{font-weight:700}
+.ab-hero__prev{font-size:13px;font-weight:600;color:var(--color-text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:16px;font-family:var(--font-sans)}
+
+/* Portrait — subtle tilt + refined shadow */
+.ab-hero__portrait{max-width:380px;transform:rotate(-1.2deg);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.ab-hero__portrait:hover{transform:rotate(0)}
+.ab-hero__portrait img{border-radius:12px !important}
+
+@media (max-width:900px){
+  .ab-statement__wrap{padding-left:0}
+  .ab-statement__mark{position:relative;font-size:80px;top:0;display:block;margin-bottom:-24px}
+  .ab-lead--dropcap::first-letter{font-size:56px}
+}
+
+
+/* ============ Interactions — CSS support for JS effects ============ */
+/* Reveal-on-scroll base */
+[data-reveal]{opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+[data-reveal].is-visible{opacity:1;transform:none}
+
+/* Statement word-by-word reveal */
+.ab-statement__text .word{display:inline-block;opacity:0;transform:translateY(6px);transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1)}
+.ab-statement__text.is-visible .word{opacity:1;transform:none}
+.ab-statement__text .word em{font-style:italic;color:#0A66C2;font-weight:500}
+
+/* Typewriter cursor */
+.ab-hero__name-typed{display:inline-block}
+.ab-hero__caret{display:inline-block;width:4px;height:0.9em;background:#0A66C2;margin-left:4px;vertical-align:baseline;transform:translateY(6px);animation:ab-caret 1s steps(2,end) infinite}
+@keyframes ab-caret{50%{opacity:0}}
+.ab-hero__caret--done{animation:none;opacity:0;transition:opacity .3s ease}
+
+/* Portrait 3D tilt */
+.ab-hero__portrait{perspective:1000px;transform-style:preserve-3d}
+.ab-hero__portrait img{transition:transform .4s cubic-bezier(.4,0,.2,1);will-change:transform;backface-visibility:hidden}
+
+/* Floating yellow dot cursor companion */
+.ab-cursor-dot{position:fixed;top:0;left:0;width:14px;height:14px;background:#F5A623;border-radius:50%;pointer-events:none;z-index:9999;opacity:0;transition:opacity .3s ease;box-shadow:0 4px 12px -2px rgba(245,166,35,.4);will-change:transform}
+.ab-cursor-dot.is-active{opacity:0.85}
+@media (prefers-reduced-motion:reduce){.ab-cursor-dot{display:none}[data-reveal]{opacity:1;transform:none}}
+
+/* Milestone count-up numbers — keep font stable during count */
+.ab-milestone-count{font-variant-numeric:tabular-nums;display:inline-block;background:#E9F1FB;color:#0A66C2;padding:2px 12px;border-radius:8px;margin-right:4px;font-weight:800;letter-spacing:-0.01em}
+
+
+/* ============ Experience timeline ============ */
+.ab-exp{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:0}
+.ab-exp__item{padding:32px 0;border-top:1px solid var(--color-divider)}
+.ab-exp__item:first-child{border-top:none;padding-top:8px}
+.ab-exp__head{display:grid;grid-template-columns:1fr auto;gap:8px 24px;align-items:baseline;margin:0 0 14px}
+.ab-exp__co{font-family:var(--font-sans);font-size:22px;font-weight:700;color:var(--color-text-deep);margin:0;letter-spacing:-0.008em;grid-column:1;grid-row:1}
+.ab-exp__dates{font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--color-text-muted);letter-spacing:0.06em;text-transform:uppercase;margin:0;grid-column:2;grid-row:1;text-align:right;white-space:nowrap}
+.ab-exp__meta{font-size:14px;color:var(--color-text-muted);margin:0;grid-column:1 / -1;grid-row:2;font-weight:500}
+.ab-exp__desc{font-size:16px;line-height:1.65;color:var(--color-text);margin:0 0 14px;font-weight:400}
+.ab-exp__tags{display:flex;flex-wrap:wrap;gap:8px}
+.ab-tag{display:inline-block;font-size:11px;font-weight:700;color:#0A66C2;background:#E9F1FB;padding:5px 12px;border-radius:999px;letter-spacing:0.06em;text-transform:uppercase;font-family:var(--font-sans)}
+
+/* ============ Craft ============ */
+.ab-craft{max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 12px}
+.ab-craft__item{display:inline-block;font-family:var(--font-sans);font-size:15px;font-weight:500;color:var(--color-text-deep);padding:10px 18px;background:#F9FAFB;border:1px solid var(--color-divider);border-radius:999px;transition:all .2s ease;cursor:default}
+.ab-craft__item:hover{background:#E9F1FB;border-color:#0A66C2;color:#0A66C2;transform:translateY(-1px)}
+
+/* ============ Languages ============ */
+.ab-langs{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.ab-lang{display:flex;align-items:center;gap:14px;padding:20px 24px;background:#F9FAFB;border-radius:12px}
+.ab-lang__flag{font-size:28px;line-height:1}
+.ab-lang__name{font-family:var(--font-sans);font-size:16px;font-weight:700;color:var(--color-text-deep);flex:1}
+.ab-lang__level{font-size:12px;font-weight:700;color:var(--color-text-muted);letter-spacing:0.1em;text-transform:uppercase}
+
+/* ============ Contact ============ */
+.ab-contact__grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ab-contact__link{display:flex;flex-direction:column;gap:6px;padding:24px;background:#F9FAFB;border-radius:12px;text-decoration:none;transition:all .2s ease;border:1px solid transparent}
+.ab-contact__link:hover{background:#E9F1FB;border-color:#0A66C2;transform:translateY(-2px)}
+.ab-contact__label{font-size:11px;font-weight:700;color:var(--color-text-muted);letter-spacing:0.14em;text-transform:uppercase;font-family:var(--font-sans)}
+.ab-contact__value{font-family:var(--font-sans);font-size:17px;font-weight:600;color:var(--color-text-deep)}
+
+@media (max-width:640px){
+  .ab-exp__head{grid-template-columns:1fr}
+  .ab-exp__dates{grid-column:1;grid-row:auto;text-align:left}
+  .ab-contact__grid{grid-template-columns:1fr}
+}
+
+
+/* ============ Beyond the Résumé — FAQ ============ */
+.ab-faq__intro{max-width:900px;margin:0 auto 32px;font-size:15px;color:var(--color-text-muted);font-style:italic;font-weight:400}
+.ab-faq__list{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:0}
+.ab-faq__item{padding:36px 0;border-top:1px solid var(--color-divider)}
+.ab-faq__item:first-child{border-top:none;padding-top:8px}
+.ab-faq__q{font-family:var(--font-sans);font-size:22px;font-weight:700;color:var(--color-text-deep);margin:0 0 16px;line-height:1.3;letter-spacing:-0.008em;position:relative;padding-left:44px}
+.ab-faq__q::before{content:"Q";position:absolute;left:0;top:0;color:#0A66C2;font-weight:800;font-size:22px;letter-spacing:0;background:#E9F1FB;width:30px;height:30px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;line-height:1;top:-2px}
+.ab-faq__lead{font-family:var(--font-sans);font-size:19px;font-weight:700;color:#0A66C2;margin:0 0 14px;line-height:1.4;letter-spacing:-0.005em;padding-left:44px}
+.ab-faq__body{padding-left:44px}
+.ab-faq__body p{font-size:16px;line-height:1.75;color:var(--color-text);margin:0 0 14px;font-weight:400}
+.ab-faq__body p:last-child{margin-bottom:0}
+.ab-faq__body strong{color:var(--color-text-deep);font-weight:700}
+.ab-faq__body em{font-style:italic;color:var(--color-text-muted)}
+
+/* ============ Life beyond design — dual-row marquee ============ */
+.ab-life{padding:64px 0;border-top:1px solid var(--color-divider);overflow:hidden}
+.ab-life__head{padding:0 24px;text-align:left}
+.ab-life__head .ab-h2{max-width:900px;margin:0 auto 32px}
+.ab-life__intro{max-width:900px;margin:0 auto 24px;font-size:16px;line-height:1.7;color:var(--color-text);font-weight:400}
+.ab-life__intro strong{color:var(--color-text-deep);font-weight:700}
+.ab-life__chips{max-width:900px;margin:0 auto 40px;display:flex;flex-wrap:wrap;gap:8px}
+.ab-chip{font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--color-text);background:#fff;border:1.5px solid var(--color-divider);border-radius:999px;padding:8px 16px;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1)}
+.ab-chip:hover{border-color:#0A66C2;color:#0A66C2}
+.ab-chip.is-active{background:#0A66C2;border-color:#0A66C2;color:#fff}
+
+.ab-gallery{display:flex;flex-direction:column;gap:16px;padding:24px 0 0}
+.ab-gallery__row{overflow:hidden;position:relative;mask-image:linear-gradient(to right,transparent 0,#000 60px,#000 calc(100% - 60px),transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,#000 60px,#000 calc(100% - 60px),transparent 100%)}
+.ab-gallery__track{display:flex;gap:16px;width:max-content;will-change:transform}
+.ab-gallery__row--left .ab-gallery__track{animation:ab-scroll-left 55s linear infinite}
+.ab-gallery__row--right .ab-gallery__track{animation:ab-scroll-right 55s linear infinite}
+.ab-gallery__row:hover .ab-gallery__track{animation-play-state:paused}
+@keyframes ab-scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ab-scroll-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+.ab-photo{margin:0;flex:0 0 auto;width:260px;height:180px;border-radius:12px;overflow:hidden;position:relative;transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .35s ease}
+.ab-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.ab-photo:hover{transform:translateY(-4px) scale(1.03);z-index:2}
+.ab-photo:hover img{transform:scale(1.08)}
+.ab-photo.is-dimmed{opacity:0.15;filter:grayscale(1)}
+
+@media (max-width:640px){
+  .ab-faq__q,.ab-faq__lead,.ab-faq__body{padding-left:36px}
+  .ab-faq__q::before{width:26px;height:26px;font-size:18px}
+  .ab-photo{width:200px;height:150px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ab-gallery__track{animation:none !important}
+}
+
+
+/* ============ WOW LAYER — editorial + novel interactions ============ */
+
+/* 1. Reading progress bar (top) */
+.wow-progress{position:fixed;top:0;left:0;height:2px;background:#F5A623;width:0%;z-index:9999;transition:width .1s ease-out}
+
+/* 2. Section number system */
+.wow-sec-num{font-family:var(--font-sans);font-size:12px;font-weight:700;color:#0A66C2;letter-spacing:0.24em;text-transform:uppercase;margin:0 auto 20px;max-width:900px;display:flex;align-items:center;gap:12px}
+.wow-sec-num__digit{font-size:20px;font-weight:800;letter-spacing:-0.02em;color:#0A66C2}
+.wow-sec-num__rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(10,102,194,.3),transparent);max-width:60px}
+
+/* 3. Right sticky dot nav */
+.wow-nav{position:fixed;right:32px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:100;opacity:0;transition:opacity .5s ease}
+.wow-nav.is-visible{opacity:1}
+.wow-nav__dot{width:8px;height:8px;border-radius:50%;background:rgba(15,24,33,.2);cursor:pointer;position:relative;transition:all .25s cubic-bezier(.4,0,.2,1);border:none;padding:0}
+.wow-nav__dot:hover,.wow-nav__dot.is-active{background:#0A66C2;transform:scale(1.5)}
+.wow-nav__dot::after{content:attr(data-label);position:absolute;right:20px;top:50%;transform:translateY(-50%);font-family:var(--font-sans);font-size:11px;font-weight:600;color:var(--color-text-deep);background:#fff;padding:5px 10px;border-radius:6px;box-shadow:0 4px 12px -4px rgba(15,24,33,.15);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;letter-spacing:0.02em}
+.wow-nav__dot:hover::after{opacity:1;transform:translateY(-50%) translateX(-6px)}
+@media (max-width:1300px){.wow-nav{display:none}}
+
+/* 4. Palette shift by section (subtle) */
+body{transition:background-color .8s ease}
+body.pal-milestone{background-color:#FBFBFD}
+body.pal-life{background-color:#FEFAF3}
+body.pal-contact{background-color:#F6FAFF}
+
+/* 5. Custom cursor states */
+.wow-cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9998;width:14px;height:14px;background:#F5A623;border-radius:50%;box-shadow:0 4px 12px -2px rgba(245,166,35,.4);opacity:0;transition:width .25s cubic-bezier(.4,0,.2,1),height .25s cubic-bezier(.4,0,.2,1),border-radius .25s cubic-bezier(.4,0,.2,1),background .25s ease,opacity .3s ease;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-sans);font-weight:700;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;will-change:transform}
+.wow-cursor.is-active{opacity:0.9}
+.wow-cursor.mode-link{width:56px;height:24px;border-radius:20px;background:#0A66C2}
+.wow-cursor.mode-link::before{content:"→";font-size:16px}
+.wow-cursor.mode-photo{width:44px;height:44px;background:rgba(10,102,194,.9)}
+.wow-cursor.mode-photo::before{content:"+";font-size:22px}
+.wow-cursor.mode-chip{width:38px;height:38px;background:rgba(245,166,35,.9)}
+
+/* 6. Craft constellation */
+.ab-craft{position:relative}
+.ab-craft__constellation{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;transition:opacity .5s ease}
+.ab-craft:hover .ab-craft__constellation{opacity:0.35}
+.ab-craft__constellation svg{width:100%;height:100%}
+.ab-craft__item{position:relative;z-index:1;transition:all .3s cubic-bezier(.4,0,.2,1)}
+.ab-craft__item:hover{background:#0A66C2 !important;color:#fff !important;border-color:#0A66C2 !important;transform:translateY(-2px) scale(1.05) !important;box-shadow:0 8px 20px -6px rgba(10,102,194,.4)}
+
+/* 7. Photo lightbox */
+.wow-lightbox{position:fixed;inset:0;background:rgba(15,24,33,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:10000;display:flex;align-items:center;justify-content:center;padding:40px;opacity:0;pointer-events:none;transition:opacity .35s ease;flex-direction:column;gap:24px}
+.wow-lightbox.is-open{opacity:1;pointer-events:auto}
+.wow-lightbox__img{max-width:min(1200px,90vw);max-height:75vh;border-radius:12px;box-shadow:0 32px 80px -20px rgba(0,0,0,.5);object-fit:contain;transform:scale(.92);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.wow-lightbox.is-open .wow-lightbox__img{transform:scale(1)}
+.wow-lightbox__meta{color:#fff;text-align:center;font-family:var(--font-sans)}
+.wow-lightbox__cat{font-size:11px;font-weight:700;color:#F5A623;letter-spacing:0.24em;text-transform:uppercase;margin:0 0 6px}
+.wow-lightbox__cap{font-size:15px;font-weight:400;color:rgba(255,255,255,.85);margin:0}
+.wow-lightbox__close{position:absolute;top:24px;right:24px;background:rgba(255,255,255,.1);color:#fff;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.wow-lightbox__close:hover{background:rgba(255,255,255,.2)}
+
+/* 8. FAQ chat-style bubbles */
+.ab-faq__item{background:transparent;padding:24px 0;border-top:1px solid var(--color-divider);display:flex;flex-direction:column;gap:14px}
+.ab-faq__item:first-child{border-top:none;padding-top:8px}
+.ab-faq__q{background:#0A66C2;color:#fff;padding:14px 22px;border-radius:20px 20px 4px 20px;align-self:flex-end;max-width:75%;margin:0;font-family:var(--font-sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;line-height:1.4;position:relative}
+.ab-faq__q::before{display:none}
+.ab-faq__lead{background:#F0F4F9;color:var(--color-text-deep);padding:14px 22px 6px;border-radius:20px 20px 20px 4px;align-self:flex-start;max-width:82%;margin:0;font-family:var(--font-sans);font-size:17px;font-weight:700;letter-spacing:-0.005em;line-height:1.35}
+.ab-faq__body{background:#F0F4F9;padding:0 22px 16px;border-radius:0 0 20px 4px;align-self:flex-start;max-width:82%;margin:-4px 0 0}
+.ab-faq__body p{font-size:15px;line-height:1.65;color:var(--color-text);margin:8px 0 0;font-weight:400}
+.ab-faq__body p:first-child{margin-top:8px}
+
+/* 10. Hero abstract shapes parallax */
+.wow-hero-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;grid-column:1 / -1;grid-row:1 / -1}
+.wow-shape{position:absolute;border-radius:50%;will-change:transform;opacity:0.5}
+.wow-shape--blue{background:#E9F1FB;width:180px;height:180px;top:12%;left:8%}
+.wow-shape--yellow{background:#FCF0D6;width:120px;height:120px;top:60%;left:15%}
+.wow-shape--ring{background:transparent;border:1.5px solid rgba(10,102,194,.15);width:220px;height:220px;bottom:5%;right:12%;border-radius:50%}
+.wow-shape--half{background:linear-gradient(90deg,#E9F1FB 50%,transparent 50%);width:90px;height:90px;top:20%;right:20%}
+.ab-hero{position:relative}
+.ab-hero > *{position:relative;z-index:1}
+
+/* 11. Signature line-draw at footer */
+.wow-signature{max-width:900px;margin:64px auto 24px;padding:24px;text-align:center}
+.wow-signature__mark{font-family:var(--font-sans);font-size:13px;font-weight:700;color:var(--color-text-muted);letter-spacing:0.28em;text-transform:uppercase;margin:0;opacity:0;transition:opacity 1s cubic-bezier(.4,0,.2,1)}
+.wow-signature.is-drawn .wow-signature__mark{opacity:0.65}
+
+/* 12. Konami confetti burst */
+.wow-confetti{position:fixed;inset:0;pointer-events:none;z-index:10001}
+.wow-confetti__dot{position:absolute;width:12px;height:12px;background:#F5A623;border-radius:50%;opacity:0;animation:wow-confetti-fall 2.4s cubic-bezier(.2,.6,.4,1) forwards}
+@keyframes wow-confetti-fall{
+  0%{opacity:0;transform:translate(0,0) scale(0)}
+  15%{opacity:1;transform:translate(var(--tx),-40vh) scale(1)}
+  100%{opacity:0;transform:translate(var(--tx),100vh) scale(0.6) rotate(720deg)}
+}
+.wow-konami-toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#0F1821;color:#fff;padding:20px 32px;border-radius:16px;font-family:var(--font-sans);font-size:20px;font-weight:600;z-index:10002;opacity:0;transition:opacity .35s ease,transform .35s ease;box-shadow:0 24px 64px -20px rgba(0,0,0,.5)}
+.wow-konami-toast.is-shown{opacity:1;transform:translate(-50%,-50%) scale(1.05)}
+
+/* 13. Currently thinking ticker */
+.wow-thinking{max-width:900px;margin:32px auto 0;padding:12px 20px;background:rgba(245,166,35,.08);border-left:3px solid #F5A623;border-radius:0 8px 8px 0;display:flex;align-items:center;gap:14px}
+.wow-thinking__label{font-family:var(--font-sans);font-size:10px;font-weight:700;color:#B57C1F;letter-spacing:0.22em;text-transform:uppercase;flex-shrink:0}
+.wow-thinking__text{font-family:var(--font-sans);font-size:14px;font-weight:400;color:var(--color-text);font-style:italic;margin:0;transition:opacity .5s ease}
+.wow-thinking__pulse{width:6px;height:6px;background:#F5A623;border-radius:50%;flex-shrink:0;animation:wow-pulse 1.8s ease-in-out infinite}
+@keyframes wow-pulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+
+/* Reduce motion respect for everything */
+@media (prefers-reduced-motion:reduce){
+  .wow-shape,.wow-signature__path,.wow-thinking__pulse,body{animation:none !important;transition:none !important}
+  .wow-cursor{display:none}
+}
+
+
+.ab-faq__answer{display:flex;gap:10px;align-items:flex-start;align-self:flex-start;max-width:82%}
+.ab-faq__avatar{width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#F0F4F9;margin-top:6px}
+.ab-faq__avatar img{width:100%;height:100%;object-fit:cover;object-position:center}
+.ab-faq__answer-body{flex:1;min-width:0}
+.ab-faq__answer .ab-faq__lead{align-self:auto;max-width:none;margin:0}
+.ab-faq__answer .ab-faq__body{align-self:auto;max-width:none}
+
+
+/* Site-wide signature stamp (in footer) */
+.wow-sig{font-family:var(--font-sans);font-size:13px;font-weight:700;color:var(--color-text-muted,#4A5868);letter-spacing:0.28em;text-transform:uppercase;margin:0;opacity:0.65;text-align:center}
+
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="brand" aria-label="Shilue's Portfolio home">
+        <span class="brand-avatar"><img class="brand-avatar__default" src="images/avatar-header.png" alt="Shilue logo" /><img class="brand-avatar__hover" src="images/avatar-header-hover.png" alt="" /></span>
+        <span>Shilue's Portfolio</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html">Projects</a>
+        <a href="playgrounds/index.html">Playgrounds</a>
+        <a href="resume.html" class="is-active">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ==================== HERO — editorial, personal ==================== -->
+    <section class="ab-hero container" id="sec-hero">
+      <div class="wow-hero-shapes" aria-hidden="true">
+        <div class="wow-shape wow-shape--blue" data-parallax="0.2"></div>
+        <div class="wow-shape wow-shape--yellow" data-parallax="-0.15"></div>
+        <div class="wow-shape wow-shape--ring" data-parallax="0.1"></div>
+        <div class="wow-shape wow-shape--half" data-parallax="-0.25"></div>
+      </div>
+      <div class="ab-hero__copy">
+        <p class="ab-overline"><span class="ab-overline__dot"></span> About</p>
+        <h1 class="ab-hero__name"><span class="ab-hero__name-typed" data-typewriter="Hi, I'm Shilue"></span><span class="ab-hero__caret" aria-hidden="true"></span><button class="ab-hero__dot" id="wow-egg-trigger" aria-label="Say hi to Shilue" title="Click me 👋" type="button"></button></h1>
+        <p class="ab-hero__role">Senior UX Designer &amp; <strong>Design Lead of Search</strong> at Trip.com.</p>
+        <p class="ab-hero__prev">Previously LinkedIn · Alibaba Group &nbsp; · &nbsp; Shanghai</p>
+      </div>
+      <div class="ab-hero__portrait">
+        <img loading="eager" fetchpriority="high" src="images/shirley-hero.png" alt="Portrait of Shirley (Shilue)" />
+      </div>
+    </section>
+
+    <!-- Currently thinking ticker -->
+    <div class="wow-thinking" aria-live="polite">
+      <span class="wow-thinking__pulse" aria-hidden="true"></span>
+      <span class="wow-thinking__label">Currently thinking</span>
+      <p class="wow-thinking__text" id="wow-thinking">how to make AI feel like a good product manager, not a chatbot.</p>
+    </div>
+
+    <!-- STATEMENT — magazine-style pull quote -->
+    <section class="ab-statement container" id="sec-statement">
+      <div class="ab-statement__wrap">
+        <span class="ab-statement__mark" aria-hidden="true">"</span>
+        <p class="ab-statement__text">I design search experiences that understand what people <em>mean</em> — not just what they <em>type</em>.</p>
+      </div>
+    </section>
+
+    <!-- ==================== BIO — long-form prose ==================== -->
+    <section class="ab-prose container" data-reveal>
+      <p class="ab-lead ab-lead--dropcap">Search is where I've built my deepest expertise. To me, search is not simply about matching a query with relevant results. It needs to <strong>understand the real need behind what a traveler says, organize relevant supply across different travel businesses, surface connections they may not have considered, and help them move toward a better decision</strong>.</p>
+      <p class="ab-body">Sometimes that means getting users to exactly what they asked for as quickly as possible. Sometimes it means connecting their search with relevant hotels, attractions, destinations, products, or content across the travel journey. And when users don't yet know exactly what they want, search can also <em>spark inspiration, help them narrow down possibilities, and gradually turn vague interest into a clearer travel plan</em>.</p>
+      <p class="ab-body">More recently, I've been shaping how <strong>AI becomes part of this search experience</strong> — moving beyond simply generating answers toward understanding tasks, supporting decisions, and connecting inspiration with actionable travel supply.</p>
+    </section>
+
+    <!-- ==================== BEYOND — prose with subtle inline callout ==================== -->
+    <section class="ab-section container" data-reveal>
+      <p class="wow-sec-num"><span class="wow-sec-num__digit">02</span> — IMPACT<span class="wow-sec-num__rule"></span></p>
+      <h2 class="ab-h2" id="sec-beyond-anchor">Beyond individual experiences</h2>
+      <div class="ab-prose">
+        <p class="ab-body">As <strong>Design Lead of Search</strong>, I turn recurring search problems into <strong>shared principles, patterns, and platform capabilities</strong> — working across product, engineering, algorithms, content, and BU teams.</p>
+        <p class="ab-body">Most recently, I <strong>drove and shipped a destination search framework</strong> that resolved long-standing query ambiguity across markets — turning a fragmented, per-BU problem into a shared capability now scaled platform-wide.</p>
+        <aside class="ab-scale-note">
+          <span class="ab-scale-note__k">Impact</span>
+          <span class="ab-scale-note__v">Trip.com &amp; Ctrip · 13 business units · 20+ product lines · 20+ markets</span>
+        </aside>
+        <p class="ab-body">I also mentor <strong>two designers</strong> and shape critique across search initiatives — detail lives in the case studies.</p>
+      </div>
+    </section>
+
+    <!-- ==================== MILESTONES — minimal editorial list ==================== -->
+    <section class="ab-section container" data-reveal>
+      <p class="wow-sec-num"><span class="wow-sec-num__digit">03</span> — MILESTONES<span class="wow-sec-num__rule"></span></p>
+      <h2 class="ab-h2" id="sec-milestones-anchor">A few milestones</h2>
+      <ol class="ab-milestone-list">
+        <li>
+          <p class="ab-milestone-list__head"><span class="ab-mm">01</span> <span class="ab-milestone-count" data-count-target="2" data-count-suffix="×">0×</span> promoted within 3 years</p>
+          <p class="ab-milestone-list__note">Growing from individual project ownership to search strategy and cross-team leadership.</p>
+        </li>
+        <li>
+          <p class="ab-milestone-list__head"><span class="ab-mm">02</span> <span class="ab-milestone-count" data-count-target="276" data-count-prefix="+" data-count-suffix="%">+0%</span> YoY Search AI users · <span class="ab-milestone-count" data-count-target="109" data-count-prefix="+" data-count-suffix="%">+0%</span> YoY search-driven orders</p>
+          <p class="ab-milestone-list__note">Contributing to the growth of AI Search while balancing user experience, exploration, and business outcomes.</p>
+        </li>
+        <li>
+          <p class="ab-milestone-list__head"><span class="ab-mm">03</span> Lead applicant for a Search UX invention patent</p>
+          <p class="ab-milestone-list__note">A travel search interaction method developed from innovations in our AI Search work.</p>
+        </li>
+        <li>
+          <p class="ab-milestone-list__head"><span class="ab-mm">04</span> Most Influential Speaker · 2025 Design Summit</p>
+          <p class="ab-milestone-list__note">Shared our task-oriented approach to designing AI Search around user intent, efficiency, and conversion.</p>
+        </li>
+      </ol>
+      <p class="ab-milestone-list__prev">Before Trip.com, I worked at <strong>LinkedIn</strong> and <strong>Alibaba Group</strong>.</p>
+    </section>
+
+    <!-- ==================== EXPERIENCE — timeline with tags ==================== -->
+    <section class="ab-section container">
+      <p class="wow-sec-num"><span class="wow-sec-num__digit">04</span> — EXPERIENCE<span class="wow-sec-num__rule"></span></p>
+      <h2 class="ab-h2" id="sec-exp-anchor">Experience</h2>
+      <div class="ab-exp">
+        <div class="ab-exp__item">
+          <div class="ab-exp__head">
+            <p class="ab-exp__co">Trip.com</p>
+            <p class="ab-exp__meta">Senior UX Designer · Design Lead of Search · Shanghai</p>
+            <p class="ab-exp__dates">2022.12 — Present</p>
+          </div>
+          <p class="ab-exp__desc">Leading Comprehensive Search and AI Search across Trip.com and Ctrip. Framework work spans 13 BUs, 20+ product lines, 20+ markets.</p>
+          <div class="ab-exp__tags">
+            <span class="ab-tag">Search</span>
+            <span class="ab-tag">AI</span>
+            <span class="ab-tag">Cross-BU Framework</span>
+            <span class="ab-tag">Travel</span>
+          </div>
+        </div>
+        <div class="ab-exp__item">
+          <div class="ab-exp__head">
+            <p class="ab-exp__co">LinkedIn</p>
+            <p class="ab-exp__meta">Product Designer · InCareer · Beijing</p>
+            <p class="ab-exp__dates">2020.12 — 2022.07</p>
+          </div>
+          <p class="ab-exp__desc">Led 0→1 messaging and homepage design for LinkedIn's China standalone app.</p>
+          <div class="ab-exp__tags">
+            <span class="ab-tag">Consumer</span>
+            <span class="ab-tag">0 → 1</span>
+            <span class="ab-tag">Career</span>
+          </div>
+        </div>
+        <div class="ab-exp__item">
+          <div class="ab-exp__head">
+            <p class="ab-exp__co">Alibaba Group</p>
+            <p class="ab-exp__meta">Product Designer · DingTalk · Hangzhou</p>
+            <p class="ab-exp__dates">2020.07 — 2020.12</p>
+          </div>
+          <p class="ab-exp__desc">Designed enterprise messaging and rich-text experiences for 100M+ enterprise DAU.</p>
+          <div class="ab-exp__tags">
+            <span class="ab-tag">Enterprise</span>
+            <span class="ab-tag">IM</span>
+            <span class="ab-tag">Design System</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CRAFT — skills breakdown ==================== -->
+    <section class="ab-section container">
+      <p class="wow-sec-num"><span class="wow-sec-num__digit">05</span> — CRAFT<span class="wow-sec-num__rule"></span></p>
+      <h2 class="ab-h2" id="sec-craft-anchor">Craft</h2>
+      <div class="ab-craft"><svg class="ab-craft__constellation" aria-hidden="true" viewBox="0 0 900 200" preserveAspectRatio="none"><path d="M60,60 L200,110 L340,50 L480,120 L620,70 L780,110 M180,150 L340,50 M480,120 L620,70" stroke="#0A66C2" stroke-width="1" fill="none" opacity="0.6"/><circle cx="60" cy="60" r="3" fill="#0A66C2"/><circle cx="200" cy="110" r="3" fill="#0A66C2"/><circle cx="340" cy="50" r="3" fill="#0A66C2"/><circle cx="480" cy="120" r="3" fill="#0A66C2"/><circle cx="620" cy="70" r="3" fill="#0A66C2"/><circle cx="780" cy="110" r="3" fill="#0A66C2"/><circle cx="180" cy="150" r="3" fill="#0A66C2"/></svg>
+        <span class="ab-craft__item">Product Strategy</span>
+        <span class="ab-craft__item">Search UX</span>
+        <span class="ab-craft__item">AI Interaction Design</span>
+        <span class="ab-craft__item">Design Systems</span>
+        <span class="ab-craft__item">Research &amp; Data</span>
+        <span class="ab-craft__item">Cross-team Leadership</span>
+        <span class="ab-craft__item">Information Architecture</span>
+        <span class="ab-craft__item">Prototyping</span>
+      </div>
+    </section>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <section class="ab-section container">
+      <p class="wow-sec-num"><span class="wow-sec-num__digit">06</span> — LANGUAGES<span class="wow-sec-num__rule"></span></p>
+      <h2 class="ab-h2" id="sec-lang-anchor">Languages</h2>
+      <div class="ab-langs">
+        <div class="ab-lang">
+          <span class="ab-lang__flag">🇨🇳</span>
+          <span class="ab-lang__name">中文</span>
+          <span class="ab-lang__level">Native</span>
+        </div>
+        <div class="ab-lang">
+          <span class="ab-lang__flag">🇺🇸</span>
+          <span class="ab-lang__name">English</span>
+          <span class="ab-lang__level">Fluent</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GET IN TOUCH ==================== -->
+    <section class="ab-section ab-contact container">
+      <p class="wow-sec-num"><span class="wow-sec-num__digit">09</span> — CONTACT<span class="wow-sec-num__rule"></span></p>
+      <h2 class="ab-h2">Get in touch <span aria-hidden="true">📨</span></h2>
+      <div class="ab-contact__grid">
+        <a class="ab-contact__link" href="mailto:shiluexue@gmail.com">
+          <span class="ab-contact__label">Email</span>
+          <span class="ab-contact__value">shiluexue@gmail.com</span>
+        </a>
+        <a class="ab-contact__link" href="https://www.linkedin.com/in/shilue-xue-728572160/" target="_blank" rel="noopener">
+          <span class="ab-contact__label">LinkedIn</span>
+          <span class="ab-contact__value">Shilue Xue →</span>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ==================== BEYOND THE RÉSUMÉ — FAQ style ==================== -->
+    <section class="ab-section ab-faq container">
+      <p class="wow-sec-num"><span class="wow-sec-num__digit">07</span> — BEYOND THE RÉSUMÉ<span class="wow-sec-num__rule"></span></p>
+      <h2 class="ab-h2" id="sec-faq-anchor">Beyond the Résumé</h2>
+      <p class="ab-faq__intro">A few questions I get asked often — with answers I actually mean.</p>
+
+      <div class="ab-faq__list">
+        <div class="ab-faq__item">
+          <p class="ab-faq__q">How did you get into design?</p>
+          <div class="ab-faq__answer"><span class="ab-faq__avatar" aria-hidden="true"><img src="images/avatar-header.png" alt="" /></span><div class="ab-faq__answer-body"><p class="ab-faq__lead">I started in engineering.</p>
+          <div class="ab-faq__body">
+            <p>Engineering taught me to understand how technology works; design taught me to ask <strong>why it should exist for people in the first place</strong>.</p>
+            <p>That combination still shapes how I work today — especially in AI, where I often sit between what technology <em>can</em> do and what people <em>actually need</em>.</p>
+          </div></div></div>
+        </div>        <div class="ab-faq__item">
+          <p class="ab-faq__q">What role should AI play in a product?</p>
+          <div class="ab-faq__answer"><span class="ab-faq__avatar" aria-hidden="true"><img src="images/avatar-header.png" alt="" /></span><div class="ab-faq__answer-body"><p class="ab-faq__lead">AI that stays invisible.</p>
+          <div class="ab-faq__body">
+            <p>The best AI in search doesn't announce itself. It works <strong>behind the scenes</strong> — understanding context, uncovering unspoken needs, and helping people decide with less effort.</p>
+          </div></div></div>
+        </div>
+
+        <div class="ab-faq__item">
+          <p class="ab-faq__q">How do you use AI as a designer?</p>
+          <div class="ab-faq__answer"><span class="ab-faq__avatar" aria-hidden="true"><img src="images/avatar-header.png" alt="" /></span><div class="ab-faq__answer-body"><p class="ab-faq__lead">To give my team expert-level critique on demand.</p>
+          <div class="ab-faq__body">
+            <p>Most AI critique tools stop at the surface — spacing, contrast, copy. What UX designers actually need is harder: <em>Is this solving the right problem? What creative alternatives haven't we explored? How does each option shift the experience for different user segments? What trade-offs are we quietly accepting?</em></p>
+            <p>I turned my instinct for <strong>direction, creative alternatives, and cross-segment trade-offs</strong> into an AI critique skill. Designers get sharper questions, wider options, and critique that <strong>pushes their thinking past the first solution</strong> — not just polishes it.</p>
+          </div></div></div>
+        </div>
+
+        <div class="ab-faq__item">
+          <p class="ab-faq__q">What kind of designer are you becoming?</p>
+          <div class="ab-faq__answer"><span class="ab-faq__avatar" aria-hidden="true"><img src="images/avatar-header.png" alt="" /></span><div class="ab-faq__answer-body"><p class="ab-faq__lead">One who makes other people better at solving the problem, too.</p>
+          <div class="ab-faq__body">
+            <p>I still love getting deep into interaction details, but increasingly, I'm interested in building the <strong>frameworks, standards, and shared understanding</strong> that help a team make better decisions without depending on one designer.</p>
+            <p>For me, growing as a designer means moving from solving individual problems well to making good solutions <strong>more repeatable, scalable, and easier for others to build on</strong>.</p>
+          </div></div></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== LIFE BEYOND DESIGN — dual marquee gallery ==================== -->
+    <section class="ab-life">
+      <div class="container ab-life__head">
+        <p class="wow-sec-num"><span class="wow-sec-num__digit">08</span> — LIFE<span class="wow-sec-num__rule"></span></p>
+      <h2 class="ab-h2" id="sec-life-anchor">Life beyond design</h2>
+        <p class="ab-life__intro">I've been to <strong>20+ countries and 100+ cities</strong>. Danced for <strong>8 years</strong>. I visit local museums wherever I go, and I'm always chasing a new outdoor skill.</p>
+        <div class="ab-life__chips">
+          <button class="ab-chip is-active" data-filter="all">All</button>
+          <button class="ab-chip" data-filter="travel">🌍 Traveling</button>
+          <button class="ab-chip" data-filter="dance">💃 Dancing</button>
+          <button class="ab-chip" data-filter="surf">🌊 Outdoors</button>
+          <button class="ab-chip" data-filter="museum">🎨 Museums</button>
+        </div>
+      </div>
+      <div class="ab-gallery">
+        <div class="ab-gallery__row ab-gallery__row--left"><div class="ab-gallery__track"><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_3df97b75a61c4604bcbaeee3280df710~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_11f53fbe8b5e447ea369ff9c27dc9b36~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_1ddbe5629d9f4b178a04c2caa7697505~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="dance"><img loading="lazy" src="images/efcc58_f823ce3e44d74d1fad373befd3153c84~mv2.jpg" alt="dance" /></figure><figure class="ab-photo" data-cat="dance"><img loading="lazy" src="images/efcc58_b735213dbc114c63a295f6b5089777d3~mv2.jpg" alt="dance" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_433418150c1d44b1a32a5b959a32fd61~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_3df97b75a61c4604bcbaeee3280df710~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_11f53fbe8b5e447ea369ff9c27dc9b36~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_1ddbe5629d9f4b178a04c2caa7697505~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="dance"><img loading="lazy" src="images/efcc58_f823ce3e44d74d1fad373befd3153c84~mv2.jpg" alt="dance" /></figure><figure class="ab-photo" data-cat="dance"><img loading="lazy" src="images/efcc58_b735213dbc114c63a295f6b5089777d3~mv2.jpg" alt="dance" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_433418150c1d44b1a32a5b959a32fd61~mv2.jpg" alt="travel" /></figure></div></div>
+        <div class="ab-gallery__row ab-gallery__row--right"><div class="ab-gallery__track"><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_93a7f48a09d2442eb339f33707bb018c~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="surf"><img loading="lazy" src="images/efcc58_8349a138f8604583bcdd7a9ec371033a~mv2.jpg" alt="surf" /></figure><figure class="ab-photo" data-cat="museum"><img loading="lazy" src="images/efcc58_410e4738730a486abcc346edcff82246~mv2.jpg" alt="museum" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_c5137cbcbad94986aea8871bb8e1ace6~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="museum"><img loading="lazy" src="images/efcc58_ef0ca14955d444b5a413b3bc1875cba0~mv2.jpg" alt="museum" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_75d03e55d30b4982871d01f5f05349ee~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_93a7f48a09d2442eb339f33707bb018c~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="surf"><img loading="lazy" src="images/efcc58_8349a138f8604583bcdd7a9ec371033a~mv2.jpg" alt="surf" /></figure><figure class="ab-photo" data-cat="museum"><img loading="lazy" src="images/efcc58_410e4738730a486abcc346edcff82246~mv2.jpg" alt="museum" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_c5137cbcbad94986aea8871bb8e1ace6~mv2.jpg" alt="travel" /></figure><figure class="ab-photo" data-cat="museum"><img loading="lazy" src="images/efcc58_ef0ca14955d444b5a413b3bc1875cba0~mv2.jpg" alt="museum" /></figure><figure class="ab-photo" data-cat="travel"><img loading="lazy" src="images/efcc58_75d03e55d30b4982871d01f5f05349ee~mv2.jpg" alt="travel" /></figure></div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Reading progress bar (top) -->
+  <div class="wow-progress" id="wow-progress" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="wow-cursor" id="wow-cursor" aria-hidden="true"></div>
+
+  <!-- Right-side sticky dot nav -->
+  <nav class="wow-nav" id="wow-nav" aria-label="Section navigation">
+    <button class="wow-nav__dot" data-target="sec-hero" data-label="About"></button>
+    <button class="wow-nav__dot" data-target="sec-statement" data-label="Manifesto"></button>
+    <button class="wow-nav__dot" data-target="sec-bio" data-label="Bio"></button>
+    <button class="wow-nav__dot" data-target="sec-beyond-anchor" data-label="Impact"></button>
+    <button class="wow-nav__dot" data-target="sec-milestones-anchor" data-label="Milestones"></button>
+    <button class="wow-nav__dot" data-target="sec-exp-anchor" data-label="Experience"></button>
+    <button class="wow-nav__dot" data-target="sec-craft-anchor" data-label="Craft"></button>
+    <button class="wow-nav__dot" data-target="sec-faq-anchor" data-label="FAQ"></button>
+    <button class="wow-nav__dot" data-target="sec-life-anchor" data-label="Life"></button>
+  </nav>
+
+  <!-- Quiet signature stamp -->
+  <div class="wow-signature" id="wow-signature">
+    <p class="wow-signature__mark">SHILUE &nbsp;·&nbsp; 2026</p>
+  </div>
+
+  <!-- Photo lightbox -->
+  <div class="wow-lightbox" id="wow-lightbox" role="dialog" aria-label="Photo viewer" aria-hidden="true">
+    <button class="wow-lightbox__close" id="wow-lightbox-close" aria-label="Close">×</button>
+    <img class="wow-lightbox__img" id="wow-lightbox-img" src="" alt="" />
+    <div class="wow-lightbox__meta">
+      <p class="wow-lightbox__cat" id="wow-lightbox-cat"></p>
+      <p class="wow-lightbox__cap" id="wow-lightbox-cap"></p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p><p class="wow-sig">SHILUE &nbsp;·&nbsp; 2026</p></p>
+  </footer>
+
+
+<script>
+  // Prefetch same-origin html links on hover — near-instant navigation
+  (function(){
+    var prefetched = new Set();
+    document.addEventListener('mouseover', function(e){
+      var link = e.target.closest && e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.href;
+      if (!href || prefetched.has(href)) return;
+      // Only same-origin html
+      try { var u = new URL(href, location.href); if (u.origin !== location.origin) return; } catch(e){ return; }
+      if (!/\.html($|\?|#)/.test(u.pathname) && u.pathname !== '/' && !u.pathname.endsWith('/')) return;
+      var l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = href; l.as = 'document';
+      document.head.appendChild(l);
+      prefetched.add(href);
+    }, { passive: true });
+  })();
+</script>
+
+<script>
+  // ============ Reveal-on-scroll ============
+  (function(){
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+  })();
+
+  // ============ Typewriter for hero name ============
+  (function(){
+    var el = document.querySelector('[data-typewriter]');
+    if (!el) return;
+    var full = el.dataset.typewriter;
+    var caret = document.querySelector('.ab-hero__caret');
+    var i = 0;
+    function tick(){
+      if (i > full.length){
+        if (caret){ setTimeout(function(){ caret.classList.add('ab-hero__caret--done'); }, 500); }
+        return;
+      }
+      el.textContent = full.slice(0, i);
+      i++;
+      setTimeout(tick, i < 4 ? 240 : 100);
+    }
+    setTimeout(tick, 400);
+  })();
+
+  // ============ Statement word-by-word reveal ============
+  (function(){
+    var stmt = document.querySelector('.ab-statement__text');
+    if (!stmt) return;
+    // DOM walk — preserves <em> tags (regex would break them)
+    function wordify(node){
+      Array.from(node.childNodes).forEach(function(child){
+        if (child.nodeType === 3){
+          var parts = child.textContent.split(/(\s+)/);
+          var frag = document.createDocumentFragment();
+          parts.forEach(function(p){
+            if (/\S/.test(p)){
+              var s = document.createElement('span');
+              s.className = 'word';
+              s.textContent = p;
+              frag.appendChild(s);
+            } else {
+              frag.appendChild(document.createTextNode(p));
+            }
+          });
+          child.parentNode.replaceChild(frag, child);
+        } else if (child.nodeType === 1){
+          wordify(child);
+        }
+      });
+    }
+    wordify(stmt);
+    var words = stmt.querySelectorAll('.word');
+    words.forEach(function(w, i){ w.style.transitionDelay = (i * 40) + 'ms'; });
+    if (!('IntersectionObserver' in window)){ stmt.classList.add('is-visible'); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ stmt.classList.add('is-visible'); io.unobserve(stmt); }
+      });
+    }, { threshold: 0.3 });
+    io.observe(stmt);
+  })();
+
+  // ============ Portrait 3D tilt on mouse move ============
+  (function(){
+    var portrait = document.querySelector('.ab-hero__portrait');
+    if (!portrait) return;
+    var img = portrait.querySelector('img');
+    if (!img) return;
+    var rect = null;
+    var maxTilt = 8;
+    function updateRect(){ rect = portrait.getBoundingClientRect(); }
+    portrait.addEventListener('mouseenter', updateRect);
+    window.addEventListener('resize', updateRect);
+    portrait.addEventListener('mousemove', function(e){
+      if (!rect) updateRect();
+      var x = (e.clientX - rect.left) / rect.width - 0.5;
+      var y = (e.clientY - rect.top) / rect.height - 0.5;
+      var rx = -y * maxTilt;
+      var ry = x * maxTilt;
+      img.style.transform = 'perspective(1000px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) scale(1.02)';
+    });
+    portrait.addEventListener('mouseleave', function(){
+      img.style.transform = '';
+    });
+  })();
+
+  // ============ Yellow cursor companion dot (magnetic follow) ============
+  (function(){
+    if (window.matchMedia('(pointer: coarse)').matches) return; // Skip on touch
+    var dot = document.createElement('div');
+    dot.className = 'ab-cursor-dot';
+    document.body.appendChild(dot);
+    var tx = 0, ty = 0, x = 0, y = 0;
+    var active = false;
+    document.addEventListener('mousemove', function(e){
+      tx = e.clientX - 7; ty = e.clientY - 7;
+      if (!active){ dot.classList.add('is-active'); active = true; }
+    });
+    document.addEventListener('mouseleave', function(){ dot.classList.remove('is-active'); active = false; });
+    function loop(){
+      x += (tx - x) * 0.12;
+      y += (ty - y) * 0.12;
+      dot.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+      requestAnimationFrame(loop);
+    }
+    loop();
+  })();
+
+  // ============ Milestone count-up (triggered when in view) ============
+  (function(){
+    var els = document.querySelectorAll('.ab-milestone-count');
+    if (!els.length) return;
+    function animate(el){
+      var target = parseFloat(el.dataset.countTarget);
+      var prefix = el.dataset.countPrefix || '';
+      var suffix = el.dataset.countSuffix || '';
+      var duration = 1400;
+      var start = performance.now();
+      function tick(now){
+        var t = Math.min(1, (now - start) / duration);
+        var eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = prefix + Math.round(target * eased) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    if (!('IntersectionObserver' in window)){ els.forEach(animate); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ animate(e.target); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    els.forEach(el => io.observe(el));
+  })();
+
+  // Reduced-motion respect
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('[data-typewriter]').forEach(el => { el.textContent = el.dataset.typewriter; var c = document.querySelector('.ab-hero__caret'); if (c) c.style.display='none'; });
+  }
+</script>
+
+
+<script>
+  // Life gallery — chip filter (dim non-matching photos)
+  (function(){
+    var chips = document.querySelectorAll('.ab-chip');
+    var photos = document.querySelectorAll('.ab-photo');
+    if (!chips.length || !photos.length) return;
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chips.forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+        var f = chip.dataset.filter;
+        photos.forEach(function(p){
+          if (f === 'all' || p.dataset.cat === f){ p.classList.remove('is-dimmed'); }
+          else { p.classList.add('is-dimmed'); }
+        });
+      });
+    });
+  })();
+</script>
+
+
+<script>
+  // ============ WOW LAYER — all novel interactions ============
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+
+  // 1. Reading progress bar
+  (function(){
+    var bar = document.getElementById('wow-progress');
+    if (!bar) return;
+    function update(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 0;
+      bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // 2. Right sticky dot nav — show/hide + active tracking + click scroll
+  (function(){
+    var nav = document.getElementById('wow-nav');
+    if (!nav) return;
+    var dots = nav.querySelectorAll('.wow-nav__dot');
+    // Show after 200px scroll
+    window.addEventListener('scroll', function(){
+      nav.classList.toggle('is-visible', window.scrollY > 240);
+    }, { passive: true });
+    // Click to scroll
+    dots.forEach(function(dot){
+      dot.addEventListener('click', function(){
+        var target = document.getElementById(dot.dataset.target);
+        if (target){ target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+    // Track active section
+    var targets = Array.from(dots).map(d => document.getElementById(d.dataset.target)).filter(Boolean);
+    function trackActive(){
+      var y = window.scrollY + window.innerHeight * 0.4;
+      var idx = 0;
+      targets.forEach(function(t, i){
+        if (t.getBoundingClientRect().top + window.scrollY <= y) idx = i;
+      });
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+    }
+    window.addEventListener('scroll', trackActive, { passive: true });
+    trackActive();
+  })();
+
+  // 3. Hero shapes parallax on mouse
+  (function(){
+    var shapes = document.querySelectorAll('.wow-shape[data-parallax]');
+    if (!shapes.length) return;
+    var hero = document.querySelector('.ab-hero');
+    if (!hero) return;
+    var cx = 0, cy = 0, tx = 0, ty = 0;
+    hero.addEventListener('mousemove', function(e){
+      var r = hero.getBoundingClientRect();
+      tx = (e.clientX - r.left) / r.width - 0.5;
+      ty = (e.clientY - r.top) / r.height - 0.5;
+    });
+    function loop(){
+      cx += (tx - cx) * 0.06;
+      cy += (ty - cy) * 0.06;
+      shapes.forEach(function(s){
+        var m = parseFloat(s.dataset.parallax) || 0.2;
+        s.style.transform = 'translate3d(' + (cx * 40 * m) + 'px,' + (cy * 40 * m) + 'px,0)';
+      });
+      requestAnimationFrame(loop);
+    }
+    loop();
+  })();
+
+  // 4. Custom cursor with mode switching
+  (function(){
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    var cursor = document.getElementById('wow-cursor');
+    if (!cursor) return;
+    // Kill the older yellow companion (from earlier work) to avoid double-cursor
+    var old = document.querySelector('.ab-cursor-dot');
+    if (old) old.style.display = 'none';
+    var tx = 0, ty = 0, x = 0, y = 0, active = false;
+    document.addEventListener('mousemove', function(e){
+      tx = e.clientX - 7; ty = e.clientY - 7;
+      if (!active){ cursor.classList.add('is-active'); active = true; }
+      // Mode detection
+      var t = e.target;
+      var mode = '';
+      if (t.closest('a, button')) mode = 'link';
+      else if (t.closest('.ab-photo')) mode = 'photo';
+      else if (t.closest('.ab-chip, .ab-craft__item, .ab-tag')) mode = 'chip';
+      cursor.classList.remove('mode-link','mode-photo','mode-chip');
+      if (mode) cursor.classList.add('mode-' + mode);
+    });
+    document.addEventListener('mouseleave', function(){ cursor.classList.remove('is-active'); active = false; });
+    function loop(){
+      x += (tx - x) * 0.18;
+      y += (ty - y) * 0.18;
+      cursor.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+      requestAnimationFrame(loop);
+    }
+    loop();
+  })();
+
+  // 5. Palette shift by section
+  (function(){
+    var body = document.body;
+    var refs = [
+      { id: 'sec-milestones-anchor', cls: 'pal-milestone' },
+      { id: 'sec-life-anchor', cls: 'pal-life' },
+      { id: 'sec-faq-anchor', cls: '' },
+    ];
+    function detect(){
+      var y = window.scrollY + window.innerHeight * 0.5;
+      body.classList.remove('pal-milestone','pal-life','pal-contact');
+      var mile = document.getElementById('sec-milestones-anchor');
+      var life = document.getElementById('sec-life-anchor');
+      var contact = document.querySelector('.ab-contact');
+      if (contact && contact.getBoundingClientRect().top + window.scrollY < y){ body.classList.add('pal-contact'); return; }
+      if (life && life.getBoundingClientRect().top + window.scrollY < y){ body.classList.add('pal-life'); return; }
+      if (mile && mile.getBoundingClientRect().top + window.scrollY < y){ body.classList.add('pal-milestone'); return; }
+    }
+    window.addEventListener('scroll', detect, { passive: true });
+    detect();
+  })();
+
+  // 6. Currently thinking — rotate every 6s
+  (function(){
+    var el = document.getElementById('wow-thinking');
+    if (!el) return;
+    var lines = [
+      'how to make AI feel like a good product manager, not a chatbot.',
+      'the difference between a search result and a decision.',
+      'why the best UX questions start with "what if we did nothing?"',
+      'how to keep design critique honest at scale.',
+      'when a system should whisper vs when it should speak up.',
+      'how AI turns "answers" into "next steps".',
+    ];
+    var i = 0;
+    setInterval(function(){
+      el.style.opacity = 0;
+      setTimeout(function(){
+        i = (i + 1) % lines.length;
+        el.textContent = lines[i];
+        el.style.opacity = 1;
+      }, 500);
+    }, 6000);
+  })();
+
+  // 7. Signature draw when scrolled into view
+  (function(){
+    var sig = document.getElementById('wow-signature');
+    if (!sig) return;
+    if (!('IntersectionObserver' in window)){ sig.classList.add('is-drawn'); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ sig.classList.add('is-drawn'); io.unobserve(sig); }});
+    }, { threshold: 0.4 });
+    io.observe(sig);
+  })();
+
+  // 8. Easter egg — click anywhere on "Hi, I'm Shilue" heading (name + dot)
+  (function(){
+    var name = document.querySelector('.ab-hero__name');
+    if (!name) return;
+    name.addEventListener('click', function(){ trigger(); });
+    name.setAttribute('title', 'Say hi 👋');
+    function trigger(){
+      // Confetti burst
+      var wrap = document.createElement('div');
+      wrap.className = 'wow-confetti';
+      var colors = ['#F5A623','#0A66C2','#F5D687','#4098D4','#0F1821'];
+      for (var i = 0; i < 60; i++){
+        var d = document.createElement('div');
+        d.className = 'wow-confetti__dot';
+        d.style.background = colors[i % colors.length];
+        d.style.left = (Math.random() * 100) + '%';
+        d.style.top = '80vh';
+        d.style.width = d.style.height = (8 + Math.random() * 12) + 'px';
+        d.style.setProperty('--tx', ((Math.random() - 0.5) * 400) + 'px');
+        d.style.animationDelay = (Math.random() * 0.3) + 's';
+        wrap.appendChild(d);
+      }
+      document.body.appendChild(wrap);
+      // Toast message
+      var toast = document.createElement('div');
+      toast.className = 'wow-konami-toast';
+      toast.textContent = 'Hi, you found me. 👋';
+      document.body.appendChild(toast);
+      setTimeout(function(){ toast.classList.add('is-shown'); }, 50);
+      setTimeout(function(){ toast.classList.remove('is-shown'); }, 2500);
+      setTimeout(function(){ wrap.remove(); toast.remove(); }, 3200);
+    }
+  })();
+
+  // 9. Photo lightbox — click any .ab-photo to open
+  (function(){
+    var lb = document.getElementById('wow-lightbox');
+    var img = document.getElementById('wow-lightbox-img');
+    var cat = document.getElementById('wow-lightbox-cat');
+    var cap = document.getElementById('wow-lightbox-cap');
+    var closeBtn = document.getElementById('wow-lightbox-close');
+    if (!lb || !img) return;
+    var catMap = {
+      'travel': ['🌍 Traveling', 'Somewhere on the way — 20+ countries, 100+ cities.'],
+      'dance': ['💃 Dancing', '8 years and counting. Movement clears my head.'],
+      'surf': ['🌊 Outdoors', 'Always chasing a new outdoor skill.'],
+      'museum': ['🎨 Museums', 'The first thing I look for in every new city.'],
+    };
+    document.querySelectorAll('.ab-photo').forEach(function(p){
+      p.style.cursor = 'zoom-in';
+      p.addEventListener('click', function(){
+        var src = p.querySelector('img').src;
+        // Upgrade to higher-res version
+        src = src.replace(/w_\d+,h_\d+/, 'w_1600,h_1200');
+        img.src = src;
+        var c = p.dataset.cat || 'travel';
+        var meta = catMap[c] || catMap.travel;
+        cat.textContent = meta[0];
+        cap.textContent = meta[1];
+        lb.classList.add('is-open');
+        lb.setAttribute('aria-hidden','false');
+      });
+    });
+    function close(){ lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true'); }
+    closeBtn.addEventListener('click', close);
+    lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && lb.classList.contains('is-open')) close(); });
+  })();
+
+  } // end reduced-motion gate
+</script>
+
+</body>
+</html>

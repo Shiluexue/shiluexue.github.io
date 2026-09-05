@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identio — Meeting Assistance | Shilue's Portfolio</title>
+  <meta name="description" content="A WebEx plugin that identifies speakers in multi-office virtual meetings, helping teams know who is talking at any moment." />
+  <link rel="icon" type="image/png" href="../images/avatar-header.png" />
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="../index.html" class="brand" aria-label="Shilue's Portfolio home">
+        <span class="brand-avatar"><img class="brand-avatar__default" src="../images/avatar-header.png" alt="Shilue logo" /><img class="brand-avatar__hover" src="../images/avatar-header-hover.png" alt="" /></span>
+        <span>Shilue's Portfolio</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="../index.html" class="is-active">Projects</a>
+        <a href="../playgrounds/index.html">Playgrounds</a>
+        <a href="../resume.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="cs-hero">
+      <img src="../images/efcc58_fbe6e1563a47408fbf8da14bc0194d69~mv2.png" alt="Identio speaker recognition plugin cover" />
+    </section>
+
+    <div class="cs-intro">
+      <p class="cs-label">Desktop · WebEx Plugin · Product Design</p>
+      <h1 class="cs-title">Identio — Meeting Assistance</h1>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><strong>Duration</strong><span>October – November 2019 (8 weeks)</span></div>
+        <div class="cs-meta-item"><strong>Team</strong><span>Shilue, Kai, Meg, Kramer</span></div>
+        <div class="cs-meta-item"><strong>Role</strong><span>Interviewer · Wireframes · Visual Design · Prototype</span></div>
+        <div class="cs-meta-item"><strong>Tools</strong><span>Sketch · InVision · Principle</span></div>
+        <div class="cs-meta-item"><strong>Tags</strong><span>Desktop · WebEx Plugin · Product Design</span></div>
+      </div>
+      <p class="cs-overview">
+        Make every speaker known at a virtual meeting between offices. Identio is a WebEx plugin that uses voice recognition technology to identify speakers in multi-office virtual meetings — solving the common problem of not knowing who is talking when multiple people share audio lines.
+      </p>
+    </div>
+
+    <div class="cs-body">
+
+      <section class="cs-section">
+        <h2>The Problem</h2>
+        <blockquote class="cs-quote">
+          "Gone are the days of multi-conference room confusion and team members untangling who said what after a conference call."
+        </blockquote>
+        <p>In multi-office virtual meetings, multiple people often share the same audio line. Existing tools like WebEx cannot identify which person from a remote office is speaking at any moment. This creates confusion during the meeting and makes post-meeting follow-up nearly impossible.</p>
+        <figure class="cs-img">
+          <img src="../images/efcc58_d4d104e2cbc14715a3a5107ba00143a2~mv2.png" alt="Problem illustration" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Research &amp; Discovery</h2>
+        <p>We used a multi-method research approach:</p>
+        <ul>
+          <li>Literature review on interpersonal communication culture</li>
+          <li>3 in-depth interviews with frequent meeting participants</li>
+          <li>Survey of <strong>127 respondents</strong> confirming gaps in speaker identification tools</li>
+        </ul>
+
+        <h3>Key Findings</h3>
+        <ul>
+          <li>Voice recognition technology (like Amazon Echo) can create voice profiles to distinguish speakers</li>
+          <li>Meeting culture emphasizes respect; knowing and using people's names makes them feel valued</li>
+          <li>Users struggle to build professional connections with remote colleagues they've never met face-to-face</li>
+        </ul>
+
+        <figure class="cs-img">
+          <img src="../images/efcc58_5964b2f57a1c4f49ad0f044ca5d599a6~mv2.gif" alt="Research process animated" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_b015dcd252a043a4be1825ab2181ac14~mv2.png" alt="Survey data visualization" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_2c85367bad2c4b4eaca591a1b4e7683b~mv2.jpg" alt="User interview context" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_160f1b14afb84d65ac8227ca1a19d2ce~mv2.png" alt="Research synthesis" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Ideation</h2>
+        <p>We ran 5-minute individual brainstorming sessions followed by team consolidation using an impact/feasibility evaluation matrix. Three concept directions emerged for the Phase 1 setup:</p>
+        <ol>
+          <li><strong>Pre-work</strong> — Email-based attendee setup before the meeting (ranked lowest by testers)</li>
+          <li><strong>Prior to Connection</strong> — Attendees identify themselves before joining (ranked highest)</li>
+          <li><strong>Manual Assignment</strong> — Real-time speaker identification during the call</li>
+        </ol>
+        <p>User feedback favored a hybrid approach: pre-meeting setup combined with the ability to manually assign unknown speakers during the call.</p>
+
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_5177e8d94e814b41b72b4be0d7f70441~mv2.png" alt="Brainstorming session" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_f8cde48994c0424e883aebec6cdc6375~mv2.png" alt="Concept evaluation matrix" />
+          </figure>
+        </div>
+        <figure class="cs-img">
+          <img src="../images/efcc58_3bb5acfb810d4f0fbe2f57c5b0f53253~mv2.png" alt="Storyboard development" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_98a1e15f1b434a8da5992e1ebc503937~mv2.png" alt="Ideation sketches" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Design Process</h2>
+
+        <h3>Phase 1: Setup Flow</h3>
+        <p>We designed a single-person identification interface (rather than batch processing) to match the natural rhythm of how people join meetings one by one. A forward button navigation accommodates variable attendee counts without requiring the host to know the final number in advance.</p>
+        <figure class="cs-img">
+          <img src="../images/efcc58_193d3c714ccd4604a54bf713c92f3aee~mv2.png" alt="Setup flow version 1" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_1781f2bbd7d64bab9352edc8ddbda13f~mv2.png" alt="Pre-work version wireframes" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_fe8dbc02162b449cb2121fc021aea54b~mv2.png" alt="Setup flow refined" />
+        </figure>
+
+        <h3>Phase 2: Main Interface</h3>
+        <p>Testing revealed users strongly preferred a <strong>list view over a grid view</strong> — list format provided enough space for detailed attendee information at a glance. A single-column layout minimized disruption to the meeting screen.</p>
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_59ba8b77e1fd463281964da845a35fcf~mv2.png" alt="List view design" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_1dbe041d051e44b3bf53a2de9ae1d429~mv2.png" alt="Grid view alternative" />
+          </figure>
+        </div>
+        <figure class="cs-img">
+          <img src="../images/efcc58_5cf6f754c5dc438a886d6bf7fe965317~mv2.png" alt="Main interface design" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_fe1ce0b4076c46b8bcb676846daa5eff~mv2.png" alt="Speaker panel detail" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Iterations</h2>
+        <p>We conducted three rounds of user testing with 12 participants total, making major revisions after each round.</p>
+
+        <h3>Iteration 1</h3>
+        <p>Separated current speaker display with striking visual prominence — users wanted to identify the current speaker at a glance without scanning a list.</p>
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_47566f39736648dfb9eff0a691877b07~mv2.png" alt="Iteration 1 design" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_c7323afbdc91468ab7b0e06a21935db1~mv2.png" alt="Iteration 1 alternate" />
+          </figure>
+        </div>
+        <figure class="cs-img">
+          <img src="../images/efcc58_e10ac794cd114f529667d9e485b49d35~mv2.png" alt="Testing feedback round 1" />
+        </figure>
+
+        <h3>Iteration 2</h3>
+        <p>Simplified navigation from tabs to an expandable arrow icon, addressing menu clarity issues and reducing cognitive load during active meetings.</p>
+        <figure class="cs-img">
+          <img src="../images/efcc58_ff2167743e6b45dd9c166c279321db7e~mv2.png" alt="Simplified navigation design" />
+        </figure>
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_8d9f1fe20fd04ffabeba36b9a4f23318~mv2.png" alt="Iteration 2 panel design" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_8fdd133471be49fca72ee98ea4a171cf~mv2.png" alt="Iteration 2 alternate" />
+          </figure>
+        </div>
+
+        <h3>Iteration 3</h3>
+        <p>Added one-step unknown speaker assignment with automatic room location detection via color-coding by office — users found the room map highly intuitive for understanding where each speaker was located.</p>
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_2353a6ade2314ce49dcd4565c5bdc209~mv2.png" alt="Room map feature" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_8d65eafbf78b4b39b15f2d1ea4d31741~mv2.png" alt="Color-coded office layout" />
+          </figure>
+        </div>
+        <figure class="cs-img">
+          <img src="../images/efcc58_0fffb02743ce40408a9d62709a69ca26~mv2.png" alt="Unknown speaker assignment" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_0edd2a5cc6f249f3a9172fc259e4fbb9~mv2.png" alt="Iteration 3 final" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_32ef1aa681c84acca5fc6d046634122e~mv2.png" alt="Design specifications" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Final Design</h2>
+        <p>The final Identio plugin provides four primary functions:</p>
+        <ul>
+          <li><strong>Speaker Identification</strong> — Current speaker displayed centrally with name, title, and office location</li>
+          <li><strong>Organizational Integration</strong> — Expandable profiles showing job title, contact info, and office</li>
+          <li><strong>Room Positioning</strong> — Visual map showing speaker location for post-meeting in-person connections</li>
+          <li><strong>Save Connections</strong> — "Like" feature for marking interesting contacts for later follow-up</li>
+        </ul>
+
+        <figure class="cs-img">
+          <img src="../images/efcc58_c06a3a8f71664d098ff37bd4ec41a204~mv2.gif" alt="Social features interaction demo" />
+          <figcaption>Profile and connection features in action</figcaption>
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_f17b0b9bc95f4990b436b3d76b854217~mv2.gif" alt="Speaker identification prototype demo" />
+          <figcaption>Real-time speaker identification</figcaption>
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_42d31193c27b4426a54a54787b84c7d2~mv2.gif" alt="Final prototype walkthrough" />
+          <figcaption>Complete prototype walkthrough</figcaption>
+        </figure>
+
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_f8394e22186f47e18ebbb3d372506e10~mv2.png" alt="Final design screen 1" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_03caa99b2a594649a28eecf2f1f2768a~mv2.png" alt="Final design screen 2" />
+          </figure>
+        </div>
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_a51dc129f6c346639d4d9d54d7257310~mv2.png" alt="Final design screen 3" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_0e98a945604a45feb4da9301414c6cc8~mv2.png" alt="Final design screen 4" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section">
+        <h2>Visual System</h2>
+        <div class="cs-img-grid cs-img-grid--3">
+          <figure>
+            <img src="../images/efcc58_ae88490009284eeead8fcfb8a84daa42~mv2.png" alt="Color system" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_ccf604d4dc574cc1bca764d8ca67008d~mv2.png" alt="Icon system" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_5804e45857bc488a9bee5106a352ebdf~mv2.png" alt="Component goals" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section">
+        <h2>Reflections</h2>
+        <p><strong>Strengths:</strong> The team showed great flexibility when research shifted the project direction from an initial wearable app concept to a WebEx plugin. Successfully prototyping a backend-heavy technical concept was a major achievement for a design-only team.</p>
+        <p><strong>Future opportunities:</strong></p>
+        <ul>
+          <li>Real meeting environment testing with multiple simultaneous participants</li>
+          <li>Platform expansion to mobile and wearable form factors</li>
+          <li>Meeting transcription and interaction logging</li>
+          <li>Integration with calendar and contact management tools</li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2022 Designed by Shilue Xue</p>
+    <nav class="footer-nav">
+      <a href="../index.html">← All Projects</a>
+      <a href="google-design-challenge.html">Next Project →</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

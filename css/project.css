@@ -1,0 +1,282 @@
+/* =============================================
+   Shared styles for all project/case-study pages
+   ============================================= */
+
+:root {
+  --color-text: #1C3142;
+  --color-text-deep: #0E1821;
+  --color-text-muted: #4A5868;
+  --color-bg: #FFFFFF;
+  --color-divider: #E5E7EB;
+  --color-accent: #C24A3A;
+  --font-sans: "Airbnb Cereal App", "Cereal-fallback", "Inter", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  --container-width: 800px;
+  --header-height: 80px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { opacity: 0.85; transition: opacity .2s ease; }
+.brand:hover { opacity: 1; }
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =========== Header =========== */
+.site-header {
+  position: sticky; top: 0;
+  background: rgba(255,255,255,.94);
+  backdrop-filter: saturate(180%) blur(8px);
+  z-index: 100;
+  height: var(--header-height);
+  display: flex; align-items: center;
+}
+.site-header__inner {
+  display: flex; align-items: center;
+  justify-content: space-between; width: 100%;
+  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+}
+.brand {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 18px; font-weight: 700; color: var(--color-text);
+}
+.brand:hover { opacity: 1; }
+.brand-avatar { position: relative; width: 38px; height: 40px; flex-shrink: 0; }
+.brand-avatar img {
+  position: absolute; top: 0; left: 0;
+  width: 38px; height: 40px; object-fit: cover; border-radius: 50%;
+  transition: opacity .2s ease;
+}
+.brand-avatar__hover { opacity: 0; }
+.brand:hover .brand-avatar__default { opacity: 0; }
+.brand:hover .brand-avatar__hover { opacity: 1; }
+.nav { display: flex; gap: 60px; align-items: center; }
+.nav a { font-size: 16px; font-weight: 500; color: var(--color-text); transition: color .25s ease; }
+.nav a:hover { color: var(--color-text-muted); opacity: 1; }
+.nav a.is-active { color: #0A66C2; }
+
+/* =========== Case Study Layout =========== */
+.cs-hero {
+  width: 100%;
+  overflow: hidden;
+  background: #F4F4F4;
+  max-height: 560px;
+  display: flex; align-items: center; justify-content: center;
+}
+.cs-hero img {
+  width: 100%; height: auto;
+  max-height: 560px; object-fit: cover;
+  object-position: top center;
+}
+
+.cs-intro {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 56px 24px 0;
+}
+.cs-label {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--color-accent);
+  margin: 0 0 16px;
+}
+.cs-title {
+  font-size: 36px; font-weight: 700; line-height: 1.2;
+  margin: 0 0 28px; color: var(--color-text-deep);
+}
+.cs-meta {
+  display: flex; flex-wrap: wrap; gap: 32px;
+  padding: 24px 0; border-top: 1px solid var(--color-divider);
+  border-bottom: 1px solid var(--color-divider);
+}
+.cs-meta-item strong {
+  display: block; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--color-text-muted); margin-bottom: 4px;
+}
+.cs-meta-item span { font-size: 15px; color: var(--color-text); }
+.cs-overview {
+  font-size: 18px; line-height: 1.7;
+  color: var(--color-text);
+  padding: 32px 0 48px;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+/* =========== Body Content =========== */
+.cs-body {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.cs-section {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--color-divider);
+}
+.cs-section:last-child { border-bottom: none; }
+
+.cs-section h2 {
+  font-size: 26px; font-weight: 700;
+  margin: 0 0 20px; color: var(--color-text-deep);
+}
+.cs-section h3 {
+  font-size: 18px; font-weight: 600;
+  margin: 36px 0 12px; color: var(--color-text-deep);
+}
+.cs-section p {
+  font-size: 16px; line-height: 1.75;
+  color: var(--color-text); margin: 0 0 16px;
+}
+.cs-section ul, .cs-section ol {
+  padding-left: 20px; margin: 0 0 16px;
+}
+.cs-section li {
+  font-size: 16px; line-height: 1.75;
+  color: var(--color-text); margin-bottom: 8px;
+}
+.cs-section strong { color: var(--color-text-deep); }
+
+/* =========== Images =========== */
+.cs-img { margin: 32px 0; }
+.cs-img img { width: 100%; height: auto; border-radius: 2px; }
+.cs-img--narrow { max-width: 320px; margin-left: auto; margin-right: auto; }
+.cs-img--narrow img { width: 100%; height: auto; border-radius: 2px; }
+.cs-img--bg {
+  background: #F4F4F4; padding: 24px;
+  border-radius: 4px;
+}
+.cs-img figcaption {
+  font-size: 13px; color: var(--color-text-muted);
+  text-align: center; margin-top: 10px; line-height: 1.4;
+}
+
+.cs-img-grid {
+  display: grid; gap: 16px; margin: 32px 0;
+}
+.cs-img-grid--2 { grid-template-columns: 1fr 1fr; }
+.cs-img-grid--3 { grid-template-columns: 1fr 1fr 1fr; }
+.cs-img-grid figure { margin: 0; }
+.cs-img-grid img { width: 100%; height: auto; border-radius: 2px; }
+.cs-img-grid figcaption {
+  font-size: 13px; color: var(--color-text-muted);
+  text-align: center; margin-top: 8px;
+}
+
+/* =========== Quote =========== */
+.cs-quote {
+  font-size: 20px; font-style: italic;
+  line-height: 1.6; color: var(--color-text-deep);
+  border-left: 3px solid var(--color-accent);
+  padding: 4px 0 4px 24px;
+  margin: 32px 0;
+}
+
+/* =========== Result chips =========== */
+.cs-results {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  margin: 24px 0;
+}
+.cs-result-chip {
+  background: #F4F4F4; border-radius: 8px;
+  padding: 16px 20px; min-width: 140px;
+}
+.cs-result-chip .num {
+  font-size: 28px; font-weight: 700;
+  color: var(--color-accent); line-height: 1;
+}
+.cs-result-chip .lbl {
+  font-size: 13px; color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* =========== Footer =========== */
+.site-footer {
+  padding: 48px 24px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-divider);
+}
+.footer-nav {
+  display: flex; justify-content: center; gap: 32px;
+  margin-top: 16px;
+}
+.footer-nav a {
+  font-size: 14px; color: var(--color-text-muted);
+  transition: color .2s ease;
+}
+.footer-nav a:hover { color: var(--color-text); opacity: 1; }
+
+/* =========== Responsive =========== */
+
+/* tablet landscape (≤1024px) */
+@media (max-width: 1024px) {
+  .nav { gap: 36px; }
+  .cs-title { font-size: 32px; }
+}
+
+/* tablet portrait (≤768px) */
+@media (max-width: 768px) {
+  :root { --container-width: 100%; }
+  .site-header { height: 68px; }
+  .brand { font-size: 16px; gap: 10px; }
+  .brand-avatar { width: 34px; height: 36px; } .brand-avatar img { width: 34px; height: 36px; }
+  .nav { gap: 24px; }
+  .nav a { font-size: 15px; }
+
+  .cs-hero { max-height: 360px; }
+  .cs-intro, .cs-body { padding-left: 28px; padding-right: 28px; }
+  .cs-title { font-size: 28px; }
+  .cs-overview { font-size: 16px; }
+  .cs-meta { gap: 20px; }
+  .cs-section h2 { font-size: 22px; }
+  .cs-img-grid--2, .cs-img-grid--3 { grid-template-columns: 1fr; }
+  .cs-result-chip .num { font-size: 24px; }
+}
+
+/* large mobile (≤600px) */
+@media (max-width: 600px) {
+  .site-header { height: 60px; }
+  .brand span { font-size: 15px; }
+  .brand img { width: 30px; height: 32px; }
+  .nav { gap: 18px; }
+  .nav a { font-size: 14px; }
+  .cs-intro, .cs-body { padding-left: 20px; padding-right: 20px; }
+  .cs-title { font-size: 24px; }
+  .cs-meta { gap: 16px; }
+  .cs-section { padding: 36px 0; }
+  .site-footer { padding: 36px 20px; }
+}
+
+/* small mobile (≤380px) */
+@media (max-width: 380px) {
+  .nav { gap: 14px; }
+  .nav a { font-size: 13px; }
+  .brand span { font-size: 14px; }
+  .cs-title { font-size: 22px; }
+}
+
+
+
+/* ============ Header unified — fixed max-width across all pages (kills nav jitter) ============ */
+.site-header__inner{max-width:1200px !important;margin:0 auto !important;padding:0 24px !important;width:100% !important;box-sizing:border-box}
+
+
+/* ============ Nav unified — same size/spacing across all pages & breakpoints (kills switch-jitter) ============ */
+.nav{display:flex !important;gap:48px !important;align-items:center !important}
+.nav a{font-size:16px !important;font-weight:500 !important;padding:6px 0 !important}
+@media (max-width:900px){.nav{gap:32px !important}}
+@media (max-width:600px){.nav{gap:20px !important}}

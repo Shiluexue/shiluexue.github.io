@@ -294,8 +294,7 @@ main section[id]{scroll-margin-top:140px}
 }
 .cs-cover-placeholder__q-new em{
   font-style:normal;
-  background:linear-gradient(180deg, transparent 62%, rgba(245,166,35,.55) 62%);
-  padding:0 4px;
+  color:#0A66C2;
 }
 .cs-cover-placeholder__stages{
   font-size:14px; font-weight:700; opacity:.6;
@@ -349,6 +348,37 @@ main section[id]{scroll-margin-top:140px}
 
 
 
+
+/* ============ Opening — gateway before/after diagram ============ */
+.op-gateway{
+  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  margin:28px 0 var(--gap-para);
+  align-items:stretch;
+}
+.op-gw-panel{
+  background:var(--c-container-bg); border-radius:16px;
+  padding:24px 24px 22px;
+  display:flex; flex-direction:column; gap:16px;
+  border:1px solid rgba(15,24,33,.06);
+}
+.op-gw-panel--after{
+  background:linear-gradient(180deg, #EFF5FE 0%, #E6EEFB 100%);
+  border-color:rgba(10,102,194,.16);
+}
+.op-gw-eyebrow{
+  font-size:11px; font-weight:800; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--c-body); opacity:.55;
+}
+.op-gw-panel--after .op-gw-eyebrow{ color:var(--c-blue); opacity:1; }
+.op-gw-svg{ width:100%; height:auto; display:block; margin:auto 0; }
+.op-gw-svg--before{ max-height:160px; }
+.op-gw-svg--after{ max-height:280px; }
+.op-gw-caption{
+  font-size:13px; color:var(--c-body); line-height:1.5;
+  margin:0; opacity:.85; font-style:italic;
+}
+@media (max-width:800px){ .op-gateway{ grid-template-columns:1fr; } }
+
 /* ============ Opening — impact metrics ============ */
 .op-metrics{
   display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
@@ -391,48 +421,49 @@ main section[id]{scroll-margin-top:140px}
 
 /* ============ Opening viz — 1. two-query contrast ============ */
 .op-queries{
-  display:grid; grid-template-columns:1fr 1fr; gap:20px;
-  margin:8px 0 var(--gap-para);
+  display:grid; grid-template-columns:1fr 1fr; gap:0;
+  margin:16px 0 var(--gap-para);
+  border-top:1px solid rgba(15,24,33,.10);
+  border-bottom:1px solid rgba(15,24,33,.10);
 }
 .op-query{
-  background:var(--c-container-bg);
-  border-radius:14px; padding:24px 26px;
-  border:1px solid rgba(15,24,33,.05);
-  display:flex; flex-direction:column; gap:16px;
-  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  padding:28px 4px;
+  display:flex; flex-direction:column; gap:12px;
+  position:relative;
 }
+.op-query--left{ padding-right:32px; }
 .op-query--right{
-  background:linear-gradient(180deg, #FFF7E6 0%, #FFEDD1 100%);
-  border-color:rgba(245,166,35,.18);
+  padding-left:32px;
+  border-left:1px solid rgba(15,24,33,.10);
 }
 .op-query__label{
-  font-size:11px; font-weight:700; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--c-body); opacity:.6;
+  font-size:10px; font-weight:800; letter-spacing:.22em;
+  text-transform:uppercase;
 }
-.op-query__bar{
-  display:flex; align-items:center; gap:10px;
-  background:#fff; border-radius:10px; padding:12px 14px;
-  border:1px solid rgba(15,24,33,.08);
-  font-size:15px; font-weight:500; color:var(--c-text-deep);
+.op-query--left .op-query__label{ color:#2A9D5C; }
+.op-query--right .op-query__label{ color:#B08014; }
+.op-query__q{
+  font-size:22px; font-weight:700; color:var(--c-text-deep);
+  line-height:1.3; letter-spacing:-.01em; margin:0;
 }
-.op-query__bar svg{ flex-shrink:0; color:var(--c-body); opacity:.55; }
-.op-query__result{
-  display:flex; align-items:center; gap:10px;
-  font-size:14px; color:var(--c-body);
-  padding-left:2px;
+.op-query__q::before{
+  content:"\201C"; color:var(--c-body); opacity:.35;
+  margin-right:1px;
 }
-.op-query__result-icon{
-  width:18px; height:18px; border-radius:50%;
-  display:inline-flex; align-items:center; justify-content:center;
-  flex-shrink:0; font-size:11px; font-weight:700;
+.op-query__q::after{
+  content:"\201D"; color:var(--c-body); opacity:.35;
+  margin-left:1px;
 }
-.op-query--left .op-query__result-icon{ background:#DEF1E4; color:#2A9D5C; }
-.op-query--right .op-query__result-icon{ background:#FCE8B8; color:#B08014; font-size:14px; }
-.op-query__note{
-  font-size:13px; color:var(--c-body); opacity:.72;
-  font-style:italic; line-height:1.45;
+.op-query__outcome{
+  font-size:14px; color:var(--c-body); line-height:1.55;
+  margin:4px 0 0;
 }
-@media (max-width:720px){ .op-queries{ grid-template-columns:1fr; } }
+.op-query__outcome strong{ color:var(--c-text-deep); font-weight:700; }
+@media (max-width:720px){
+  .op-queries{ grid-template-columns:1fr; }
+  .op-query--left{ padding:0 0 24px; border-bottom:1px solid rgba(15,24,33,.10); }
+  .op-query--right{ padding:24px 0 0; border-left:none; }
+}
 
 /* ============ Opening viz — 2. three capability shift cards ============ */
 .op-shifts-viz{
@@ -557,9 +588,8 @@ main section[id]{scroll-margin-top:140px}
   width:3px; background:var(--c-blue); border-radius:2px;
 }
 .opening-quote__body em{
-  font-style:italic; color:var(--c-blue);
-  background:linear-gradient(180deg, transparent 68%, rgba(245,166,35,.35) 68%);
-  padding:0 2px;
+  font-style:normal; font-weight:900; color:var(--c-blue);
+  letter-spacing:-.005em;
 }
 @media (max-width:720px){
   .opening-quote__body{ font-size:20px; padding-left:20px; }
@@ -1141,7 +1171,7 @@ main section[id]{scroll-margin-top:140px}
         </p>
 
         <p class="p">
-          The design lever was a <strong class="dark">Match &amp; Inspire framework</strong> I built for SERP: each query was classified into an intent bucket, and the page was designed to first <em>match</em> the explicit need (tickets, hotels, transport) and then <em>inspire</em> adjacent possibilities (themed itineraries, seasonal hooks, curated destinations) tuned to that bucket. <strong class="dark">One page, two jobs.</strong>
+          The design lever was a framework I built and named <strong class="dark">Match &amp; Inspire</strong> — each SERP first <em>matched</em> the explicit need, then <em>inspired</em> adjacent possibilities tuned to that intent. <strong class="dark">One page, two jobs.</strong>
         </p>
 
         <p class="p">The impact was measurable and significant:</p>
@@ -1170,39 +1200,25 @@ main section[id]{scroll-margin-top:140px}
       <div class="op-beat">
         <p class="op-beat__label"><span class="op-beat__label-num">02</span> The Ceiling</p>
         <p class="p">
-          <strong class="dark">But the gains had a shape.</strong> The queries that benefited were the ones traditional Search was built for — clean keyword-to-inventory mapping. Every query that <em>didn't</em> map to a single inventory slot — because it was too rare (<strong class="dark">long-tail</strong>) or too complex (<strong class="dark">semantic-goal</strong>) — remained beyond what ranking or curation could reach. The mechanic underneath was still <strong class="dark">keyword matching</strong>, and it had a hard edge.
+          <strong class="dark">But the gains had a shape.</strong> Every query that didn't map to a single inventory slot — because it was too rare (<strong class="dark">long-tail</strong>) or too complex (<strong class="dark">semantic-goal</strong>) — stayed outside reach. The mechanic underneath was still <strong class="dark">keyword matching</strong>, and it had a hard edge.
         </p>
 
         <p class="p">Two examples show where that edge sits:</p>
 
         <p class="p">
-          We could infer what users might want next — but not <em>why</em> they were searching, <em>what</em> information they were missing, or <em>what would actually help them decide.</em>
+          We could infer what users might want next — but not the <em>intent</em> behind the query, the <em>gaps</em> in what they knew, or the <em>shape</em> of the decision they were making.
         </p>
 
         <div class="op-queries" aria-label="Two queries showing where keyword matching stops">
           <div class="op-query op-query--left">
-            <span class="op-query__label">What SERP handles well</span>
-            <div class="op-query__bar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-              <span>the Palace Museum</span>
-            </div>
-            <div class="op-query__result">
-              <span class="op-query__result-icon">✓</span>
-              <span>3 ticket options · 24 hotels nearby · 12 attractions</span>
-            </div>
-            <p class="op-query__note">Clear intent → clear inventory. Keyword matching shines here.</p>
+            <span class="op-query__label">Handled well</span>
+            <p class="op-query__q">the Palace Museum</p>
+            <p class="op-query__outcome"><strong>3 ticket options · 24 hotels nearby · 12 attractions.</strong> Clear intent, clean inventory.</p>
           </div>
           <div class="op-query op-query--right">
-            <span class="op-query__label">Where it stops</span>
-            <div class="op-query__bar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-              <span>Where should I take my parents this summer?</span>
-            </div>
-            <div class="op-query__result">
-              <span class="op-query__result-icon">?</span>
-              <span>No handle for intent, missing info, or decision help.</span>
-            </div>
-            <p class="op-query__note">Keyword matching has nothing to grip onto.</p>
+            <span class="op-query__label">Stops at the edge</span>
+            <p class="op-query__q">Where should I take my parents this summer?</p>
+            <p class="op-query__outcome"><strong>Nothing to match on.</strong> The intent, the missing info, the shape of the decision — all outside SERP's reach.</p>
           </div>
         </div>
 
@@ -1211,7 +1227,7 @@ main section[id]{scroll-margin-top:140px}
       <div class="op-beat">
         <p class="op-beat__label"><span class="op-beat__label-num">03</span> The Capability Shift</p>
         <p class="p">
-          That was where AI stopped being a trend and became strategically necessary — not as a content-generation layer, but as a way to expand Search in three directions:
+          That was where AI stopped being a trend and became a strategic necessity — not to generate more content, but to extend Search in three directions:
         </p>
 
         <div class="op-shifts-viz" aria-label="Three capability shifts AI enables in Search">
@@ -1233,31 +1249,42 @@ main section[id]{scroll-margin-top:140px}
       </div>
 
       <p class="p">
-        For an OTA, this reframes what Search <em>is</em>: no longer a transaction entry, but a <strong class="dark">travel decision gateway</strong> connecting traveler intent, inspiration, cross-business supply, and booking.
+        For an OTA, this reframes what Search <em>is</em> — from a transaction entry into a <strong class="dark">travel decision gateway</strong>.
       </p>
 
       <div class="op-gateway" aria-label="Search reframed: from transaction entry to travel decision gateway">
-        <div class="op-gateway__col op-gateway__col--before">
-          <span class="op-gateway__eyebrow">Before · Transaction entry</span>
-          <div class="op-gateway__flow">
-            <span class="op-gateway__node">Search</span>
-            <span class="op-gateway__arrow">→</span>
-            <span class="op-gateway__node">Booking</span>
-          </div>
-          <p class="op-gateway__caption">Get from query to purchase, as fast as possible.</p>
+        <div class="op-gw-panel op-gw-panel--before">
+          <span class="op-gw-eyebrow">Before &middot; Transaction entry</span>
+          <svg class="op-gw-svg op-gw-svg--before" viewBox="0 0 340 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Search directly to Booking">
+            <rect x="20" y="60" width="90" height="34" rx="8" fill="#fff" stroke="#c9d0d7" stroke-width="1.5"/>
+            <text x="65" y="82" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1821" font-family="Airbnb Cereal App, Inter, sans-serif">Search</text>
+            <line x1="118" y1="77" x2="214" y2="77" stroke="#8b96a3" stroke-width="1.6"/>
+            <polygon points="220,77 210,72 210,82" fill="#8b96a3"/>
+            <rect x="225" y="60" width="100" height="34" rx="8" fill="#fff" stroke="#c9d0d7" stroke-width="1.5"/>
+            <text x="275" y="82" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1821" font-family="Airbnb Cereal App, Inter, sans-serif">Booking</text>
+          </svg>
+          <p class="op-gw-caption">Get from query to purchase, as fast as possible.</p>
         </div>
-        <div class="op-gateway__col op-gateway__col--after">
-          <span class="op-gateway__eyebrow">After · Travel decision gateway</span>
-          <div class="op-gateway__flow">
-            <span class="op-gateway__node op-gateway__node--hub">Search</span>
-            <div class="op-gateway__branches">
-              <span class="op-gateway__branch">Intent</span>
-              <span class="op-gateway__branch">Inspiration</span>
-              <span class="op-gateway__branch">Cross-business supply</span>
-              <span class="op-gateway__branch">Booking</span>
-            </div>
-          </div>
-          <p class="op-gateway__caption">Orchestrate intent, exploration, and supply into a decision.</p>
+        <div class="op-gw-panel op-gw-panel--after">
+          <span class="op-gw-eyebrow">After &middot; Travel decision gateway</span>
+          <svg class="op-gw-svg op-gw-svg--after" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Search as a hub branching to intent, inspiration, cross-business supply, and booking">
+            <path d="M 122 105 Q 190 90 250 40" stroke="#0A66C2" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M 122 120 Q 190 115 250 95" stroke="#0A66C2" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M 122 140 Q 190 145 250 165" stroke="#0A66C2" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M 122 155 Q 190 175 250 220" stroke="#0A66C2" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <circle cx="70" cy="130" r="52" fill="none" stroke="#0A66C2" stroke-width="1" opacity="0.22"/>
+            <circle cx="70" cy="130" r="46" fill="#0A66C2"/>
+            <text x="70" y="136" text-anchor="middle" font-size="15" font-weight="800" fill="#fff" font-family="Airbnb Cereal App, Inter, sans-serif">Search</text>
+            <rect x="252" y="22" width="90" height="36" rx="18" fill="#fff" stroke="#0A66C2" stroke-width="1.5"/>
+            <text x="297" y="45" text-anchor="middle" font-size="13" font-weight="700" fill="#0F1821" font-family="Airbnb Cereal App, Inter, sans-serif">Intent</text>
+            <rect x="252" y="77" width="118" height="36" rx="18" fill="#fff" stroke="#0A66C2" stroke-width="1.5"/>
+            <text x="311" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#0F1821" font-family="Airbnb Cereal App, Inter, sans-serif">Inspiration</text>
+            <rect x="252" y="147" width="148" height="36" rx="18" fill="#fff" stroke="#0A66C2" stroke-width="1.5"/>
+            <text x="326" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#0F1821" font-family="Airbnb Cereal App, Inter, sans-serif">Cross-business supply</text>
+            <rect x="252" y="202" width="100" height="36" rx="18" fill="#fff" stroke="#0A66C2" stroke-width="1.5"/>
+            <text x="302" y="225" text-anchor="middle" font-size="13" font-weight="700" fill="#0F1821" font-family="Airbnb Cereal App, Inter, sans-serif">Booking</text>
+          </svg>
+          <p class="op-gw-caption">Orchestrate intent, exploration, and supply into a decision.</p>
         </div>
       </div>
 
@@ -1265,7 +1292,7 @@ main section[id]{scroll-margin-top:140px}
 
       <div class="op-beat">
         <p class="op-beat__label"><span class="op-beat__label-num">04</span> The Design North Star &amp; What Came Next</p>
-        <p class="p">The obvious framing was <em>&ldquo;add AI features to Search.&rdquo;</em> I chose a harder one — a question that treated AI as a way to <em>reframe</em> Search itself, not decorate it:</p>
+        <p class="p">The obvious move was <em>&ldquo;add AI features to Search.&rdquo;</em> I chose a harder framing:</p>
 
         <figure class="opening-quote">
         <figcaption class="opening-quote__eyebrow">The design north star</figcaption>

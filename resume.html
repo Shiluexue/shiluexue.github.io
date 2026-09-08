@@ -573,6 +573,9 @@ body.pal-contact{background-color:#F6FAFF}
 /* Site-wide signature stamp (in footer) */
 .wow-sig{font-family:var(--font-sans);font-size:13px;font-weight:700;color:var(--color-text-muted,#4A5868);letter-spacing:0.28em;text-transform:uppercase;margin:0;opacity:0.65;text-align:center}
 
+.site-header{view-transition-name:site-header}
+::view-transition-group(site-header){animation-duration:.01s}
+::view-transition-old(site-header),::view-transition-new(site-header){animation:none}
 </style>
 </head>
 <body>
@@ -585,7 +588,6 @@ body.pal-contact{background-color:#F6FAFF}
       </a>
       <nav class="nav" aria-label="Main">
         <a href="index.html">Projects</a>
-        <a href="playgrounds/index.html">Playgrounds</a>
         <a href="resume.html" class="is-active">About</a>
       </nav>
     </div>

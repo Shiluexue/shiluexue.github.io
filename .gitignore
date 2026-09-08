@@ -15,6 +15,16 @@
 !/css/project.css
 !/css/styles.css
 
+# videos/ — Wix 原站的交互演示视频
+!/videos/
+/videos/*
+!/videos/efcc58_11c30cc4bcd44fb6a27ae0dfdedb15ab.mp4
+!/videos/efcc58_12cb6977ed5d4d8b812a1bf842f33db1.mp4
+!/videos/efcc58_79bead2cd00b4923a78d535c381bd39d.mp4
+!/videos/efcc58_afd21a4dd60d411d928150a98e9e83c3.mp4
+!/videos/efcc58_bf0f612847484c44be3eb0a1c13ee419.mp4
+
+
 # fonts/
 !/fonts/
 /fonts/*
@@ -31,6 +41,8 @@
 !/images/11062b_4b7c9a8e48334d5aad2fd274fddba3bc~mv2.jpg
 !/images/avatar-header-hover.png
 !/images/avatar-header.png
+!/images/identio-wordmark.png
+!/images/identio-mark.gif
 !/images/avatar-thanks.png
 !/images/context-mistap.mp4
 !/images/context-phone.png

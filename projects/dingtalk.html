@@ -15,7 +15,7 @@
 
 /* ============ A11y baseline: focus-visible + reduced-motion ============ */
 *:focus { outline: none; }
-a:focus-visible, button:focus-visible, [tabindex]:focus-visible, .card:focus-visible, .card:focus-within {
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible, .card:focus-visible {
   outline: 2px solid #0A66C2;
   outline-offset: 3px;
   border-radius: 4px;
@@ -470,6 +470,14 @@ main section[id]{scroll-margin-top:140px}
 /* Site-wide signature stamp (in footer) */
 .wow-sig{font-family:var(--font-sans);font-size:13px;font-weight:700;color:var(--color-text-muted,#4A5868);letter-spacing:0.28em;text-transform:uppercase;margin:0;opacity:0.65;text-align:center}
 
+
+/* ==== Shared-element transition from the homepage card ==== */
+.cs-cover img { view-transition-name: cover-dingtalk; }
+.site-header { view-transition-name: site-header; }
+::view-transition-group(*) { animation-duration:.46s; animation-timing-function:cubic-bezier(.32,.72,0,1); }
+::view-transition-group(site-header){ animation-duration:.01s }
+::view-transition-old(site-header),::view-transition-new(site-header){ animation:none }
+@media (prefers-reduced-motion: reduce){ .cs-cover img, .site-header { view-transition-name: none; } }
 </style>
 </head>
 <body>
@@ -483,7 +491,6 @@ main section[id]{scroll-margin-top:140px}
       </a>
       <nav class="nav" aria-label="Main">
         <a href="../index.html" class="is-active">Projects</a>
-        <a href="../playgrounds/index.html">Playgrounds</a>
         <a href="../resume.html">About</a>
       </nav>
     </div>

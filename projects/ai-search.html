@@ -1697,58 +1697,83 @@ main section[id]{scroll-margin-top:140px}
 @media (max-width:720px){ .brk__row{ grid-template-columns:1fr; gap:12px; } .brk__type{ padding-top:0; } }
 
 /* ---- 04 · framework wireframes ---- */
-.fw{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin:26px 0 8px; align-items:start; }
-.fw-opt{ display:flex; flex-direction:column; gap:12px; }
+.fw{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:32px;
+  margin:26px 0 8px;
+  padding:36px 40px 40px;
+  background:var(--c-container-bg);
+  border-radius:20px;
+  align-items:start;
+}
+.fw-opt{ display:flex; flex-direction:column; gap:14px; align-items:flex-start; }
 .fw-opt__label{
   font-size:13px; font-weight:800; letter-spacing:.005em;
   color:var(--c-body); opacity:.6;
 }
 .fw-opt--pick .fw-opt__label{ color:var(--c-blue); opacity:1; }
 .fw-opt__name{ font-size:15px; font-weight:800; color:var(--c-text-deep); margin:0; letter-spacing:-.005em; }
+
+/* Phone frame: 375 x 812 (iPhone) — stays proportional at any width */
 .fw-phone{
-  position:relative; margin:0 auto; width:100%; max-width:292px; height:512px;
-  background:#fff; border:1.5px solid #DFE2E7; border-radius:34px; overflow:hidden;
+  position:relative; margin:0; width:100%; max-width:240px;
+  aspect-ratio: 375 / 812;
+  background:#fff; border:1.5px solid #DFE2E7; border-radius:36px; overflow:hidden;
   box-shadow:0 12px 32px rgba(15,24,33,.07);
 }
 .fw-opt--pick .fw-phone{ border-color:rgba(10,102,194,.34); box-shadow:0 12px 32px rgba(10,102,194,.12); }
 .fw-island{
-  position:absolute; top:10px; left:50%; transform:translateX(-50%);
-  width:72px; height:19px; border-radius:11px; background:#101A23;
+  position:absolute; top:9px; left:50%; transform:translateX(-50%);
+  width:78px; height:20px; border-radius:12px; background:#101A23; z-index:2;
 }
 .fw-home{
-  position:absolute; bottom:7px; left:50%; transform:translateX(-50%);
-  width:98px; height:4px; border-radius:2px; background:#101A23; opacity:.8;
+  position:absolute; bottom:6px; left:50%; transform:translateX(-50%);
+  width:104px; height:4px; border-radius:2px; background:#101A23; opacity:.85; z-index:2;
 }
 .fw-screen{
-  position:absolute; inset:0; padding:40px 12px 20px;
+  position:absolute; inset:0; padding:40px 10px 20px;
   display:flex; flex-direction:column; gap:8px; overflow:hidden;
 }
 .fw-bar{
-  height:30px; border-radius:15px; background:#F2F3F6; border:1px solid #E7E9ED; flex:none;
-  display:flex; align-items:center; padding:0 11px;
+  height:32px; border-radius:16px; background:#F2F3F6; border:1px solid #E7E9ED; flex:none;
+  display:flex; align-items:center; padding:0 11px; gap:8px;
 }
-.fw-bar::before{ content:""; width:9px; height:9px; border-radius:50%; border:1.5px solid #C3C8CE; }
-.fw-bar::after{ content:""; margin-left:8px; height:5px; width:52%; border-radius:3px; background:#DEE1E6; }
+.fw-bar__ico{
+  width:12px; height:12px; flex:none; color:#9AA3AC; display:flex; align-items:center; justify-content:center;
+}
+.fw-bar__ico svg{ width:100%; height:100%; display:block; }
+.fw-bar::after{
+  content:""; flex:1; height:5px; border-radius:3px; background:#DEE1E6;
+  max-width:70%;
+}
 .fw-zone{ border-radius:12px; padding:10px; display:flex; flex-direction:column; gap:6px; }
 .fw-zone--ai{ background:#EFF4FB; border:1px solid rgba(10,102,194,.14); }
 .fw-zone--results{ background:transparent; padding:2px 0 0; }
 .fw-zone--grow{ flex:1; min-height:0; }
 .fw-tag{
-  font-size:9px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; margin-bottom:1px;
+  font-size:9px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; margin-bottom:2px;
 }
 .fw-zone--ai .fw-tag{ color:var(--c-blue); opacity:.9; }
-.fw-zone--results .fw-tag{ color:var(--c-body); opacity:.42; }
+.fw-zone--results .fw-tag{ color:var(--c-body); opacity:.42; padding-left:2px; }
 .fw-line{ height:6px; border-radius:3px; background:rgba(10,102,194,.24); }
 .fw-line--s{ width:58%; }
 .fw-line--m{ width:84%; }
-.fw-cards{ display:grid; grid-template-columns:1fr 1fr; gap:7px; }
-.fw-card{ height:56px; border-radius:9px; background:#fff; border:1px solid #E7E9ED; box-shadow:0 1px 2px rgba(15,24,33,.03); }
-.fw-card--tall{ height:84px; }
+
+/* Search results: solid filled cards, grid that fills the available space */
+.fw-cards{ display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.fw-card{
+  aspect-ratio: 1 / 1.05;
+  border-radius:8px;
+  background:#E7EAEE; /* solid fill, no outline */
+}
+.fw-card--wide{ grid-column:1 / -1; aspect-ratio:auto; height:88px; }
+.fw-card--tall{ aspect-ratio: 1 / 1.4; }
+
 .fw-input{
   height:32px; border-radius:16px; background:#F2F3F6; border:1px solid #E7E9ED; flex:none; margin-top:auto;
 }
 .fw-t0{
-  font-size:13px; font-weight:700; letter-spacing:.04em;
+  font-size:13px; font-weight:700; letter-spacing:.02em;
   color:var(--c-body); opacity:.75; margin:0;
 }
 .fw-note{ font-size:13px; line-height:1.55; color:var(--c-body); margin:0; }
@@ -1757,12 +1782,35 @@ main section[id]{scroll-margin-top:140px}
 .fw-why li{ position:relative; padding-left:14px; font-size:13px; line-height:1.5; color:var(--c-body); }
 .fw-why li::before{ content:""; position:absolute; left:0; top:9px; width:6px; height:1.5px; background:#C6CDD4; }
 .fw-opt--pick .fw-why li strong{ color:var(--c-blue); font-weight:700; }
+
+/* Pros / Cons split under each phone */
+.fw-pc{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:2px; }
+.fw-pc__k{
+  margin:0 0 6px; font-size:10px; font-weight:800;
+  letter-spacing:.20em; text-transform:uppercase;
+}
+.fw-pc__col--pros .fw-pc__k{ color:var(--c-status-ok); }
+.fw-pc__col--cons .fw-pc__k{ color:var(--c-status-limit); }
+.fw-pc__list{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px; }
+.fw-pc__list li{
+  position:relative; padding-left:14px;
+  font-size:12.5px; line-height:1.45; color:var(--c-body);
+}
+.fw-pc__list li::before{
+  content:""; position:absolute; left:0; top:8px; width:6px; height:1.5px; background:#C6CDD4;
+}
+.fw-opt--pick .fw-pc__list li strong{ color:var(--c-blue); font-weight:700; }
+@media (max-width:820px){
+  .fw-pc{ grid-template-columns:1fr; gap:12px; }
+}
+
+/* Option B — bottom sheet overlaid on results */
 .fw-phone--stack{ position:relative; }
 .fw-sheet{
   position:absolute; left:0; right:0; bottom:0;
   border-radius:18px 18px 0 0; background:#EFF4FB;
   border-top:1px solid rgba(10,102,194,.18); padding:9px 12px 22px;
-  display:flex; flex-direction:column; gap:6px; box-shadow:0 -10px 24px rgba(15,24,33,.08);
+  display:flex; flex-direction:column; gap:6px; box-shadow:0 -10px 24px rgba(15,24,33,.08); z-index:1;
 }
 .fw-handle{ width:34px; height:4px; border-radius:2px; background:rgba(15,24,33,.18); margin:0 auto 4px; }
 .trade{ margin:26px 0 var(--gap-para); }
@@ -1804,7 +1852,7 @@ main section[id]{scroll-margin-top:140px}
   .vd__row{ grid-template-columns:1fr; gap:10px; padding:20px 0; }
 }
 @media (max-width:900px){ .trade__head, .trade__row{ grid-template-columns:1fr; gap:8px; } }
-@media (max-width:820px){ .fw{ grid-template-columns:1fr; } .fw-phone{ height:260px; } }
+@media (max-width:820px){ .fw{ grid-template-columns:1fr; } .fw-phone{ max-width:220px; } }
 
 /* ---- decision block ---- */
 .decision{
@@ -1922,12 +1970,13 @@ main section[id]{scroll-margin-top:140px}
 }
 .b-qa__q span{ color:var(--c-blue); margin-right:10px; }
 .op-metrics--3{ grid-template-columns:repeat(3,1fr); }
+.op-metrics--2{ grid-template-columns:repeat(2,1fr); }
 .op-metric__sig{
   font-size:13px; font-weight:800; letter-spacing:.005em;
   margin-top:8px; color:var(--c-status-limit);
 }
 .op-metric__sig--ok{ color:var(--c-status-ok); }
-@media (max-width:800px){ .op-metrics--3{ grid-template-columns:1fr; } }
+@media (max-width:800px){ .op-metrics--3, .op-metrics--2{ grid-template-columns:1fr; } }
 
 
 /* ============ Prologue ============ */
@@ -2163,16 +2212,16 @@ main section[id]{scroll-margin-top:140px}
   letter-spacing:.01em;
 }
 .exh__cases{
-  display:grid; grid-template-columns:repeat(3, 1fr); gap:0;
-  border-top:1px solid rgba(15,24,33,.10);
-  border-bottom:1px solid rgba(15,24,33,.10);
+  display:grid; grid-template-columns:repeat(3, 1fr);
+  gap:40px;
+  background:#fff;
+  border-radius:14px;
+  padding:36px;
 }
 .exh__case{
   display:flex; flex-direction:column; gap:14px;
-  padding:28px 24px 26px;
-  border-left:1px solid rgba(15,24,33,.10);
+  padding:0;
 }
-.exh__case:first-child{ border-left:none; }
 .exh__tag{
   display:flex; align-items:baseline; gap:8px;
   font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase;
@@ -2180,61 +2229,114 @@ main section[id]{scroll-margin-top:140px}
 }
 .exh__tag-n{ color:var(--c-status-limit); opacity:1; }
 .exh__q{
-  font-size:15px; font-weight:700; color:var(--c-text-deep);
-  line-height:1.4; letter-spacing:-.005em; margin:0; min-height:42px;
+  font-size:17px; font-weight:700; color:var(--c-text-deep);
+  line-height:1.85; letter-spacing:-.005em; margin:0;
 }
-.exh__chips{ display:flex; flex-wrap:wrap; align-content:flex-start; gap:5px; min-height:49px; }
-.exh__chip{
-  font-size:13px; font-weight:600; color:var(--c-text-deep);
-  background:rgba(15,24,33,.05); border:1px solid transparent;
-  border-radius:4px; padding:3px 8px; line-height:1.3;
+/* Inline highlights on the query — replaces the separate chips row */
+.exh__q mark{
+  background:rgba(15,24,33,.06); color:var(--c-text-deep);
+  padding:2px 5px; border-radius:4px; font-weight:700;
+  box-decoration-break:clone; -webkit-box-decoration-break:clone;
 }
-.exh__chip--miss{
-  background:transparent; border:1px dashed rgba(15,24,33,.22);
+.exh__q mark.miss{
+  background:transparent;
+  border:1px dashed rgba(15,24,33,.28);
   color:#98A4B0; font-weight:600;
+  padding:1px 5px;
 }
 .exh__shot{
-  display:flex; align-items:center; justify-content:center;
-  background:#fff; border:1px solid rgba(15,24,33,.06);
-  border-radius:10px; padding:12px; height:436px;
+  background:transparent; border:none; padding:0;
+  display:block; text-align:left;
+  margin:4px 0 6px;
 }
 .exh__shot img{
-  display:block; width:auto; height:auto;
-  max-width:100%; max-height:400px;
-  border-radius:6px;
+  display:block;
+  width:220px;
+  height:auto;
+  max-width:100%;
+  margin:0;
+  border-radius:14px;
+  box-shadow:
+    0 1px 2px rgba(15,24,33,.06),
+    0 6px 20px -8px rgba(15,24,33,.14);
 }
 .exh__result{
-  display:flex; flex-direction:column; gap:6px;
-  font-size:15px; line-height:1.4; margin:0;
+  display:flex; flex-direction:column; gap:16px;
+  margin:6px 0 0; padding-top:20px;
+  border-top:1px solid rgba(15,24,33,.08);
 }
-.exh__result-line{ display:flex; align-items:baseline; gap:10px; }
+.exh__result-line{ display:flex; flex-direction:column; gap:4px; }
 .exh__result-k{
-  flex:0 0 68px;
-  font-size:13px; font-weight:800; letter-spacing:.005em;
-  color:var(--c-body); opacity:.6;
+  font-size:10px; font-weight:800; letter-spacing:.20em;
+  text-transform:uppercase; color:var(--c-body); opacity:.5;
 }
-.exh__result-v{ color:var(--c-text-deep); font-weight:500; margin:0; }
+.exh__result-v{
+  margin:0; font-size:16px; line-height:1.45; font-weight:500;
+  color:var(--c-text-deep); letter-spacing:-.003em;
+}
+.exh__result-line--got .exh__result-k{ color:var(--c-status-limit); opacity:1; }
 .exh__result-line--got .exh__result-v{ color:var(--c-status-limit); font-weight:700; }
-.exh__gap{
-  margin:32px 0 0; padding:0;
-  display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:baseline;
+/* Footer: stat + payoff, wrapped in a nested white container inside .exh */
+.exh__footer{
+  margin-top:24px;
+  background:#fff;
+  border-radius:14px;
+  padding:32px 36px;
+  display:grid; grid-template-columns:auto 1fr;
+  gap:48px; align-items:center;
 }
-.exh__gap-k{
-  font-size:13px; font-weight:800; letter-spacing:.005em;
-  color:var(--c-status-limit);
+.exh__stat{
+  display:flex; flex-direction:column; gap:6px;
+  padding-right:48px;
+  border-right:1px solid rgba(15,24,33,.10);
+  min-width:200px;
 }
-.exh__gap-v{
-  font-size:19px; font-weight:700; line-height:1.45; color:var(--c-text-deep);
-  letter-spacing:-.008em; margin:0;
+.exh__stat-figure{
+  font-size:44px; font-weight:800; color:var(--c-text-deep);
+  line-height:1; letter-spacing:-.025em;
+  font-feature-settings:"tnum"; margin:0;
 }
-.exh__gap-v em{ font-style:italic; font-weight:700; color:var(--c-body); }
+.exh__stat-caption{
+  font-size:14px; line-height:1.5; color:var(--c-body);
+  margin:0; max-width:220px;
+}
+.exh__stat-caption strong{ color:var(--c-text-deep); font-weight:700; }
+.exh__payoff{
+  display:flex; flex-direction:column; gap:10px;
+  padding-top:6px;
+}
+.exh__payoff-eyebrow{
+  font-size:11px; font-weight:800; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--c-status-limit);
+  margin:0;
+}
+.exh__payoff-body{
+  font-size:17px; font-weight:500; line-height:1.6;
+  color:var(--c-text-deep); letter-spacing:-.003em;
+  margin:0; max-width:56ch;
+}
+.exh__payoff-body em{
+  font-style:italic; font-weight:500; color:var(--c-body);
+}
+.exh__payoff-body strong{
+  font-style:normal; font-weight:700; color:var(--c-text-deep);
+}
+/* Legacy classes kept alive to guard against any external reference */
+.exh__then, .exh__gap, .exh__gap-k, .exh__gap-v{ display:none; }
 @media (max-width:900px){
   .exh{ padding:36px 24px 32px; }
-  .exh__cases{ grid-template-columns:1fr; }
-  .exh__case{ border-left:none; border-top:1px solid rgba(15,24,33,.10); padding:24px 0; }
-  .exh__case:first-child{ border-top:none; padding-top:0; }
-  .exh__case:last-child{ padding-bottom:0; }
-  .exh__gap{ grid-template-columns:1fr; gap:8px; }
+  .exh__cases{ grid-template-columns:1fr; gap:32px; padding:24px; }
+  .exh__case{ padding:0; }
+  .exh__footer{
+    grid-template-columns:1fr; gap:24px; margin-top:32px;
+    padding:24px 22px;
+  }
+  .exh__stat{
+    padding-right:0; padding-bottom:22px;
+    border-right:none; border-bottom:1px solid rgba(15,24,33,.10);
+  }
+  .exh__stat-figure{ font-size:36px; }
+  .exh__payoff-body{ font-size:16px; }
 }
 /* Legacy .brk3 / .intent-row / .wb2 blocks removed — kept dormant to avoid breaking any other pages that reference them via search. If needed, the pre-exhibit backup is at projects/ai-search.pre-exhibit.html */
 
@@ -2288,8 +2390,110 @@ main section[id]{scroll-margin-top:140px}
 .chain{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0; font-size:15px; font-weight:700; color:var(--c-text-deep); }
 .chain__s{ color:#C2C9D1; font-weight:400; }
 .chain__cost{ color:var(--c-status-limit); }
+.chain__cost{ display:inline-flex; align-items:baseline; gap:6px; }
+.chain__dots{ display:inline-flex; align-items:center; gap:3px; margin-left:2px; }
+.chain__dots i{
+  width:4px; height:4px; border-radius:50%;
+  background:var(--c-status-limit);
+  display:inline-block; opacity:.3;
+  animation:chainDots 1.2s ease-in-out infinite;
+}
+.chain__dots i:nth-child(2){ animation-delay:.2s; }
+.chain__dots i:nth-child(3){ animation-delay:.4s; }
+@keyframes chainDots{
+  0%,80%,100%{ opacity:.25; transform:translateY(0); }
+  40%        { opacity:1;    transform:translateY(-2px); }
+}
+@media (prefers-reduced-motion:reduce){
+  .chain__dots i{ animation:none; opacity:.6; }
+}
+
 .lat__row--ai .lat__v{ color:var(--c-blue); }
 @media (max-width:900px){ .lat__row{ grid-template-columns:1fr 64px; } .lat__bar{ grid-column:1 / -1; } }
+/* ---- 04 · lat-fig: text on the left, chart in its own container --------- */
+.lat-fig{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:56px;
+  align-items:center;
+  margin:32px 0 var(--gap-para);
+}
+.lat-fig__text{ display:flex; flex-direction:column; gap:16px; max-width:44ch; }
+.lat-fig__text p{
+  margin:0;
+  font-size:17px; line-height:1.7; color:var(--c-body); font-weight:400;
+}
+.lat-fig__text strong{ color:var(--c-text-deep); font-weight:700; }
+.lat-fig__text .chain{
+  font-size:15px; font-weight:600;
+  color:var(--c-body); opacity:.8;
+}
+.lat-fig__text .chain__cost{ color:var(--c-status-limit); }
+.lat-fig__text .chain__s{ color:#C2C9D1; font-weight:400; }
+
+/* Chart lives inside its own container — the figure's right half */
+.lat-fig__chart{
+  display:flex; flex-direction:column; gap:12px;
+  padding:36px 32px 26px;
+  background:var(--c-container-bg);
+  border-radius:20px;
+}
+.lat-row{
+  display:grid;
+  grid-template-columns:1fr 64px;
+  grid-template-rows:auto auto;
+  column-gap:16px; row-gap:6px; align-items:center;
+}
+.lat-row__k{
+  grid-column:1; grid-row:1; margin:0;
+  font-size:13px; font-weight:700; color:var(--c-text-deep); line-height:1.3;
+}
+.lat-row__meta{ font-weight:400; color:var(--c-body); opacity:.7; margin-left:4px; }
+.lat-row__v{
+  grid-column:2; grid-row:1 / span 2; margin:0;
+  font-size:15px; font-weight:800; color:var(--c-body);
+  text-align:right; letter-spacing:-.01em;
+  font-feature-settings:"tnum"; align-self:center;
+}
+.lat-row__v span{ font-weight:700; opacity:.75; margin-left:1px; }
+.lat-row__bar{
+  grid-column:1; grid-row:2; position:relative; height:8px;
+  background:rgba(15,24,33,.06); border-radius:5px;
+}
+.lat-row__fill{
+  position:absolute; inset:0 auto 0 0;
+  background:rgba(15,24,33,.28); border-radius:5px;
+}
+.lat-row--ai .lat-row__k{ color:var(--c-text-deep); }
+.lat-row--ai .lat-row__fill{ background:var(--c-blue); }
+.lat-row--ai .lat-row__v{ color:var(--c-blue); }
+.lat-row__scale{
+  display:grid;
+  grid-template-columns:4% 35% 39% auto;
+  margin-top:8px; padding-right:80px;
+  font-size:11px; font-weight:700; letter-spacing:.02em;
+  color:var(--c-body); opacity:.55; font-feature-settings:"tnum";
+}
+.lat-row__scale span{ text-align:left; }
+.lat-row__scale span:last-child{ text-align:right; padding-right:0; }
+
+.lat-fig__note{
+  margin:14px 0 0; padding-top:14px;
+  border-top:1px solid rgba(15,24,33,.08);
+  padding-right:80px;
+  font-size:12px; line-height:1.5; color:var(--c-body); opacity:.7;
+  font-style:italic;
+}
+.lat-fig__note strong{ color:var(--c-text-deep); font-weight:700; font-style:normal; opacity:1; }
+
+@media (max-width:900px){
+  .lat-fig{ grid-template-columns:1fr; gap:32px; }
+  .lat-fig__chart{ padding:28px 22px 20px; }
+  .lat-row{ grid-template-columns:1fr 56px; }
+  .lat-row__scale{ padding-right:72px; }
+  .lat-fig__note{ padding-right:72px; }
+}
+
 @media (max-width:900px){ .cmp__shot{ height:auto; } }
 .cmp__body{ font-size:15px; line-height:1.65; color:var(--c-body); margin:0 0 14px; }
 .cmp__out{
@@ -2896,10 +3100,9 @@ main section[id]{scroll-margin-top:140px}
             <div class="evi__panel">
               <div class="evi__stat">
                 <span class="evi__stat-b">+24%</span>
-                <span class="evi__stat-a">in five quarters</span>
               </div>
-              <span class="evi__stat-note">6.3% &nbsp;&rarr;&nbsp; 7.8% &nbsp;&middot;&nbsp; 23 Q3 &rarr; 24 Q4</span>
-              <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Share of queries written as full sentences, rising from 6.3% to 7.8% between 23Q3 and 24Q4" style="width:100%;height:auto;display:block">
+              <span class="evi__stat-note">12.3% &nbsp;&rarr;&nbsp; 15.3% &nbsp;&middot;&nbsp; 23 Q3 &rarr; 24 Q4</span>
+              <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Share of queries longer than seven words, rising from 12.3% to 15.3% between 23Q3 and 24Q4" style="width:100%;height:auto;display:block">
                 <defs>
                   <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stop-color="#FFB400" stop-opacity=".28"/>
@@ -2909,27 +3112,27 @@ main section[id]{scroll-margin-top:140px}
                 <line x1="34" y1="24" x2="308" y2="24" stroke="#E4E8EC" stroke-width="1" stroke-dasharray="3 3"/>
                 <line x1="34" y1="68" x2="308" y2="68" stroke="#E4E8EC" stroke-width="1" stroke-dasharray="3 3"/>
                 <line x1="34" y1="112" x2="308" y2="112" stroke="#E4E8EC" stroke-width="1" stroke-dasharray="3 3"/>
-                <text x="28" y="28" text-anchor="end" font-size="10" font-weight="600" fill="#8994A1" font-family="Airbnb Cereal App, Inter, sans-serif">10%</text>
-                <text x="28" y="72" text-anchor="end" font-size="10" font-weight="600" fill="#8994A1" font-family="Airbnb Cereal App, Inter, sans-serif">8%</text>
-                <text x="28" y="116" text-anchor="end" font-size="10" font-weight="600" fill="#8994A1" font-family="Airbnb Cereal App, Inter, sans-serif">6%</text>
-                <path d="M54 106.6 L138 97.8 L222 68 L302 68 L302 132 L54 132 Z" fill="url(#areaGrad)"/>
-                <path d="M54 106.6 L138 97.8 L222 68 L302 68" fill="none" stroke="#FFB400" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="54" cy="106.6" r="4.5" fill="#fff" stroke="#FFB400" stroke-width="2"/>
-                <circle cx="138" cy="97.8" r="4.5" fill="#fff" stroke="#FFB400" stroke-width="2"/>
-                <circle cx="222" cy="68" r="4.5" fill="#fff" stroke="#FFB400" stroke-width="2"/>
-                <circle cx="302" cy="68" r="7.5" fill="#FFB400"/>
-                <circle cx="302" cy="68" r="7.5" fill="none" stroke="#E5A200" stroke-width="1.4"/>
-                <text x="54" y="96" text-anchor="middle" font-size="12" font-weight="800" fill="#2C61FE" font-family="Airbnb Cereal App, Inter, sans-serif">6.3</text>
-                <text x="302" y="52" text-anchor="middle" font-size="16" font-weight="900" fill="#2C61FE" font-family="Airbnb Cereal App, Inter, sans-serif">7.8</text>
+                <text x="28" y="28" text-anchor="end" font-size="10" font-weight="600" fill="#8994A1" font-family="Airbnb Cereal App, Inter, sans-serif">16%</text>
+                <text x="28" y="72" text-anchor="end" font-size="10" font-weight="600" fill="#8994A1" font-family="Airbnb Cereal App, Inter, sans-serif">14%</text>
+                <text x="28" y="116" text-anchor="end" font-size="10" font-weight="600" fill="#8994A1" font-family="Airbnb Cereal App, Inter, sans-serif">12%</text>
+                <path d="M54 109.4 L138 96.2 L222 47.8 L302 43.4 L302 132 L54 132 Z" fill="url(#areaGrad)"/>
+                <path d="M54 109.4 L138 96.2 L222 47.8 L302 43.4" fill="none" stroke="#FFB400" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="54" cy="109.4" r="4.5" fill="#fff" stroke="#FFB400" stroke-width="2"/>
+                <circle cx="138" cy="96.2" r="4.5" fill="#fff" stroke="#FFB400" stroke-width="2"/>
+                <circle cx="222" cy="47.8" r="4.5" fill="#fff" stroke="#FFB400" stroke-width="2"/>
+                <circle cx="302" cy="43.4" r="7.5" fill="#FFB400"/>
+                <circle cx="302" cy="43.4" r="7.5" fill="none" stroke="#E5A200" stroke-width="1.4"/>
+                <text x="54" y="99" text-anchor="middle" font-size="12" font-weight="800" fill="#2C61FE" font-family="Airbnb Cereal App, Inter, sans-serif">12.3</text>
+                <text x="302" y="28" text-anchor="middle" font-size="16" font-weight="900" fill="#2C61FE" font-family="Airbnb Cereal App, Inter, sans-serif">15.3</text>
                 <text x="54" y="150" text-anchor="middle" font-size="10" font-weight="600" fill="#6A7480" font-family="Airbnb Cereal App, Inter, sans-serif">23 Q3</text>
                 <text x="302" y="150" text-anchor="end" font-size="10" font-weight="600" fill="#6A7480" font-family="Airbnb Cereal App, Inter, sans-serif">24 Q4</text>
               </svg>
-              <p class="evi__cap">Queries written as full sentences, as a share of all searches.</p>
+              <p class="evi__cap">Queries longer than seven words, as a share of all searches.</p>
             </div>
           </div>
         </div>
 
-        <p class="p">AI chat tools had changed how people ask, everywhere. We saw it on <strong class="dark">Trip.com</strong> in both directions &mdash; in what travelers typed, and in how fast that share was growing: <strong class="dark">up 24% in five quarters.</strong></p>
+        <p class="p">AI chat tools had changed how people ask, everywhere. We saw it on <strong class="dark">Trip.com</strong> in both directions &mdash; in what travelers typed, and in how fast that share was growing: <strong class="dark">up 24%.</strong></p>
 
         <div class="ruleblock ruleblock--blue">
           <span class="ruleblock__label">Core signal</span>
@@ -2944,15 +3147,12 @@ main section[id]{scroll-margin-top:140px}
         <p class="p exh__intro-p">Traditional Search works when a query maps to a structured intent &mdash; <span class="exh__intents"><span class="exh__intent">Destination</span><span class="exh__intent">Attraction</span><span class="exh__intent">Hotel</span><span class="exh__intent">Activity</span></span>. These aren&rsquo;t that.</p>
 
         <div class="exh" role="group" aria-label="Three travel tasks keyword retrieval could not serve">
-          <p class="exh__eyebrow">Three tasks &middot; one shared failure</p>
+          <p class="exh__eyebrow">Three jobs &middot; one shared failure</p>
 
           <div class="exh__cases">
-            <article class="exh__case" aria-label="Case 01 — Information inquiry">
-              <p class="exh__tag"><span class="exh__tag-n">01</span>Information inquiry</p>
-              <p class="exh__q">&ldquo;What are the opening hours of Universal Studios Japan?&rdquo;</p>
-              <div class="exh__chips" aria-label="Keyword match">
-                <span class="exh__chip">Universal Studios Japan</span><span class="exh__chip exh__chip--miss">opening time</span>
-              </div>
+            <article class="exh__case" aria-label="Case 01 — Know">
+              <p class="exh__tag"><span class="exh__tag-n">01</span>Know</p>
+              <p class="exh__q">&ldquo;What are the <mark class="miss">opening hours</mark> of <mark>Universal Studios Japan</mark>?&rdquo;</p>
               <div class="exh__shot"><img loading="lazy" decoding="async" src="../images/epic-02-screen-info.png" alt="Trip.com search results for &quot;What are the opening hours of Universal Studios Japan?&quot; — a grid of posts, events and sights that mention the park, without the opening time itself" /></div>
               <div class="exh__result">
                 <div class="exh__result-line"><span class="exh__result-k">Expected</span><p class="exh__result-v">The opening time</p></div>
@@ -2960,12 +3160,9 @@ main section[id]{scroll-margin-top:140px}
               </div>
             </article>
 
-            <article class="exh__case" aria-label="Case 02 — Trip planning">
-              <p class="exh__tag"><span class="exh__tag-n">02</span>Trip planning</p>
-              <p class="exh__q">&ldquo;Tokyo 5-day 4-night itinerary, last day shopping&rdquo;</p>
-              <div class="exh__chips" aria-label="Keyword match">
-                <span class="exh__chip">Tokyo</span><span class="exh__chip">itinerary</span><span class="exh__chip">shopping</span><span class="exh__chip exh__chip--miss">duration and order</span>
-              </div>
+            <article class="exh__case" aria-label="Case 02 — Plan">
+              <p class="exh__tag"><span class="exh__tag-n">02</span>Plan</p>
+              <p class="exh__q">&ldquo;<mark>Tokyo</mark> <mark class="miss">5-day 4-night</mark> <mark>itinerary</mark>, <mark class="miss">last day</mark> <mark>shopping</mark>&rdquo;</p>
               <div class="exh__shot"><img loading="lazy" decoding="async" src="../images/epic-02-screen-plan.png" alt="Trip.com search results for &quot;Tokyo 5-day 4-night itinerary, last day shopping&quot; — a mix of guides, group tours and travel posts, none of them a usable end-to-end plan" /></div>
               <div class="exh__result">
                 <div class="exh__result-line"><span class="exh__result-k">Expected</span><p class="exh__result-v">A usable plan</p></div>
@@ -2973,12 +3170,9 @@ main section[id]{scroll-margin-top:140px}
               </div>
             </article>
 
-            <article class="exh__case" aria-label="Case 03 — Inspiration seeking">
-              <p class="exh__tag"><span class="exh__tag-n">03</span>Inspiration seeking</p>
-              <p class="exh__q">&ldquo;Where should I take my parents this summer?&rdquo;</p>
-              <div class="exh__chips" aria-label="Keyword match">
-                <span class="exh__chip">parents</span><span class="exh__chip">summer</span><span class="exh__chip exh__chip--miss">where to go</span>
-              </div>
+            <article class="exh__case" aria-label="Case 03 — Decide">
+              <p class="exh__tag"><span class="exh__tag-n">03</span>Decide</p>
+              <p class="exh__q">&ldquo;<mark class="miss">Where should I take</mark> my <mark>parents</mark> this <mark>summer</mark>?&rdquo;</p>
               <div class="exh__shot"><img loading="lazy" decoding="async" src="../images/epic-02-screen-inspire.png" alt="Trip.com search results for &quot;Where should I take my parents this summer?&quot; — posts containing the words &quot;parents&quot; and &quot;summer&quot; rather than actual destination suggestions" /></div>
               <div class="exh__result">
                 <div class="exh__result-line"><span class="exh__result-k">Expected</span><p class="exh__result-v">A few destinations, with reasons</p></div>
@@ -2987,25 +3181,31 @@ main section[id]{scroll-margin-top:140px}
             </article>
           </div>
 
-          <div class="exh__gap">
-            <span class="exh__gap-k">The gap</span>
-            <p class="exh__gap-v">Traditional Search matched a query to a <em>known intent.</em> These needed the <strong>task behind the query</strong> understood.</p>
+          <div class="exh__footer">
+            <div class="exh__stat">
+              <p class="exh__stat-figure">36%</p>
+              <p class="exh__stat-caption"><strong>typed it again</strong> &mdash; a re-query rate nearly twice the page average.</p>
+            </div>
+            <div class="exh__payoff">
+              <p class="exh__payoff-eyebrow">The gap</p>
+              <p class="exh__payoff-body">Traditional Search matched <em>keywords in the query to keywords on the page.</em> These queries needed the <strong>task behind the words</strong> understood.</p>
+            </div>
           </div>
         </div>
 
-        <p class="p"><strong class="dark">LLMs could read the task behind a query and write an answer to it.</strong> That made them the technical route into these three.</p>
+        <p class="p">Retrieval could only surface what already existed. <strong class="dark">LLMs brought two things it never had &mdash; intent understanding and generation:</strong> read the task behind the query, then write the thing that isn&rsquo;t on any page.</p>
       </div><!-- /02 -->
 
       <div class="op-beat">
         <p class="t-beat-head"><span class="t-beat-num">03</span><span class="t-beat-name">Defining AI&rsquo;s role in Search</span></p>
         <h3 class="sec-claim">AI could answer every query. The hard part was knowing when it shouldn&rsquo;t.</h3>
 
-        <p class="p">TripGenie had already shown that AI could handle complex travel decisions &mdash; inside a chat, where the whole screen belongs to the answer. Search is a different surface: <strong class="dark">an answer nobody needed still takes the screen the traveler came to use.</strong></p>
+        <p class="p">TripGenie had already shown AI could handle complex travel decisions. The question stopped being <em>can AI answer this</em> and became <strong class="dark">should it.</strong></p>
 
-        <p class="p">That is where <strong class="dark">a better answer stops being a better Search experience</strong> &mdash; and which queries get one turns on <strong class="dark">what task the traveler is trying to finish.</strong></p>
+        <p class="p">Travelers aren&rsquo;t always looking for an answer. Often they want a choice, an action, a booking &mdash; and for those, an AI answer doesn&rsquo;t reduce the effort. <strong class="dark">It adds a layer between the traveler and what they came for.</strong></p>
 
-        <div class="cons"><p class="cons__t">The answer has to fit the task</p></div>
-        <p class="p"><strong class="dark">Search and AI return different kinds of things.</strong> Most travel queries don&rsquo;t want an explanation &mdash; they want options, availability, and something to act on. For example, the same query answered two ways:</p>
+        <div class="cons"><p class="cons__t">The answer has to match the task</p></div>
+        <p class="p"><strong class="dark">A query is not the task.</strong> The same words can carry very different needs. Here is one query, answered two ways:</p>
 
         <div class="cmp" aria-label="The same query answered two ways">
           <div class="cmp__cols">
@@ -3024,7 +3224,7 @@ main section[id]{scroll-margin-top:140px}
           </div>
         </div>
 
-        <p class="p">The same holds across every structured intent &mdash; <strong class="dark">destination, attraction, hotel, A-to-B transport.</strong> Search resolves the query into supply and hands over the shortest path to action. That path isn&rsquo;t automatic &mdash; it exists because I mapped the likely and the latent intent behind each of these queries and validated the assumptions. <strong class="dark">The framework carries that understanding of the traveler. A model answering from scratch doesn&rsquo;t.</strong></p>
+        <p class="p">The same holds across every structured intent &mdash; <strong class="dark">destination, attraction, hotel, A-to-B transport.</strong> Search resolves the query into supply and hands over the shortest path to action, because <strong class="dark">the framework behind it already maps the likely and the latent intent of these queries, tested and validated.</strong> A model answering from scratch has none of that.</p>
 
         <div class="ruleblock">
           <span class="ruleblock__label">For a structured intent</span>
@@ -3043,7 +3243,7 @@ main section[id]{scroll-margin-top:140px}
           </div>
           <div class="vd__row">
             <div>
-              <p class="vd__type">Find</p>
+              <p class="vd__type">Book</p>
               <p class="vd__q">&ldquo;The Palace Museum&rdquo; &middot; &ldquo;Universal Studios Japan&rdquo;</p>
             </div>
             <p class="vd__s">Options to compare, priced and bookable</p>
@@ -3079,16 +3279,13 @@ main section[id]{scroll-margin-top:140px}
           </div>
         </div>
 
-        <p class="p">Retrieval serves <strong class="dark">one of the four.</strong> The other three are jobs the traveler brought to a search box because there was nowhere else to put them.</p>
 
         <div class="ruleblock ruleblock--blue">
           <span class="ruleblock__label">Design principle</span>
-          <p class="ruleblock__body">The screen goes to <strong>whichever better understands the task in front of the traveler</strong> &mdash; and gets them through it at lower cost.</p>
+          <p class="ruleblock__body">Search helps travelers <strong>find and act.</strong> AI helps them <strong>understand and decide.</strong> The work is knowing which one should lead.</p>
         </div>
 
-        <p class="p">Full sentences are <strong class="dark">7.8%</strong> of searches. But a job doesn&rsquo;t only arrive as a full sentence &mdash; counted by job instead of by phrasing, these three cover <strong class="dark">about one in five searches on the page.</strong></p>
-
-        <p class="p">I reframed this into a broader Search evolution proposal and brought it to leadership. The response was clear: <strong class="dark">one month, closed development, the comprehensive results page.</strong> That became <strong class="dark">EPIC</strong> &mdash; Explore Intelligent Content.</p>
+        <p class="p">I reframed this into a broader Search evolution proposal &mdash; <strong class="dark">a scope covering about one in five searches on the page</strong> &mdash; and brought it to leadership. The response was clear: <strong class="dark">one month, closed development, the comprehensive results page.</strong> That became <strong class="dark">EPIC</strong> &mdash; Explore Intelligent Content.</p>
 
         <p class="p">Everything after that was an argument about the design frame and the interactions it complicated &mdash; placement, length, control.</p>
 
@@ -3096,48 +3293,51 @@ main section[id]{scroll-margin-top:140px}
 
       <div class="op-beat">
         <p class="t-beat-head"><span class="t-beat-num">04</span><span class="t-beat-name">Design thinking</span></p>
-        <h3 class="sec-claim">AI improves answer quality. Search protects immediacy.</h3>
+        <h3 class="sec-claim">AI answer, or AI + Search?</h3>
 
-        <div class="cons"><p class="cons__t">AI answer, or AI + Search?</p></div>
+        <p class="p">AI improves the answer. Search protects immediacy &mdash; it is an efficiency scenario, and AI takes time.</p>
 
-        <p class="p">Search is an efficiency scenario. AI takes time.</p>
-
-        <div class="lat" aria-label="What arrives when, against average dwell time on the results page">
-          <p class="lat__eyebrow">Against dwell time on the results page</p>
-          <div class="lat__row">
-            <p class="lat__k">Search &mdash; results returned and rendered</p>
-            <div class="lat__bar"><span class="lat__fill" style="width:4%"></span></div>
-            <p class="lat__v">~500ms</p>
+        <figure class="lat-fig" aria-label="What arrives when, against average dwell time on the results page">
+          <div class="lat-fig__text">
+            <p>In Search, <strong>the wait is part of the experience</strong> &mdash; and an AI-only page opens with a gap in it.</p>
+            <p class="chain">Query <span class="chain__s">&rarr;</span> <span class="chain__cost">Wait<span class="chain__dots" aria-hidden="true"><i></i><i></i><i></i></span></span> <span class="chain__s">&rarr;</span> Answer</p>
+            <p>For a search user, it&rsquo;s a blank page &mdash; <strong>nothing to read, nowhere to tap.</strong> Five seconds of that isn&rsquo;t a loading state. <strong>It&rsquo;s when they leave.</strong></p>
           </div>
-          <div class="lat__row lat__row--ai">
-            <p class="lat__k">AI &mdash; first token returned, streaming starts</p>
-            <div class="lat__bar"><span class="lat__fill" style="width:39%"></span></div>
-            <p class="lat__v">~5s</p>
+
+          <div class="lat-fig__chart" role="img" aria-label="Search returns in ~500ms; AI first token in ~5s; AI answer fully streamed by ~10s">
+            <div class="lat-row">
+              <p class="lat-row__k">Search <span class="lat-row__meta">results rendered</span></p>
+              <div class="lat-row__bar"><span class="lat-row__fill" style="width:4%"></span></div>
+              <p class="lat-row__v">~500<span>ms</span></p>
+            </div>
+            <div class="lat-row lat-row--ai">
+              <p class="lat-row__k">AI <span class="lat-row__meta">first token, streaming starts</span></p>
+              <div class="lat-row__bar"><span class="lat-row__fill" style="width:39%"></span></div>
+              <p class="lat-row__v">~5<span>s</span></p>
+            </div>
+            <div class="lat-row lat-row--ai">
+              <p class="lat-row__k">AI <span class="lat-row__meta">answer fully streamed</span></p>
+              <div class="lat-row__bar"><span class="lat-row__fill" style="width:78%"></span></div>
+              <p class="lat-row__v">~10<span>s</span></p>
+            </div>
+            <div class="lat-row__scale" aria-hidden="true">
+              <span>0</span><span>5s</span><span>10s</span><span>12.85s</span>
+            </div>
+            <p class="lat-fig__note">Full track = <strong>12.85s</strong>, the average dwell time on the results page, per search.</p>
           </div>
-          <div class="lat__row lat__row--ai">
-            <p class="lat__k">AI &mdash; this answer fully streamed</p>
-            <div class="lat__bar"><span class="lat__fill" style="width:78%"></span></div>
-            <p class="lat__v">~10s</p>
-          </div>
-          <p class="lat__cap">Full track = <strong>12.85s</strong> &mdash; average dwell time on the results page, per search.</p>
-        </div>
-
-        <p class="p">In Search, <strong class="dark">the wait is part of the experience</strong> &mdash; and an AI-only page opens with a gap in it.</p>
-
-        <p class="chain">Query <span class="chain__s">&rarr;</span> <span class="chain__cost">Wait</span> <span class="chain__s">&rarr;</span> Answer</p>
-
-        <p class="p">Inside that gap there is <strong class="dark">nothing to read and no way forward.</strong> Five seconds of nothing isn&rsquo;t a loading state. <strong class="dark">It&rsquo;s an exit.</strong></p>
+        </figure>
 
         <p class="p">Keeping the results feed wouldn&rsquo;t make generation faster. It would make the wait survivable. I built out three ways the page could be put together.</p>
 
         <div class="fw" aria-label="Three page structures explored">
+          <!-- OPTION A ---------------------------------------------------- -->
           <div class="fw-opt">
             <span class="fw-opt__label">Option A</span>
             <p class="fw-opt__name">AI-only experience</p>
             <div class="fw-phone">
               <span class="fw-island"></span>
               <div class="fw-screen">
-                <div class="fw-bar"></div>
+                <div class="fw-bar"><span class="fw-bar__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span></div>
                 <div class="fw-zone fw-zone--ai fw-zone--grow">
                   <span class="fw-tag">AI answer</span>
                   <div class="fw-line fw-line--m"></div><div class="fw-line"></div><div class="fw-line fw-line--m"></div>
@@ -3145,28 +3345,42 @@ main section[id]{scroll-margin-top:140px}
                   <div class="fw-line fw-line--s"></div><div class="fw-line"></div><div class="fw-line fw-line--m"></div>
                   <div class="fw-line fw-line--s"></div>
                 </div>
-                <div class="fw-input"></div>
               </div>
               <span class="fw-home"></span>
             </div>
             <p class="fw-t0">t = 0 &nbsp;&rarr;&nbsp; a spinner</p>
-            <ul class="fw-why">
-              <li>Five seconds with nothing on screen.</li>
-              <li>Nothing to read, nothing to book, while it writes.</li>
-              <li>The only move left is to leave.</li>
-            </ul>
+            <div class="fw-pc">
+              <div class="fw-pc__col fw-pc__col--pros">
+                <p class="fw-pc__k">Pros</p>
+                <ul class="fw-pc__list">
+                  <li>Cleanest expression of the AI answer.</li>
+                  <li>Full canvas for prose and follow-up.</li>
+                </ul>
+              </div>
+              <div class="fw-pc__col fw-pc__col--cons">
+                <p class="fw-pc__k">Cons</p>
+                <ul class="fw-pc__list">
+                  <li>Five seconds with nothing on screen.</li>
+                  <li>Nothing to read, nothing to book, while it writes.</li>
+                  <li>The only move left is to leave.</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
+          <!-- OPTION B ---------------------------------------------------- -->
           <div class="fw-opt">
             <span class="fw-opt__label">Option B</span>
             <p class="fw-opt__name">AI overlay experience</p>
             <div class="fw-phone fw-phone--stack">
               <span class="fw-island"></span>
               <div class="fw-screen">
-                <div class="fw-bar"></div>
+                <div class="fw-bar"><span class="fw-bar__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span></div>
                 <div class="fw-zone fw-zone--results fw-zone--grow">
                   <span class="fw-tag">Search results</span>
-                  <div class="fw-cards"><div class="fw-card fw-card--tall"></div><div class="fw-card fw-card--tall"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
                   <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
                   <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
                 </div>
@@ -3179,38 +3393,65 @@ main section[id]{scroll-margin-top:140px}
               <span class="fw-home"></span>
             </div>
             <p class="fw-t0">t = 0 &nbsp;&rarr;&nbsp; results, answer collapsed</p>
-            <ul class="fw-why">
-              <li>Two scrolls fighting each other &mdash; the sheet moves, the feed moves.</li>
-              <li>Expanding it covers what the traveler was reading.</li>
-              <li>Highest build cost of the three, against a one-month deadline.</li>
-            </ul>
+            <div class="fw-pc">
+              <div class="fw-pc__col fw-pc__col--pros">
+                <p class="fw-pc__k">Pros</p>
+                <ul class="fw-pc__list">
+                  <li>Results are immediately available.</li>
+                  <li>AI answer stays discoverable via bottom sheet.</li>
+                </ul>
+              </div>
+              <div class="fw-pc__col fw-pc__col--cons">
+                <p class="fw-pc__k">Cons</p>
+                <ul class="fw-pc__list">
+                  <li>Two scrolls fighting each other &mdash; sheet moves, feed moves.</li>
+                  <li>Expanding it covers what the user was reading.</li>
+                  <li>Highest build cost against a one-month deadline.</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
+          <!-- OPTION C — SELECTED ---------------------------------------- -->
           <div class="fw-opt fw-opt--pick">
-            <span class="fw-opt__label">Option C &nbsp;&middot;&nbsp; shipped</span>
+            <span class="fw-opt__label">Option C &nbsp;&middot;&nbsp; selected</span>
             <p class="fw-opt__name">Hybrid AI + Search experience</p>
             <div class="fw-phone">
               <span class="fw-island"></span>
               <div class="fw-screen">
-                <div class="fw-bar"></div>
+                <div class="fw-bar"><span class="fw-bar__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span></div>
                 <div class="fw-zone fw-zone--ai">
                   <span class="fw-tag">AI answer &mdash; streams in</span>
                   <div class="fw-line fw-line--m"></div><div class="fw-line"></div><div class="fw-line fw-line--s"></div>
                 </div>
                 <div class="fw-zone fw-zone--results fw-zone--grow">
                   <span class="fw-tag">Search results &mdash; immediate</span>
-                  <div class="fw-cards"><div class="fw-card fw-card--tall"></div><div class="fw-card fw-card--tall"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
                   <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
                 </div>
               </div>
               <span class="fw-home"></span>
             </div>
             <p class="fw-t0">AI answers above. Search remains below.</p>
-            <ul class="fw-why">
-              <li>Results at t = 0; the answer arrives on top at t = 5s.</li>
-              <li>The feed stays browsable the whole time it writes.</li>
-              <li><strong>Nothing is taken away while it loads.</strong></li>
-            </ul>
+            <div class="fw-pc">
+              <div class="fw-pc__col fw-pc__col--pros">
+                <p class="fw-pc__k">Pros</p>
+                <ul class="fw-pc__list">
+                  <li>Results at t = 0; the answer arrives on top at t = 5s.</li>
+                  <li>Feed stays browsable the whole time it writes.</li>
+                  <li><strong>Nothing is taken away while it loads.</strong></li>
+                </ul>
+              </div>
+              <div class="fw-pc__col fw-pc__col--cons">
+                <p class="fw-pc__k">Cons</p>
+                <ul class="fw-pc__list">
+                  <li>Vertical real-estate split between two content types.</li>
+                  <li>Requires strict height budgeting for the AI answer.</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -3252,7 +3493,7 @@ main section[id]{scroll-margin-top:140px}
         <div class="decision">
           <span class="decision__label">Decision</span>
           <p class="decision__head">Let the answer finish.</p>
-          <p class="decision__body">A truncated answer can&rsquo;t be judged &mdash; the traveler never finds out whether the wait was worth it, and neither do we. Full output also puts more feed on screen while it writes. <strong>The cost is a page that moves</strong> &mdash; which turned the next problem into an interaction one.</p>
+          <p class="decision__body">A truncated answer can&rsquo;t be judged &mdash; the traveler never finds out whether the wait was worth it, and neither do we. Full output also puts more feed on screen while it writes. <strong>The cost is a page that moves.</strong> With AI and Search now sharing one surface, that was one of two problems left &mdash; and both were about the person, not the model.</p>
         </div>
 
       </div><!-- /04 -->
@@ -3261,7 +3502,7 @@ main section[id]{scroll-margin-top:140px}
         <p class="t-beat-head"><span class="t-beat-num">05</span><span class="t-beat-name">Interaction challenges</span></p>
         <h3 class="sec-claim">AI makes Search smarter, and less predictable</h3>
 
-        <p class="p">AI now lives inside Search instead of replacing it. That decision settled where AI lives &mdash; and introduced <strong class="dark">two tensions that only exist once the two share a page.</strong></p>
+        <p class="p"><strong class="dark">Two tensions that only exist once AI and Search share a page:</strong> the traveler who never wanted the answer, and the page that will not hold still.</p>
 
         <h4 class="b-case__h">Tension 01 &mdash; AI assistance vs. what this traveler wants</h4>
         <p class="p">The same page now serves two people.</p>
@@ -3347,23 +3588,9 @@ main section[id]{scroll-margin-top:140px}
 
         <p class="p">Two framework decisions and two interaction principles produced V1.</p>
 
-        <div class="b-flow" aria-label="V1 experience flow">
-          <div class="b-flow__step">Complex query</div>
-          <div class="b-flow__arrow">&darr;</div>
-          <div class="b-flow__step">Search results immediately available</div>
-          <div class="b-flow__arrow">&darr;</div>
-          <div class="b-flow__step">AI starts generating, reporting its state in place</div>
-          <div class="b-flow__arrow">&darr;</div>
-          <div class="b-flow__step">Full answer expands progressively</div>
-          <div class="b-flow__arrow">&darr;</div>
-          <div class="b-flow__step">Search feed remains below, browsable throughout</div>
-          <div class="b-flow__arrow">&darr;</div>
-          <div class="b-flow__step">User controls the pace while generation continues</div>
-        </div>
-
         <div class="ph ph--tall">[ V1 &middot; final UI and interaction prototype ]</div>
 
-        <p class="p">It shipped on schedule: one month of closed development, no reference pattern for most of it, and an interaction model engineering had good reasons to push back on. What mattered in that month was less about frames than about keeping a direction intact while six people took turns arguing with it.</p>
+        <p class="p">It shipped on schedule &mdash; one month of closed development, with no reference pattern for most of it. What mattered in that month was less about frames than about keeping a direction intact while six people took turns arguing with it.</p>
       </div><!-- /05 -->
 
       <div class="op-beat">
@@ -3404,13 +3631,8 @@ main section[id]{scroll-margin-top:140px}
 
           <p class="b-qa__q"><span>03</span>Did better information translate into transaction?</p>
           <p class="p">No. Orders were flat.</p>
-          <p class="p">I had seen this coming and only half-solved it. A good AI answer is a satisfying dead end &mdash; the traveler gets what they asked for and has no particular reason to keep going. Every place the answer named became a link into the product for it, and the follow-up questions underneath routed back into the feed rather than deeper into chat: <strong class="dark">the answer was built to end somewhere, not just to end.</strong> It was the right direction and it wasn&rsquo;t enough, which the numbers said plainly a month later.</p>
+          <p class="p">I had built for this and it wasn&rsquo;t enough. A good AI answer is a satisfying dead end &mdash; the traveler gets what they asked for and has no particular reason to keep going. Every place the answer named became a link into the product for it, and the follow-up questions underneath routed back into the feed rather than deeper into chat: <strong class="dark">the answer was built to end somewhere, not just to end.</strong> A month of data said it still mostly ended.</p>
           <div class="ph">[ Orders &middot; diversion &middot; conversion &middot; feed engagement ]</div>
-        </div>
-
-        <div class="ruleblock ruleblock--blue">
-          <span class="ruleblock__label">What the data changed</span>
-          <p class="ruleblock__body">Users valued the information. More information did not automatically become better Search efficiency &mdash; or a booking.</p>
         </div>
 
         <div class="cons"><p class="cons__t">What EPIC actually changed</p></div>
@@ -3437,18 +3659,44 @@ main section[id]{scroll-margin-top:140px}
 
         <div class="ph">[ Post-launch occupancy &middot; average AI height, first-screen result visibility, feed impressions ]</div>
 
+        <p class="p">Three costs showed up in the post-launch data:</p>
+
+        <ul class="fw-why">
+          <li>Long, dense answers lowered completion &mdash; people stopped reading before the end.</li>
+          <li>Product and UGC exposure on the first screen dropped.</li>
+          <li>High-intent travelers had a longer path to the thing they came to book.</li>
+        </ul>
+
         <div class="ruleblock">
           <span class="ruleblock__label">Hypothesis</span>
           <p class="ruleblock__body">If the answer&rsquo;s default height is capped while the full version stays one tap away, can we keep what brings travelers back and still put results in front of them sooner?</p>
         </div>
 
-        <div class="ph ph--tall">[ Experiment &middot; fixed-height AI &mdash; design, metrics, results ]</div>
+        <div class="ph ph--tall">[ Experiment &middot; fixed-height AI &mdash; design and screens ]</div>
 
-        <p class="p">[ Decision &mdash; to be written from the experiment results. ]</p>
+        <div class="op-metrics op-metrics--2">
+          <div class="op-metric">
+            <span class="op-metric__value">+6.17%</span>
+            <span class="op-metric__label">Diversion into the feed</span>
+            <span class="op-metric__note">capped height vs. fully expanded</span>
+          </div>
+          <div class="op-metric">
+            <span class="op-metric__value">+2.13%</span>
+            <span class="op-metric__label">Results-page orders</span>
+            <span class="op-metric__note">capped height vs. fully expanded</span>
+            <span class="op-metric__sig">Not significant</span>
+          </div>
+        </div>
+
+        <div class="decision">
+          <span class="decision__label">Decision</span>
+          <p class="decision__head">Cap the default height. Keep the whole answer one tap away.</p>
+          <p class="decision__body">Travelers reached the feed sooner and orders moved with it, without giving up the completeness that brought them back. <strong>The answer was never the thing to remove &mdash; only the amount of it you have to scroll past.</strong></p>
+        </div>
 
         <h3 class="l3">What I took from it</h3>
         <p class="p"><strong class="dark">Completeness is what earns the second visit.</strong> The instinct to cap the answer for layout safety would have cost the only thing that made travelers come back.</p>
-        <p class="p"><strong class="dark">Control is a feature, not a fix.</strong> Pause-on-touch started as damage repair for a decision I&rsquo;d made and ended up being the piece of EPIC worth patenting. When AI holds the page, giving the page back on demand is the design.</p>
+        <p class="p"><strong class="dark">Control is the design, not the patch.</strong> Pause-on-touch began as repair for a problem my own decision created, and became a principle: when AI holds the page, handing it back on demand <em>is</em> the design. It is the piece of EPIC worth patenting.</p>
         <p class="p"><strong class="dark">A good answer is not a decision.</strong> EPIC read complicated sentences well. It sent people away satisfied and unbooked. That gap is where the next chapter started.</p>
       </div><!-- /07 -->
 

@@ -434,7 +434,7 @@ main section[id]{scroll-margin-top:140px}
    bounding box by 70px and the right edge starts colliding with the column. */
 .cs-cover-phone--answer{
   aspect-ratio:750/2300;
-  height:134%; left:41%; top:-15%;
+  height:123%; left:41%; top:-11%;
   z-index:2;
   /* aerial perspective: the far object loses contrast and saturation */
   filter:saturate(.88) brightness(.94);
@@ -450,7 +450,7 @@ main section[id]{scroll-margin-top:140px}
 .cs-cover-anno{
   position:absolute; z-index:3;
   aspect-ratio:750/1624;
-  height:84%; left:6%; top:9%;
+  height:97%; left:9%; top:2%;
   transform:rotate(-4deg);
 }
 .cs-cover-anno__screen{
@@ -468,11 +468,11 @@ main section[id]{scroll-margin-top:140px}
   width:100%; height:100%; object-fit:cover; object-position:top center;
   border-radius:clamp(7px,1.5vw,17px); display:block;
 }
-/* the lifted bar — breaks the phone's left edge, landing on the 12–18% band
-   where the real TripGenie bar sits in the screenshot */
+/* the lifted bar — breaks both edges of the phone, landing on the 12.3–15% band
+   where the real Trip.Planner header sits in the screenshot underneath */
 .cs-cover-anno__callout{
   position:absolute; z-index:4;
-  left:-15%; width:130%; top:11.2%;
+  left:-15%; width:130%; top:10%;
   background:#fff; border-radius:clamp(8px,1.1vw,13px);
   padding:clamp(5px,.7vw,9px);
   box-shadow:
@@ -504,8 +504,8 @@ main section[id]{scroll-margin-top:140px}
   .cs-cover-art__sub{ max-width:34ch; }
   .cs-cover-art__map{ background-position:34% 30%; background-size:auto 78%; opacity:.16; }
   .cs-cover-art__stage::before{ top:58%; }
-  .cs-cover-phone--answer{ height:112%; left:45%; top:-8%; }
-  .cs-cover-anno{ height:70%; left:1%; top:10%; transform:rotate(-4deg); }
+  .cs-cover-phone--answer{ height:104%; left:46%; top:-6%; }
+  .cs-cover-anno{ height:80%; left:4%; top:7%; transform:rotate(-4deg); }
   .cs-cover-anno__callout{ left:-9%; width:118%; }
 }
 
@@ -3182,10 +3182,10 @@ main section[id]{scroll-margin-top:140px}
           </div>
           <div class="cs-cover-anno">
             <div class="cs-cover-anno__screen">
-              <img loading="eager" decoding="async" width="750" height="1624" src="../images/cover-ai-results.jpg" alt="Trip.com search results, already rendered and readable while the AI answer is still being assembled" />
+              <img loading="eager" decoding="async" width="750" height="1624" src="../images/cover-ai-results.jpg" alt="A Tokyo 3-day itinerary search, answered by Trip.Planner with a day-by-day overview above the results feed" />
             </div>
             <div class="cs-cover-anno__callout">
-              <img loading="eager" decoding="async" width="750" height="108" src="../images/tripgenie-bar.png" alt="A pinned bar reading: TripGenie, Organizing" />
+              <img loading="eager" decoding="async" width="363" height="52" src="../images/tripplanner-bar.png" alt="A pinned bar reading: Trip.Planner, Generating" />
             </div>
           </div>
         </div>

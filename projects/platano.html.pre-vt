@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthcare Monitor — Platano | Shilue's Portfolio</title>
+  <meta name="description" content="A gamified health monitoring app for patients with Type II diabetes to track food intake, exercise, and blood glucose changes." />
+  <link rel="icon" type="image/png" href="../images/avatar-header.png" />
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="../index.html" class="brand" aria-label="Shilue's Portfolio home">
+        <span class="brand-avatar"><img class="brand-avatar__default" src="../images/avatar-header.png" alt="Shilue logo" /><img class="brand-avatar__hover" src="../images/avatar-header-hover.png" alt="" /></span>
+        <span>Shilue's Portfolio</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="../index.html" class="is-active">Projects</a>
+        <a href="../playgrounds/index.html">Playgrounds</a>
+        <a href="../resume.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="cs-hero" style="background:#F9D854;">
+      <img src="../images/efcc58_5e04da9cf4fc4405b915cc4426d4323b~mv2.png" alt="Healthcare Monitor app screens" />
+    </section>
+
+    <div class="cs-intro">
+      <p class="cs-label">Healthcare · Gamification · Product Design</p>
+      <h1 class="cs-title">Healthcare Monitor</h1>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><strong>Domain</strong><span>Healthcare · Type II Diabetes</span></div>
+        <div class="cs-meta-item"><strong>Focus</strong><span>Gamification · Behavior Change</span></div>
+        <div class="cs-meta-item"><strong>Tags</strong><span>Healthcare · Gamification · Product Design</span></div>
+      </div>
+      <p class="cs-overview">
+        A health monitoring application designed for patients with Type II diabetes to measure food intake, exercise time, and blood glucose changes — helping them control blood glucose through an engaging, gamified experience rather than a clinical one.
+      </p>
+    </div>
+
+    <div class="cs-body">
+
+      <section class="cs-section">
+        <h2>Design Showcase</h2>
+        <p>The following screens illustrate the complete app experience — from onboarding and goal setting to daily tracking, data visualization, and gamified rewards.</p>
+
+        <figure class="cs-img">
+          <img src="../images/efcc58_fdb8967bce0f4c51951cce52da548f37~mv2.png" alt="Healthcare Monitor — Frame 10" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_f83f189a48e94fa68edbba343a107d63~mv2.png" alt="Healthcare Monitor — Frame 11" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_5e95397ee27a4b5090250f581b76c641~mv2.png" alt="Healthcare Monitor — Frame 12" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_41bb28d3048444b8b29e8c9e6bc6d68c~mv2.png" alt="Healthcare Monitor — Frame 13" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_75e5e6395286433c91d5877386819db4~mv2.png" alt="Healthcare Monitor — Frame 15" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_0202f8da4d0b4dfbbfc59bd64396767d~mv2.png" alt="Healthcare Monitor — Frame 16" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_c79668b86a9340d2a28d7c762d422b29~mv2.png" alt="Healthcare Monitor — Frame 18" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_de3e1ef52f0d4f4ab980d331da9ef2f6~mv2.png" alt="Healthcare Monitor — Frame 19" />
+        </figure>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2022 Designed by Shilue Xue</p>
+    <nav class="footer-nav">
+      <a href="../index.html">← All Projects</a>
+      <a href="../playgrounds/index.html">See Playgrounds →</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

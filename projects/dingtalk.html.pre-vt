@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DingTalk | Shilue's Portfolio</title>
+  <meta name="description" content="Optimize the experience of rich formatting in DingTalk IM — educate new users about the rich-text feature and reduce mistapping." />
+  <link rel="icon" type="image/png" href="../images/avatar-header.png" />
+  <link rel="preload" href="../fonts/AirbnbCereal_W_Bk.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="../fonts/AirbnbCereal_W_Bd.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+
+/* ============ A11y baseline: focus-visible + reduced-motion ============ */
+*:focus { outline: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible, .card:focus-visible, .card:focus-within {
+  outline: 2px solid #0A66C2;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  video[autoplay] { display: none; }
+}
+
+
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 300; font-style: normal; src: url('../fonts/AirbnbCereal_W_Lt.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 400; font-style: normal; src: url('../fonts/AirbnbCereal_W_Bk.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 500; font-style: normal; src: url('../fonts/AirbnbCereal_W_Md.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 700; font-style: normal; src: url('../fonts/AirbnbCereal_W_Bd.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 800; font-style: normal; src: url('../fonts/AirbnbCereal_W_XBd.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Airbnb Cereal App'; font-weight: 900; font-style: normal; src: url('../fonts/AirbnbCereal_W_Blk.otf') format('opentype'); font-display: swap; }
+
+/* Fallback fonts sized to match Cereal metrics — reduces FOUT layout shift */
+@font-face {
+  font-family: 'Cereal-fallback';
+  src: local('Arial');
+  size-adjust: 102%;
+  ascent-override: 92%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+
+:root{
+  --c-text:#1C3142; --c-text-deep:#0E1821; --c-body:#464545;
+  --c-l1:#DBDBDB;
+  --c-blue:#0071D6;
+  --c-bg:#FFFFFF; --c-container-bg:#F8F8FA;
+  --c-callout-blue:#E5F1FF; --c-card-blue:#EFF5FE;
+  --c-accent:#C24A3A;
+  --font-sans:"Airbnb Cereal App","Cereal-fallback","Inter","-apple-system","BlinkMacSystemFont","Helvetica Neue",Arial,sans-serif;
+  --container-width:1140px; --header-height:80px; --side-pad:0px;
+  --gap-l1-top:160px; --gap-l1-bottom:32px;
+  --gap-l2-top:64px; --gap-l2-bottom:16px;
+  --gap-para:16px;
+  --gap-text-to-img:40px; --gap-img-to-text:56px; --gap-img-to-img:48px;
+  --gap-caption-to-img:16px;
+  --gap-section-block:64px;
+  --container-pad:64px;
+}
+*{box-sizing:border-box}
+html{overflow-y:scroll;scroll-behavior:smooth}
+html,body{margin:0;padding:0;background:var(--c-bg);color:var(--c-body);font-family:var(--font-sans);font-size:17px;font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.85;transition:opacity .2s ease}
+.brand:hover{opacity:1}
+img{max-width:100%;display:block}
+
+/* ============ Header ============ */
+.site-header{position:fixed;top:0;left:0;right:0;width:100%;background:transparent;z-index:100;height:var(--header-height);display:flex;align-items:center;border-bottom:1px solid transparent;transition:background-color .35s cubic-bezier(.4,0,.2,1),backdrop-filter .35s cubic-bezier(.4,0,.2,1),-webkit-backdrop-filter .35s cubic-bezier(.4,0,.2,1),border-color .35s cubic-bezier(.4,0,.2,1),box-shadow .35s cubic-bezier(.4,0,.2,1),transform .35s cubic-bezier(.4,0,.2,1)}
+.site-header.is-hidden{transform:translateY(-100%)}
+body{padding-top:var(--header-height)}
+.site-header.is-scrolled{background:rgba(255,255,255,.55);backdrop-filter:saturate(160%) blur(28px);-webkit-backdrop-filter:saturate(160%) blur(28px);border-bottom-color:rgba(15,24,33,.08);box-shadow:0 4px 24px -10px rgba(15,24,33,.10)}
+.site-header__inner{display:flex;align-items:center;justify-content:space-between;width:100%}
+.brand{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:700;color:var(--c-text)}
+.brand-avatar{position:relative;width:38px;height:40px;flex-shrink:0}
+.brand-avatar img{position:absolute;top:0;left:0;width:38px;height:40px;object-fit:cover;border-radius:50%;transition:opacity .2s ease,transform .4s cubic-bezier(.4,0,.2,1)}
+.brand-avatar__hover{opacity:0}
+.brand:hover .brand-avatar__default{opacity:0}
+.brand:hover .brand-avatar__hover{opacity:1}
+.brand:hover .brand-avatar img{transform:scale(1.05)}
+.nav{display:flex;gap:60px;align-items:center}
+.nav a{position:relative;display:inline-block;padding:6px 0;font-size:16px;font-weight:500;color:var(--c-text);transition:color .25s cubic-bezier(.4,0,.2,1)}
+.nav a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .35s cubic-bezier(.65,0,.35,1)}
+.nav a:hover::after,.nav a.is-active::after{transform:scaleX(1)}
+.nav a.is-active{color:#0A66C2}
+
+.container{max-width:var(--container-width);margin:0 auto;padding-left:var(--side-pad);padding-right:var(--side-pad)}
+.site-header > .container{padding-left:var(--side-pad);padding-right:var(--side-pad)}
+/* ============ Anchor scroll offset (account for sticky header + section-nav) ============ */
+main section[id]{scroll-margin-top:140px}
+@media (max-width:768px){main section[id]{scroll-margin-top:110px}}
+
+
+/* ============ Section navigation (sticky top bar below main header) ============ */
+.section-nav{position:sticky;top:0;z-index:101;background:rgba(255,255,255,.92);backdrop-filter:saturate(160%) blur(20px);-webkit-backdrop-filter:saturate(160%) blur(20px);border-bottom:1px solid rgba(15,24,33,.06);margin:32px 0 0;transition:top .35s cubic-bezier(.4,0,.2,1),box-shadow .3s ease}
+.section-nav.is-stuck{box-shadow:0 4px 20px -8px rgba(15,24,33,.10)}
+.section-nav.below-header{top:var(--header-height)}
+
+/* ============ Floating scroll progress + back-to-top ============ */
+.scroll-progress{position:fixed;bottom:32px;right:32px;width:52px;height:52px;z-index:100;opacity:0;transform:translateY(20px);transition:opacity .35s ease,transform .35s ease;cursor:pointer;border:none;padding:0;background:transparent;pointer-events:none;-webkit-tap-highlight-color:transparent}
+.scroll-progress.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.scroll-progress__ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.scroll-progress__track{fill:none;stroke:rgba(15,24,33,.08);stroke-width:2}
+.scroll-progress__fill{fill:none;stroke:var(--c-blue);stroke-width:2;stroke-linecap:round;transition:stroke-dashoffset .12s linear}
+.scroll-progress__button{position:absolute;inset:4px;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);-webkit-backdrop-filter:saturate(180%) blur(10px);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--c-text-deep);transition:background .25s ease,color .25s ease,transform .25s ease;box-shadow:0 4px 16px -4px rgba(15,24,33,.12),0 2px 6px -2px rgba(15,24,33,.06)}
+.scroll-progress:hover .scroll-progress__button{background:var(--c-blue);color:#fff;transform:scale(1.06)}
+.scroll-progress:active .scroll-progress__button{transform:scale(0.96)}
+.scroll-progress__button svg{width:16px;height:16px;display:block}
+@media (max-width:768px){.scroll-progress{bottom:20px;right:20px;width:44px;height:44px}}
+.section-nav.is-sticky{box-shadow:0 2px 12px -6px rgba(15,24,33,.08)}
+.section-nav__inner{display:flex;align-items:center;justify-content:center;gap:48px;max-width:var(--container-width);margin:0 auto;padding:14px var(--side-pad);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.section-nav__inner::-webkit-scrollbar{display:none}
+.section-nav__link{font-size:13px;font-weight:500;color:var(--c-body);letter-spacing:0.08em;text-transform:uppercase;padding:8px 0;position:relative;transition:color .2s ease;white-space:nowrap;flex-shrink:0}
+.section-nav__link:hover{color:var(--c-text-deep);opacity:1}
+.section-nav__link.is-active{color:var(--c-blue);font-weight:700}
+.section-nav__link.is-active::after{content:"";position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);width:100%;height:2px;background:var(--c-blue);border-radius:2px}
+@media (max-width:768px){.section-nav__inner{justify-content:flex-start;gap:28px;padding:12px 20px}.section-nav__link{font-size:12px;letter-spacing:0.06em}}
+
+/* ============ Context media (video + callout overlay) ============ */
+.context-media{position:relative;display:block;width:100%;min-height:460px;overflow:visible}
+/* Video — UPPER layer (z-index 2), anchored top-left, covers left half of callout */
+.context-video{position:relative;width:220px;max-width:60%;display:block;margin:0 110px 0 auto;border-radius:24px;box-shadow:0 10px 28px -8px rgba(15,24,33,.18),0 3px 10px -3px rgba(15,24,33,.10);z-index:2;background:#f0f0f0}
+/* Callout image — SMALLER, LOWER layer (z-index 1), positioned so video overlaps left half of it */
+.context-callout{position:absolute;right:0;left:auto;bottom:30px;width:140px;max-width:42%;display:block;background:transparent;z-index:1;filter:drop-shadow(0 6px 16px rgba(15,24,33,.14))}
+@media (max-width:768px){
+  .context-media{display:flex;flex-direction:column;min-height:auto;align-items:center;gap:0}
+  .context-video{width:200px;max-width:70%;margin:0 auto}
+  .context-callout{position:static;width:140px;max-width:50%;align-self:flex-end;margin-top:-30px;left:auto;bottom:auto}
+}
+
+/* ============ Cover ============ */
+.cs-cover-wrap{background:var(--c-text-deep);width:100%;display:flex;justify-content:center;margin-top:16px}
+.cs-cover{max-width:var(--container-width);width:100%;margin:0 auto;display:block}
+.cs-cover img{width:100%;height:auto;display:block}
+
+/* ============ Heading hierarchy ============
+ * L1 (56px gray)   — Page section break: Context, Problem Analysis, Customer Insights, etc.
+ * L2 (28px bold dark) — Module title: "#1 Many customers do not know..." or "Quantitative Insights"
+ * L2-c (28px bold dark, centered) — Centered module title: "Is this a padding issue?", "A thinking trap...", "Jump out of trap"
+ * L3 (24px bold dark) — Sub-heading: text-img copy heading
+ * L4 (18-20px bold dark) — Small heading
+ */
+.l1{font-family:var(--font-sans);font-weight:400;font-size:56px;color:var(--c-l1);margin:var(--gap-l1-top) 0 var(--gap-l1-bottom);letter-spacing:-0.01em;line-height:1.1;padding-top:32px;position:relative}
+.l1::before{content:"";position:absolute;top:0;left:0;width:64px;height:4px;background:var(--c-blue);border-radius:2px}
+.l2{font-family:var(--font-sans);font-weight:700;font-size:22px;color:var(--c-text-deep);margin:var(--gap-l2-top) 0 var(--gap-l2-bottom);line-height:1.35;letter-spacing:-0.002em}
+.l2--center{text-align:center;margin-left:auto;margin-right:auto;max-width:900px}
+.l3,.text-img__copy h3.l3{font-family:var(--font-sans);font-weight:700;font-size:18px;color:var(--c-text-deep);margin:0 0 12px;line-height:1.35;letter-spacing:-0.002em}
+.l3--blue,.text-img__copy h3.l3--blue{color:var(--c-blue)}
+.l4{font-family:var(--font-sans);font-weight:700;font-size:20px;color:var(--c-text-deep);margin:0 0 8px;line-height:1.3}
+.l1 + .l2,.l1 + .l3{margin-top:8px}
+.l1 + .text-img,.l1 + .p{margin-top:8px}
+
+.p{margin:0 0 var(--gap-para);font-weight:400;color:var(--c-body)}
+.p strong{color:var(--c-blue);font-weight:700}
+.p strong.dark{color:var(--c-text-deep);font-weight:700}
+.p .link-blue,.text-img__copy p .link-blue{color:var(--c-blue);font-weight:700;text-decoration:none}
+
+/* ============ Centered subtitle (DingTalk - A professional...) ============ */
+.cs-subtitle{text-align:left;font-size:24px;font-weight:700;color:var(--c-text-deep);margin:80px 0 32px;line-height:1.4}
+
+/* ============ Project meta gray box ============ */
+.cs-meta-box{background:var(--c-container-bg);border-radius:20px;padding:56px 64px;margin:40px auto var(--gap-section-block);max-width:var(--container-width);display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.cs-meta-col{display:flex;flex-direction:column;gap:8px}
+.cs-meta-h{font-size:20px;font-weight:700;color:var(--c-text-deep);margin:24px 0 8px}
+.cs-meta-h:first-child{margin-top:0}
+.cs-meta-p{font-size:17px;line-height:1.7;color:var(--c-body);margin:0 0 8px;font-weight:400}
+.cs-meta-p strong{color:var(--c-blue);font-weight:700}
+.cs-meta-list{list-style:disc;padding-left:22px;margin:0;font-size:17px;line-height:1.7;color:var(--c-body);font-weight:400}
+.cs-meta-list strong{color:var(--c-blue);font-weight:700}
+
+/* ============ Image blocks ============ */
+.img{margin:var(--gap-text-to-img) auto var(--gap-img-to-text);text-align:center;max-width:var(--container-width)}
+.img img{display:inline-block;max-width:100%;height:auto;border-radius:8px}
+.img--wide{max-width:1424px}
+.img--noradius img{border-radius:0}
+.img--phone img{border-radius:24px;box-shadow:0 12px 32px -8px rgba(15,24,33,.18),0 4px 12px -4px rgba(15,24,33,.10)}
+.img__caption{font-size:20px;font-weight:700;color:var(--c-text-deep);text-align:center;margin:0 0 var(--gap-caption-to-img);font-family:var(--font-sans)}
+.img__caption--blue{color:var(--c-blue)}
+.img-caption-below{font-size:16px;font-weight:400;color:var(--c-body);text-align:center;margin:16px auto 0}
+
+/* ============ 2-col captioned ============ */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;max-width:var(--container-width);margin:var(--gap-text-to-img) auto var(--gap-img-to-text);align-items:end}
+.two-col__item{text-align:center}
+.two-col__title{font-size:20px;font-weight:700;color:var(--c-text-deep);margin:0 0 16px}
+.two-col__item img{display:inline-block;max-width:100%;height:auto}
+.two-col__caption{font-size:16px;color:var(--c-body);margin:12px 0 0;line-height:1.5}
+
+/* ============ Text-image side-by-side ============ */
+.text-img{display:grid;grid-template-columns:5fr 6fr;gap:64px;max-width:var(--container-width);margin:var(--gap-l2-top) auto var(--gap-l2-top);align-items:start}
+.text-img__copy .l2{margin-top:0}
+.l2 + .text-img{margin-top:var(--gap-l2-bottom)}
+.text-img--tight{margin-top:24px;margin-bottom:32px}
+.text-img--imgleft .text-img__media{order:0}
+.text-img--imgleft .text-img__copy{order:1}
+.text-img__copy h3{font-size:24px;font-weight:700;color:var(--c-text-deep);margin:0 0 24px}
+.text-img__copy p{font-size:17px;line-height:1.7;color:var(--c-body);margin:0 0 16px;font-weight:400}
+.text-img__copy p strong{color:var(--c-blue);font-weight:700}
+.text-img__copy p + p{margin-top:20px}
+.text-img__copy ul{list-style:disc;padding-left:22px;margin:8px 0 0;font-size:17px;line-height:1.7;color:var(--c-body);font-weight:400}
+.text-img__media img{width:100%;height:auto}
+.text-img__media{text-align:center}
+
+/* ============ Bullet list ============ */
+.bullet-list{list-style:disc;padding-left:24px;margin:8px 0 0;font-size:17px;line-height:1.7;color:var(--c-body);max-width:var(--container-width);font-weight:400}
+.bullet-list li{margin:0 0 12px}
+
+/* ============ Light gray container (Thinking trap, Jump out of trap, Quantitative Insights) ============ */
+.gray-block{background:var(--c-container-bg);border-radius:20px;padding:56px 64px;margin:var(--gap-l2-top) auto 0;max-width:var(--container-width)}
+.gray-block__title{font-size:22px;font-weight:700;letter-spacing:-0.002em;color:var(--c-text-deep);text-align:left;margin:0 0 24px;padding-top:24px;position:relative}
+.gray-block__title::before{content:"";position:absolute;top:0;left:0;width:80px;height:4px;background:var(--c-blue);border-radius:2px}
+.gray-block__title--blue{color:var(--c-blue)}
+
+/* ============ Quantitative chart layout ============ */
+.quant-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:32px;align-items:center;margin-top:32px}
+.quant-bars{display:flex;flex-direction:column;gap:18px}
+.quant-bar-row{display:grid;grid-template-columns:280px 1fr;gap:20px;align-items:center}
+.quant-bar{position:relative;height:30px;background:#fff;border:1px solid #E0E6EE;border-radius:6px;overflow:hidden}
+.quant-bar__fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#9DD7F2 0%,#4FBFE8 100%);border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-size:14px;font-weight:600;color:#0E1821}
+.quant-bar__label{font-size:16px;color:var(--c-body);font-weight:400}
+.quant-arrow{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--c-body);font-size:14px;font-weight:400}
+.quant-arrow svg{width:80px;height:auto}
+.quant-badge{background:#E5F1FF;border:2px dashed var(--c-blue);border-radius:14px;padding:18px 24px;font-size:16px;font-weight:700;color:var(--c-blue);max-width:240px;line-height:1.4}
+
+/* ============ 3-step layout (Step 1 / 2 / 3 in Thinking Trap) ============ */
+.steps-3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:24px 0 0}
+.steps-3__step{}
+.steps-3__num{font-size:14px;color:var(--c-blue);font-weight:700;border-top:2px solid var(--c-blue);padding-top:8px;margin-bottom:8px}
+.steps-3__title{font-size:16px;font-weight:700;color:var(--c-text-deep);margin:0 0 8px}
+.steps-3__qs{margin:8px 0 0;padding:0;list-style:none;font-size:14px;color:var(--c-body);line-height:1.6;font-weight:400}
+.steps-3__qs li{margin:0 0 4px}
+
+/* ============ "Is this a padding issue" 2 hypothesis cards ============ */
+.icon-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:40px 0 0}
+.icon-row__item{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;background:var(--c-container-bg);border-radius:20px;padding:48px 40px;text-align:left;min-height:280px}
+.icon-row__label{font-size:12px;font-weight:700;color:var(--c-blue);letter-spacing:0.2em;text-transform:uppercase;margin:0 0 28px}
+.icon-row__icon{flex:1;display:flex;align-items:center;justify-content:flex-start;width:100%}
+.icon-row__item svg{display:block;margin:0;height:110px;width:auto}
+.icon-row__caption{font-size:18px;font-weight:700;color:var(--c-text-deep);margin:28px 0 0}
+
+/* ============ Steps 3 (thinking-trap) — colored bars, no gray bg ============ */
+.steps-3--bare{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;max-width:var(--container-width);margin:48px auto 0}
+.steps-3--bare .steps-3__title-row{font-size:16px;color:var(--c-body);font-weight:400;margin:0 0 8px}
+.steps-3--bare .steps-3__bar{height:6px;border-radius:3px;margin:6px 0 24px}
+.steps-3--bare .steps-3__bar--c1{background:#BDE6F2}
+.steps-3--bare .steps-3__bar--c2{background:#E8C7DF}
+.steps-3--bare .steps-3__bar--c3{background:#F4C8B5}
+.steps-3--bare .steps-3__qs{margin:0;padding:0;list-style:none;font-size:16px;color:var(--c-body);line-height:1.6;font-weight:400}
+.steps-3--bare .steps-3__qs li{margin:0 0 6px}
+
+/* ============ Pain points & Design Challenge mapping (FULL WIDTH) ============ */
+.pp-dc-wrap{background:var(--c-callout-blue);width:100%;margin:var(--gap-text-to-img) 0;padding:48px 0}
+.pp-dc{padding:0 64px;margin:0 auto;max-width:var(--container-width)}
+.pp-dc__head{display:grid;grid-template-columns:80px 1fr 80px 1fr;gap:32px;margin-bottom:16px;align-items:end}
+.pp-dc__h{position:relative;font-size:20px;font-weight:700;color:var(--c-text-deep);margin:0;padding-bottom:14px;letter-spacing:0.02em}
+.pp-dc__h::after{content:"";position:absolute;left:0;bottom:0;width:60px;height:2px;background:var(--c-blue);border-radius:2px}
+.pp-dc__row{display:grid;grid-template-columns:80px 1fr 80px 1fr;gap:32px;align-items:center;padding:24px 0}
+.pp-dc__row + .pp-dc__row{border-top:0}
+.pp-dc__icon{display:flex;align-items:center;justify-content:center;width:64px;height:64px}
+.pp-dc__icon svg, .pp-dc__icon img{display:block;width:64px;height:64px;object-fit:contain}
+.pp-dc__cell{font-size:17px;color:var(--c-body);line-height:1.55;font-weight:400}
+.pp-dc__cell strong{color:var(--c-blue);font-weight:700}
+.pp-dc__arrow{display:flex;align-items:center;justify-content:center}
+.pp-dc__arrow svg{width:48px;height:auto;display:block}
+
+/* ============ Recap callout for Design Challenges ============ */
+.recap-row-img{display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:center;margin:24px 0}
+.recap-row-img__label{font-weight:700;font-size:18px;color:var(--c-text-deep);text-align:left}
+.recap-row-img img{width:100%;height:auto;display:block}
+
+/* ============ Design solution block ============ */
+.solution-tag{display:inline-block;border-left:5px solid var(--c-text-deep);padding:0 0 0 14px;font-size:24px;font-weight:700;color:var(--c-text-deep);margin:48px 0 20px;line-height:1.3}
+
+/* ============ Before/After side-by-side (phone frames) ============ */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin:24px 0;align-items:end;max-width:640px}
+.ba-grid__item{display:flex;flex-direction:column;align-items:center;gap:16px}
+.ba-grid__media{width:100%;display:flex;justify-content:center}
+.ba-grid__media video,.ba-grid__media img{width:100%;max-width:220px;height:auto;display:block;border-radius:24px;box-shadow:0 12px 32px -8px rgba(15,24,33,.18),0 4px 12px -4px rgba(15,24,33,.10);background:#f0f0f0}
+.ba-grid__label{font-size:18px;font-weight:700;color:var(--c-text-deep);margin:0;text-align:center}
+@media (max-width:768px){.ba-grid{grid-template-columns:1fr;gap:32px}}
+
+/* ============ Design Challenge (staff-designer refined) ============ */
+.dc-chapter{margin:96px 0 48px;padding-top:40px;border-top:1px solid var(--c-l1);display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start}
+.l1 + .dc-chapter,.l1 + * + .dc-chapter{border-top:none;padding-top:0;margin-top:64px}
+.dc-chapter__num{font-family:var(--font-sans);font-size:88px;font-weight:800;color:var(--c-blue);line-height:0.85;letter-spacing:-0.04em;font-feature-settings:"tnum";margin:-6px 0 0}
+.dc-chapter__body{display:flex;flex-direction:column;gap:12px;padding-top:0}
+.dc-chapter__overline{font-size:13px;font-weight:700;color:var(--c-body);letter-spacing:0.2em;text-transform:uppercase;margin:0}
+.dc-chapter__title{font-family:var(--font-sans);font-size:32px;font-weight:700;color:var(--c-text-deep);line-height:1.2;letter-spacing:-0.01em;margin:0}
+.dc-overline{font-size:12px;font-weight:700;color:var(--c-body);letter-spacing:0.2em;text-transform:uppercase;margin:0 0 20px}
+.dc-overline--blue{color:var(--c-blue)}
+.dc-recap-clean{margin:0 0 56px}
+.dc-recap-clean img{width:100%;height:auto;display:block;border-radius:16px;box-shadow:0 8px 24px -12px rgba(15,24,33,.08)}
+
+/* ============ Refined Recap card (persona + mapping) ============ */
+.recap-card{background:var(--c-container-bg);border-radius:20px;padding:40px 48px;margin:0 0 24px}
+.recap-persona{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;padding-bottom:28px;border-bottom:1px solid rgba(15,24,33,.08)}
+.recap-persona__photo{width:88px;height:88px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--c-l1);box-shadow:0 2px 8px -2px rgba(15,24,33,.15)}
+.recap-persona__photo img{width:100%;height:100%;object-fit:cover;display:block}
+.recap-persona__meta{display:flex;flex-direction:column;gap:4px}
+.recap-persona__name{font-size:20px;font-weight:700;color:var(--c-text-deep);margin:0;line-height:1.2}
+.recap-persona__desc{font-size:16px;font-weight:400;color:var(--c-body);margin:0;line-height:1.5}
+.recap-mapping{display:grid;grid-template-columns:1fr auto 1fr;gap:32px;padding-top:28px;align-items:start}
+.recap-col__label{font-size:11px;font-weight:700;color:var(--c-body);letter-spacing:0.18em;text-transform:uppercase;margin:0 0 16px}
+.recap-col__label--blue{color:var(--c-blue)}
+.recap-col__list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.recap-col__list li{position:relative;padding-left:20px;font-size:15px;line-height:1.55;color:var(--c-body);font-weight:400}
+.recap-col__list li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--c-body);border-radius:50%}
+.recap-col__list--blue li::before{background:var(--c-blue)}
+.recap-arrow{display:flex;align-items:center;justify-content:center;padding-top:36px}
+.recap-arrow svg{width:32px;height:auto;color:var(--c-blue)}
+@media (max-width:768px){.recap-card{padding:28px 24px}.recap-mapping{grid-template-columns:1fr;gap:20px}.recap-arrow{transform:rotate(90deg);padding:0}}
+.dc-solution{margin:72px 0 0}
+.dc-solution__header{margin-bottom:24px;display:flex;flex-direction:column;gap:10px;position:relative;padding-top:24px}
+.dc-solution__header::before{content:"";position:absolute;top:0;left:0;width:48px;height:3px;background:var(--c-blue);border-radius:2px}
+.dc-solution__overline{font-size:12px;font-weight:700;color:var(--c-blue);letter-spacing:0.2em;text-transform:uppercase;margin:0}
+.dc-solution__title{font-size:24px;font-weight:700;color:var(--c-text-deep);margin:0;line-height:1.3;font-family:var(--font-sans);letter-spacing:-0.005em}
+.dc-solution__body p{font-size:17px;line-height:1.7;color:var(--c-body);font-weight:400;margin:0 0 16px}
+.dc-solution__body p strong{color:var(--c-blue);font-weight:700}
+@media (max-width:768px){.dc-solution__title{font-size:20px}}
+@media (max-width:768px){.dc-chapter{grid-template-columns:1fr;gap:12px}.dc-chapter__num{font-size:64px}.dc-chapter__title{font-size:24px}.dc-solution__title{flex-direction:column;align-items:flex-start;gap:12px}}
+
+/* ============ Two-column callouts (Why drop off + Opportunities for #3) ============ */
+.dual-callout{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}
+.dual-callout__item{background:var(--c-container-bg);border-radius:20px;padding:40px 48px}
+.dual-callout__h{font-size:12px;font-weight:700;color:var(--c-body);letter-spacing:0.2em;text-transform:uppercase;margin:0 0 20px}
+.dual-callout__h--blue{color:var(--c-blue)}
+.dual-callout__p{font-size:16px;color:var(--c-body);font-weight:400;line-height:1.55;margin:0 0 12px}
+.dual-callout__p:last-child{margin-bottom:0}
+.dual-callout__p strong{color:var(--c-blue);font-weight:700}
+
+/* ============ Results block ============ */
+/* ============ Results (staff-designer refined) ============ */
+.results-metrics{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:40px 0 32px}
+.results-metric{background:var(--c-container-bg);border-radius:20px;padding:48px 48px}
+.results-metric__value{font-family:var(--font-sans);font-size:72px;font-weight:800;color:var(--c-blue);line-height:1;letter-spacing:-0.04em;margin:0 0 16px;font-feature-settings:"tnum"}
+.results-metric__label{font-size:18px;font-weight:400;color:var(--c-body);margin:0;line-height:1.4}
+.results-metric__note{font-size:12px;font-weight:400;color:var(--c-body);opacity:0.6;margin:14px 0 0;line-height:1.4;font-style:italic}
+.results-metric__sub{font-size:12px;font-weight:700;color:var(--c-blue);letter-spacing:0.2em;text-transform:uppercase;margin:0 0 20px}
+.results-qual{margin-top:48px}
+.results-qual__label{font-size:12px;font-weight:700;color:var(--c-body);letter-spacing:0.2em;text-transform:uppercase;margin:0 0 24px}
+.results-quotes{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+.results-quote{background:var(--c-container-bg);border-radius:20px;padding:32px 40px;position:relative}
+.results-quote__mark{position:absolute;top:20px;left:32px;font-family:Georgia,serif;font-size:64px;line-height:1;color:var(--c-blue);opacity:0.25}
+.results-quote__text{font-size:20px;font-weight:400;color:var(--c-text-deep);line-height:1.4;margin:32px 0 16px;font-style:italic;position:relative}
+.results-quote__cite{font-size:13px;font-weight:600;color:var(--c-body);letter-spacing:0.05em;margin:0;font-style:normal}
+.results-facts{display:flex;flex-direction:column;gap:12px;margin:0;padding:0;list-style:none}
+.results-facts li{display:flex;align-items:flex-start;gap:12px;font-size:17px;color:var(--c-body);font-weight:400;line-height:1.5}
+.results-facts__icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--c-blue);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;margin-top:1px}
+@media (max-width:768px){.results-metrics,.results-quotes{grid-template-columns:1fr;gap:16px}.results-metric__value{font-size:64px}}
+
+/* ============ Reflections L3 list ============ */
+.reflections{margin:var(--gap-section-block) auto 0;max-width:var(--container-width)}
+.reflections > p{margin-bottom:0;color:var(--c-body);font-weight:400}
+.reflections__grid{display:grid;grid-template-columns:1fr 1fr;gap:56px 64px;margin-top:56px}
+.reflection-block{margin:0}
+.reflection-block__num{font-size:12px;font-weight:700;color:var(--c-blue);letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px}
+.reflection-block h4{font-size:20px;font-weight:700;color:var(--c-text-deep);margin:0 0 14px;line-height:1.3}
+.reflection-block p{font-size:16px;color:var(--c-body);font-weight:400;line-height:1.6;margin:0}
+.reflection-block p strong{color:var(--c-text-deep);font-weight:700}
+@media (max-width:768px){.reflections__grid{grid-template-columns:1fr;gap:40px}}
+
+/* ============ Dark quote box (editorial closing statement) ============ */
+.quote-box{background:var(--c-text-deep);color:#fff;text-align:center;padding:96px 64px;margin:var(--gap-section-block) auto 40px;max-width:var(--container-width);border-radius:20px;position:relative;overflow:hidden}
+.quote-box::before{content:'\201C';position:absolute;top:24px;left:50%;transform:translateX(-50%);font-size:200px;line-height:0.9;color:rgba(255,255,255,.06);font-family:Georgia,serif;font-weight:700;z-index:0;pointer-events:none}
+.quote-box p{font-size:26px;line-height:1.5;color:#fff;font-weight:400;margin:0 auto;position:relative;z-index:1;max-width:840px;font-style:normal;letter-spacing:-0.005em}
+.quote-box .quote-box__cite{font-size:12px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:0.24em;text-transform:uppercase;margin:32px 0 0;font-style:normal}
+@media (max-width:768px){.quote-box{padding:64px 32px;border-radius:14px}.quote-box p{font-size:20px}.quote-box::before{font-size:140px;top:16px}}
+
+/* ============ Closing ============ */
+.closing{text-align:center;margin:var(--gap-l1-top) auto 80px;max-width:var(--container-width)}
+.closing h2{font-size:56px;font-weight:400;color:var(--c-l1);margin:0 0 40px;letter-spacing:-0.01em}
+.closing img{display:inline-block;margin:0 auto 24px}
+.closing a{font-size:18px;color:var(--c-body);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+
+.site-footer{padding:60px 24px;text-align:center;font-size:15px;color:#4A5868}
+
+/* ============ Responsive ============ */
+@media (max-width:1080px){
+  :root{--container-width:100%;--side-pad:24px;--gap-l1-top:120px;--gap-l2-top:56px;--container-pad:48px}
+  .nav{gap:48px}
+  .l1{font-size:48px}
+  .cs-meta-box{padding:40px 48px}
+}
+@media (max-width:900px){
+  :root{--side-pad:20px;--gap-l1-top:96px;--gap-l2-top:48px}
+  .nav{gap:32px}
+  .l1{font-size:42px}
+  .l2{font-size:22px}
+  .l3{font-size:19px}
+  .cs-meta-box{padding:36px 40px;gap:32px}
+}
+@media (max-width:768px){
+  :root{--side-pad:24px;--gap-l1-top:80px;--gap-l2-top:40px}
+  .site-header{height:68px}
+  .brand{font-size:16px;gap:10px;white-space:nowrap}
+  .brand-avatar,.brand-avatar img{width:34px;height:36px}
+  .nav{gap:24px}
+  .nav a{font-size:15px}
+  .l1{font-size:36px}
+  .l2{font-size:20px}
+  .cs-meta-box{grid-template-columns:1fr;padding:32px 28px;gap:16px}
+  .two-col,.text-img{grid-template-columns:1fr;gap:32px}
+  .steps-3,.steps-3--bare,.icon-row,.results-summary,.results-badges,.dual-callout,.quant-row,.quant-bar-row{grid-template-columns:1fr;gap:24px}
+  .quant-arrow{transform:rotate(90deg)}
+  .pp-dc-wrap{padding:40px 0}
+  .pp-dc{padding:0 24px}
+  .pp-dc__head,.pp-dc__row{grid-template-columns:1fr;gap:12px}
+  .pp-dc__arrow{display:none}
+  .pp-dc__icon{margin:0 auto}
+  .recap-row-img{grid-template-columns:1fr;gap:12px}
+  .gray-block{padding:32px 28px}
+  .closing h2{font-size:36px}
+  .quote-box{padding:48px 24px}
+  .quote-box p{font-size:17px}
+}
+@media (max-width:600px){
+  :root{--side-pad:20px}
+  .site-header{height:60px}
+  .brand span{font-size:15px}
+  .brand-avatar,.brand-avatar img{width:30px;height:32px}
+  .nav{gap:18px}
+  .nav a{font-size:14px}
+}
+@media (max-width:380px){
+  :root{--side-pad:16px}
+  .nav{gap:14px}
+  .nav a{font-size:13px}
+  .brand span{font-size:14px}
+}
+  
+/* ============ Header unified — fixed max-width across all pages (kills nav jitter) ============ */
+.site-header__inner{max-width:1200px !important;margin:0 auto !important;padding:0 24px !important;width:100% !important;box-sizing:border-box}
+
+
+/* ============ Nav unified — same size/spacing across all pages & breakpoints (kills switch-jitter) ============ */
+.nav{display:flex !important;gap:48px !important;align-items:center !important}
+.nav a{font-size:16px !important;font-weight:500 !important;padding:6px 0 !important}
+@media (max-width:900px){.nav{gap:32px !important}}
+@media (max-width:600px){.nav{gap:20px !important}}
+
+
+
+
+/* ============ Cross-page View Transitions (Chrome/Edge 126+, Safari 18+) ============ */
+@view-transition { navigation: auto; }
+::view-transition-old(root),::view-transition-new(root){animation-duration:.18s;animation-timing-function:cubic-bezier(.4,0,.2,1);mix-blend-mode:normal}
+::view-transition-old(root){animation-name:vt-fade-out}
+::view-transition-new(root){animation-name:vt-fade-in}
+@keyframes vt-fade-out{to{opacity:0}}
+@keyframes vt-fade-in{from{opacity:0}}
+
+
+/* ============ Case-study scroll reveal (Framer/Linear style) ============ */
+.cs-reveal{opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.cs-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.cs-reveal{opacity:1 !important;transform:none !important}}
+
+
+.wow-progress{position:fixed;top:0;left:0;height:2px;background:#F5A623;width:0%;z-index:9999;transition:width .1s ease-out}
+
+
+/* Site-wide signature stamp (in footer) */
+.wow-sig{font-family:var(--font-sans);font-size:13px;font-weight:700;color:var(--color-text-muted,#4A5868);letter-spacing:0.28em;text-transform:uppercase;margin:0;opacity:0.65;text-align:center}
+
+</style>
+</head>
+<body>
+
+  <!-- Header (global pattern) -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="../index.html" class="brand" aria-label="Shilue's Portfolio">
+        <span class="brand-avatar"><img loading="eager" decoding="async" fetchpriority="high" class="brand-avatar__default" src="../images/avatar-header.png" alt="Shilue avatar icon" /><img loading="lazy" decoding="async" class="brand-avatar__hover" src="../images/avatar-header-hover.png" alt="" /></span>
+        <span>Shilue's Portfolio</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="../index.html" class="is-active">Projects</a>
+        <a href="../playgrounds/index.html">Playgrounds</a>
+        <a href="../resume.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Floating scroll progress + back-to-top -->
+  <button class="scroll-progress" aria-label="Scroll to top" title="Back to top" type="button">
+    <svg class="scroll-progress__ring" viewBox="0 0 52 52" aria-hidden="true">
+      <circle class="scroll-progress__track" cx="26" cy="26" r="24"/>
+      <circle class="scroll-progress__fill" cx="26" cy="26" r="24" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+    </svg>
+    <span class="scroll-progress__button">
+      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 13V3M3 8l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </span>
+  </button>
+
+  <main>
+
+    <!-- 1. Cover (full-width dark container per Wix design) -->
+    <div class="cs-cover-wrap">
+      <section class="cs-cover">
+        <img loading="eager" decoding="async" fetchpriority="high" width="1140" height="626" src="../images/cover.png" alt="Optimize the Experience of Rich formatting in IM" />
+      </section>
+    </div>
+
+    <!-- 2. Project Intro -->
+    <section class="container">
+      <h2 class="cs-subtitle">DingTalk - A professional office tool used by over 10 million enterprises and organizations</h2>
+      <div class="img" style="margin-top:0">
+        <img loading="lazy" decoding="async" src="../images/dingtalk-devices.png" alt="DingTalk on iPad, iPhone, and Macbook" />
+      </div>
+      <p class="p">
+        Since July 2020, I've been working on the DingTalk, an enterprise application of Alibaba Group, which integrates enterprise Products like Chat, Online meeting, Calendar, Drive and Docs into a one-stop-shop to help professionals get things done seamlessly and efficiently. I was mainly responsible for IM and efficiency tools in DingTalk, shipping efficiency suite, solving problems in multiple messaging scenarios, and delivering professional settings in chat for admins.
+      </p>
+
+      <p class="meta-badge">Alibaba Group · 2020</p>
+      <div class="cs-meta-box">
+        <div class="cs-meta-col">
+          <h3 class="cs-meta-h">My Role</h3>
+          <p class="cs-meta-p">I was the sole designer for the project. I <strong>initiated this design improvement</strong> and aligned with the cross-functional team, conducted research, clarified the problem, created iOS / Android designs and animations, and produced production assets. I designed up and <strong>presented works to gain buy-in from executives, stakeholders</strong> throughout the project lifecycle.</p>
+          <h3 class="cs-meta-h">Project status</h3>
+          <p class="cs-meta-p"><span class="status-pill">Shipped</span></p>
+        </div>
+        <div class="cs-meta-col">
+          <h3 class="cs-meta-h">What I Did</h3>
+          <ul class="cs-meta-list">
+            <li>Problem define &amp; refine</li>
+            <li>Interviews &amp; User testing</li>
+            <li>Product vision</li>
+            <li>Defining design principles</li>
+            <li>Fostering relationship with partners</li>
+            <li>Interaction design &amp; Animation design</li>
+            <li>Documenting patterns and best practices</li>
+            <li>Presenting to the whole design team</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- In-page section navigation — natural home before Context, sticks when scrolled past -->
+    <nav class="section-nav" aria-label="Sections">
+      <div class="section-nav__inner">
+        <a href="#problem-analysis" class="section-nav__link" data-section="problem-analysis">Problem</a>
+        <a href="#customer-insights" class="section-nav__link" data-section="customer-insights">Insights</a>
+        <a href="#project-reframe" class="section-nav__link" data-section="project-reframe">Reframe</a>
+        <a href="#design" class="section-nav__link" data-section="design">Design</a>
+        <a href="#results" class="section-nav__link" data-section="results">Results</a>
+        <a href="#envisions" class="section-nav__link" data-section="envisions">Reflections</a>
+      </div>
+    </nav>
+
+    <!-- 3. L1: Context -->
+    <section class="container">
+      <h2 class="l1">Context</h2>
+      <div class="text-img" style="grid-template-columns:7fr 4fr;align-items:start">
+        <div class="text-img__copy">
+          <h3 class="l3" style="margin-top:0">Accidental taps happen while editing the content of the message in IM can be extremely frustrating</h3>
+          <p>The whole project started with some customer complaints about mistapping the 'rich-text icon while inserting emojis in IM. This is a common problem when icon buttons are aligned in a row. <span class="link-blue">Users can easily hit adjacent buttons, which slow down their task performance.</span></p>
+          <p>I discovered this problem from a voice-from-users internal website and then initiated this design improvement.</p>
+        </div>
+        <div class="text-img__media context-media">
+          <!-- Main video: phone with chat + keyboard mistap -->
+          <video class="context-video" autoplay loop muted playsinline preload="metadata">
+            <source src="../images/context-mistap.mp4" type="video/mp4">
+          </video>
+          <!-- Callout overlay: zoom-in showing rich-text icon being mis-tapped -->
+          <img loading="lazy" decoding="async" class="context-callout" src="../images/context-phone.png" alt="Mis-tap the rich-text icon" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. L1: Problem Analysis -->
+    <section id="problem-analysis" class="container">
+      <h2 class="l1">Problem Analysis</h2>
+
+      <h3 class="l3" style="margin-top:32px">Is this a padding issue?</h3>
+      <p class="p">
+        I thought it was an easy-to-solve problem after analyzing the whole scenario. After checking the hot zone with engineers and analyzing finger-friendly padding, I defined that the problem was caused by hot zone and positions.
+      </p>
+
+      <div class="icon-row">
+        <!-- Left: Problem 1 — Icons placed too close -->
+        <div class="icon-row__item">
+          <p class="icon-row__label">Problem 1</p>
+          <div class="icon-row__icon">
+          <svg viewBox="0 0 170 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Gear icon (Lucide settings) -->
+            <g transform="translate(15,15) scale(2.4)" stroke="#0071D6" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </g>
+            <!-- Small red OUTLINED rectangle in the gap between icons -->
+            <rect x="80" y="25" width="8" height="40" fill="none" stroke="#E5544D" stroke-width="2"/>
+            <!-- Thumbs-up icon, close to gear -->
+            <g transform="translate(90,15) scale(2.4)" stroke="#0071D6" stroke-width="1.7" fill="none" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M7 10v12"/>
+              <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/>
+            </g>
+          </svg>
+          </div>
+          <p class="icon-row__caption">Icons are placed too close</p>
+        </div>
+        <!-- Right: Problem 2 — Inappropriate hot zone -->
+        <div class="icon-row__item">
+          <p class="icon-row__label">Problem 2</p>
+          <div class="icon-row__icon">
+          <svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Red box around gear -->
+            <rect x="10" y="10" width="80" height="72" fill="none" stroke="#E5544D" stroke-width="2"/>
+            <g transform="translate(20,16) scale(2.5)" stroke="#0071D6" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </g>
+            <!-- Red box around thumb (touching) -->
+            <rect x="90" y="10" width="80" height="72" fill="none" stroke="#E5544D" stroke-width="2"/>
+            <g transform="translate(105,18) scale(2.5)" stroke="#0071D6" stroke-width="1.6" fill="none" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M7 10v12"/>
+              <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/>
+            </g>
+          </svg>
+          </div>
+          <p class="icon-row__caption">Inappropriate hot zone</p>
+        </div>
+      </div>
+
+      <!-- Thinking trap gray container -->
+      <div class="gray-block">
+        <h3 class="gray-block__title" style="font-size:28px">A thinking trap by a single perspective</h3>
+        <p class="p">
+          However, I was surprised to find this problem had undergone several iterations in the past 2 years. Aware of falling into a thinking trap, not considering the whole view of the problem, I got out of myself as a designer and think like a customer. I noted down questions I have after walking through the assumed customer process.
+        </p>
+        <div class="steps-3 steps-3--bare" style="margin-top:40px">
+          <div>
+            <p class="steps-3__title-row">Step 1 Type messages in the text box</p>
+            <div class="steps-3__bar steps-3__bar--c1"></div>
+            <p class="steps-3__qs">Do customers know what the 'expand' icon is about?</p>
+          </div>
+          <div>
+            <p class="steps-3__title-row">Step 2 Mistap the rich-text icon</p>
+            <div class="steps-3__bar steps-3__bar--c2"></div>
+            <p class="steps-3__qs">Mistapping happens everywhere, why customers hate it so much?</p>
+          </div>
+          <div>
+            <p class="steps-3__title-row">Step 3 Return to origin flow</p>
+            <div class="steps-3__bar steps-3__bar--c3"></div>
+            <ul class="steps-3__qs">
+              <li>Do people realize what's going on?</li>
+              <li>What are customers not satisfied with?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jump out of trap gray container -->
+      <div class="gray-block">
+        <div class="text-img" style="margin-top:0;margin-bottom:0;align-items:center;grid-template-columns:4fr 7fr">
+          <div class="text-img__media">
+            <img loading="lazy" decoding="async" src="../images/enterprise-users.png" alt="Enterprise users illustration" style="max-width:280px;margin:0 auto" />
+            <p class="img-caption-below" style="font-weight:700;color:var(--c-text-deep);font-size:16px;margin-top:12px">Enterprise users</p>
+          </div>
+          <div class="text-img__copy">
+            <h3 class="l2" style="margin-top:0">Jump out of trap</h3>
+            <p>Consumer product users are individuals.<br/>Unlike consumer products, enterprise products would categorize users based on their professional roles.</p>
+            <p>Consumers look for simple, smooth UX, and fancy UI.<br/>Enterprise users take efficiency above everything.</p>
+            <p>Consumers use a product to finish a task.<br/>Enterprise uses the product to get their job done.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guerrilla testing -->
+      <div class="text-img" style="grid-template-columns:7fr 4fr;align-items:center">
+        <div class="text-img__copy">
+          <p>As a designer, I'm nowhere close to a user. My assumptions might not even be relevant. Confronted with limited time, I chose to conduct guerrilla testing with 5 Alibaba employees in different positions to understand how customers use rich text features, what their workflow is, and what causes dissatisfaction.</p>
+        </div>
+        <div class="text-img__media">
+          <img loading="lazy" decoding="async" src="../images/guerrilla-testing.jpg" alt="Guerrilla testing with 3 Alibaba employees" style="max-width:300px;margin:0 auto;border-radius:12px;box-shadow:0 8px 24px -8px rgba(15,24,33,.14)" />
+          <p class="img-caption-below" style="font-weight:700;color:var(--c-text-deep);font-size:16px;margin-top:12px">Guerrilla testing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. L1: Customer Insights -->
+    <section id="customer-insights" class="container">
+      <h2 class="l1">Customer Insights</h2>
+
+      <h3 class="l3" style="margin-top:var(--gap-l2-top)">#1 Many customers do not know rich-text feature at all</h3>
+      <p class="p">From my observation, I noticed some participants sent messages and words separately. An image is usually followed by some descriptive words. Some participants even googled how to send rich messages on DingTalk. So I hypothesized people might not know much about this feature.</p>
+
+      <div class="two-col" style="max-width:900px;margin-left:0;margin-right:auto;align-items:end;grid-template-columns:3fr 5fr;gap:100px">
+        <div class="two-col__item" style="text-align:left;display:flex;flex-direction:column;align-items:flex-start">
+          <img loading="lazy" decoding="async" src="../images/insight-1a.jpg" alt="Sent messages and words separately" style="display:block;margin:0;border-radius:12px;box-shadow:0 8px 24px -8px rgba(15,24,33,.14)" />
+          <p class="two-col__caption">Sent messages and words separately</p>
+        </div>
+        <div class="two-col__item" style="text-align:left;display:flex;flex-direction:column;align-items:flex-start">
+          <img loading="lazy" decoding="async" src="../images/insight-1b.jpg" alt="Even searched how to send rich messages" style="display:block;margin:0;border-radius:12px;box-shadow:0 8px 24px -8px rgba(15,24,33,.14)" />
+          <p class="two-col__caption">Even searched how to send rich messages</p>
+        </div>
+      </div>
+
+      <!-- #2 and #3 — both insights share a single mistapping video on the right -->
+      <div class="text-img" style="grid-template-columns:7fr 4fr;align-items:center;margin-top:120px">
+        <div class="text-img__copy">
+          <h3 class="l3" style="margin-top:0">#2 It's easy to mistap when switching features and editing words.</h3>
+          <p>I discovered 3 scenarios when mistapping happens</p>
+          <ul>
+            <li>Mistapping while editing the content (the last word)</li>
+            <li>Mistapping while switching between emoji and keyboard</li>
+            <li>Tap while unstable situation</li>
+          </ul>
+
+          <div style="height:1px;background:var(--c-l1);margin:72px 0 72px;width:60px"></div>
+
+          <h3 class="l3" style="margin-top:0">#3 A new loading page makes people confused after mistapping</h3>
+          <p>Another key observation is that users drop off after mistapping rather than continuing editing in the rich text editor. The long loading time in the rich-text editor makes people confused and causes a high drop-off rate after mistapping.</p>
+        </div>
+        <div class="text-img__media">
+          <video autoplay loop muted playsinline preload="metadata" style="width:100%;max-width:240px;border-radius:24px;box-shadow:0 12px 32px -8px rgba(15,24,33,.18),0 4px 12px -4px rgba(15,24,33,.10);display:block;margin:0 auto;background:#f0f0f0">
+            <source src="../images/insight-mistapping-correct.mp4" type="video/mp4">
+          </video>
+          <p style="font-weight:700;color:var(--c-text-deep);font-size:16px;text-align:center;margin:20px 0 0;line-height:1.4">Mistapping &amp; After mistapping</p>
+        </div>
+      </div>
+
+      <!-- Quantitative Insights gray block -->
+      <div class="gray-block">
+        <h3 class="gray-block__title">Quantitative Insights</h3>
+        <p class="p" style="margin:0 0 24px">
+          I researched the current usage of three co-related features to find clues about my hypothesis. The magnitude gap is large between rich text and other forms of messages. So I assumed <strong>most users might not know about this feature</strong>. I considered two metrics to verify my assumptions, such as unique views of the rich text editor and the number of rich text messages sent.
+        </p>
+        <!-- Hand-built chart: bars + assumption arrow + badge -->
+        <div class="quant-row">
+          <div class="quant-bars">
+            <img loading="lazy" decoding="async" src="../images/quant-bars.png" alt="Bar chart: Sending messages 10M UV, Sending images 7M UV, Sending rich text 140K UV" style="width:100%;display:block" />
+          </div>
+          <div class="quant-arrow">
+            <div>Assumption</div>
+            <img loading="lazy" decoding="async" src="../images/quant-arrow.png" alt="" style="width:120px;height:auto;display:block" />
+          </div>
+          <div class="quant-badge">Most users don't know this feature</div>
+        </div>
+        <p class="p" style="font-size:13px;color:var(--c-body);margin-top:32px;text-align:left">[1] UV indicates Unique view: If a user views the same page more than once in a session, this will only count as a single unique page view.</p>
+      </div>
+    </section>
+
+    <!-- 6. L1: Project Reframe -->
+    <section id="project-reframe" class="container">
+      <h2 class="l1">Project Reframe</h2>
+      <p class="p">From a holistic perspective, the customer's lack of understanding of rich text is a more serious problem. I discussed research insights with my PM and suggested viewing it as an opportunity to improve the overall rich text experience. We agreed that educating users about rich text feature is our top priority.</p>
+      <p class="p">Considering how customers are <strong>before, during, and after</strong> using the rich text feature, I've summarized the top priorities. Most users <strong>do not know about the rich text feature</strong>. Some users <strong>mistakenly tap the rich text button</strong> when editing. Users have no idea where they are after mistapping, so they <strong>drop off</strong>.</p>
+
+      <div class="img img--noradius" style="text-align:left;margin-left:0;margin-right:auto">
+        <img loading="lazy" decoding="async" src="../images/reframe-process.png" alt="Stage / Problem / Opportunity / Priority process flow" />
+      </div>
+    </section>
+
+    <!-- Pain points & Design Challenge — FULL WIDTH light blue band -->
+    <div class="pp-dc-wrap">
+      <div class="pp-dc">
+        <div class="pp-dc__head">
+          <div></div>
+          <div class="pp-dc__h">Pain points &amp; Opportunities</div>
+          <div></div>
+          <div class="pp-dc__h">Design Challenge</div>
+        </div>
+        <div class="pp-dc__row">
+          <div class="pp-dc__icon">
+            <img loading="lazy" decoding="async" src="../images/pp-icon-1.png" alt="" />
+          </div>
+          <div class="pp-dc__cell">Do not know how to find the entrance of rich formatting.</div>
+          <div class="pp-dc__arrow">
+            <svg viewBox="0 0 40 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="0" y1="8" x2="32" y2="8" stroke="#0071D6" stroke-width="3" stroke-linecap="round"/>
+              <polyline points="26,3 34,8 26,13" fill="none" stroke="#0071D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="pp-dc__cell">1. How might we <strong>educate users know and use rich-text feature</strong>?</div>
+        </div>
+        <div class="pp-dc__row">
+          <div class="pp-dc__icon">
+            <img loading="lazy" decoding="async" src="../images/pp-icon-2.png" alt="" />
+          </div>
+          <div class="pp-dc__cell">Annoyed by the interruption caused by mistapping when switching features and editing words.</div>
+          <div class="pp-dc__arrow">
+            <svg viewBox="0 0 40 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="0" y1="8" x2="32" y2="8" stroke="#0071D6" stroke-width="3" stroke-linecap="round"/>
+              <polyline points="26,3 34,8 26,13" fill="none" stroke="#0071D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="pp-dc__cell">2. How might we <strong>reduce interruptions</strong>?</div>
+        </div>
+        <div class="pp-dc__row">
+          <div class="pp-dc__icon">
+            <img loading="lazy" decoding="async" src="../images/pp-icon-3.png" alt="" />
+          </div>
+          <div class="pp-dc__cell">Customers didn't realize rich formatting is related to but stronger than plain text.</div>
+          <div class="pp-dc__arrow">
+            <svg viewBox="0 0 40 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="0" y1="8" x2="32" y2="8" stroke="#0071D6" stroke-width="3" stroke-linecap="round"/>
+              <polyline points="26,3 34,8 26,13" fill="none" stroke="#0071D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="pp-dc__cell">3. How might we make it <strong>self-explanatory</strong> to help users <strong>realize the value of rich-text</strong>?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. L1: Design -->
+    <section id="design" class="container">
+      <h2 class="l1">Design</h2>
+
+      <!-- ===== Design Challenge #1 ===== -->
+      <div class="dc-chapter">
+        <p class="dc-chapter__num">01</p>
+        <div class="dc-chapter__body">
+          <p class="dc-chapter__overline">Design Challenge</p>
+          <h3 class="dc-chapter__title">How might we educate users know and use rich-text feature?</h3>
+        </div>
+      </div>
+
+      <!-- Recap -->
+      <p class="dc-overline">Recap</p>
+      <div class="recap-card">
+        <div class="recap-persona">
+          <div class="recap-persona__photo">
+            <img loading="lazy" decoding="async" src="../images/michael-portrait.png" alt="Michael portrait" />
+          </div>
+          <div class="recap-persona__meta">
+            <p class="recap-persona__name">Michael, busy office worker</p>
+            <p class="recap-persona__desc">Sending a massive amount of messages each day.</p>
+          </div>
+        </div>
+        <div class="recap-mapping">
+          <div>
+            <p class="recap-col__label">Pain points</p>
+            <ul class="recap-col__list">
+              <li>Firstly do not know this feature</li>
+              <li>Seeing rich text messages sent from others, he was confused about how to send one by himself</li>
+            </ul>
+          </div>
+          <div class="recap-arrow" aria-hidden="true">
+            <svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="8" x2="24" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <polyline points="18,3 26,8 18,13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <p class="recap-col__label recap-col__label--blue">Corresponding considerations</p>
+            <ul class="recap-col__list recap-col__list--blue">
+              <li>Educate new users</li>
+              <li>Increase the discovery of the rich-text entrance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overview + illustration -->
+      <div class="text-img" style="grid-template-columns:6fr 5fr;align-items:center;margin-top:32px">
+        <div class="text-img__copy">
+          <p>The first challenge is to help users discover rich text feature. So, in my design considerations, <strong>educating new users</strong> is the top priority. <strong>Increasing the discovery of the entrance</strong> is also needed since rich-text button is covered in online version.</p>
+        </div>
+        <div class="text-img__media">
+          <img loading="lazy" decoding="async" src="../images/dc1-hardtofind.png" alt="Rich text button is hard to find: collapsed view (small icon) vs expanded keyboard view" />
+          <p class="img-caption-below" style="font-weight:700;color:var(--c-text-deep);font-size:18px">Rich text button is hard to find</p>
+        </div>
+      </div>
+
+      <!-- Solution 01 -->
+      <div class="dc-solution" style="margin-top:96px">
+        <div class="dc-solution__header">
+          <p class="dc-solution__overline">Design Strategy 01</p>
+          <h4 class="dc-solution__title">Educate new users with users</h4>
+        </div>
+        <div class="dc-solution__body">
+          <p>It's my strategy to <strong>have frequent users educate new ones</strong>. I attached a button below a rich text message sent by others so that new users can also send rich text messages when seeing them. An "Expand" icon is used in the button to <strong>strengthen memory</strong> so that users could recognize the rich text icon next time.</p>
+        </div>
+        <div class="img" style="text-align:left;margin-left:0;margin-right:auto">
+          <img loading="lazy" decoding="async" src="../images/dc1-educate.png" alt="Design solution: educate users with users" style="max-width:640px" />
+        </div>
+      </div>
+
+      <!-- Solution 02 -->
+      <div class="dc-solution">
+        <div class="dc-solution__header">
+          <p class="dc-solution__overline">Design Strategy 02</p>
+          <h4 class="dc-solution__title">Micro animation to draw attention</h4>
+        </div>
+        <div class="dc-solution__body">
+          <p>In order to <strong>deal with the covered rich text entrance</strong>, I brought up two solutions. New user guidance is everywhere in many apps, including DingTalk. However, an unexpected guidance might cause interruption for users. So I adopted a more lightweight, natural way, a micro animation, to draw attention. The motion can focus a user's attention on a specific area we want them to see.</p>
+        </div>
+        <div class="text-img" style="grid-template-columns:7fr 4fr;align-items:center;margin-top:32px">
+          <div class="text-img__copy">
+            <p>Please pay attention to the expand icon. As you can see, the expand icon shows up spinning as the keyboard rises up.</p>
+            <div class="img" style="margin:16px 0;text-align:left">
+              <img loading="lazy" decoding="async" src="../images/dc1-flow.png" alt="Increase the discovery flow" />
+            </div>
+          </div>
+          <div class="text-img__media">
+            <img loading="lazy" decoding="async" src="../images/dc1-anim.gif" alt="Rich text icon rotates as the keyboard rises" style="max-width:240px;display:block;margin:0 auto" />
+            <p class="img-caption-below" style="font-weight:700;color:var(--c-text-deep);font-size:16px;max-width:280px;margin:16px auto 0;line-height:1.4">The rich text icon rotates as the keyboard rises to increase its discovery</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Design Challenge #2 ===== -->
+      <div class="dc-chapter">
+        <p class="dc-chapter__num">02</p>
+        <div class="dc-chapter__body">
+          <p class="dc-chapter__overline">Design Challenge</p>
+          <h3 class="dc-chapter__title">How might we reduce interruptions?</h3>
+        </div>
+      </div>
+
+      <!-- Recap -->
+      <p class="dc-overline">Recap</p>
+      <div class="recap-card">
+        <div class="recap-persona">
+          <div class="recap-persona__photo">
+            <img loading="lazy" decoding="async" src="../images/sara-portrait.png" alt="Sara portrait" />
+          </div>
+          <div class="recap-persona__meta">
+            <p class="recap-persona__name">Sara, project manager</p>
+            <p class="recap-persona__desc">Buried in a sea of messages. She even sends messages while walking.</p>
+          </div>
+        </div>
+        <div class="recap-mapping">
+          <div>
+            <p class="recap-col__label">Pain points</p>
+            <ul class="recap-col__list">
+              <li>Annoyed by the interruption caused by mistapping</li>
+              <li>She collapsed the rich text editor and drops off after mistapping</li>
+            </ul>
+          </div>
+          <div class="recap-arrow" aria-hidden="true">
+            <svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="8" x2="24" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <polyline points="18,3 26,8 18,13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <p class="recap-col__label recap-col__label--blue">Corresponding considerations</p>
+            <ul class="recap-col__list recap-col__list--blue">
+              <li>Adjust the hot zone and position</li>
+              <li>Reduce the cost to retract after mis-tapping</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overview -->
+      <p class="p" style="margin-top:32px">Sara is annoyed with interruptions caused by mistapping. So I considered solving the problem by <strong>adjusting the hot zone and position</strong> of the rich-text button. I also thought about reducing the annoyance of interruptions by helping users <strong>recover from errors more easily.</strong></p>
+
+      <!-- Design Strategy 01 — matches original wix content (one solution with 2 sub-parts) -->
+      <div class="dc-solution" style="margin-top:96px">
+        <div class="dc-solution__header">
+          <p class="dc-solution__overline">Design Strategy 01</p>
+          <h4 class="dc-solution__title">Adjust the hot zone and position</h4>
+        </div>
+        <div class="dc-solution__body">
+          <p>I expanded the "breathing room" between the input box and the rich text icon. Likewise, the safe spacing between the emoji button and the rich text button has been expanded. Proper hot zones <strong>eliminate error-prone conditions</strong>.</p>
+        </div>
+        <div class="img" style="text-align:left;margin-left:0;margin-right:auto">
+          <img loading="lazy" decoding="async" src="../images/dc2-considered.png" alt="Before and after: expanded breathing room around buttons" style="max-width:640px" />
+        </div>
+        <div class="dc-solution__body" style="margin-top:40px">
+          <p>I also thought about moving the rich text button above. Nevertheless, I am also aware that any important change may have a ripple effect. <strong>1. Users habits have been developed over years. Even a small difference might make millions of users uncomfortable. 2. The entire panel needs to be changed accordingly, so it takes a huge effort.</strong> So I did not adopt it even though it could solve the mistapping problem seamlessly.</p>
+        </div>
+        <div class="img" style="text-align:left;margin-left:0;margin-right:auto">
+          <img loading="lazy" decoding="async" src="../images/dc2-recover.png" alt="Considered alternative: move rich text button above" style="max-width:640px" />
+          <p class="img-caption-below" style="color:var(--c-body);font-weight:400;font-size:13px;margin-top:12px;text-align:left;font-style:italic">* Not adopted this time</p>
+        </div>
+      </div>
+
+      <!-- ===== Design Challenge #3 ===== -->
+      <div class="dc-chapter">
+        <p class="dc-chapter__num">03</p>
+        <div class="dc-chapter__body">
+          <p class="dc-chapter__overline">Design Challenge</p>
+          <h3 class="dc-chapter__title">How might we help users discover the value of rich-text?</h3>
+        </div>
+      </div>
+
+      <p class="p">Before talking about how to make rich formatting self-evident, we need to come back to the reason why users drop off in this step.</p>
+
+      <div class="dual-callout" style="margin-top:32px">
+        <div class="dual-callout__item">
+          <h4 class="dual-callout__h">Why people drop off once mistapping?</h4>
+          <p class="dual-callout__p">People didn't view our rich text editor <strong>as a messaging tool</strong>.</p>
+          <p class="dual-callout__p">People think that the new page looks like a bug because of the <strong>long loading time and the slow pop-up box</strong>.</p>
+        </div>
+        <div class="dual-callout__item">
+          <h4 class="dual-callout__h dual-callout__h--blue">Opportunities</h4>
+          <p class="dual-callout__p">Help users <strong>discern the power of rich text editor</strong></p>
+          <p class="dual-callout__p">Streamline the rich text sending flow</p>
+        </div>
+      </div>
+
+      <!-- Solution 01 — side-by-side Before/After phone comparison -->
+      <div class="dc-solution" style="margin-top:96px">
+        <div class="dc-solution__header">
+          <p class="dc-solution__overline">Design Strategy 01</p>
+          <h4 class="dc-solution__title">Smooth the rich text editor unfolding</h4>
+        </div>
+        <div class="dc-solution__body">
+          <p>Loading is caused by waiting for the API to return the typed characters. In order to make the functionality of the rich text editor self-evident, I worked with engineers to smooth the unfolding of the rich text editor. I also removed the pop-up to speed up the loading time.</p>
+        </div>
+        <div class="ba-grid">
+          <div class="ba-grid__item">
+            <div class="ba-grid__media">
+              <video autoplay loop muted playsinline preload="metadata">
+                <source src="../images/dc3-before.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p class="ba-grid__label">Before</p>
+          </div>
+          <div class="ba-grid__item">
+            <div class="ba-grid__media">
+              <img loading="lazy" decoding="async" src="../images/dc3-anim.gif" alt="Optimized rich text flow animation" />
+            </div>
+            <p class="ba-grid__label">After</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solution 02 -->
+      <div class="dc-solution">
+        <div class="dc-solution__header">
+          <p class="dc-solution__overline">Design Strategy 02</p>
+          <h4 class="dc-solution__title">Optimize the flow</h4>
+        </div>
+        <div class="dc-solution__body">
+          <p>Deleting the feature is always not an easy task, nor is removing pop-ups. I analyzed the original flow and its purpose on each step. My research shows that asking if to keep the typed words is not what the user expects. Even though enquiring customers respects their choice, it leads to longer loading and impacts rich text experience. Its <strong>weaknesses outweigh its strengths</strong>. So I came up with an optimized flow to match the habits of our customers.</p>
+        </div>
+        <p class="dc-overline" style="margin-top:8px">Original Flow</p>
+        <div class="img" style="text-align:left;margin-left:0;margin-right:auto;margin-top:0">
+          <img loading="lazy" decoding="async" src="../images/dc3-original.png" alt="Original flow comparison" style="max-width:100%;width:100%" />
+        </div>
+        <p class="dc-overline" style="margin-top:56px">Modified Flow</p>
+        <div class="img" style="text-align:left;margin-left:0;margin-right:auto;margin-top:0">
+          <img loading="lazy" decoding="async" src="../images/dc3-modified.png" alt="Modified flow" style="max-width:100%;width:100%" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. L1: Results -->
+    <section id="results" class="container">
+      <h2 class="l1">Results</h2>
+      <p class="p">I'm excited to see a significant increase in the number of people using efficient rich text features in their daily work.</p>
+
+      <!-- Quantitative metric cards -->
+      <div class="results-metrics">
+        <div class="results-metric">
+          <p class="results-metric__sub">Quantitative</p>
+          <p class="results-metric__value">+84%</p>
+          <p class="results-metric__label">UV of rich text editor</p>
+          <p class="results-metric__note">30-day window post-launch vs. prior 30 days</p>
+        </div>
+        <div class="results-metric">
+          <p class="results-metric__sub">Quantitative</p>
+          <p class="results-metric__value">+126%</p>
+          <p class="results-metric__label">Number of rich-text messages sent</p>
+          <p class="results-metric__note">Measured across 100M+ enterprise DAU</p>
+        </div>
+      </div>
+
+      <!-- Qualitative feedback -->
+      <div class="results-qual">
+        <p class="results-qual__label">Qualitative Feedback</p>
+        <div class="results-quotes">
+          <div class="results-quote">
+            <span class="results-quote__mark" aria-hidden="true">"</span>
+            <p class="results-quote__text">Mistapping is no longer frustrating.</p>
+            <p class="results-quote__cite">— DingTalk user</p>
+          </div>
+          <div class="results-quote">
+            <span class="results-quote__mark" aria-hidden="true">"</span>
+            <p class="results-quote__text">I knew how to send rich text messages right now.</p>
+            <p class="results-quote__cite">— DingTalk user</p>
+          </div>
+        </div>
+        <ul class="results-facts">
+          <li><span class="results-facts__icon">✓</span> 15/15 people passed the test without mistapping</li>
+          <li><span class="results-facts__icon">✓</span> Users can understand the value of rich text feature in a natural way</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 9. L1: Envisions and Reflections -->
+    <section id="envisions" class="container">
+      <h2 class="l1">Envisions and Reflections</h2>
+      <p class="p" style="font-weight:400">
+        At the current stage of the product, we don't support forwarding, copying, and pasting rich text. So we still have a long way to go. In the near future, I hope to be able to <strong>anticipate user behavior</strong> and <strong>naturally leverage guidance on their critical path</strong>.
+      </p>
+
+      <div class="two-col" style="max-width:900px;margin-left:auto;margin-right:auto;align-items:end">
+        <div class="two-col__item">
+          <img loading="lazy" decoding="async" src="../images/scenario1.gif" alt="Scenario 1: adding description when sending images (animated)" style="max-width:220px;border-radius:24px;box-shadow:0 12px 32px -8px rgba(15,24,33,.18),0 4px 12px -4px rgba(15,24,33,.10)" />
+          <h4 class="two-col__title" style="margin-top:24px">Scenario1</h4>
+          <p class="two-col__caption">People usually have potential needs of adding description when sending images. So I choose to proactively adapt to users' behavior.</p>
+        </div>
+        <div class="two-col__item">
+          <img loading="lazy" decoding="async" src="../images/scenario2.png" alt="Scenario 2: copy-pasting rich text guidance" style="max-width:220px;border-radius:24px;box-shadow:0 12px 32px -8px rgba(15,24,33,.18),0 4px 12px -4px rgba(15,24,33,.10)" />
+          <h4 class="two-col__title" style="margin-top:24px">Scenario2</h4>
+          <p class="two-col__caption">When DingTalk does not support copy-pasting rich text messages, it is better to guide on sending rich text messages than to notify people with an error toast.</p>
+        </div>
+      </div>
+
+      <div class="reflections">
+        <p>Reflecting on the entire design journey, I experienced confusion about the mystery of the problem, doubts about project scope, pressure to lead the design direction and joy of receiving great feedback.</p>
+
+        <div class="reflections__grid">
+          <div class="reflection-block">
+            <p class="reflection-block__num">01</p>
+            <h4>Good products are a whole-organization effort</h4>
+            <p>Initiating a project is never easy. As I learned more about my customers, the scope of the project changed. Therefore, I <strong>suggested my PM partner to expand the scope</strong> as a more serious problem presented to us. However, we are faced with technical constraints. Aligning with all the partners and discussing about technical effort on each option, we successfully ship the entire project with lightweight design and minimal effort.</p>
+          </div>
+
+          <div class="reflection-block">
+            <p class="reflection-block__num">02</p>
+            <h4>Communicate more = understand more</h4>
+            <p>Resources are never enough. But <strong>research is always necessary, even informal interviews are insightful</strong>. Communicating about my projects and getting feedback from other people also help me understand the historical reasons and avoid unnecessary effort.</p>
+          </div>
+
+          <div class="reflection-block">
+            <p class="reflection-block__num">03</p>
+            <h4>Designer's imperative</h4>
+            <p>Designers generally don't make decisions based on opinion or what someone 'likes'. The true magic of today's designer is in how they can <strong>interpret implicit and explicit data, and thoughtfully transform that information into design solutions</strong>.</p>
+          </div>
+
+          <div class="reflection-block">
+            <p class="reflection-block__num">04</p>
+            <h4>Designer's impact</h4>
+            <p>In order to deliver exceptional experiences, designers will need to help our organizations transform themselves into being <strong>empathy driven and customer focused</strong> in all they do. I will continue communicate the benefits of empathy-inspired design to executives and decision makers, immersing them in the process.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark Quote box — editorial closing statement -->
+      <div class="quote-box">
+        <p>Design is a step-by-step process of approaching the truth. Designers need to get in and out from problems throughout defining journey, so don't take anything for granted.</p>
+      </div>
+    </section>
+
+    <!-- 10. Closing -->
+    <section class="closing">
+      <h2>Thanks!</h2>
+      <img loading="lazy" decoding="async" src="../images/avatar-thanks.png" alt="Shilue avatar" style="width:auto;max-width:200px" />
+      <div><a href="../index.html">Back to home</a></div>
+    </section>
+
+  </main>
+
+  
+      <nav class="next-case" aria-label="Case navigation">
+        <a href="../index.html" class="next-case__back">← All projects</a>
+        <a href="homepage-design.html" class="next-case__next">Next case: LinkedIn Student Mini-program →</a>
+      </nav>
+
+  <footer class="site-footer" id="footer">
+    <p class="wow-sig">SHILUE &nbsp;·&nbsp; 2026</p>
+  </footer>
+
+  <script>
+    (function () {
+      // Header glass on scroll
+      const header = document.querySelector('.site-header');
+      let scrolled = false;
+      const onScroll = () => {
+        const isScrolled = window.scrollY > 16;
+        if (isScrolled !== scrolled) { scrolled = isScrolled; header.classList.toggle('is-scrolled', scrolled); }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Side nav active section highlight
+      const sections = document.querySelectorAll('main section[id]');
+      const dots = document.querySelectorAll('.section-nav__link[data-section]');
+      const updateActiveSection = () => {
+        const scrollPos = window.scrollY + window.innerHeight * 0.4;
+        let activeId = '';
+        sections.forEach(s => { if (s.offsetTop <= scrollPos) activeId = s.id; });
+        dots.forEach(d => { const isActive = d.dataset.section === activeId; d.classList.toggle('is-active', isActive); if (isActive) d.setAttribute('aria-current', 'location'); else d.removeAttribute('aria-current'); });
+      };
+      window.addEventListener('scroll', updateActiveSection, { passive: true });
+      updateActiveSection();
+
+      // Circular scroll progress + back-to-top button
+      const sectionNav = document.querySelector('.section-nav');
+      const scrollBtn = document.querySelector('.scroll-progress');
+      const progressRing = document.querySelector('.scroll-progress__fill');
+      const updateProgress = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+        progressRing.style.strokeDashoffset = 100 - progress;
+        scrollBtn.classList.toggle('is-visible', scrollTop > 400);
+      };
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+      scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Combined nav behavior with asymmetric thresholds (Uber/Instagram feel):
+      //  · Hero/intro area: main header always visible, section nav in natural flow
+      //  · Content area (section nav stuck):
+      //      - Scroll DOWN 20px accumulated → header hides
+      //      - Scroll UP  3px accumulated → header reveals (fast intent response)
+      //      - Any direction reset resets the OTHER accumulator (fresh intent)
+      let lastY = window.scrollY;
+      let downAccum = 0, upAccum = 0;
+      let wasStuck = false;
+      const HIDE_THRESHOLD = 20;   // scroll DOWN before hiding (stability)
+      const SHOW_THRESHOLD = 3;    // scroll UP before showing (responsiveness)
+      let ticking = false;
+      const checkNav = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const currentY = window.scrollY;
+          const diff = currentY - lastY;
+          const navTop = sectionNav.getBoundingClientRect().top;
+          const stickyOffset = parseFloat(getComputedStyle(sectionNav).top) || 0;
+          const isStuck = navTop <= stickyOffset + 1;
+
+          sectionNav.classList.toggle('is-stuck', isStuck);
+
+          if (!isStuck) {
+            // In hero/intro area — always show main header, reset accumulators
+            header.classList.remove('is-hidden');
+            downAccum = 0;
+            upAccum = 0;
+          } else if (!wasStuck) {
+            // Just BECAME stuck — immediately hide header (user has clearly scrolled into content)
+            header.classList.add('is-hidden');
+            downAccum = 0;
+            upAccum = 0;
+          } else {
+            // Continue in stuck state — accumulate scroll distance by direction
+            if (diff > 0) {
+              downAccum += diff;
+              upAccum = 0;
+              if (downAccum > HIDE_THRESHOLD) header.classList.add('is-hidden');
+            } else if (diff < 0) {
+              upAccum += -diff;
+              downAccum = 0;
+              if (upAccum > SHOW_THRESHOLD) header.classList.remove('is-hidden');
+            }
+          }
+
+          // Keep section nav positioned to make room for main header when it's visible
+          sectionNav.classList.toggle('below-header', !header.classList.contains('is-hidden'));
+          wasStuck = isStuck;
+
+          lastY = currentY;
+          ticking = false;
+        });
+      };
+      window.addEventListener('scroll', checkNav, { passive: true });
+      checkNav();
+    })();
+  </script>
+
+<script>
+  // Prefetch same-origin html links on hover — near-instant navigation
+  (function(){
+    var prefetched = new Set();
+    document.addEventListener('mouseover', function(e){
+      var link = e.target.closest && e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.href;
+      if (!href || prefetched.has(href)) return;
+      // Only same-origin html
+      try { var u = new URL(href, location.href); if (u.origin !== location.origin) return; } catch(e){ return; }
+      if (!/\.html($|\?|#)/.test(u.pathname) && u.pathname !== '/' && !u.pathname.endsWith('/')) return;
+      var l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = href; l.as = 'document';
+      document.head.appendChild(l);
+      prefetched.add(href);
+    }, { passive: true });
+  })();
+</script>
+
+<script>
+  // Case-study scroll reveal — auto-tag major content blocks, then observe
+  (function(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var selectors = [
+      '.container > h1.l1','.container > h2.l1','.container > h3.l2','.container > h4.l3',
+      '.container > .p','.container > .p--muted','.container > p.p',
+      '.container > .img','.container > .img--wide','.container > .img--full',
+      '.container > .callout-blue','.container > .why-container',
+      '.container > .step-block','.container > .challenge-block',
+      '.container > .two-col','.container > .text-img',
+      '.container > .uc-block','.container > .principles','.container > .design-goal-card',
+      '.container > .findings-grid','.container > .results-flow','.container > .results-metrics','.container > .results-qual',
+      '.container > .framework-viz','.container > .reflections','.container > .reflections__group',
+      '.container > .quote-box','.container > .highlight-center',
+      '.alts-wrap','.soc-wrap',
+      '.container > .cs-meta-box','.container > .cs-cover',
+      '.container > .recap-card','.container > .gray-block',
+      '.container > .dc-solution',
+    ];
+    var els = document.querySelectorAll(selectors.join(','));
+    if (!els.length) return;
+    els.forEach(function(el){ el.classList.add('cs-reveal'); });
+    if (!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+
+
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var b = document.createElement('div');
+  b.className = 'wow-progress';
+  document.body.appendChild(b);
+  function u(){ var h = document.documentElement.scrollHeight - window.innerHeight; b.style.width = (h>0 ? Math.min(100,window.scrollY/h*100) : 0) + '%'; }
+  window.addEventListener('scroll', u, { passive: true });
+  u();
+})();
+</script>
+
+</body>
+</html>

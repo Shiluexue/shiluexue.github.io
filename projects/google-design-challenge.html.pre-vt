@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoReport — Google Design Challenge | Shilue's Portfolio</title>
+  <meta name="description" content="An on-campus facility issue reporting platform designed for UT Austin students. Google Design Challenge — 7 days." />
+  <link rel="icon" type="image/png" href="../images/avatar-header.png" />
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="../index.html" class="brand" aria-label="Shilue's Portfolio home">
+        <span class="brand-avatar"><img class="brand-avatar__default" src="../images/avatar-header.png" alt="Shilue logo" /><img class="brand-avatar__hover" src="../images/avatar-header-hover.png" alt="" /></span>
+        <span>Shilue's Portfolio</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="../index.html" class="is-active">Projects</a>
+        <a href="../playgrounds/index.html">Playgrounds</a>
+        <a href="../resume.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="cs-hero">
+      <img src="../images/efcc58_f4458625d190416b938e36f65bb77841~mv2.png" alt="CoReport app cover design" />
+    </section>
+
+    <div class="cs-intro">
+      <p class="cs-label">Google Design Challenge · 7 Days · Passed</p>
+      <h1 class="cs-title">CoReport</h1>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><strong>Challenge</strong><span>Google Design Challenge</span></div>
+        <div class="cs-meta-item"><strong>Duration</strong><span>7 days</span></div>
+        <div class="cs-meta-item"><strong>Result</strong><span>✓ Passed</span></div>
+        <div class="cs-meta-item"><strong>Tags</strong><span>Mobile · Product Design · Research</span></div>
+      </div>
+      <p class="cs-overview">
+        UT Austin students rarely report facility issues outside dormitories, despite real problems existing across campus. CoReport is an online platform that allows students to report on-campus facility issues — connecting students, building managers, and maintenance staff into one efficient workflow.
+      </p>
+    </div>
+
+    <div class="cs-body">
+
+      <section class="cs-section">
+        <h2>The Opportunity</h2>
+        <p>After interviewing UT Austin library managers, I discovered the campus lacked a dedicated maintenance reporting system that students could actually use. The existing tools were either staff-only or required too much manual effort to fill out accurately.</p>
+        <figure class="cs-img">
+          <img src="../images/efcc58_7555d6a1fe234222bed7411cdace2405~mv2.png" alt="Campus context and opportunity space" />
+        </figure>
+        <figure class="cs-img cs-img--narrow">
+          <img src="../images/efcc58_69affe95ae9b436492ee79763dfa3fc1~mv2.png" alt="Problem space overview" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Research</h2>
+
+        <h3>Competitive Analysis</h3>
+        <p>I examined three existing systems:</p>
+        <ul>
+          <li><strong>UT online maintenance request website</strong> — too much information required manually</li>
+          <li><strong>WORQS</strong> — staff-only platform, inaccessible to students</li>
+          <li><strong>Spiceworks</strong> — maintenance team tool with insufficient location specificity</li>
+        </ul>
+        <figure class="cs-img">
+          <img src="../images/efcc58_976cc96a66824a0796a0c54352962c81~mv2.png" alt="Competitive analysis matrix" />
+        </figure>
+
+        <h3>User Research</h3>
+        <p>5 contextual interviews with students (3 dorm-focused, 2 campus-focused) + 2 staff stakeholder interviews (IT coordinator, library building manager).</p>
+        <figure class="cs-img">
+          <img src="../images/efcc58_ee3a70beb0be4ebb959d4953c3755046~mv2.png" alt="User research synthesis" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_258fcd5fbec043a18fc8d62c895a8bb0~mv2.png" alt="Student user journey map" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_cff5f038bfd3464a8a2a2dbf4130d374~mv2.png" alt="Staff user journey map" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Key Pain Points</h2>
+
+        <h3>For Students</h3>
+        <ul>
+          <li>Having to travel to front desks just to report an issue</li>
+          <li>No feedback on maintenance timelines or outcomes</li>
+          <li>Difficulty finding the right reporting channel in unfamiliar buildings</li>
+          <li>Can't see if someone else already reported the same issue</li>
+        </ul>
+
+        <h3>For Maintenance Staff</h3>
+        <ul>
+          <li>Vague, incomplete problem descriptions</li>
+          <li>Inaccurate location information</li>
+          <li>False reports (e.g., computers that are just sleeping, not broken)</li>
+          <li>Redundant submissions for the same issue</li>
+        </ul>
+
+        <figure class="cs-img">
+          <img src="../images/efcc58_1d776f8c10b242c98b8fed96393d2a56~mv2.png" alt="Original reporting scenario" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_9455f094f27c41b3a46cfdc19fe39fbd~mv2.png" alt="Core problems identified" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_83e5def956a54cbb8d4e182409758f2d~mv2.png" alt="What matters to each stakeholder" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Design Strategy</h2>
+        <p>I reframed the solution around a three-stage verification workflow: students identify issues → building managers verify and add professional descriptions → maintenance receives accurate, actionable information.</p>
+
+        <h3>Location Input</h3>
+        <p>GPS/IPS indoor positioning combined with QR codes for precise device identification — solving the biggest pain point of inaccurate location data.</p>
+
+        <h3>Problem Description</h3>
+        <p>Pre-populated common issues tailored by location, reducing student effort while enabling manager verification before the ticket reaches maintenance.</p>
+
+        <figure class="cs-img">
+          <img src="../images/efcc58_fe001ff91ef24974b23fbbaf716a70f0~mv2.png" alt="Ideation process" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_2212df8846964efd8563385cb77b7d82~mv2.png" alt="Design strategy overview" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Design Iterations</h2>
+
+        <h3>Iteration 1</h3>
+        <p>Initial concept combining simplified reporting with reward systems — points and gamification for active reporters.</p>
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_a5a6ec56524e4c90baf74de8c5799ac6~mv2.png" alt="Iteration 1 concept" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_09367d14e48d49dda27e7bf485327679~mv2.png" alt="Iteration 1 alternate" />
+          </figure>
+        </div>
+        <figure class="cs-img">
+          <img src="../images/efcc58_12517286dc024275afeabd7bebefc773~mv2.png" alt="Reward system exploration" />
+        </figure>
+
+        <h3>Iteration 2</h3>
+        <p>Replaced extrinsic motivation (rewards) with intrinsic motivation — location-based common problem suggestions made reporting faster and more accurate without gamification overhead.</p>
+        <div class="cs-img-grid cs-img-grid--2">
+          <figure>
+            <img src="../images/efcc58_a8e61cb029b644febb43453426bdc3bf~mv2.png" alt="Iteration 2 — simplified reporting" />
+          </figure>
+          <figure>
+            <img src="../images/efcc58_91e8c883c1184e40bf44e9ab25403d19~mv2.png" alt="Iteration 2 — location suggestions" />
+          </figure>
+        </div>
+        <figure class="cs-img">
+          <img src="../images/efcc58_c19f103fa88848b2845d4c12c0a02ae1~mv2.png" alt="Iteration 2 complete flow" />
+        </figure>
+
+        <h3>Iteration 3</h3>
+        <p>Addressed the multiple-identical-devices problem by requiring QR code scanning — eliminates ambiguity when there are dozens of identical computers in a lab.</p>
+        <figure class="cs-img">
+          <img src="../images/efcc58_e08aa18c28234b2ab549dae10dcbcca9~mv2.png" alt="QR code scanning solution" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_2c9796aeee2d41939aa0cc97bf8c43bf~mv2.png" alt="Iteration 3 flow" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Final Design</h2>
+        <p>Three primary workflows:</p>
+        <ol>
+          <li>Student reporting with automatic location detection</li>
+          <li>Special case handling (wrong location, duplicates, multiple identical devices)</li>
+          <li>Building manager verification and professional notation</li>
+        </ol>
+
+        <figure class="cs-img">
+          <img src="../images/efcc58_e01039348f2c49e59b61f909274ee8a1~mv2.png" alt="Current reporting scenario with CoReport" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_f35ec47b793747a7a0fceafb0fb3b7a0~mv2.png" alt="Student reporting flow" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_54ce3928afe242659ccd03a73c1b6ca6~mv2.png" alt="High-fidelity screens — student view" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_6c7e54b006d34d8c9762d89305e551dd~mv2.png" alt="High-fidelity screens — manager view" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_da07762d9e174ab0a151576d236915b0~mv2.png" alt="Final screen — report submission" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_3eef3d34f3184f568836bca979759fe0~mv2.png" alt="Final screen — status tracking" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_5a3accad187e4fb59f5c19b736154c32~mv2.png" alt="Final screen — building manager dashboard" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_714526e775da44e4ac023a108e3f8056~mv2.png" alt="Final screen — QR code wireframe flow" />
+        </figure>
+        <figure class="cs-img cs-img--narrow">
+          <img src="../images/efcc58_89ac2c97d0a4457292479b10189f7e02~mv2.png" alt="Complete design overview — phone screen" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_47609bc919b94075b2615a4ab6dca8ae~mv2.png" alt="Design system components" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_ef475dbb711e44ffa2f72864073d16a5~mv2.png" alt="Final prototype screens" />
+        </figure>
+        <figure class="cs-img">
+          <img src="../images/efcc58_7ad3e48bdfb34b3d867f585052c3f6d7~mv2.png" alt="Final design detail" />
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Future Steps</h2>
+        <ul>
+          <li>Task-based usability testing with defined success metrics</li>
+          <li>MVP breakdown prioritizing user value versus implementation ease</li>
+          <li>Exploration of low-cost, non-digital alternatives for edge cases</li>
+          <li>Enhanced staff engagement integration for real-time status updates</li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2022 Designed by Shilue Xue</p>
+    <nav class="footer-nav">
+      <a href="../index.html">← All Projects</a>
+      <a href="platano.html">Next Project →</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

@@ -945,6 +945,40 @@ main section[id]{scroll-margin-top:140px}
   gap:20px;
   align-items:start;
 }
+
+/* --- fw--two: 2-column variant for the second decision --------------------- */
+.fw--two{
+  grid-template-columns:repeat(2, 260px) !important;
+  justify-content:center !important;
+  column-gap:48px !important;
+}
+/* Fixed-height AI block — truncated content + View more button */
+.fw-zone--fixed{
+  max-height:130px;
+  overflow:hidden;
+  position:relative;
+  padding-bottom:34px; /* room for the sticky button */
+}
+.fw-viewmore{
+  position:absolute; left:50%; bottom:8px;
+  transform:translateX(-50%);
+  background:#fff;
+  color:var(--c-blue);
+  border:1px solid rgba(10,102,194,.20);
+  border-radius:999px;
+  padding:5px 14px;
+  font-size:9px; font-weight:800; letter-spacing:.06em;
+  font-family:inherit;
+  box-shadow:0 2px 6px rgba(15,24,33,.06);
+  cursor:default;
+}
+.fw-zone--fixed::before{
+  /* soft fade above the button, hinting the truncation */
+  content:"";
+  position:absolute; left:0; right:0; bottom:34px; height:22px;
+  background:linear-gradient(to bottom, rgba(239,244,251,0), #EFF4FB);
+  pointer-events:none;
+}
 .op-phase{
   display:flex; flex-direction:column; gap:16px;
   position:relative;
@@ -1698,10 +1732,12 @@ main section[id]{scroll-margin-top:140px}
 
 /* ---- 04 · framework wireframes ---- */
 .fw{
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:32px;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 260px));
+  justify-content:space-between;
+  column-gap:32px;
   margin:26px 0 8px;
-  padding:36px 40px 40px;
+  padding:44px 40px 48px;
   background:var(--c-container-bg);
   border-radius:20px;
   align-items:start;
@@ -2079,7 +2115,7 @@ main section[id]{scroll-margin-top:140px}
 
 /* ---- Framework comparison table ---------------------------------------- */
 .fwt{
-  margin:36px 0 12px;
+  margin:26px 0 8px;
   padding:36px 40px 32px;
   background:var(--c-container-bg);
   border-radius:20px;
@@ -2095,6 +2131,9 @@ main section[id]{scroll-margin-top:140px}
   grid-template-columns:170px 1fr 1fr 1fr;
   gap:32px;
   align-items:baseline;
+}
+.fwt__grid--two .fwt__head, .fwt__grid--two .fwt__row{
+  grid-template-columns:200px 1fr 1fr;
 }
 .fwt__head{
   padding-bottom:14px;
@@ -2147,6 +2186,48 @@ main section[id]{scroll-margin-top:140px}
   content:""; display:inline-block; vertical-align:middle;
   width:6px; height:6px; border-radius:50%; background:var(--c-status-limit);
   margin-right:8px; margin-top:-2px;
+}
+
+
+
+/* ---- Pattern explanation (two-item side-by-side intro block) ------------ */
+.pattern{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 440px));
+  justify-content:center;
+  gap:48px;
+  margin:26px 0 0;
+  padding:36px 40px 32px;
+  background:var(--c-container-bg);
+  border-radius:20px;
+}
+.pattern__item{
+  display:flex; flex-direction:column; gap:8px;
+  padding-left:20px;
+  border-left:2px solid rgba(15,24,33,.14);
+}
+.pattern__k{
+  margin:0;
+  font-size:15px; font-weight:800; letter-spacing:-.005em;
+  color:var(--c-text-deep);
+}
+.pattern__v{
+  margin:0;
+  font-size:14px; line-height:1.6; color:var(--c-body);
+}
+.pattern__ref{
+  margin:6px 0 0;
+  font-size:12px; font-weight:600; color:var(--c-body); opacity:.65;
+  letter-spacing:.005em;
+}
+.pattern__ref-k{
+  display:inline-block;
+  font-size:10px; font-weight:800; letter-spacing:.20em;
+  text-transform:uppercase; color:var(--c-body); opacity:.55;
+  margin-right:8px;
+}
+@media (max-width:800px){
+  .pattern{ grid-template-columns:1fr; gap:20px; }
 }
 
 @media (max-width:900px){
@@ -3782,40 +3863,26 @@ main section[id]{scroll-margin-top:140px}
             </div>
 
             <div class="fwt__row">
-              <span class="fwt__k">AI role in the experience</span>
-              <span class="fwt__v">
-                <strong>AI becomes the entire experience.</strong>
-                Maximizes AI&rsquo;s ability to synthesize, but removes the existing Search journey.
+              <span class="fwt__k">Who leads on complex queries</span>
+              <span class="fwt__v fwt__v--good">
+                <strong>AI leads.</strong>
+                On queries this complex, AI is the value &mdash; and here it holds first position.
               </span>
               <span class="fwt__v fwt__v--bad">
-                <strong>AI becomes an optional layer.</strong>
-                Not the primary experience &mdash; limits its ability to guide complex decisions.
+                <strong>AI is demoted to an optional layer.</strong>
+                Search is on top; AI has to be pulled up. Its importance is understated.
               </span>
               <span class="fwt__v fwt__v--good">
-                <strong>AI becomes the primary decision-support layer.</strong>
-                AI leads the experience while Search remains available for exploration and action.
+                <strong>AI leads, Search supports.</strong>
+                AI holds first position for the decision; Search stays available for exploration and action.
               </span>
             </div>
 
             <div class="fwt__row">
               <span class="fwt__k">Search efficiency</span>
-              <span class="fwt__v fwt__v--bad">Users wait on a blank page before accessing results.</span>
-              <span class="fwt__v fwt__v--good">Search results remain immediately available.</span>
-              <span class="fwt__v fwt__v--good">Search results remain available while the AI answer generates.</span>
-            </div>
-
-            <div class="fwt__row">
-              <span class="fwt__k">Conversion &amp; supply exposure</span>
-              <span class="fwt__v fwt__v--bad">Products, hotels and posts get no exposure during the answer.</span>
-              <span class="fwt__v">Exposure is preserved, but the answer sits in a parallel destination.</span>
-              <span class="fwt__v fwt__v--good">Exposure preserved. The answer supports the decision; the feed supports the action.</span>
-            </div>
-
-            <div class="fwt__row">
-              <span class="fwt__k">Experience clarity</span>
-              <span class="fwt__v fwt__v--good">One destination, one interaction &mdash; but no fallback if the answer disappoints.</span>
-              <span class="fwt__v fwt__v--bad">Two competing surfaces for the same query.</span>
-              <span class="fwt__v fwt__v--good">One journey, enhanced by AI at the top.</span>
+              <span class="fwt__v fwt__v--bad">Users wait on a blank page while AI generates.</span>
+              <span class="fwt__v">Results are there, but AI is out of the way &mdash; Search efficiency is preserved, AI value isn&rsquo;t felt.</span>
+              <span class="fwt__v fwt__v--good">Results appear immediately while the AI answer streams on top &mdash; neither is delayed.</span>
             </div>
           </div>
         </div>
@@ -3826,32 +3893,116 @@ main section[id]{scroll-margin-top:140px}
           <p class="decision__body">AI takes position one as the information-synthesis layer; the results feed stays completely intact underneath it. Search keeps immediate access, exploration and the paths to book &mdash; and it carries <strong>the five seconds before the answer exists.</strong></p>
         </div>
 
-        <div class="cons"><p class="cons__t">Fixed height, or the full answer in place?</p></div>
+        <h3 class="sec-claim" style="margin-top: var(--gap-sub); margin-bottom: var(--bind-claim);">Fixed height or full answer expansion?</h3>
 
-        <p class="p">There was no settled pattern to copy. The market had split into two camps, and neither had been running long enough to call a winner &mdash; Google, RED and WeChat pinned the answer into a <strong class="dark">fixed-height block</strong> above results; Quark and Baidu let it <strong class="dark">stream in place</strong> and push the page down as it went.</p>
+        <p class="p">After choosing the Hybrid AI + Search framework, the next question was <strong class="dark">how much space AI should take on the page.</strong> Two patterns emerged:</p>
 
-        <div class="ph">[ Industry scan &middot; early 2025 ]</div>
+        <div class="pattern">
+          <div class="pattern__item">
+            <p class="pattern__k">Fixed-height AI block</p>
+            <p class="pattern__v">AI is placed in a predefined container above Search results. It keeps the page structure stable and prevents Search feeds from being pushed down, but the fixed space can limit how much of a complex answer is presented.</p>
+            <p class="pattern__ref"><span class="pattern__ref-k">Adopted by</span> Google &middot; RED &middot; WeChat</p>
+          </div>
+          <div class="pattern__item">
+            <p class="pattern__k">Full answer expansion</p>
+            <p class="pattern__v">AI starts compact and expands as it generates. It allows the answer to fully unfold and keeps Search feeds visible earlier during generation, but the growing module continuously pushes content below and affects page stability.</p>
+            <p class="pattern__ref"><span class="pattern__ref-k">Adopted by</span> Quark &middot; Baidu</p>
+          </div>
+        </div>
 
-        <div class="trade" aria-label="Fixed-height block compared with full output in place">
-          <div class="trade__head">
-            <p class="trade__k">&nbsp;</p>
-            <p class="trade__opt">Fixed-height block<span>Considered</span></p>
-            <p class="trade__opt trade__opt--pick">Full answer, in place<span>Shipped</span></p>
+        <div class="fw fw--two" aria-label="Fixed-height vs full expansion — two page structures">
+          <!-- OPTION A · Fixed-height -->
+          <div class="fw-opt">
+            <span class="fw-opt__label">Option A</span>
+            <p class="fw-opt__name">Fixed-height AI block</p>
+            <div class="fw-phone">
+              <span class="fw-island"></span>
+              <div class="fw-screen">
+                <div class="fw-bar"><span class="fw-bar__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span></div>
+                <div class="fw-zone fw-zone--ai fw-zone--fixed">
+                  <span class="fw-tag">AI answer</span>
+                  <div class="fw-line fw-line--m"></div>
+                  <div class="fw-line"></div>
+                  <div class="fw-line fw-line--s"></div>
+                  <div class="fw-line fw-line--m"></div>
+                  <button class="fw-viewmore" type="button">View more</button>
+                </div>
+                <div class="fw-zone fw-zone--results fw-zone--grow">
+                  <span class="fw-tag">Search results</span>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                </div>
+              </div>
+              <span class="fw-home"></span>
+            </div>
           </div>
-          <div class="trade__row">
-            <p class="trade__k">The answer</p>
-            <p class="trade__v">Cut to fit the box. The traveler judges AI on a fragment.</p>
-            <p class="trade__v trade__v--good">Complete, with follow-up questions after it to carry the next step.</p>
+
+          <!-- OPTION B · Full expansion (reuse Option C animation) -->
+          <div class="fw-opt fw-opt--pick">
+            <span class="fw-opt__label">Option B &nbsp;&middot;&nbsp; selected</span>
+            <p class="fw-opt__name">Full answer expansion</p>
+            <div class="fw-phone fw-phone--anim" aria-label="AI streams in on top; results remain browsable below">
+              <span class="fw-island"></span>
+              <div class="fw-screen">
+                <div class="fw-bar"><span class="fw-bar__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span></div>
+                <div class="fw-zone fw-zone--ai fw-zone--anim">
+                  <div class="fw-ai-load">
+                    <span class="fw-ai-load__spinner" aria-hidden="true"></span>
+                    <span class="fw-ai-load__label">Searching for references&hellip;</span>
+                  </div>
+                  <div class="fw-ai-stream">
+                    <span class="fw-tag">AI answer</span>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim fw-line--m"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim fw-line--m"></div>
+                    <div class="fw-line fw-line--anim fw-line--s"></div>
+                    <div class="fw-line fw-line--anim fw-line--m"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim fw-line--m"></div>
+                    <div class="fw-line fw-line--anim fw-line--s"></div>
+                    <div class="fw-line fw-line--anim fw-line--m"></div>
+                  </div>
+                </div>
+                <div class="fw-zone fw-zone--results fw-zone--grow">
+                  <span class="fw-tag">Search results</span>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                </div>
+              </div>
+              <span class="fw-home"></span>
+            </div>
           </div>
-          <div class="trade__row">
-            <p class="trade__k">Feed exposure</p>
-            <p class="trade__v">Lower while it loads &mdash; reserved space showing nothing.</p>
-            <p class="trade__v trade__v--good">Higher while it loads &mdash; the feed is what fills the screen.</p>
-          </div>
-          <div class="trade__row">
-            <p class="trade__k">Page stability</p>
-            <p class="trade__v trade__v--good">Stable. The layout never moves.</p>
-            <p class="trade__v trade__v--bad">Moves. The page grows as tokens arrive.</p>
+        </div>
+
+        <div class="fwt" aria-label="Fixed-height vs full expansion comparison">
+          <p class="fwt__caption">Decision criteria</p>
+          <div class="fwt__grid fwt__grid--two">
+            <div class="fwt__head">
+              <span class="fwt__h">&nbsp;</span>
+              <span class="fwt__h fwt__h--opt">Fixed-height<em>Considered</em></span>
+              <span class="fwt__h fwt__h--opt fwt__h--pick">Full expansion<em>Selected</em></span>
+            </div>
+
+            <div class="fwt__row">
+              <span class="fwt__k">AI answer value</span>
+              <span class="fwt__v fwt__v--bad">Complex answers get cut to fit &mdash; users judge AI on a fragment.</span>
+              <span class="fwt__v fwt__v--good">The answer arrives complete, giving AI a fair chance to prove its value.</span>
+            </div>
+
+            <div class="fwt__row">
+              <span class="fwt__k">Feed exposure</span>
+              <span class="fwt__v fwt__v--bad">Reserved space sits empty while AI generates &mdash; less feed on screen.</span>
+              <span class="fwt__v fwt__v--good">Compact at start; Search feed fills the screen while the answer writes.</span>
+            </div>
+
+            <div class="fwt__row">
+              <span class="fwt__k">Page stability</span>
+              <span class="fwt__v fwt__v--good">Layout never moves &mdash; predictable and calm.</span>
+              <span class="fwt__v fwt__v--bad">Page grows as tokens arrive; content below keeps shifting.</span>
+            </div>
           </div>
         </div>
 

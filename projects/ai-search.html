@@ -296,55 +296,217 @@ main section[id]{scroll-margin-top:140px}
 
 
 
-/* ============ AI Search — cover placeholder ============ */
-.cs-cover-placeholder{
-  width:100%; aspect-ratio:1140/560;
+/* ============================================================================
+   AI Search — cover
+   ----------------------------------------------------------------------------
+   Brief: Trip.com brand field (site blue #2C61FE), site yellow #FFB400 as the
+   single accent, yellow dots / circles / large radii, phones as the subject.
+   Thesis made literal: the AI answer overlaps and sits IN FRONT OF the results
+   feed. Type stays all white — the yellow is spent on the full stop and the
+   dot cluster, not on highlighting a word.
+   ============================================================================ */
+/* Full-bleed: the blue field runs edge to edge, but the content stays inside the
+   page's 1140 column so the headline sits on the same left spine as the body
+   text further down. Height is set directly — an aspect-ratio would make this
+   absurdly tall on a wide monitor. */
+.cs-cover-art{
+  position:relative; width:100%;
+  height:clamp(430px, 44vw, 620px);
+  overflow:hidden;
   background:
-    radial-gradient(circle at 20% 25%, rgba(255,255,255,.85), rgba(255,255,255,0) 55%),
-    radial-gradient(circle at 82% 72%, rgba(255,214,102,.5), rgba(255,214,102,0) 55%),
-    linear-gradient(135deg, #E8F0FF 0%, #F5EEFF 45%, #FFF3E0 100%);
-  border-radius:16px;
+    radial-gradient(120% 140% at 84% 16%, #4C7BFF 0%, rgba(76,123,255,0) 58%),
+    linear-gradient(160deg, #2C61FE 0%, #2355E8 62%, #1B45C4 100%);
+  isolation:isolate;
+}
+.cs-cover-art__inner{
+  position:relative; z-index:2;
+  max-width:var(--container-width); height:100%; margin:0 auto;
+  display:grid; grid-template-columns:minmax(0,52%) minmax(0,48%);
+  align-items:center;
+}
+@media (max-width:1220px){
+  .cs-cover-art__inner{ padding:0 40px; }
+}
+
+/* --- background geometry: dot grid, soft circle, ring --- */
+.cs-cover-art__map,
+.cs-cover-art__circle,
+.cs-cover-art__ring{ position:absolute; pointer-events:none; z-index:0; }
+/* The brand field's dots aren't an abstract grid — they trace a world map.
+   Africa/Europe sit behind the type, the Pacific runs out under the phones. */
+.cs-cover-art__map{
+  inset:0;
+  background-image:url('../images/dotmap.png');
+  background-repeat:no-repeat;
+  background-position:22% 42%;
+  background-size:auto 132%;
+  opacity:.15;
+  mask-image:linear-gradient(102deg,#000 0%,#000 44%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.22) 86%,transparent 100%);
+  -webkit-mask-image:linear-gradient(102deg,#000 0%,#000 44%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.22) 86%,transparent 100%);
+}
+.cs-cover-art__circle{
+  right:-6%; top:-30%; width:min(62%,700px); aspect-ratio:1;
+  border-radius:50%; background:rgba(255,255,255,.07);
+}
+.cs-cover-art__ring{
+  left:max(-7%, calc(50% - 640px)); bottom:-34%; width:min(34%,404px); aspect-ratio:1;
+  border-radius:50%; border:2px solid rgba(255,255,255,.10);
+}
+
+/* --- type block --- */
+/* Aligned to the page's content column, with a gutter so it never touches the
+   phones. */
+.cs-cover-art__copy{
+  position:relative; z-index:4;
+  padding:0 clamp(24px,3vw,40px) 0 0;
+  display:flex; flex-direction:column; align-items:flex-start;
+}
+/* The Trip.com wordmark stands in for a meta line. Its yellow dot is the same
+   mark that ends the headline, so the lockup and the sentence rhyme. */
+.cs-cover-art__logo{
+  height:clamp(24px,2.6vw,34px); width:auto; display:block;
+  margin:0 0 clamp(20px,3vw,34px);
+}
+.cs-cover-art__h{
+  font-family:var(--font-sans);
+  font-size:clamp(27px,4.6vw,54px); font-weight:700; line-height:1.07;
+  letter-spacing:-.028em; color:#fff; margin:0 0 clamp(14px,2.2vw,26px);
+}
+.cs-cover-art__h span{ display:block; }
+.cs-cover-art__h b{ color:#FFB400; font-weight:700; }
+.cs-cover-art__sub{
+  font-size:clamp(12.5px,1.55vw,19px); font-weight:400; line-height:1.55;
+  color:rgba(255,255,255,.82); margin:0; max-width:31ch;
+}
+
+/* six service circles — the breadth of business lines one search box fronts.
+   Kept small and unlabelled: the shapes are self-evident, and the cover's
+   weight belongs to the phones. */
+.cs-cover-svcs{
+  display:flex; flex-wrap:wrap; gap:clamp(9px,1.1vw,14px);
+  margin:clamp(22px,3vw,34px) 0 0; padding:0; list-style:none;
+}
+.cs-cover-svcs li{
+  width:clamp(32px,3.5vw,44px); aspect-ratio:1; border-radius:50%;
+  background:#fff; color:#2C61FE;
   display:flex; align-items:center; justify-content:center;
-  position:relative;
+  box-shadow:0 8px 18px -8px rgba(8,24,80,.38), 0 2px 5px -2px rgba(8,24,80,.20);
 }
-.cs-cover-placeholder__inner{
-  text-align:center; padding:0 40px; max-width:820px;
-  display:flex; flex-direction:column; align-items:center;
+.cs-cover-svcs svg{ width:54%; height:54%; display:block; }
+@media (max-width:860px){
+  .cs-cover-svcs{ gap:9px; margin-top:22px; }
+  .cs-cover-svcs li{ width:34px; }
 }
-.cs-cover-placeholder__eyebrow{
-  font-size:13px; font-weight:700; letter-spacing:.24em;
-  text-transform:uppercase; opacity:.5; margin-bottom:32px; color:#0F1821;
+
+/* --- phones: results feed behind + AI answer in front --- */
+/* No 3D foreshortening here on purpose. rotateY would skew the actual product
+   screenshots, and the UI has to read true in a portfolio. Depth is carried by
+   overlap, scale, stacked shadows and aerial perspective instead — none of which
+   touch the screens' proportions. */
+.cs-cover-art__stage{
+  position:relative; z-index:2; height:100%;
 }
-.cs-cover-placeholder__q-old{
-  font-size:22px; font-weight:500; font-style:italic;
-  opacity:.35; line-height:1.3; margin-bottom:10px; color:#0F1821;
+/* the surface the phones sit on — diffuse contact with the ground */
+.cs-cover-art__stage::before{
+  content:""; position:absolute; z-index:0; pointer-events:none;
+  left:-4%; right:-8%; top:64%; bottom:-30%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(4,14,46,.46) 0%, rgba(4,14,46,0) 72%);
+  filter:blur(18px);
 }
-.cs-cover-placeholder__arrow{
-  font-size:20px; opacity:.32; margin:2px 0 8px; color:#0F1821;
+.cs-cover-phone{
+  position:absolute;
+  background:#fff; border-radius:clamp(10px,1.9vw,22px);
+  padding:clamp(2px,.42vw,5px);
+  overflow:hidden; backface-visibility:hidden;
 }
-.cs-cover-placeholder__q-new{
-  font-size:56px; font-weight:900; line-height:1.08;
-  letter-spacing:-.02em; color:#0F1821; margin-bottom:36px;
+/* each frame's aspect-ratio equals its own source aspect, so cover neither
+   crops nor stretches — the screenshots keep their true proportions */
+.cs-cover-phone img{
+  width:100%; height:100%; object-fit:cover; object-position:top center;
+  border-radius:clamp(7px,1.5vw,17px); display:block;
 }
-.cs-cover-placeholder__q-new em{
-  font-style:normal;
-  color:#0A66C2;
+/* Light reads as coming from the upper right (see the radial highlight on the
+   field), so every shadow offsets down-and-left. Five stacked layers — tight
+   and dark through wide and faint — instead of one blur. */
+/* The long AI answer runs dead vertical and bleeds off both top and bottom, so it
+   reads as a continuing scroll rather than a screenshot cut short. Upright also
+   keeps it inside the content column: at this length a 5deg tilt swells the
+   bounding box by 70px and the right edge starts colliding with the column. */
+.cs-cover-phone--answer{
+  aspect-ratio:750/2300;
+  height:134%; left:41%; top:-15%;
+  z-index:2;
+  /* aerial perspective: the far object loses contrast and saturation */
+  filter:saturate(.88) brightness(.94);
+  box-shadow:
+    -3px 6px 8px rgba(6,18,54,.14),
+    -10px 20px 24px rgba(6,18,54,.17),
+    -24px 44px 56px rgba(6,18,54,.20);
 }
-.cs-cover-placeholder__stages{
-  font-size:14px; font-weight:700; opacity:.6;
-  letter-spacing:.05em; text-transform:uppercase; color:#0F1821;
-  margin-bottom:14px;
+
+/* ---- annotated screen: in front, with the TripGenie bar lifted off it ----
+   This wrapper carries the rotation and stays overflow-visible, so the callout
+   rides the same angle as the phone instead of being clipped by its corner. */
+.cs-cover-anno{
+  position:absolute; z-index:3;
+  aspect-ratio:750/1624;
+  height:84%; left:6%; top:9%;
+  transform:rotate(-4deg);
 }
-.cs-cover-placeholder__note{
-  position:absolute; bottom:16px; right:20px;
-  font-size:11px; font-weight:600; letter-spacing:.12em;
-  text-transform:uppercase; opacity:.35; color:#0F1821;
+.cs-cover-anno__screen{
+  position:absolute; inset:0;
+  background:#fff; border-radius:clamp(10px,1.9vw,22px);
+  padding:clamp(2px,.42vw,5px);
+  overflow:hidden;
+  box-shadow:
+    -1px 2px 3px rgba(6,18,54,.16),
+    -6px 11px 13px rgba(6,18,54,.18),
+    -14px 26px 30px rgba(6,18,54,.22),
+    -30px 52px 62px rgba(6,18,54,.26);
 }
-@media (max-width:768px){
-  .cs-cover-placeholder{ aspect-ratio:4/5; }
-  .cs-cover-placeholder__q-new{ font-size:32px; }
-  .cs-cover-placeholder__q-old{ font-size:15px; }
-  .cs-cover-placeholder__stages{ font-size:13px; }
+.cs-cover-anno__screen img{
+  width:100%; height:100%; object-fit:cover; object-position:top center;
+  border-radius:clamp(7px,1.5vw,17px); display:block;
+}
+/* the lifted bar — breaks the phone's left edge, landing on the 12–18% band
+   where the real TripGenie bar sits in the screenshot */
+.cs-cover-anno__callout{
+  position:absolute; z-index:4;
+  left:-15%; width:130%; top:11.2%;
+  background:#fff; border-radius:clamp(8px,1.1vw,13px);
+  padding:clamp(5px,.7vw,9px);
+  box-shadow:
+    0 2px 4px rgba(6,18,54,.14),
+    -4px 10px 18px rgba(6,18,54,.18),
+    -10px 26px 46px rgba(6,18,54,.24);
+}
+.cs-cover-anno__callout img{ width:100%; height:auto; display:block; border-radius:6px; }
+/* a faint blue veil deepens the phone that sits further back */
+.cs-cover-phone--answer::after{
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:rgba(30,72,190,.12); border-radius:inherit;
+}
+/* one specular sheen across the front glass — the only gloss on the page */
+.cs-cover-anno__screen::after{
+  content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+  background:linear-gradient(112deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.04) 26%, rgba(255,255,255,0) 46%);
+  border-radius:inherit;
+}
+
+@media (max-width:860px){
+  .cs-cover-art{ height:auto; min-height:0; }
+  .cs-cover-art__inner{
+    grid-template-columns:1fr; grid-template-rows:auto 1fr;
+    align-items:start; row-gap:0; height:auto; padding:0;
+  }
+  .cs-cover-art__copy{ padding:36px 26px 0; }
+  .cs-cover-art__stage{ height:clamp(340px,84vw,440px); }
+  .cs-cover-art__sub{ max-width:34ch; }
+  .cs-cover-art__map{ background-position:34% 30%; background-size:auto 78%; opacity:.16; }
+  .cs-cover-art__stage::before{ top:58%; }
+  .cs-cover-phone--answer{ height:112%; left:45%; top:-8%; }
+  .cs-cover-anno{ height:70%; left:1%; top:10%; transform:rotate(-4deg); }
+  .cs-cover-anno__callout{ left:-9%; width:118%; }
 }
 
 /* ============ Opening shifts list ============ */
@@ -967,20 +1129,10 @@ main section[id]{scroll-margin-top:140px}
 .fw-ai-stream--fixed{
   position:absolute; left:0; right:0; top:0; bottom:36px;
   padding:10px 14px 0;
-  display:flex; flex-direction:column; gap:9px;
-  opacity:0;
-  animation: fwStreamShow 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  display:flex; flex-direction:column; gap:7px;
+  visibility:hidden;   /* matches what fwStreamShow animates */
+  animation: fwStreamShow 6s steps(1,end) infinite;
 }
-/* Lines reveal sequentially within the fixed zone */
-.fw-ai-stream--fixed .fw-line--anim{ animation: fwLineIn 7.5s steps(1, end) infinite; }
-.fw-ai-stream--fixed .fw-line--anim:nth-of-type(1){ animation-delay:.05s; }
-.fw-ai-stream--fixed .fw-line--anim:nth-of-type(2){ animation-delay:.28s; }
-.fw-ai-stream--fixed .fw-line--anim:nth-of-type(3){ animation-delay:.51s; }
-.fw-ai-stream--fixed .fw-line--anim:nth-of-type(4){ animation-delay:.74s; }
-.fw-ai-stream--fixed .fw-line--anim:nth-of-type(5){ animation-delay:.97s; }
-.fw-ai-stream--fixed .fw-line--anim:nth-of-type(6){ animation-delay:1.20s; }
-.fw-ai-stream--fixed .fw-line--anim:nth-of-type(7){ animation-delay:1.43s; }
-.fw-ai-stream--fixed .fw-line--anim:nth-of-type(8){ animation-delay:1.66s; }
 
 /* View more button: appears after streaming is done */
 .fw-viewmore{
@@ -994,12 +1146,11 @@ main section[id]{scroll-margin-top:140px}
   box-shadow:0 2px 6px rgba(15,24,33,.06);
   cursor:default;
   opacity:0;
-  animation: fwViewMoreIn 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  animation: fwViewMoreIn 6s cubic-bezier(.4,0,.2,1) infinite;
 }
 @keyframes fwViewMoreIn{
-  0%,  55% { opacity:0; transform:translate(-50%, 4px); }
-  62%, 92% { opacity:1; transform:translate(-50%, 0); }
-  100%     { opacity:0; transform:translate(-50%, 4px); }
+  0%,  38% { opacity:0; transform:translate(-50%, 4px); }
+  42%, 100%{ opacity:1; transform:translate(-50%, 0); }
 }
 
 /* Fade strip above View more */
@@ -1009,12 +1160,11 @@ main section[id]{scroll-margin-top:140px}
   background:linear-gradient(to bottom, rgba(239,244,251,0), #EFF4FB);
   pointer-events:none;
   opacity:0;
-  animation: fwFadeIn 7.5s ease-in-out infinite;
+  animation: fwFadeIn 6s ease-in-out infinite;
 }
 @keyframes fwFadeIn{
-  0%,  55% { opacity:0; }
-  62%, 92% { opacity:1; }
-  100%     { opacity:0; }
+  0%,  38% { opacity:0; }
+  42%, 100%{ opacity:1; }
 }
 .fw-viewmore{
   position:absolute; left:50%; bottom:8px;
@@ -1144,8 +1294,8 @@ main section[id]{scroll-margin-top:140px}
 
 
 /* ============ Cover ============ */
-.cs-cover{max-width:var(--container-width);margin:16px auto 0}
-.cs-cover img{width:100%;height:auto}
+.cs-cover{max-width:none;width:auto;margin:0}
+.cs-cover > img{width:100%;height:auto}
 
 /* ============ T5 SUB — 结论底下的具体案例 ============
    .l1 / .l2 已在上面的 TYPE SYSTEM 块里归一到 T1 / T2。
@@ -1731,12 +1881,12 @@ main section[id]{scroll-margin-top:140px}
 .ep-bridge__word span{display:block;font-size:15px;font-weight:400;line-height:1.6;letter-spacing:0;color:var(--c-body);margin-top:18px;text-transform:none;max-width:520px}
 @media (max-width:720px){.ep-bridge__line{font-size:22px}}
 
-.cs-cover-placeholder { view-transition-name: cover-ai-search; }
+.cs-cover-art { view-transition-name: cover-ai-search; }
 .site-header { view-transition-name: site-header; }
 ::view-transition-group(*) { animation-duration:.46s; animation-timing-function:cubic-bezier(.32,.72,0,1); }
 ::view-transition-group(site-header){ animation-duration:.01s }
 ::view-transition-old(site-header),::view-transition-new(site-header){ animation:none }
-@media (prefers-reduced-motion: reduce){ .cs-cover-placeholder, .site-header { view-transition-name: none; } }
+@media (prefers-reduced-motion: reduce){ .cs-cover-art, .site-header { view-transition-name: none; } }
 
 /* ============ Chapter 1 — shared ============ */
 .ph{
@@ -1894,50 +2044,36 @@ main section[id]{scroll-margin-top:140px}
 /* Option B — bottom sheet overlaid on results */
 .fw-phone--stack{ position:relative; }
 
-/* ------------ Option C · loop animation --------------------------------- */
-/* Total cycle = 6.5s. 0–1.5s loading, 1.5–3.8s stream, 3.8–5.8s hold, 5.8–6.5s fade back. */
+/* ============================================================================
+   Wireframe streaming — ONE implementation shared by every phone mock.
+   Cycle 6s:  0–20% loading  ·  20%+ lines pop in one by one  ·  then holds.
+   Every state switch uses steps(1,end), so a line appears at its full width
+   instantly — it never fades or scales (that read as "thin, then thick").
+   No height is ever animated: the panel grows because each new line adds
+   80ms later takes up real space, which pushes the feed below it down.
+   ========================================================================== */
+
+/* ---- the AI panel — height comes from its content, never from a keyframe -- */
 .fw-zone--anim{
-  position:relative; overflow:hidden;
+  position:relative;
   margin:0 4px;
   padding:12px 14px;
-  animation: fwAiExpand 7.5s cubic-bezier(.4,0,.2,1) infinite;
-  will-change: min-height;
 }
-/* Full-height variant (Option A) — no feed underneath, streams until it fills the whole zone */
-.fw-zone--anim-full{
-  flex:1; min-height:0;
-  animation: fwAiExpandFull 7.5s cubic-bezier(.4,0,.2,1) infinite;
-}
-@keyframes fwAiExpandFull{
-  0%   { flex-basis:44px;  flex-grow:0; }
-  20%  { flex-basis:44px;  flex-grow:0; }
-  30%  { flex-basis:80px;  flex-grow:0; }
-  45%  { flex-basis:180px; flex-grow:0; }
-  62%  { flex-basis:320px; flex-grow:0; }
-  75%  { flex-basis:100%;  flex-grow:1; }
-  92%  { flex-basis:100%;  flex-grow:1; }
-  100% { flex-basis:44px;  flex-grow:0; }
-}
+/* Option A (AI-only) has no feed beneath it, so it takes the whole screen. */
+.fw-zone--tall{ flex:0 0 auto; }
 
-@keyframes fwAiExpand{
-  0%   { min-height:44px; }
-  20%  { min-height:44px; }
-  30%  { min-height:80px; }
-  45%  { min-height:150px; }
-  62%  { min-height:240px; }
-  75%  { min-height:360px; }
-  92%  { min-height:360px; }
-  100% { min-height:44px; }
-}
-
+/* ---- phase 1 · loading --------------------------------------------------- */
+/* Collapses fully out of the flow at 20%, so "AI answer" lands at the top. */
 .fw-ai-load{
   display:flex; align-items:center; gap:6px;
-  height:38px; padding:0 2px;
-  animation: fwAiLoad 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  max-height:20px; overflow:hidden;
+  animation: fwAiLoad 6s cubic-bezier(.4,0,.2,1) infinite;
 }
 @keyframes fwAiLoad{
-  0%,  20% { opacity:1; transform:translateY(0); }
-  26%, 100%{ opacity:0; transform:translateY(-4px); }
+  0%   { max-height:20px; margin-bottom:0;    opacity:1; }
+  17%  { max-height:20px; margin-bottom:0;    opacity:1; }
+  21%  { max-height:0;    margin-bottom:-6px; opacity:0; }
+  100% { max-height:0;    margin-bottom:-6px; opacity:0; }
 }
 .fw-ai-load__spinner{
   width:10px; height:10px; border-radius:50%;
@@ -1949,62 +2085,51 @@ main section[id]{scroll-margin-top:140px}
 @keyframes fwSpin{ to { transform: rotate(360deg); } }
 .fw-ai-load__label{
   font-size:9px; font-weight:800; letter-spacing:.11em;
-  color:var(--c-blue); text-transform:uppercase;
-}
-.fw-ai-load__dots{ display:inline-flex; gap:2px; align-items:center; }
-.fw-ai-load__dots i{
-  width:3px; height:3px; border-radius:50%; background:var(--c-blue); opacity:.35;
-  animation: fwDot 1.2s ease-in-out infinite;
-}
-.fw-ai-load__dots i:nth-child(2){ animation-delay:.15s; }
-.fw-ai-load__dots i:nth-child(3){ animation-delay:.3s; }
-@keyframes fwDot{
-  0%,80%,100%{ opacity:.25; }
-  40%        { opacity:1; }
+  color:var(--c-blue); text-transform:uppercase; white-space:nowrap;
 }
 
+/* ---- phase 2 · streaming ------------------------------------------------- */
 .fw-ai-stream{
-  position:absolute; inset:0;
-  padding:12px 14px;
+  position:relative;
   display:flex; flex-direction:column; gap:9px;
-  opacity:0;
-  animation: fwStreamShow 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  visibility:hidden;
+  animation: fwStreamShow 6s steps(1,end) infinite;
 }
 @keyframes fwStreamShow{
-  0%,  20% { opacity:0; }
-  26%, 92% { opacity:1; }
-  100%     { opacity:0; }
+  0%   { visibility:hidden; }
+  20%  { visibility:visible; }
+  100% { visibility:visible; }
 }
-.fw-line--anim{
-  opacity: 0;
-  width: 90% !important;
-  animation: fwLineIn 7.5s steps(1, end) infinite;
+/* The lines live in one wrapper and *its height* is what animates, so the
+   reveal is a single continuous motion — the panel grows smoothly and the
+   lines are simply uncovered from the top down. Their shape never changes.
+   --lines-h is set per phone from its own line count. */
+.fw-ai-lines{
+  display:flex; flex-direction:column; justify-content:flex-start; gap:9px;
+  overflow:hidden;
+  height:0;
+  animation: fwLinesGrow 6s linear infinite;
 }
-.fw-ai-stream .fw-line--anim:nth-of-type(1){ animation-delay:.00s; }
-.fw-ai-stream .fw-line--anim:nth-of-type(2){ animation-delay:.35s; }
-.fw-ai-stream .fw-line--anim:nth-of-type(3){ animation-delay:.70s; }
-.fw-ai-stream .fw-line--anim:nth-of-type(4){ animation-delay:1.05s; }
-.fw-ai-stream .fw-line--anim:nth-of-type(5){ animation-delay:1.40s; }
-.fw-ai-stream .fw-line--anim:nth-of-type(6){ animation-delay:1.75s; }
-.fw-ai-stream .fw-line--anim:nth-of-type(7){ animation-delay:2.10s; }
-.fw-ai-stream .fw-line--anim:nth-of-type(8){ animation-delay:2.45s; }
-.fw-ai-stream .fw-line--anim:nth-of-type(9){ animation-delay:2.80s; }
-.fw-ai-stream .fw-line--anim:nth-of-type(10){ animation-delay:3.15s; }
-@keyframes fwLineIn{
-  0%,  30% { opacity: 0; }
-  30.01%, 92% { opacity: 1; }
-  100%     { opacity: 0; }
+/* Never let the flex box squash the lines while it is shorter than its
+   content — they must keep their 6px and be clipped, not compressed.
+   (This was what read as the lines starting thin and thickening.) */
+.fw-ai-lines > .fw-line{ flex:0 0 6px; }
+@keyframes fwLinesGrow{
+  0%,  20% { height:0; }
+  68%      { height:var(--lines-h); }
+  100%     { height:var(--lines-h); }
 }
+.fw-ai-stream--sheet .fw-ai-lines{ gap:6px; }
+/* A line is collapsed to zero height; the negative margin cancels the flex gap
+   so a hidden line contributes nothing at all to the panel height. */
+
 
 @media (prefers-reduced-motion: reduce){
-  .fw-zone--anim, .fw-ai-load, .fw-ai-stream,
-  .fw-line--anim, .fw-ai-load__spinner, .fw-ai-load__dots i {
-    animation:none !important;
-  }
-  .fw-zone--anim{ min-height:118px; }
+  .fw-zone--anim, .fw-ai-load, .fw-ai-stream, .fw-ai-lines,
+  .fw-ai-load__spinner { animation:none !important; }
   .fw-ai-load{ display:none; }
-  .fw-ai-stream{ position:static; opacity:1; }
-  .fw-line--anim{ transform:none; }
+  .fw-ai-stream{ visibility:visible; }
+  .fw-ai-lines{ height:var(--lines-h); animation:none; }
 }
 
 .fw-sheet{
@@ -2022,25 +2147,25 @@ main section[id]{scroll-margin-top:140px}
   z-index:3;
   width:32px; height:40px; color:var(--c-text-deep);
   opacity:0; pointer-events:none;
-  animation: fwDragCue 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  animation: fwDragCue 6s cubic-bezier(.4,0,.2,1) infinite;
 }
 .fw-drag-cue__hand{
   width:100%; height:100%; display:block; position:relative; z-index:2;
   filter:drop-shadow(0 3px 5px rgba(15,24,33,.18));
   transform-origin: 50% 6px;
-  animation: fwFingerPress 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  animation: fwFingerPress 6s cubic-bezier(.4,0,.2,1) infinite;
 }
 .fw-drag-cue__ring{
   position:absolute; left:50%; top:6px; transform:translate(-50%,-50%) scale(0);
   width:16px; height:16px; border-radius:50%;
   background:rgba(10,102,194,.28);
   z-index:1;
-  animation: fwFingerRing 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  animation: fwFingerRing 6s cubic-bezier(.4,0,.2,1) infinite;
 }
 @keyframes fwDragCue{
   0%,  52% { opacity:0; }
-  58%, 88% { opacity:1; }
-  100%     { opacity:0; }
+  58%, 84% { opacity:1; }
+  90%, 100%{ opacity:0; }
 }
 /* Slight squash as the finger presses down on the sheet */
 @keyframes fwFingerPress{
@@ -2068,7 +2193,7 @@ main section[id]{scroll-margin-top:140px}
   overflow:visible;
   height:88px;
   transform:translateY(0);
-  animation: fwSheetLift 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  animation: fwSheetLift 6s cubic-bezier(.4,0,.2,1) infinite;
   box-shadow:0 -12px 30px rgba(15,24,33,.10);
 }
 
@@ -2100,50 +2225,26 @@ main section[id]{scroll-margin-top:140px}
   72%       { height:230px; transform:translateY(-6px); }
   78%       { height:280px; transform:translateY(-2px); }
 
-  /* Phase 5: sheet settles open — user reads a completed answer. */
-  82%, 92%  { height:280px; transform:translateY(0); }
-
-  /* Phase 6: release, back to peek. */
-  100%      { height:88px;  transform:translateY(0); }
+  /* Phase 5: sheet settles open and STAYS open — the loop resets instantly
+     at the cycle boundary rather than animating back down. */
+  82%, 100% { height:280px; transform:translateY(0); }
 }
 .fw-ai-load--sheet{
-  position:absolute; left:12px; right:12px; top:14px;
-  margin:0;
-  opacity:1;
-  animation: fwAiLoad 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  /* absolute, so it never reserves space inside the peek */
+  position:absolute; left:12px; right:12px; top:14px; margin:0;
+  animation: fwAiLoad 6s cubic-bezier(.4,0,.2,1) infinite;
 }
 .fw-ai-stream--sheet{
   position:relative;
   display:flex; flex-direction:column; gap:6px;
-  opacity:0;
-  animation: fwSheetStreamShow 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  visibility:hidden;
+  animation: fwStreamShow 6s steps(1,end) infinite;
 }
-@keyframes fwSheetStreamShow{
-  0%,  18%  { opacity:0; }              /* still loading */
-  25%, 92%  { opacity:1; }              /* streams in, then stays visible through lift and hold */
-  100%      { opacity:0; }              /* only fades out at the end of the cycle */
-}
-.fw-ai-stream--sheet .fw-line--anim{
-  animation-name: fwSheetLineIn;
-  animation-duration: 7.5s;
-  animation-timing-function: steps(1, end);
-}
-@keyframes fwSheetLineIn{
-  0%,  30% { opacity: 0; }
-  30.01%, 92% { opacity: 1; }
-  100%     { opacity: 0; }
-}
-.fw-ai-stream--sheet .fw-line--anim:nth-of-type(1){ animation-delay:.05s; }
-.fw-ai-stream--sheet .fw-line--anim:nth-of-type(2){ animation-delay:.25s; }
-.fw-ai-stream--sheet .fw-line--anim:nth-of-type(3){ animation-delay:.45s; }
-.fw-ai-stream--sheet .fw-line--anim:nth-of-type(4){ animation-delay:.65s; }
-.fw-ai-stream--sheet .fw-line--anim:nth-of-type(5){ animation-delay:.85s; }
-.fw-ai-stream--sheet .fw-line--anim:nth-of-type(6){ animation-delay:1.05s; }
-.fw-ai-stream--sheet .fw-line--anim:nth-of-type(7){ animation-delay:1.25s; }
+/* Same collapse trick as the other phones, only the gap differs (6px here). */
 @media (prefers-reduced-motion: reduce){
   .fw-sheet--anim{ animation:none; height:280px; transform:none; }
   .fw-ai-load--sheet{ display:none; }
-  .fw-ai-stream--sheet{ position:static; opacity:1; padding:4px 12px 14px; }
+  .fw-ai-stream--sheet{ visibility:visible; }
 }
 
 .trade{ margin:26px 0 var(--gap-para); }
@@ -2333,6 +2434,7 @@ main section[id]{scroll-margin-top:140px}
   line-height:1.3; letter-spacing:-.01em; margin:0 0 12px;
 }
 .decision__body{ font-size:15px; line-height:1.65; color:var(--c-body); margin:0; }
+.decision__body + .decision__body{ margin-top:12px; }
 
 
 /* ============ A/B version switch (temporary review control) ============ */
@@ -3048,16 +3150,45 @@ main section[id]{scroll-margin-top:140px}
 
     <!-- ============ 1. Cover ============ -->
     <section class="cs-cover" id="cover">
-      <!-- COVER PLACEHOLDER — replace ../images/ai-search-cover.[avif|png|jpg] once art is ready.
-           Suggested composition: a single frame showing three surfaces (EPIC results / Search × AI entry / AI Personalization filter) with the pull-quote "What did you type? → What do you really want?" typeset over the top. -->
-      <div class="cs-cover-placeholder" role="img" aria-label="AI Search cover — placeholder">
-        <div class="cs-cover-placeholder__inner">
-          <span class="cs-cover-placeholder__eyebrow">Trip.com Search · 2024–Now</span>
-          <span class="cs-cover-placeholder__q-old">&ldquo;What did you type?&rdquo;</span>
-          <span class="cs-cover-placeholder__arrow" aria-hidden="true">↓</span>
-          <span class="cs-cover-placeholder__q-new">&ldquo;What do you <em>really</em> want?&rdquo;</span>
-          <span class="cs-cover-placeholder__stages">EPIC &nbsp;·&nbsp; Search × AI &nbsp;·&nbsp; AI Personalization</span>
-          <span class="cs-cover-placeholder__note">Cover artwork placeholder</span>
+      <!-- Cover — full-bleed blue field, content held to the 1140 column.
+           Composition: the AI answer overlaps and sits in front of the results feed,
+           which is the case study's thesis stated as geometry. Depth comes from a
+           overlap, scale, stacked cast shadows, and aerial perspective on the phone
+           that sits further back — the screenshots stay undistorted. Yellow appears
+           twice only: the wordmark's dot and the headline's full stop. -->
+      <div class="cs-cover-art">
+        <span class="cs-cover-art__map" aria-hidden="true"></span>
+        <span class="cs-cover-art__circle" aria-hidden="true"></span>
+        <span class="cs-cover-art__ring" aria-hidden="true"></span>
+
+        <div class="cs-cover-art__inner">
+        <div class="cs-cover-art__copy">
+          <img class="cs-cover-art__logo" loading="eager" decoding="async" width="330" height="162" src="../images/tripcom-wordmark.png" alt="Trip.com" />
+          <p class="cs-cover-art__h"><span>Not what you typed.</span><span>What you meant<b>.</b></span></p>
+          <p class="cs-cover-art__sub">Reframing Search from keyword retrieval into a travel decision gateway.</p>
+          <ul class="cs-cover-svcs" aria-label="Business lines behind one search box">
+            <li title="Flights"><svg viewBox="0 0 24 24" role="img" aria-label="Flights"><path fill="currentColor" d="M20.9 3.1c-.8-.8-2.1-.6-3 .3l-2.7 2.7-8.6-2.3a1 1 0 0 0-1 .26l-1.2 1.2c-.42.42-.3 1.1.24 1.36l6.5 3.1-2.9 2.9-3.5-.5a.85.85 0 0 0-.72.24l-.95.95c-.42.42-.24 1.1.3 1.32l3.2 1.3 1.3 3.2c.22.54.9.72 1.32.3l.95-.95a.85.85 0 0 0 .24-.72l-.5-3.5 2.9-2.9 3.1 6.5c.26.54.94.66 1.36.24l1.2-1.2a1 1 0 0 0 .26-1l-2.3-8.6 2.7-2.7c.9-.9 1.1-2.2.3-3Z"/></svg></li>
+            <li title="Trains"><svg viewBox="0 0 24 24" role="img" aria-label="Trains"><rect x="6.4" y="1.9" width="11.2" height="1.9" rx=".95" fill="currentColor"/><path fill="currentColor" d="M8.6 4.5h6.8a3.4 3.4 0 0 1 3.4 3.4v7.3a3.4 3.4 0 0 1-3.4 3.4H8.6a3.4 3.4 0 0 1-3.4-3.4V7.9a3.4 3.4 0 0 1 3.4-3.4Z"/><rect x="7.3" y="6.7" width="9.4" height="3.5" rx=".8" fill="#fff"/><rect x="7.8" y="12.3" width="3" height="2.5" rx=".6" fill="#fff"/><rect x="13.2" y="12.3" width="3" height="2.5" rx=".6" fill="#fff"/><path fill="currentColor" d="M8.5 19.3h2.2l-1.6 2.7H6.3l2.2-2.7Zm7 0h-2.2l1.6 2.7h2.8l-2.2-2.7Z"/></svg></li>
+            <li title="Attractions"><svg viewBox="0 0 24 24" role="img" aria-label="Attractions"><path fill="currentColor" d="M12 10.6c.6 0 1.1.35 1.35.9l3.6 8.1c.3.66-.18 1.4-.9 1.4H7.95c-.72 0-1.2-.74-.9-1.4l3.6-8.1c.25-.55.75-.9 1.35-.9Z"/><circle cx="12" cy="8.4" r="6.1" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="8.4" r="1.5" fill="currentColor"/><circle cx="12" cy="1.9" r="1.5" fill="currentColor"/><circle cx="16.6" cy="3.8" r="1.5" fill="currentColor"/><circle cx="18.5" cy="8.4" r="1.5" fill="currentColor"/><circle cx="16.6" cy="13" r="1.5" fill="currentColor"/><circle cx="7.4" cy="13" r="1.5" fill="currentColor"/><circle cx="5.5" cy="8.4" r="1.5" fill="currentColor"/><circle cx="7.4" cy="3.8" r="1.5" fill="currentColor"/></svg></li>
+            <li title="Airport transfers"><svg viewBox="0 0 24 24" role="img" aria-label="Airport transfers"><path fill="currentColor" d="M21.4 2.7c-.5-.5-1.35-.36-2 .3l-1.9 1.9-5.9-1.5a.7.7 0 0 0-.67.18l-.8.8c-.3.3-.2.78.17.95l4.4 2.05-1.2 1.2 1.1 1.1 1.2-1.2 2.05 4.4c.17.37.65.47.95.17l.8-.8a.7.7 0 0 0 .18-.67l-1.5-5.9 1.9-1.9c.66-.65.8-1.5.3-2Z"/><path fill="currentColor" d="M4.3 15.5l1.15-2.6A2.3 2.3 0 0 1 7.55 11.5h5.1a2.3 2.3 0 0 1 2.1 1.4l1.15 2.6c.85.3 1.45 1.1 1.45 2.05v2.9c0 .5-.4.9-.9.9h-.75a1.55 1.55 0 0 1-3.05 0H7.55a1.55 1.55 0 0 1-3.05 0H3.75c-.5 0-.9-.4-.9-.9v-2.9c0-.95.6-1.75 1.45-2.05Z"/><path fill="#fff" d="M6 15.2h8.2l-.85-1.95a.75.75 0 0 0-.7-.45H7.55a.75.75 0 0 0-.7.45L6 15.2Z"/><circle cx="6.1" cy="17.9" r="1.15" fill="#fff"/><circle cx="14.1" cy="17.9" r="1.15" fill="#fff"/></svg></li>
+            <li title="Car rentals"><svg viewBox="0 0 24 24" role="img" aria-label="Car rentals"><path fill="currentColor" d="M4.1 10.6 5.5 7.2A2.6 2.6 0 0 1 7.9 5.6h8.2a2.6 2.6 0 0 1 2.4 1.6l1.4 3.4c1 .32 1.7 1.25 1.7 2.35v4.2c0 .55-.45 1-1 1h-.9a1.75 1.75 0 0 1-3.45 0H7.75a1.75 1.75 0 0 1-3.45 0h-.9c-.55 0-1-.45-1-1v-4.2c0-1.1.7-2.03 1.7-2.35Z"/><path fill="#fff" d="M6.2 10.2h11.6L16.5 7.4a.8.8 0 0 0-.72-.48H8.22a.8.8 0 0 0-.72.48L6.2 10.2Z"/><rect x="4.6" y="12.4" width="3.4" height="1.9" rx=".95" fill="#fff"/><rect x="16" y="12.4" width="3.4" height="1.9" rx=".95" fill="#fff"/></svg></li>
+            <li title="Hotels"><svg viewBox="0 0 24 24" role="img" aria-label="Hotels"><path fill="currentColor" d="M2.4 5.9h19.2a1.5 1.5 0 0 1 1.5 1.5v4.3H0.9V7.4a1.5 1.5 0 0 1 1.5-1.5Z"/><rect x="3.3" y="7.7" width="7.6" height="3.1" rx="1.2" fill="#fff"/><rect x="13.1" y="7.7" width="7.6" height="3.1" rx="1.2" fill="#fff"/><path fill="currentColor" d="M0.9 12.4h22.2v3.7a1.3 1.3 0 0 1-1.3 1.3H2.2a1.3 1.3 0 0 1-1.3-1.3v-3.7Z"/><rect x="1.1" y="17.6" width="2" height="2.9" rx="1" fill="currentColor"/><rect x="20.9" y="17.6" width="2" height="2.9" rx="1" fill="currentColor"/></svg></li>
+          </ul>
+        </div>
+
+        <div class="cs-cover-art__stage">
+          <div class="cs-cover-phone cs-cover-phone--answer">
+            <img loading="eager" decoding="async" width="750" height="2300" src="../images/cover-ai-answer.jpg" alt="TripGenie answering &quot;Recommend a 3-day Hong Kong itinerary&quot; with a day-by-day plan and a map view" />
+          </div>
+          <div class="cs-cover-anno">
+            <div class="cs-cover-anno__screen">
+              <img loading="eager" decoding="async" width="750" height="1624" src="../images/cover-ai-results.jpg" alt="Trip.com search results, already rendered and readable while the AI answer is still being assembled" />
+            </div>
+            <div class="cs-cover-anno__callout">
+              <img loading="eager" decoding="async" width="750" height="108" src="../images/tripgenie-bar.png" alt="A pinned bar reading: TripGenie, Organizing" />
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </section>
@@ -3802,26 +3933,39 @@ main section[id]{scroll-margin-top:140px}
               <span class="fw-island"></span>
               <div class="fw-screen">
                 <div class="fw-bar"><span class="fw-bar__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span></div>
-                <div class="fw-zone fw-zone--ai fw-zone--anim fw-zone--anim-full fw-zone--grow">
+                <div class="fw-zone fw-zone--ai fw-zone--anim fw-zone--tall">
                   <div class="fw-ai-load">
                     <span class="fw-ai-load__spinner" aria-hidden="true"></span>
                     <span class="fw-ai-load__label">Searching for references&hellip;</span>
                   </div>
                   <div class="fw-ai-stream">
                     <span class="fw-tag">AI answer</span>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-ai-lines" style="--lines-h:351px">
+                      <div class="fw-line" style="width:94%"></div>
+                      <div class="fw-line" style="width:98%"></div>
+                      <div class="fw-line" style="width:94%"></div>
+                      <div class="fw-line" style="width:89%"></div>
+                      <div class="fw-line" style="width:74%"></div>
+                      <div class="fw-line" style="width:95%"></div>
+                      <div class="fw-line" style="width:87%"></div>
+                      <div class="fw-line" style="width:88%"></div>
+                      <div class="fw-line" style="width:78%"></div>
+                      <div class="fw-line" style="width:96%"></div>
+                      <div class="fw-line" style="width:72%"></div>
+                      <div class="fw-line" style="width:96%"></div>
+                      <div class="fw-line" style="width:96%"></div>
+                      <div class="fw-line" style="width:66%"></div>
+                      <div class="fw-line" style="width:87%"></div>
+                      <div class="fw-line" style="width:69%"></div>
+                      <div class="fw-line" style="width:95%"></div>
+                      <div class="fw-line" style="width:73%"></div>
+                      <div class="fw-line" style="width:95%"></div>
+                      <div class="fw-line" style="width:94%"></div>
+                      <div class="fw-line" style="width:70%"></div>
+                      <div class="fw-line" style="width:96%"></div>
+                      <div class="fw-line" style="width:76%"></div>
+                      <div class="fw-line" style="width:46%"></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -3856,13 +4000,15 @@ main section[id]{scroll-margin-top:140px}
                   </div>
                   <div class="fw-ai-stream fw-ai-stream--sheet">
                     <span class="fw-tag" style="color:var(--c-blue);opacity:.9">AI answer</span>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-ai-lines" style="--lines-h:78px">
+                      <div class="fw-line" style="width:94%"></div>
+                      <div class="fw-line" style="width:99%"></div>
+                      <div class="fw-line" style="width:70%"></div>
+                      <div class="fw-line" style="width:89%"></div>
+                      <div class="fw-line" style="width:86%"></div>
+                      <div class="fw-line" style="width:78%"></div>
+                      <div class="fw-line" style="width:41%"></div>
+                    </div>
                   </div>
                 </div>
                 </div>
@@ -3899,16 +4045,20 @@ main section[id]{scroll-margin-top:140px}
                   </div>
                   <div class="fw-ai-stream">
                     <span class="fw-tag">AI answer</span>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-ai-lines" style="--lines-h:171px">
+                      <div class="fw-line" style="width:99%"></div>
+                      <div class="fw-line" style="width:87%"></div>
+                      <div class="fw-line" style="width:99%"></div>
+                      <div class="fw-line" style="width:89%"></div>
+                      <div class="fw-line" style="width:80%"></div>
+                      <div class="fw-line" style="width:72%"></div>
+                      <div class="fw-line" style="width:92%"></div>
+                      <div class="fw-line" style="width:95%"></div>
+                      <div class="fw-line" style="width:98%"></div>
+                      <div class="fw-line" style="width:91%"></div>
+                      <div class="fw-line" style="width:71%"></div>
+                      <div class="fw-line" style="width:38%"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="fw-zone fw-zone--results fw-zone--grow">
@@ -3985,14 +4135,22 @@ main section[id]{scroll-margin-top:140px}
                   </div>
                   <div class="fw-ai-stream fw-ai-stream--fixed">
                     <span class="fw-tag">AI answer</span>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-ai-lines" style="--lines-h:201px">
+                      <div class="fw-line" style="width:98%"></div>
+                      <div class="fw-line" style="width:88%"></div>
+                      <div class="fw-line" style="width:67%"></div>
+                      <div class="fw-line" style="width:73%"></div>
+                      <div class="fw-line" style="width:88%"></div>
+                      <div class="fw-line" style="width:89%"></div>
+                      <div class="fw-line" style="width:89%"></div>
+                      <div class="fw-line" style="width:98%"></div>
+                      <div class="fw-line" style="width:76%"></div>
+                      <div class="fw-line" style="width:92%"></div>
+                      <div class="fw-line" style="width:89%"></div>
+                      <div class="fw-line" style="width:79%"></div>
+                      <div class="fw-line" style="width:98%"></div>
+                      <div class="fw-line" style="width:56%"></div>
+                    </div>
                   </div>
                   <button class="fw-viewmore" type="button">View more</button>
                 </div>
@@ -4024,16 +4182,20 @@ main section[id]{scroll-margin-top:140px}
                   </div>
                   <div class="fw-ai-stream">
                     <span class="fw-tag">AI answer</span>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-ai-lines" style="--lines-h:171px">
+                      <div class="fw-line" style="width:100%"></div>
+                      <div class="fw-line" style="width:68%"></div>
+                      <div class="fw-line" style="width:99%"></div>
+                      <div class="fw-line" style="width:95%"></div>
+                      <div class="fw-line" style="width:68%"></div>
+                      <div class="fw-line" style="width:70%"></div>
+                      <div class="fw-line" style="width:75%"></div>
+                      <div class="fw-line" style="width:90%"></div>
+                      <div class="fw-line" style="width:87%"></div>
+                      <div class="fw-line" style="width:75%"></div>
+                      <div class="fw-line" style="width:86%"></div>
+                      <div class="fw-line" style="width:57%"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="fw-zone fw-zone--results fw-zone--grow">
@@ -4062,20 +4224,20 @@ main section[id]{scroll-margin-top:140px}
 
             <div class="fwt__row">
               <span class="fwt__k">AI answer value</span>
-              <span class="fwt__v fwt__v--bad">Complex answers get cut to fit &mdash; users judge AI on a fragment.</span>
-              <span class="fwt__v fwt__v--good">The answer arrives complete, giving AI a fair chance to prove its value.</span>
+              <span class="fwt__v fwt__v--bad">Answer length is constrained by the fixed container, which may limit complex responses.</span>
+              <span class="fwt__v fwt__v--good">Answer expands naturally, allowing users to see the complete AI response and related queries.</span>
             </div>
 
             <div class="fwt__row">
               <span class="fwt__k">Feed exposure</span>
-              <span class="fwt__v fwt__v--bad">Reserved space sits empty while AI generates &mdash; less feed on screen.</span>
-              <span class="fwt__v fwt__v--good">Compact at start; Search feed fills the screen while the answer writes.</span>
+              <span class="fwt__v fwt__v--bad">Reserved space stays occupied during generation, reducing visible Search content.</span>
+              <span class="fwt__v fwt__v--good">Starts compact, allowing Search feeds to remain visible while AI generates.</span>
             </div>
 
             <div class="fwt__row">
               <span class="fwt__k">Page stability</span>
-              <span class="fwt__v fwt__v--good">Layout never moves &mdash; predictable and calm.</span>
-              <span class="fwt__v fwt__v--bad">Page grows as tokens arrive; content below keeps shifting.</span>
+              <span class="fwt__v fwt__v--good">Layout remains stable with predictable content positions.</span>
+              <span class="fwt__v fwt__v--bad">Dynamic height changes push content below as the answer grows.</span>
             </div>
           </div>
         </div>
@@ -4083,80 +4245,87 @@ main section[id]{scroll-margin-top:140px}
         <div class="decision">
           <span class="decision__label">Decision</span>
           <p class="decision__head">Let the answer finish.</p>
-          <p class="decision__body">A truncated answer can&rsquo;t be judged &mdash; the traveler never finds out whether the wait was worth it, and neither do we. Full output also puts more feed on screen while it writes. <strong>The cost is a page that moves.</strong> With AI and Search now sharing one surface, that was one of two problems left &mdash; and both were about the person, not the model.</p>
+          <p class="decision__body">At this stage, our first priority was to validate whether AI could truly close the information gap left by traditional Search.</p>
+          <p class="decision__body">A truncated answer would make it difficult for users to evaluate AI&rsquo;s value. Therefore, we chose full expansion &mdash; allowing the answer to complete while keeping Search feeds visible during generation.</p>
         </div>
+
+        <p class="p"><strong class="dark">The trade-off: the page grows as AI writes.</strong></p>
+
+        <p class="p">This introduced a new interaction challenge: how can users stay in control when the experience is still evolving?</p>
 
       </div><!-- /04 -->
 
       <div class="op-beat">
-        <p class="t-beat-head"><span class="t-beat-num">05</span><span class="t-beat-name">Interaction challenges</span></p>
-        <h3 class="sec-claim">AI makes Search smarter, and less predictable</h3>
+        <p class="t-beat-head"><span class="t-beat-num">05</span><span class="t-beat-name">Designing for user control</span></p>
+        <h3 class="sec-claim">AI and Search can coexist. But can users stay in control?</h3>
 
-        <p class="p"><strong class="dark">Two tensions that only exist once AI and Search share a page:</strong> the traveler who never wanted the answer, and the page that will not hold still.</p>
+        <p class="p">The hybrid framework solved one problem: AI could finally help travelers through complex decisions, and Search stayed available underneath it. But a new tension emerged &mdash; <strong class="dark">not every traveler wants the same thing.</strong></p>
 
-        <h4 class="b-case__h">Tension 01 &mdash; AI assistance vs. what this traveler wants</h4>
-        <p class="p">The same page now serves two people.</p>
+        <p class="op-stairs">
+          <span>Some travelers want AI to guide them.</span>
+          <span>Some just want to browse.</span>
+          <span>And even travelers who love AI don&rsquo;t want AI to take over their journey.</span>
+        </p>
 
-        <div class="trade" aria-label="Two travelers on the same page">
-          <div class="trade__head">
-            <p class="trade__k">&nbsp;</p>
-            <p class="trade__opt">The traveler who knows</p>
-            <p class="trade__opt trade__opt--pick">The traveler who doesn&rsquo;t</p>
-          </div>
-          <div class="trade__row">
-            <p class="trade__k">Arrives with</p>
-            <p class="trade__v">A target.</p>
-            <p class="trade__v">A situation.</p>
-          </div>
-          <div class="trade__row">
-            <p class="trade__k">Wants</p>
-            <p class="trade__v">To scan the list and book.</p>
-            <p class="trade__v">To be told where to start.</p>
-          </div>
-          <div class="trade__row">
-            <p class="trade__k">AI on the first screen</p>
-            <p class="trade__v trade__v--bad">Costs them a screen.</p>
-            <p class="trade__v trade__v--good">Is the reason they came.</p>
-          </div>
-        </div>
+        <p class="op-punch">How do we give AI a bigger role <strong>without taking control away from users?</strong></p>
 
-        <p class="p">So the question was never <em>should AI go first.</em> It was <strong class="dark">how one page supports different levels of AI dependency</strong> &mdash; without asking anyone to declare which one they are.</p>
+        <h4 class="b-case__h">Challenge 01 &mdash; Let users choose how they search</h4>
+        <p class="p">AI is useful, but it isn&rsquo;t always the first thing a traveler wants. For a complex query it provides the guidance. Mid-exploration, the same person would rather be browsing more options, comparing products, or scanning the feed. <strong class="dark">Forcing everyone through the AI answer creates friction for whoever didn&rsquo;t need it yet.</strong></p>
 
         <div class="ruleblock ruleblock--blue">
           <span class="ruleblock__label">Design principle</span>
           <p class="ruleblock__body">AI should be <strong>available, never mandatory.</strong></p>
         </div>
 
-        <p class="p">Most AI Search treats the answer as a terminus. EPIC treats it as one of two places to be.</p>
+        <p class="t-sub">Solution &mdash; Make AI and Search switchable</p>
+        <p class="p">Rather than picking one experience for everyone, the page lets the traveler decide what leads.</p>
+
+        <div class="op-caps op-caps--2">
+          <div class="op-cap">
+            <span class="op-cap__num">Want AI guidance</span>
+            <p class="op-cap__title">Stay with the answer</p>
+            <p class="op-cap__desc">The module holds the top of the page and expands as it writes.</p>
+          </div>
+          <div class="op-cap">
+            <span class="op-cap__num">Want to explore</span>
+            <p class="op-cap__title">Swipe up to pin it</p>
+            <p class="op-cap__desc">The answer condenses to a bar, and the screen belongs to the feed.</p>
+          </div>
+        </div>
 
         <p class="chain" style="opacity:.6">Common pattern &nbsp; Search <span class="chain__s">&rarr;</span> AI answer <span class="chain__s">&rarr;</span> <span class="chain__cost">done</span></p>
         <p class="chain">EPIC &nbsp; Search <span class="chain__s" style="color:var(--c-blue)">&#8645;</span> AI &mdash; <strong>reachable in both directions, at any moment</strong></p>
 
-        <p class="p">The module condenses and pins as the traveler scrolls, so the feed is never interrupted and the answer is never gone. Scroll down and the screen belongs to the listings; scroll back up and the answer expands again. <strong class="dark">The choice stays open while they read</strong> &mdash; which a toggle could never do, because it asks people to choose before they know what the answer says.</p>
+        <p class="p">Most AI Search treats the answer as a terminus. Here it is one of two places to be: scroll down and the listings own the screen, scroll back up and the answer expands again. <strong class="dark">The choice stays open while they read</strong> &mdash; which a toggle could never do, because a toggle asks people to choose before they know what the answer says.</p>
 
         <div class="ph">[ AI module &middot; expanded, pinned, and returned to &mdash; screens ]</div>
 
-        <h4 class="b-case__h">Tension 02 &mdash; AI generation vs. user control</h4>
-        <p class="p"><strong class="dark">AI puts a moving interface inside an experience built on stillness.</strong> A results page loads, then holds; the traveler explores at their own pace. A generating page keeps changing under them &mdash; content inserts, height grows, reading position slides.</p>
+        <h4 class="b-case__h">Challenge 02 &mdash; The page was still moving without permission</h4>
+        <p class="p">Giving people the choice solved the first problem and exposed the next one: <strong class="dark">AI was still generating.</strong> Unlike a traditional results page, this one was no longer finished when the traveler started reading it. Content kept arriving, height kept growing, and the thing they were looking at kept sliding down.</p>
 
-        <p class="p">I watched a session where someone reached for a card and <strong class="dark">it moved 200 pixels before the tap landed.</strong> They tried twice, then left. That recording ended the argument for me.</p>
+        <p class="p">In the extreme case, <strong class="dark">AI generated faster than a person could scroll.</strong></p>
+
+        <div class="ph">[ Competitor case &middot; Quark &mdash; the feed outrunning the scroll ]</div>
+
+        <p class="p">I watched a session where someone reached for a card and <strong class="dark">it moved 200 pixels before the tap landed.</strong> They tried twice, then left. The experience read as <em>the AI owns this screen, not me</em> &mdash; and that recording ended the argument internally.</p>
 
         <div class="ruleblock ruleblock--blue">
           <span class="ruleblock__label">Design principle</span>
           <p class="ruleblock__body">AI output should be <strong>paced by the user, not by the model.</strong></p>
         </div>
 
-        <p class="p">A finger on the page holds generation; lifting it resumes where it stopped. No button, no setting, no mode.</p>
+        <p class="t-sub">Solution &mdash; Make generation respond to the user</p>
+        <p class="p">We changed which side yields. AI can keep thinking, but a user action always comes first: scrolling pauses generation, a finger on the page freezes the stream, and lifting it resumes exactly where it stopped. No button, no setting, no mode.</p>
 
         <p class="chain">Generating <span class="chain__s">&rarr;</span> touch <span class="chain__s">&rarr;</span> <strong>page freezes</strong> <span class="chain__s">&rarr;</span> explore <span class="chain__s">&rarr;</span> release <span class="chain__s">&rarr;</span> resumes</p>
 
-        <p class="p"><strong class="dark">Scrolling becomes the control.</strong> Every other product asks the traveler to press Pause, Stop or Cancel &mdash; to interrupt the AI in the AI&rsquo;s own language. Here the ordinary act of reaching for something already says <em>I want to look at this,</em> and the system gets out of the way.</p>
+        <p class="p"><strong class="dark">Scrolling becomes the control.</strong> Every other product asks the traveler to press Pause, Stop or Cancel &mdash; to interrupt the AI in the AI&rsquo;s own language. Here the ordinary act of reaching for something already says <em>I want to look at this,</em> and the system gets out of the way. The page stops fighting the user: <strong class="dark">AI generates, the traveler navigates.</strong></p>
 
         <div class="ph">[ Interaction sequence &middot; press to pause, release to resume &mdash; GIF ]</div>
 
         <p class="p">It was the hardest piece to get built &mdash; it touched rendering, and the estimate came back as &ldquo;this will interfere with both modules.&rdquo; Winning it took prototyping the behaviour myself and sitting with the engineer until it was obvious. It became the core claim of an <strong class="dark">invention patent I filed as lead applicant</strong>, and was reused on later AI surfaces instead of being redesigned each time.</p>
 
-        <div class="cons"><p class="cons__t">Designing AI Search around human agency</p></div>
+        <h3 class="sec-claim" style="margin-top: var(--gap-sub); margin-bottom: var(--bind-claim);">Designing AI Search around human agency</h3>
 
         <div class="trade" aria-label="Two tensions and the principle each produced">
           <div class="trade__head">
@@ -4166,12 +4335,12 @@ main section[id]{scroll-margin-top:140px}
           </div>
           <div class="trade__row">
             <p class="trade__k">01</p>
-            <p class="trade__v">Different travelers need different amounts of AI.</p>
+            <p class="trade__v">The same traveler needs different modes at different moments.</p>
             <p class="trade__v trade__v--good">Preserve user choice.</p>
           </div>
           <div class="trade__row">
             <p class="trade__k">02</p>
-            <p class="trade__v">AI changes the page while it is being used.</p>
+            <p class="trade__v">AI keeps changing the page while it is being read.</p>
             <p class="trade__v trade__v--good">Preserve user control.</p>
           </div>
         </div>

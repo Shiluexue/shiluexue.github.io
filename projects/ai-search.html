@@ -950,14 +950,71 @@ main section[id]{scroll-margin-top:140px}
 .fw--two{
   grid-template-columns:repeat(2, 260px) !important;
   justify-content:center !important;
-  column-gap:48px !important;
+  column-gap:128px !important;
 }
 /* Fixed-height AI block — truncated content + View more button */
 .fw-zone--fixed{
-  max-height:130px;
+  min-height:200px;
+  max-height:200px;
   overflow:hidden;
   position:relative;
-  padding-bottom:34px; /* room for the sticky button */
+  flex:0 0 200px; /* fixed height, no grow */
+  padding-bottom:36px; /* room for View more button */
+}
+/* skeleton removed — now uses loading state */
+
+/* Streaming lines inside fixed-height block — position absolute, fill zone */
+.fw-ai-stream--fixed{
+  position:absolute; left:0; right:0; top:0; bottom:36px;
+  padding:10px 14px 0;
+  display:flex; flex-direction:column; gap:9px;
+  opacity:0;
+  animation: fwStreamShow 7.5s cubic-bezier(.4,0,.2,1) infinite;
+}
+/* Lines reveal sequentially within the fixed zone */
+.fw-ai-stream--fixed .fw-line--anim{ animation: fwLineIn 7.5s steps(1, end) infinite; }
+.fw-ai-stream--fixed .fw-line--anim:nth-of-type(1){ animation-delay:.05s; }
+.fw-ai-stream--fixed .fw-line--anim:nth-of-type(2){ animation-delay:.28s; }
+.fw-ai-stream--fixed .fw-line--anim:nth-of-type(3){ animation-delay:.51s; }
+.fw-ai-stream--fixed .fw-line--anim:nth-of-type(4){ animation-delay:.74s; }
+.fw-ai-stream--fixed .fw-line--anim:nth-of-type(5){ animation-delay:.97s; }
+.fw-ai-stream--fixed .fw-line--anim:nth-of-type(6){ animation-delay:1.20s; }
+.fw-ai-stream--fixed .fw-line--anim:nth-of-type(7){ animation-delay:1.43s; }
+.fw-ai-stream--fixed .fw-line--anim:nth-of-type(8){ animation-delay:1.66s; }
+
+/* View more button: appears after streaming is done */
+.fw-viewmore{
+  position:absolute; left:50%; bottom:8px;
+  transform:translateX(-50%);
+  background:#fff; color:var(--c-blue);
+  border:1px solid rgba(10,102,194,.20);
+  border-radius:999px; padding:5px 14px;
+  font-size:9px; font-weight:800; letter-spacing:.06em;
+  font-family:inherit;
+  box-shadow:0 2px 6px rgba(15,24,33,.06);
+  cursor:default;
+  opacity:0;
+  animation: fwViewMoreIn 7.5s cubic-bezier(.4,0,.2,1) infinite;
+}
+@keyframes fwViewMoreIn{
+  0%,  55% { opacity:0; transform:translate(-50%, 4px); }
+  62%, 92% { opacity:1; transform:translate(-50%, 0); }
+  100%     { opacity:0; transform:translate(-50%, 4px); }
+}
+
+/* Fade strip above View more */
+.fw-zone--fixed::before{
+  content:"";
+  position:absolute; left:0; right:0; bottom:34px; height:22px;
+  background:linear-gradient(to bottom, rgba(239,244,251,0), #EFF4FB);
+  pointer-events:none;
+  opacity:0;
+  animation: fwFadeIn 7.5s ease-in-out infinite;
+}
+@keyframes fwFadeIn{
+  0%,  55% { opacity:0; }
+  62%, 92% { opacity:1; }
+  100%     { opacity:0; }
 }
 .fw-viewmore{
   position:absolute; left:50%; bottom:8px;
@@ -1737,18 +1794,33 @@ main section[id]{scroll-margin-top:140px}
   justify-content:space-between;
   column-gap:32px;
   margin:26px 0 8px;
-  padding:44px 40px 48px;
+  padding:44px 48px 44px;
   background:var(--c-container-bg);
   border-radius:20px;
   align-items:start;
 }
-.fw-opt{ display:flex; flex-direction:column; gap:14px; align-items:flex-start; }
+.fw-opt{ display:flex; flex-direction:column; gap:10px; align-items:flex-start; }
 .fw-opt__label{
   font-size:13px; font-weight:800; letter-spacing:.005em;
   color:var(--c-body); opacity:.6;
 }
 .fw-opt--pick .fw-opt__label{ color:var(--c-blue); opacity:1; }
 .fw-opt__name{ font-size:15px; font-weight:800; color:var(--c-text-deep); margin:0; letter-spacing:-.005em; }
+.fw-opt__desc{
+  margin:14px 0 0; font-size:13px; line-height:1.5; color:var(--c-body);
+  max-width:34ch;
+}
+.fw-opt__adopted{
+  margin:6px 0 0;
+  font-size:11px; font-weight:600; color:var(--c-body); opacity:.6;
+  letter-spacing:.005em;
+}
+.fw-opt__adopted span{
+  display:inline-block;
+  font-size:10px; font-weight:800; letter-spacing:.20em;
+  text-transform:uppercase; color:var(--c-body); opacity:.55;
+  margin-right:8px;
+}
 
 /* Phone frame: 375 x 812 (iPhone) — stays proportional at any width */
 .fw-phone{
@@ -1791,7 +1863,7 @@ main section[id]{scroll-margin-top:140px}
 }
 .fw-zone--ai .fw-tag{ color:var(--c-blue); opacity:.9; }
 .fw-zone--results .fw-tag{ color:var(--c-body); opacity:.42; padding-left:2px; }
-.fw-line{ height:6px; border-radius:3px; background:rgba(10,102,194,.24); }
+.fw-line{ height:6px; border-radius:3px; background:rgba(10,102,194,.24); width:90%; }
 .fw-line--s{ width:58%; }
 .fw-line--m{ width:84%; }
 
@@ -1894,7 +1966,7 @@ main section[id]{scroll-margin-top:140px}
 .fw-ai-stream{
   position:absolute; inset:0;
   padding:12px 14px;
-  display:flex; flex-direction:column; gap:7px;
+  display:flex; flex-direction:column; gap:9px;
   opacity:0;
   animation: fwStreamShow 7.5s cubic-bezier(.4,0,.2,1) infinite;
 }
@@ -1904,9 +1976,9 @@ main section[id]{scroll-margin-top:140px}
   100%     { opacity:0; }
 }
 .fw-line--anim{
-  transform-origin: left center;
-  transform: scaleX(0);
-  animation: fwLineIn 7.5s cubic-bezier(.4,0,.2,1) infinite;
+  opacity: 0;
+  width: 90% !important;
+  animation: fwLineIn 7.5s steps(1, end) infinite;
 }
 .fw-ai-stream .fw-line--anim:nth-of-type(1){ animation-delay:.00s; }
 .fw-ai-stream .fw-line--anim:nth-of-type(2){ animation-delay:.35s; }
@@ -1919,9 +1991,9 @@ main section[id]{scroll-margin-top:140px}
 .fw-ai-stream .fw-line--anim:nth-of-type(9){ animation-delay:2.80s; }
 .fw-ai-stream .fw-line--anim:nth-of-type(10){ animation-delay:3.15s; }
 @keyframes fwLineIn{
-  0%,  22% { transform: scaleX(0); }
-  32%, 92% { transform: scaleX(1); }
-  100%     { transform: scaleX(0); }
+  0%,  30% { opacity: 0; }
+  30.01%, 92% { opacity: 1; }
+  100%     { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -2054,11 +2126,12 @@ main section[id]{scroll-margin-top:140px}
 .fw-ai-stream--sheet .fw-line--anim{
   animation-name: fwSheetLineIn;
   animation-duration: 7.5s;
+  animation-timing-function: steps(1, end);
 }
 @keyframes fwSheetLineIn{
-  0%,  20% { transform: scaleX(0); }    /* still loading */
-  36%, 92% { transform: scaleX(1); }    /* streams in by ~36%, stays fully drawn until release */
-  100%     { transform: scaleX(0); }
+  0%,  30% { opacity: 0; }
+  30.01%, 92% { opacity: 1; }
+  100%     { opacity: 0; }
 }
 .fw-ai-stream--sheet .fw-line--anim:nth-of-type(1){ animation-delay:.05s; }
 .fw-ai-stream--sheet .fw-line--anim:nth-of-type(2){ animation-delay:.25s; }
@@ -2190,16 +2263,15 @@ main section[id]{scroll-margin-top:140px}
 
 
 
-/* ---- Pattern explanation (two-item side-by-side intro block) ------------ */
+/* ---- Pattern explanation (two-item side-by-side intro block, inside .fw) ---- */
 .pattern{
   display:grid;
   grid-template-columns:repeat(2, minmax(0, 440px));
   justify-content:center;
-  gap:48px;
-  margin:26px 0 0;
-  padding:36px 40px 32px;
-  background:var(--c-container-bg);
-  border-radius:20px;
+  gap:56px;
+  margin:0 0 40px;
+  padding-bottom:32px;
+  border-bottom:1px solid rgba(15,24,33,.08);
 }
 .pattern__item{
   display:flex; flex-direction:column; gap:8px;
@@ -2227,7 +2299,7 @@ main section[id]{scroll-margin-top:140px}
   margin-right:8px;
 }
 @media (max-width:800px){
-  .pattern{ grid-template-columns:1fr; gap:20px; }
+  .pattern{ grid-template-columns:1fr; gap:32px; }
 }
 
 @media (max-width:900px){
@@ -3738,18 +3810,18 @@ main section[id]{scroll-margin-top:140px}
                   <div class="fw-ai-stream">
                     <span class="fw-tag">AI answer</span>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
-                    <div class="fw-line fw-line--anim fw-line--s"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
-                    <div class="fw-line fw-line--anim fw-line--s"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
-                    <div class="fw-line fw-line--anim fw-line--s"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
                   </div>
                 </div>
               </div>
@@ -3784,13 +3856,13 @@ main section[id]{scroll-margin-top:140px}
                   </div>
                   <div class="fw-ai-stream fw-ai-stream--sheet">
                     <span class="fw-tag" style="color:var(--c-blue);opacity:.9">AI answer</span>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
-                    <div class="fw-line fw-line--anim fw-line--s"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--s"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
                   </div>
                 </div>
                 </div>
@@ -3828,15 +3900,15 @@ main section[id]{scroll-margin-top:140px}
                   <div class="fw-ai-stream">
                     <span class="fw-tag">AI answer</span>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
-                    <div class="fw-line fw-line--anim fw-line--s"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
-                    <div class="fw-line fw-line--anim fw-line--s"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
                   </div>
                 </div>
                 <div class="fw-zone fw-zone--results fw-zone--grow">
@@ -3897,44 +3969,44 @@ main section[id]{scroll-margin-top:140px}
 
         <p class="p">After choosing the Hybrid AI + Search framework, the next question was <strong class="dark">how much space AI should take on the page.</strong> Two patterns emerged:</p>
 
-        <div class="pattern">
-          <div class="pattern__item">
-            <p class="pattern__k">Fixed-height AI block</p>
-            <p class="pattern__v">AI is placed in a predefined container above Search results. It keeps the page structure stable and prevents Search feeds from being pushed down, but the fixed space can limit how much of a complex answer is presented.</p>
-            <p class="pattern__ref"><span class="pattern__ref-k">Adopted by</span> Google &middot; RED &middot; WeChat</p>
-          </div>
-          <div class="pattern__item">
-            <p class="pattern__k">Full answer expansion</p>
-            <p class="pattern__v">AI starts compact and expands as it generates. It allows the answer to fully unfold and keeps Search feeds visible earlier during generation, but the growing module continuously pushes content below and affects page stability.</p>
-            <p class="pattern__ref"><span class="pattern__ref-k">Adopted by</span> Quark &middot; Baidu</p>
-          </div>
-        </div>
-
         <div class="fw fw--two" aria-label="Fixed-height vs full expansion — two page structures">
           <!-- OPTION A · Fixed-height -->
           <div class="fw-opt">
             <span class="fw-opt__label">Option A</span>
             <p class="fw-opt__name">Fixed-height AI block</p>
-            <div class="fw-phone">
+            <div class="fw-phone fw-phone--anim" aria-label="Fixed-height AI block: loading → streaming → View more">
               <span class="fw-island"></span>
               <div class="fw-screen">
                 <div class="fw-bar"><span class="fw-bar__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span></div>
                 <div class="fw-zone fw-zone--ai fw-zone--fixed">
-                  <span class="fw-tag">AI answer</span>
-                  <div class="fw-line fw-line--m"></div>
-                  <div class="fw-line"></div>
-                  <div class="fw-line fw-line--s"></div>
-                  <div class="fw-line fw-line--m"></div>
+                  <div class="fw-ai-load">
+                    <span class="fw-ai-load__spinner" aria-hidden="true"></span>
+                    <span class="fw-ai-load__label">Searching for references&hellip;</span>
+                  </div>
+                  <div class="fw-ai-stream fw-ai-stream--fixed">
+                    <span class="fw-tag">AI answer</span>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                  </div>
                   <button class="fw-viewmore" type="button">View more</button>
                 </div>
                 <div class="fw-zone fw-zone--results fw-zone--grow">
                   <span class="fw-tag">Search results</span>
                   <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
                   <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
+                  <div class="fw-cards"><div class="fw-card"></div><div class="fw-card"></div></div>
                 </div>
               </div>
               <span class="fw-home"></span>
             </div>
+            <p class="fw-opt__desc">A capped container. Answers are truncated; the page never moves.</p>
+            <p class="fw-opt__adopted"><span>Adopted by</span> Google &middot; REDnotes &middot; WeChat</p>
           </div>
 
           <!-- OPTION B · Full expansion (reuse Option C animation) -->
@@ -3953,15 +4025,15 @@ main section[id]{scroll-margin-top:140px}
                   <div class="fw-ai-stream">
                     <span class="fw-tag">AI answer</span>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
-                    <div class="fw-line fw-line--anim fw-line--s"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
                     <div class="fw-line fw-line--anim"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
-                    <div class="fw-line fw-line--anim fw-line--s"></div>
-                    <div class="fw-line fw-line--anim fw-line--m"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
+                    <div class="fw-line fw-line--anim"></div>
                   </div>
                 </div>
                 <div class="fw-zone fw-zone--results fw-zone--grow">
@@ -3974,6 +4046,8 @@ main section[id]{scroll-margin-top:140px}
               </div>
               <span class="fw-home"></span>
             </div>
+            <p class="fw-opt__desc">The answer unfolds in place; the feed is pushed down as it writes.</p>
+            <p class="fw-opt__adopted"><span>Adopted by</span> Quark &middot; Baidu</p>
           </div>
         </div>
 

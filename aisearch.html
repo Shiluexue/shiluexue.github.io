@@ -209,9 +209,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, .card:focus-vis
   /* BREAKS — air above a heading. Proportional to the level it announces.
      Reference: dingtalk / homepage-design give their .l1 section 160+32=192px.
      T1 here outranks that .l1, T3 is its working equivalent.               */
-  --gap-movement:272px;      /* T1 break — 换乐章                            */
-  --gap-beat:176px;          /* T3 break — 换步骤 (01 / 02 / 03)             */
-  --gap-section:112px;       /* T3-light — 序言里的分节，内容比章节 beat 轻     */
+  --gap-movement:240px;      /* T1 break — 换乐章                            */
+  --gap-beat:144px;          /* T3 break — 换步骤 (01 / 02 / 03)             */
   --gap-sub:64px;            /* T5 break — 换案例                            */
   --gap-block:48px;          /* body ↔ component / figure / panel            */
   --gap-para:24px;           /* para ↔ para                                 */
@@ -1639,14 +1638,14 @@ main section[id]{scroll-margin-top:140px}
 /* ============ Responsive ============ */
 @media (max-width:1080px){
   :root{--container-width:100%;--side-pad:24px;--gap-l2-top:56px;--container-pad:48px;
-        --t-movement-size:46px;--gap-movement:224px;--gap-beat:148px;--gap-section:96px}
+        --t-movement-size:46px;--gap-movement:200px;--gap-beat:120px}
   .nav{gap:48px}
   .why-container{padding:48px 56px}
 }
 @media (max-width:900px){
   :root{--side-pad:20px;--gap-l2-top:48px;
         --t-movement-size:40px;--t-claim-size:24px;
-        --gap-movement:192px;--gap-beat:128px;--gap-section:88px;--bind-subject:56px}
+        --gap-movement:176px;--gap-beat:104px;--bind-subject:56px}
   .nav{gap:32px}
   .p{font-size:17px}
   .cs-meta-box{padding:36px 40px;gap:32px}
@@ -1655,7 +1654,7 @@ main section[id]{scroll-margin-top:140px}
   :root{--side-pad:24px;--gap-l2-top:40px;
         --t-movement-size:34px;--t-subject-size:19px;--t-claim-size:22px;
         --t-sub-size:18px;--t-lede-size:18px;
-        --gap-movement:144px;--gap-beat:96px;--gap-section:72px;--gap-sub:48px;--gap-block:36px;
+        --gap-movement:128px;--gap-beat:80px;--gap-sub:48px;--gap-block:36px;
         --bind-subject:40px}
   .site-header{height:68px}
   .brand{font-size:15px;gap:10px;white-space:nowrap}
@@ -1678,7 +1677,7 @@ main section[id]{scroll-margin-top:140px}
 }
 @media (max-width:600px){
   :root{--side-pad:20px;--t-movement-size:29px;--t-claim-size:20px;
-        --gap-movement:112px;--gap-beat:80px;--gap-section:60px}
+        --gap-movement:104px;--gap-beat:64px}
   .site-header{height:60px}
   .brand span{font-size:15px}
   .brand-avatar,.brand-avatar img{width:30px;height:32px}
@@ -2556,12 +2555,12 @@ main section[id]{scroll-margin-top:140px}
 .pro-beat{
   display:flex; flex-direction:column;
   gap:var(--gap-block);
-  padding:var(--gap-section) 0 0;
+  padding:var(--gap-beat) 0 0;
   margin:0;
 }
 /* flex gap is uniform, so pull the beat label back to its bind distance */
 .pro-beat > .t-sub{ margin-bottom:calc(var(--bind-sub) - var(--gap-block)); }
-.pro-beat--lede{ padding-top:0; }   /* T2 subject already paid --bind-subject */
+.pro-beat--lede{ padding-top:var(--gap-sub); }
 .pro-beat > .op-beat__label{ margin:0; }
 .pro-beat > *{ margin-top:0; }
 .pro-beat > *:last-child{ margin-bottom:0; }
@@ -2638,18 +2637,6 @@ main section[id]{scroll-margin-top:140px}
 .strat__tag::after{
   content:"\2192"; font-size:15px; color:var(--c-blue);
   transition:transform .25s cubic-bezier(.4,0,.2,1);
-}
-.strat__row--soon{ cursor:default; }
-.strat__row--soon:hover{ background:transparent; }
-.strat__row--soon .strat__n,
-.strat__row--soon .strat__h{ opacity:.42; }
-.strat__row--soon .strat__tag{ color:var(--c-body); opacity:.45; }
-.strat__row--soon .strat__tag::after{ visibility:hidden; }
-.strat__soon{
-  font-size:10.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--c-body); opacity:.5; white-space:nowrap;
-  padding:4px 9px; border-radius:999px; background:rgba(15,24,33,.055);
-  margin-right:12px;
 }
 @media (max-width:720px){
   .strat__row{ grid-template-columns:32px 1fr; row-gap:4px; padding:14px 4px; }
@@ -3141,33 +3128,6 @@ main section[id]{scroll-margin-top:140px}
   .spec__rail{ display:none; }
   .spec__stops{ grid-template-columns:1fr; gap:22px; }
 }
-.wideshot{
-  background:var(--c-container-bg);
-  border-radius:16px;
-  padding:28px;
-  margin:26px 0 var(--gap-para);
-}
-.wideshot img{ display:block; width:100%; height:auto; }
-@media (max-width:900px){ .wideshot{ padding:18px; } }
-.vidstage{
-  margin-top:18px; background:var(--c-container-bg); border-radius:16px;
-  padding:22px 0; display:flex; justify-content:center;
-}
-.vidstage video{
-  display:block; width:262px; max-width:72%; height:auto;
-  border-radius:22px; background:#fff;
-  box-shadow:0 1px 2px rgba(15,24,33,.06), 0 8px 26px -12px rgba(15,24,33,.20);
-}
-@media (max-width:900px){ .vidstage video{ width:220px; } }
-.vidslot{
-  width:262px; max-width:72%; aspect-ratio:540/1116;
-  border:1px dashed rgba(15,24,33,.22); border-radius:22px; background:#fff;
-  display:flex; align-items:center; justify-content:center; text-align:center;
-  padding:22px; box-sizing:border-box;
-  font-size:12px; font-weight:800; letter-spacing:.005em;
-  color:var(--c-body); opacity:.6; line-height:1.8;
-}
-@media (max-width:900px){ .vidslot{ width:220px; } }
 </style>
 </head>
 
@@ -3316,24 +3276,32 @@ main section[id]{scroll-margin-top:140px}
               <span class="strat__h">Answer what retrieval couldn&rsquo;t</span>
               <span class="strat__tag">EPIC</span>
             </a>
-            <div class="strat__row strat__row--soon" aria-disabled="true">
+            <a class="strat__row" href="#personalization">
               <span class="strat__n">02</span>
               <span class="strat__h">Personalize what to consider</span>
-              <span class="strat__tag"><span class="strat__soon">Coming soon</span>AI Personalization</span>
-            </div>
-            <div class="strat__row strat__row--soon" aria-disabled="true">
+              <span class="strat__tag">AI Personalization</span>
+            </a>
+            <a class="strat__row" href="#chat">
               <span class="strat__n">03</span>
               <span class="strat__h">Decide how each intent is served</span>
-              <span class="strat__tag"><span class="strat__soon">Coming soon</span>Search &times; AI</span>
-            </div>
+              <span class="strat__tag">Search &times; AI</span>
+            </a>
           </div>
       </div>
     </section>
 
+    <!-- ============ TEMPORARY · A/B story switch (remove before publishing) ============ -->
+    <div class="ab" id="ab-switch">
+      <span class="ab__tag">Draft comparison</span>
+      <div class="ab__btns">
+        <button class="ab__btn" type="button" data-ab="b" aria-pressed="true">B &middot; Linear Progression</button>
+      </div>
+      <span class="ab__note" id="ab-note">Why now &rarr; Break &rarr; <strong>AI&rsquo;s role</strong> &rarr; Design &rarr; Interaction &rarr; Validation &rarr; <strong>Iteration</strong></span>
+    </div>
 
     <div id="epic-a" hidden>
     <!-- ============ 4. Chapter 02 — EPIC ============ -->
-    <section class="container" id="epic-legacy">
+    <section class="container" id="epic">
       <p class="t-rail">Chapter 01 &middot; Explore Intelligent Content (EPIC)</p>
       <h1 class="t-movement">Extending Search<span class="mark-dot" aria-hidden="true"></span></h1>
       <h2 class="t-subject">From Keywords to Complex Intent</h2>
@@ -3677,7 +3645,7 @@ main section[id]{scroll-margin-top:140px}
 
     <!-- ============ Chapter 1 · EPIC — VERSION B ============ -->
     <div id="epic-b">
-    <section class="container" id="epic">
+    <section class="container">
       <p class="t-rail">Chapter 01 &middot; Explore Intelligent Content (EPIC)</p>
       <h1 class="t-movement">Extending Search<span class="mark-dot" aria-hidden="true"></span></h1>
       <h2 class="t-subject">From Keywords to Complex Intent</h2>
@@ -4288,78 +4256,92 @@ main section[id]{scroll-margin-top:140px}
 
       <div class="op-beat">
         <p class="t-beat-head"><span class="t-beat-num">05</span><span class="t-beat-name">Designing for user control</span></p>
-        <h3 class="sec-claim">AI doesn&rsquo;t ask for the page. It takes it the moment it starts writing.</h3>
+        <h3 class="sec-claim">AI and Search can coexist. But can users stay in control?</h3>
 
-        <p class="p">Traditional Search gives users control through explicit actions. Users decide what to search, what to open, and when to move forward.</p>
+        <p class="p">The hybrid framework solved one problem: AI could finally help travelers through complex decisions, and Search stayed available underneath it. But a new tension emerged &mdash; <strong class="dark">not every traveler wants the same thing.</strong></p>
 
-        <p class="p">AI changes this relationship. <strong class="dark">It generates, expands, and changes the page on its own.</strong></p>
+        <p class="op-stairs">
+          <span>Some travelers want AI to guide them.</span>
+          <span>Some just want to browse.</span>
+          <span>And even travelers who love AI don&rsquo;t want AI to take over their journey.</span>
+        </p>
 
-        <p class="p">The challenge became: <strong class="dark">how do we keep users in control when the experience itself is dynamic?</strong></p>
+        <p class="op-punch">How do we give AI a bigger role <strong>without taking control away from users?</strong></p>
 
-        <h3 class="sec-claim" style="margin-top: var(--gap-sub); margin-bottom: var(--bind-claim);">Challenge 01 &mdash; One experience cannot satisfy everyone</h3>
+        <h4 class="b-case__h">Challenge 01 &mdash; Let users choose how they search</h4>
+        <p class="p">AI is useful, but it isn&rsquo;t always the first thing a traveler wants. For a complex query it provides the guidance. Mid-exploration, the same person would rather be browsing more options, comparing products, or scanning the feed. <strong class="dark">Forcing everyone through the AI answer creates friction for whoever didn&rsquo;t need it yet.</strong></p>
 
-        <p class="p">Once AI and Search share the same page, users have different expectations. Some want AI guidance. Others want to browse results directly. And even the ones who want AI may not want to wait for the answer to finish.</p>
+        <div class="ruleblock ruleblock--blue">
+          <span class="ruleblock__label">Design principle</span>
+          <p class="ruleblock__body">AI should be <strong>available, never mandatory.</strong></p>
+        </div>
 
-        <p class="p">How can we support both &mdash; <strong class="dark">without forcing users into one mode?</strong></p>
-
-        <p class="t-sub">Solution &mdash; Make AI available, never mandatory</p>
-        <p class="p">Instead of choosing AI or Search for users, we let users switch based on their moment.</p>
+        <p class="t-sub">Solution &mdash; Make AI and Search switchable</p>
+        <p class="p">Rather than picking one experience for everyone, the page lets the traveler decide what leads.</p>
 
         <div class="op-caps op-caps--2">
           <div class="op-cap">
-            <span class="op-cap__num">Want AI guidance?</span>
+            <span class="op-cap__num">Want AI guidance</span>
             <p class="op-cap__title">Stay with the answer</p>
-            <p class="op-cap__desc">The module holds the top of the page and keeps writing.</p>
-            <div class="vidstage">
-              <video src="../videos/epic-05-mode-a.mp4" poster="../videos/epic-05-mode-a.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The AI module stays expanded at the top of the results page and keeps streaming the answer while the traveler reads"></video>
-            </div>
+            <p class="op-cap__desc">The module holds the top of the page and expands as it writes.</p>
           </div>
           <div class="op-cap">
-            <span class="op-cap__num">Don&rsquo;t want to wait?</span>
-            <p class="op-cap__title">Swipe up &mdash; come back when it&rsquo;s ready</p>
-            <p class="op-cap__desc">The answer condenses to a bar. The bar tells you when it&rsquo;s done.</p>
-            <div class="vidstage">
-              <video src="../videos/epic-05-mode-b.mp4" poster="../videos/epic-05-mode-b.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Swiping up condenses the AI answer into a pinned bar so the feed takes the screen; the bar switches to Completed the answer, and tapping it returns to the full answer"></video>
-            </div>
+            <span class="op-cap__num">Want to explore</span>
+            <p class="op-cap__title">Swipe up to pin it</p>
+            <p class="op-cap__desc">The answer condenses to a bar, and the screen belongs to the feed.</p>
           </div>
         </div>
 
-        <p class="p"><strong class="dark">AI should guide the journey, not own the journey.</strong> Users stay free to switch between answers and exploration.</p>
+        <p class="chain" style="opacity:.6">Common pattern &nbsp; Search <span class="chain__s">&rarr;</span> AI answer <span class="chain__s">&rarr;</span> <span class="chain__cost">done</span></p>
+        <p class="chain">EPIC &nbsp; Search <span class="chain__s" style="color:var(--c-blue)">&#8645;</span> AI &mdash; <strong>reachable in both directions, at any moment</strong></p>
 
-        <figure class="wideshot">
-          <img loading="lazy" decoding="async" src="../images/epic-05-modes.jpg" alt="Four states of the AI module on the Trip.com results page: AI generating at the top of the page, swiped up so the answer condenses to a bar and the feed takes the screen, the bar showing &quot;Completed the answer&quot; as the ready cue, and the full answer returned to with day-by-day itinerary and place cards" />
-        </figure>
+        <p class="p">Most AI Search treats the answer as a terminus. Here it is one of two places to be: scroll down and the listings own the screen, scroll back up and the answer expands again. <strong class="dark">The choice stays open while they read</strong> &mdash; which a toggle could never do, because a toggle asks people to choose before they know what the answer says.</p>
 
-                <h3 class="sec-claim" style="margin-top: var(--gap-sub); margin-bottom: var(--bind-claim);">Challenge 02 &mdash; AI should not take over the page while generating</h3>
+        <div class="ph">[ AI module &middot; expanded, pinned, and returned to &mdash; screens ]</div>
 
-        <p class="p">Even when users choose AI, a new problem appears. <strong class="dark">AI keeps generating while users are reading.</strong></p>
+        <h4 class="b-case__h">Challenge 02 &mdash; The page was still moving without permission</h4>
+        <p class="p">Giving people the choice solved the first problem and exposed the next one: <strong class="dark">AI was still generating.</strong> Unlike a traditional results page, this one was no longer finished when the traveler started reading it. Content kept arriving, height kept growing, and the thing they were looking at kept sliding down.</p>
 
-        <p class="p">When generation moves faster than users scroll, the answer keeps expanding, the feed keeps moving, and users lose their position. In one session a traveler reached for a hotel card three times &mdash; each time the next line pushed it <strong class="dark">200 pixels down the screen.</strong></p>
+        <p class="p">In the extreme case, <strong class="dark">AI generated faster than a person could scroll.</strong></p>
 
-        <p class="p">The page starts following the model, instead of the traveler.</p>
+        <div class="ph">[ Competitor case &middot; Quark &mdash; the feed outrunning the scroll ]</div>
 
-        <div class="vidstage">
-          <div class="vidslot">[ Competitor case &middot; Quark &mdash;<br />the feed outrunning the scroll ]</div>
+        <p class="p">I watched a session where someone reached for a card and <strong class="dark">it moved 200 pixels before the tap landed.</strong> They tried twice, then left. The experience read as <em>the AI owns this screen, not me</em> &mdash; and that recording ended the argument internally.</p>
+
+        <div class="ruleblock ruleblock--blue">
+          <span class="ruleblock__label">Design principle</span>
+          <p class="ruleblock__body">AI output should be <strong>paced by the user, not by the model.</strong></p>
         </div>
 
-        <p class="t-sub">Solution &mdash; Make generation respond to users</p>
-        <p class="p">We changed the relationship between AI and interaction. <strong class="dark">User actions become the control signal.</strong></p>
+        <p class="t-sub">Solution &mdash; Make generation respond to the user</p>
+        <p class="p">We changed which side yields. AI can keep thinking, but a user action always comes first: scrolling pauses generation, a finger on the page freezes the stream, and lifting it resumes exactly where it stopped. No button, no setting, no mode.</p>
 
-        <p class="chain" style="margin-bottom:26px">Scroll <span class="chain__s">&rarr;</span> <strong>generation pauses</strong> &nbsp;&nbsp;&nbsp; Stop <span class="chain__s">&rarr;</span> <strong>generation resumes</strong></p>
+        <p class="chain">Generating <span class="chain__s">&rarr;</span> touch <span class="chain__s">&rarr;</span> <strong>page freezes</strong> <span class="chain__s">&rarr;</span> explore <span class="chain__s">&rarr;</span> release <span class="chain__s">&rarr;</span> resumes</p>
 
-        <p class="p">Every other product hands the traveler a Stop button &mdash; asking them to interrupt AI in AI&rsquo;s own language. Here, reaching for something already says it. <strong class="dark">AI adapts to user attention, not the other way around.</strong></p>
+        <p class="p"><strong class="dark">Scrolling becomes the control.</strong> Every other product asks the traveler to press Pause, Stop or Cancel &mdash; to interrupt the AI in the AI&rsquo;s own language. Here the ordinary act of reaching for something already says <em>I want to look at this,</em> and the system gets out of the way. The page stops fighting the user: <strong class="dark">AI generates, the traveler navigates.</strong></p>
 
-        <div class="vidstage">
-          <div class="vidslot">[ Interaction &middot; scroll to pause,<br />stop to resume ]</div>
-        </div>
+        <div class="ph">[ Interaction sequence &middot; press to pause, release to resume &mdash; GIF ]</div>
 
         <p class="p">It was the hardest piece to get built &mdash; it touched rendering, and the estimate came back as &ldquo;this will interfere with both modules.&rdquo; Winning it took prototyping the behaviour myself and sitting with the engineer until it was obvious. It became the core claim of an <strong class="dark">invention patent I filed as lead applicant</strong>, and was reused on later AI surfaces instead of being redesigned each time.</p>
 
         <h3 class="sec-claim" style="margin-top: var(--gap-sub); margin-bottom: var(--bind-claim);">Designing AI Search around human agency</h3>
 
-        <div class="ruleblock ruleblock--blue">
-          <span class="ruleblock__label">Design principle</span>
-          <p class="ruleblock__body">AI should <strong>assist the journey &mdash; never take control of it.</strong></p>
+        <div class="trade" aria-label="Two tensions and the principle each produced">
+          <div class="trade__head">
+            <p class="trade__k">&nbsp;</p>
+            <p class="trade__opt">The tension</p>
+            <p class="trade__opt trade__opt--pick">The principle</p>
+          </div>
+          <div class="trade__row">
+            <p class="trade__k">01</p>
+            <p class="trade__v">The same traveler needs different modes at different moments.</p>
+            <p class="trade__v trade__v--good">Preserve user choice.</p>
+          </div>
+          <div class="trade__row">
+            <p class="trade__k">02</p>
+            <p class="trade__v">AI keeps changing the page while it is being read.</p>
+            <p class="trade__v trade__v--good">Preserve user control.</p>
+          </div>
         </div>
 
         <p class="p">Two framework decisions and two interaction principles produced V1.</p>

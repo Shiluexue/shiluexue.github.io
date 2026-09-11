@@ -2461,6 +2461,11 @@ main section[id]{scroll-margin-top:140px}
 
 /* ============ Chapter B — section headers & blocks ============ */
 /* ---- T4 CLAIM — 章内正文里最大的东西 ---- */
+/* A Challenge/Solution pair is ONE unit — the reader scans 问题 → 解法.
+   Same size as the beat's own claim; what marks the beat claim is its
+   POSITION (directly under the 40px numeral), not a bigger size. */
+.t-pair{ margin-top:var(--gap-sub); margin-bottom:var(--bind-claim); }
+
 .t-claim,.sec-claim{
   font-size:var(--t-claim-size); font-weight:700; color:var(--c-text-deep);
   letter-spacing:-.015em; line-height:1.3; margin:0 0 var(--bind-claim);
@@ -3168,6 +3173,52 @@ main section[id]{scroll-margin-top:140px}
   color:var(--c-body); opacity:.6; line-height:1.8;
 }
 @media (max-width:900px){ .vidslot{ width:220px; } }
+.chainset{ margin:18px 0 26px; }
+.chainset .chain{ margin:0 0 9px; }
+.chainset .chain:last-child{ margin-bottom:0; }
+.vidsplit{
+  display:grid; grid-template-columns:262px 1fr; gap:40px; align-items:center;
+  background:var(--c-container-bg); border-radius:16px;
+  padding:28px; margin:26px 0 var(--gap-para);
+}
+.vidsplit video{
+  display:block; width:100%; height:auto; border-radius:22px; background:#fff;
+  box-shadow:0 1px 2px rgba(15,24,33,.06), 0 8px 26px -12px rgba(15,24,33,.20);
+}
+.vidsplit .vidslot{ width:100%; max-width:none; }
+.vidsplit__copy > *:first-child{ margin-top:0; }
+.vidsplit__copy .p{ margin:0 0 16px; }
+.vidsplit__copy .p:last-child{ margin-bottom:0; }
+.vidsplit__punch{
+  margin:0; font-size:21px; font-weight:800; line-height:1.45;
+  letter-spacing:-.01em; color:var(--c-text-deep);
+}
+.vidsplit__punch strong{ color:var(--c-blue); }
+@media (max-width:800px){
+  .vidsplit{ grid-template-columns:1fr; gap:24px; padding:20px; justify-items:center; }
+  .vidsplit video{ max-width:240px; }
+  .vidsplit__copy{ width:100%; }
+}
+.personas{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  margin:26px 0 var(--gap-para);
+}
+.persona{
+  background:var(--c-container-bg); border-radius:16px; padding:26px 24px 24px;
+}
+.persona__av{ position:relative; display:block; width:56px; height:56px; margin-bottom:18px; }
+.persona__badge{
+  position:absolute; right:-3px; bottom:-3px;
+  width:24px; height:24px; border-radius:50%;
+  background:#fff; box-shadow:0 0 0 2px var(--c-container-bg);
+  display:flex; align-items:center; justify-content:center;
+}
+.persona__t{
+  font-size:18px; font-weight:800; color:var(--c-text-deep);
+  letter-spacing:-.008em; line-height:1.3; margin:0 0 8px;
+}
+.persona__d{ font-size:15px; line-height:1.6; color:var(--c-body); margin:0; }
+@media (max-width:800px){ .personas{ grid-template-columns:1fr; gap:14px; } }
 </style>
 </head>
 
@@ -4146,7 +4197,7 @@ main section[id]{scroll-margin-top:140px}
           <p class="decision__body">AI takes position one as the information-synthesis layer; the results feed stays completely intact underneath it. Search keeps immediate access, exploration and the paths to book &mdash; and it carries <strong>the five seconds before the answer exists.</strong></p>
         </div>
 
-        <h3 class="sec-claim" style="margin-top: var(--gap-sub); margin-bottom: var(--bind-claim);">Fixed height or full answer expansion?</h3>
+        <h3 class="sec-claim t-pair">Fixed height or full answer expansion?</h3>
 
         <p class="p">After choosing the Hybrid AI + Search framework, the next question was <strong class="dark">how much space AI should take on the page.</strong> Two patterns emerged:</p>
 
@@ -4290,19 +4341,60 @@ main section[id]{scroll-margin-top:140px}
         <p class="t-beat-head"><span class="t-beat-num">05</span><span class="t-beat-name">Designing for user control</span></p>
         <h3 class="sec-claim">AI doesn&rsquo;t ask for the page. It takes it the moment it starts writing.</h3>
 
-        <p class="p">Traditional Search gives users control through explicit actions. Users decide what to search, what to open, and when to move forward.</p>
+        <p class="p">Search used to be predictable. Users scroll when they want. They pause when they need.</p>
 
-        <p class="p">AI changes this relationship. <strong class="dark">It generates, expands, and changes the page on its own.</strong></p>
+        <p class="p">AI changes that. While users explore, <strong class="dark">the page keeps moving as the answer streams in.</strong></p>
 
-        <p class="p">The challenge became: <strong class="dark">how do we keep users in control when the experience itself is dynamic?</strong></p>
+        <p class="p">The experience is no longer controlled by the traveler &mdash; <strong class="dark">it is controlled by generation.</strong></p>
 
-        <h3 class="sec-claim" style="margin-top: var(--gap-sub); margin-bottom: var(--bind-claim);">Challenge 01 &mdash; One experience cannot satisfy everyone</h3>
+        <p class="p">Two things had slipped out of the traveler&rsquo;s hands: <strong class="dark">what the page shows, and when it moves.</strong></p>
 
-        <p class="p">Once AI and Search share the same page, users have different expectations. Some want AI guidance. Others want to browse results directly. And even the ones who want AI may not want to wait for the answer to finish.</p>
+        <h3 class="sec-claim t-pair">Challenge 01 &mdash; One AI experience cannot fit every moment</h3>
 
-        <p class="p">How can we support both &mdash; <strong class="dark">without forcing users into one mode?</strong></p>
+        <p class="p">Once AI became the answer layer for complex queries, a new challenge emerged. <strong class="dark">Not every traveler feels the same way about AI.</strong></p>
 
-        <p class="t-sub">Solution &mdash; Make AI available, never mandatory</p>
+        <div class="personas">
+          <div class="persona">
+            <span class="persona__av">
+              <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true">
+                <circle cx="28" cy="28" r="28" fill="#E6EBF1"/>
+                <circle cx="28" cy="22" r="8.5" fill="#9AA6B3"/>
+                <path d="M11 48c2.8-8.8 9.4-13.2 17-13.2S42.2 39.2 45 48z" fill="#9AA6B3"/>
+              </svg>
+              <span class="persona__badge"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 1.2l1.5 3.9 3.9 1.5-3.9 1.5L8 12l-1.5-3.9L2.6 6.6l3.9-1.5z" fill="#0A66C2"/></svg></span>
+            </span>
+            <p class="persona__t">Open to AI</p>
+            <p class="persona__d">Trusts the answer and wants to read it through.</p>
+          </div>
+          <div class="persona">
+            <span class="persona__av">
+              <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true">
+                <circle cx="28" cy="28" r="28" fill="#E6EBF1"/>
+                <circle cx="28" cy="22" r="8.5" fill="#9AA6B3"/>
+                <path d="M11 48c2.8-8.8 9.4-13.2 17-13.2S42.2 39.2 45 48z" fill="#9AA6B3"/>
+              </svg>
+              <span class="persona__badge"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="5.6" fill="none" stroke="#8A96A3" stroke-width="1.8"/><line x1="4.4" y1="11.6" x2="11.6" y2="4.4" stroke="#8A96A3" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            </span>
+            <p class="persona__t">Resistant to AI</p>
+            <p class="persona__d">Came for the listings. The answer is in the way.</p>
+          </div>
+          <div class="persona">
+            <span class="persona__av">
+              <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true">
+                <circle cx="28" cy="28" r="28" fill="#E6EBF1"/>
+                <circle cx="28" cy="22" r="8.5" fill="#9AA6B3"/>
+                <path d="M11 48c2.8-8.8 9.4-13.2 17-13.2S42.2 39.2 45 48z" fill="#9AA6B3"/>
+              </svg>
+              <span class="persona__badge"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="5.8" fill="none" stroke="#C9863B" stroke-width="1.7"/><path d="M8 4.6V8l2.4 1.6" fill="none" stroke="#C9863B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+            <p class="persona__t">Willing, but impatient</p>
+            <p class="persona__d">Wants the answer &mdash; not the wait that comes with it.</p>
+          </div>
+        </div>
+
+        <p class="p">A fixed AI experience could not adapt to different moments of the journey. How can we give users the value of AI, <strong class="dark">while letting them stay in control?</strong></p>
+
+        <h3 class="sec-claim t-pair">Solution &mdash; Make AI available, never mandatory</h3>
         <p class="p">Instead of choosing AI or Search for users, we let users switch based on their moment.</p>
 
         <div class="op-caps op-caps--2">
@@ -4324,30 +4416,41 @@ main section[id]{scroll-margin-top:140px}
           </div>
         </div>
 
-        <p class="p"><strong class="dark">AI should guide the journey, not own the journey.</strong> Users stay free to switch between answers and exploration.</p>
+        <p class="p">The traveler keeps the <strong class="dark">choice</strong> &mdash; whether AI leads, or the feed does.</p>
 
         <figure class="wideshot">
           <img loading="lazy" decoding="async" src="../images/epic-05-modes.jpg" alt="Four states of the AI module on the Trip.com results page: AI generating at the top of the page, swiped up so the answer condenses to a bar and the feed takes the screen, the bar showing &quot;Completed the answer&quot; as the ready cue, and the full answer returned to with day-by-day itinerary and place cards" />
         </figure>
 
-                <h3 class="sec-claim" style="margin-top: var(--gap-sub); margin-bottom: var(--bind-claim);">Challenge 02 &mdash; AI should not take over the page while generating</h3>
+                <h3 class="sec-claim t-pair">Challenge 02 &mdash; When the page moves while you read</h3>
 
-        <p class="p">Even when users choose AI, a new problem appears. <strong class="dark">AI keeps generating while users are reading.</strong></p>
+        <p class="p">Once users choose to explore AI, a new problem appears. A traditional results page finishes loading, and then the user decides where to go. <strong class="dark">An AI page never finishes.</strong></p>
 
-        <p class="p">When generation moves faster than users scroll, the answer keeps expanding, the feed keeps moving, and users lose their position. In one session a traveler reached for a hotel card three times &mdash; each time the next line pushed it <strong class="dark">200 pixels down the screen.</strong></p>
+        <p class="p">The answer keeps generating while users are reading. The content grows. The layout shifts. The results below keep moving.</p>
 
-        <p class="p">The page starts following the model, instead of the traveler.</p>
+        <p class="p">In one session a traveler reached for the same hotel card three times. Each time, the next line pushed it <strong class="dark">200 pixels down the screen.</strong></p>
 
-        <div class="vidstage">
-          <div class="vidslot">[ Competitor case &middot; Quark &mdash;<br />the feed outrunning the scroll ]</div>
+        <div class="vidsplit">
+          <video src="../videos/epic-05-quark.mp4" poster="../videos/epic-05-quark.jpg" autoplay muted loop playsinline preload="metadata" aria-label="A competitor AI search result page: the answer streams in at the top and the result feed below it is pushed further down the screen with every new line"></video>
+          <div class="vidsplit__copy">
+            <span class="op-cap__num">Competitor case &middot; Quark</span>
+            <p class="p">Every AI Search product inherits this. The feed slides down faster than a thumb can scroll, and whatever the user was reaching for is already gone.</p>
+            <p class="vidsplit__punch">Users are no longer navigating the page &mdash; <strong>they are chasing it.</strong></p>
+          </div>
         </div>
 
-        <p class="t-sub">Solution &mdash; Make generation respond to users</p>
-        <p class="p">We changed the relationship between AI and interaction. <strong class="dark">User actions become the control signal.</strong></p>
+        <h3 class="sec-claim t-pair">Solution &mdash; Make AI generation respond to users</h3>
+        <p class="p">AI can keep thinking. <strong class="dark">Users should control the pace.</strong></p>
 
-        <p class="chain" style="margin-bottom:26px">Scroll <span class="chain__s">&rarr;</span> <strong>generation pauses</strong> &nbsp;&nbsp;&nbsp; Stop <span class="chain__s">&rarr;</span> <strong>generation resumes</strong></p>
+        <div class="chainset">
+          <p class="chain">Scroll <span class="chain__s">&rarr;</span> <strong>pause generation</strong></p>
+          <p class="chain">Hold <span class="chain__s">&rarr;</span> <strong>freeze the stream</strong></p>
+          <p class="chain">Keep browsing <span class="chain__s">&rarr;</span> <strong>resume when ready</strong></p>
+        </div>
 
-        <p class="p">Every other product hands the traveler a Stop button &mdash; asking them to interrupt AI in AI&rsquo;s own language. Here, reaching for something already says it. <strong class="dark">AI adapts to user attention, not the other way around.</strong></p>
+        <p class="p">The page stays stable. AI follows the user&rsquo;s attention. The traveler keeps the <strong class="dark">pace</strong> &mdash; when the page moves, and when it waits.</p>
+
+        <p class="p">Every other product hands the traveler a Stop button &mdash; asking them to interrupt AI in AI&rsquo;s own language. Here, reaching for something already says it.</p>
 
         <div class="vidstage">
           <div class="vidslot">[ Interaction &middot; scroll to pause,<br />stop to resume ]</div>
@@ -4355,7 +4458,7 @@ main section[id]{scroll-margin-top:140px}
 
         <p class="p">It was the hardest piece to get built &mdash; it touched rendering, and the estimate came back as &ldquo;this will interfere with both modules.&rdquo; Winning it took prototyping the behaviour myself and sitting with the engineer until it was obvious. It became the core claim of an <strong class="dark">invention patent I filed as lead applicant</strong>, and was reused on later AI surfaces instead of being redesigned each time.</p>
 
-        <h3 class="sec-claim" style="margin-top: var(--gap-sub); margin-bottom: var(--bind-claim);">Designing AI Search around human agency</h3>
+        <h3 class="sec-claim t-pair">Designing AI Search around human agency</h3>
 
         <div class="ruleblock ruleblock--blue">
           <span class="ruleblock__label">Design principle</span>

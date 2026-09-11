@@ -129,28 +129,18 @@ h1, h2, h3, p, span, a { overflow-wrap: break-word; }
   position: fixed;
   top: 0; left: 0; right: 0;
   width: 100%;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: saturate(180%) blur(8px);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
   z-index: 100;
   height: var(--header-height);
   display: flex; align-items: center;
   border-bottom: 1px solid transparent;
   view-transition-name: site-header;
-  transition: background-color .35s var(--ease-out),
-              backdrop-filter .35s var(--ease-out),
-              -webkit-backdrop-filter .35s var(--ease-out),
-              border-color .35s var(--ease-out),
-              box-shadow .35s var(--ease-out);
 }
 body { padding-top: var(--header-height); }
-.site-header.is-scrolled {
-  /* 0.55 alpha let page text read straight through the bar. 0.86 + blur keeps
-     the nav legible over any content that scrolls underneath it. */
-  background: rgba(255, 255, 255, 0.90);
-  backdrop-filter: saturate(160%) blur(20px);
-  -webkit-backdrop-filter: saturate(160%) blur(20px);
-  border-bottom-color: rgba(15, 24, 33, 0.09);
-  box-shadow: 0 4px 24px -12px rgba(15, 24, 33, 0.14);
-}
+/* Kept for JS compat — no visual change on scroll, header stays stable across pages */
+.site-header.is-scrolled { background: rgba(255, 255, 255, 0.94); }
 .site-header__inner {
   display: flex; align-items: center; justify-content: space-between;
   width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; gap: 16px;
@@ -542,7 +532,8 @@ body { padding-top: var(--header-height); }
 /* The cover morph gets a longer, softer curve than the page cross-fade. */
 ::view-transition-group(*) { animation-duration: .46s; animation-timing-function: cubic-bezier(.32,.72,0,1); }
 ::view-transition-group(site-header) { animation-duration: .01s; }
-::view-transition-old(site-header), ::view-transition-new(site-header) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(site-header){ animation:none; opacity:0; mix-blend-mode:normal }
+::view-transition-new(site-header){ animation:none; opacity:1; mix-blend-mode:normal }
 
 /* Scroll progress */
 .wow-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 9999; transition: width .1s ease-out; }

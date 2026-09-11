@@ -55,7 +55,7 @@ img { max-width: 100%; display: block; }
 }
 .site-header__inner {
   display: flex; align-items: center; justify-content: space-between; width: 100%;
-  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+  max-width: 1200px; margin: 0 auto; padding: 0 24px; gap: 16px;
 }
 .brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 700; color: var(--color-text); }
 .brand-avatar { position: relative; width: 38px; height: 40px; flex-shrink: 0; }
@@ -63,8 +63,27 @@ img { max-width: 100%; display: block; }
 .brand-avatar__hover { opacity: 0; }
 .brand:hover .brand-avatar__default { opacity: 0; }
 .brand:hover .brand-avatar__hover { opacity: 1; }
-.nav { display: flex; gap: 60px; align-items: center; }
-.nav a { font-size: 16px; font-weight: 500; color: var(--color-text); transition: color .25s ease; }
+.nav { display: flex; gap: 40px; align-items: center; }
+.nav a {
+  position: relative;
+  display: inline-flex; align-items: center;
+  min-height: 44px;
+  font-size: 16px; font-weight: 500;
+  color: var(--color-text);
+  transition: color .25s cubic-bezier(.4,0,.2,1);
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 10px;
+  width: 100%; height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .35s cubic-bezier(.65,0,.35,1);
+}
+.nav a:hover::after,
+.nav a.is-active::after { transform: scaleX(1); }
 .nav a:hover { color: var(--color-text-muted); opacity: 1; }
 .nav a.is-active { color: #0A66C2; }
 
@@ -203,11 +222,14 @@ img { max-width: 100%; display: block; }
 .site-header__inner{max-width:1200px !important;margin:0 auto !important;padding:0 24px !important;width:100% !important;box-sizing:border-box}
 
 
-/* ============ Nav unified — same size/spacing across all pages & breakpoints (kills switch-jitter) ============ */
-.nav{display:flex !important;gap:48px !important;align-items:center !important}
-.nav a{font-size:16px !important;font-weight:500 !important;padding:6px 0 !important}
-@media (max-width:900px){.nav{gap:32px !important}}
-@media (max-width:600px){.nav{gap:20px !important}}
+/* ============ Nav unified — must match index.html EXACTLY (kills view-transition ghost) ============ */
+.nav{display:flex !important; gap:40px !important; align-items:center !important}
+.nav a{font-size:16px !important; font-weight:500 !important; min-height:44px !important}
+@media (max-width:1080px){.nav{gap:34px !important}}
+@media (max-width:900px){.nav{gap:26px !important}}
+@media (max-width:768px){.nav{gap:22px !important}}
+@media (max-width:620px){.nav{gap:20px !important}}
+@media (max-width:420px){.nav{gap:14px !important}}
 
 
 
@@ -430,9 +452,7 @@ img { max-width: 100%; display: block; }
 .ab-life__intro{max-width:900px;margin:0 auto 24px;font-size:16px;line-height:1.7;color:var(--color-text);font-weight:400}
 .ab-life__intro strong{color:var(--color-text-deep);font-weight:700}
 .ab-life__chips{max-width:900px;margin:0 auto 40px;display:flex;flex-wrap:wrap;gap:8px}
-.ab-chip{font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--color-text);background:#fff;border:1.5px solid var(--color-divider);border-radius:999px;padding:8px 16px;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1)}
-.ab-chip:hover{border-color:#0A66C2;color:#0A66C2}
-.ab-chip.is-active{background:#0A66C2;border-color:#0A66C2;color:#fff}
+.ab-chip{display:inline-flex;align-items:center;font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--color-text);background:#fff;border:1px solid var(--color-divider);border-radius:999px;padding:7px 15px;user-select:none}
 
 .ab-gallery{display:flex;flex-direction:column;gap:16px;padding:24px 0 0}
 .ab-gallery__row{overflow:hidden;position:relative;mask-image:linear-gradient(to right,transparent 0,#000 60px,#000 calc(100% - 60px),transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,#000 60px,#000 calc(100% - 60px),transparent 100%)}
@@ -575,7 +595,8 @@ body.pal-contact{background-color:#F6FAFF}
 
 .site-header{view-transition-name:site-header}
 ::view-transition-group(site-header){animation-duration:.01s}
-::view-transition-old(site-header),::view-transition-new(site-header){animation:none}
+::view-transition-old(site-header){ animation:none; opacity:0; mix-blend-mode:normal }
+::view-transition-new(site-header){ animation:none; opacity:1; mix-blend-mode:normal }
 </style>
 </head>
 <body>
@@ -824,12 +845,11 @@ body.pal-contact{background-color:#F6FAFF}
         <p class="wow-sec-num"><span class="wow-sec-num__digit">08</span> — LIFE<span class="wow-sec-num__rule"></span></p>
       <h2 class="ab-h2" id="sec-life-anchor">Life beyond design</h2>
         <p class="ab-life__intro">I've been to <strong>20+ countries and 100+ cities</strong>. Danced for <strong>8 years</strong>. I visit local museums wherever I go, and I'm always chasing a new outdoor skill.</p>
-        <div class="ab-life__chips">
-          <button class="ab-chip is-active" data-filter="all">All</button>
-          <button class="ab-chip" data-filter="travel">🌍 Traveling</button>
-          <button class="ab-chip" data-filter="dance">💃 Dancing</button>
-          <button class="ab-chip" data-filter="surf">🌊 Outdoors</button>
-          <button class="ab-chip" data-filter="museum">🎨 Museums</button>
+        <div class="ab-life__chips" aria-label="Life beyond design — themes">
+          <span class="ab-chip">🌍 Traveling</span>
+          <span class="ab-chip">💃 Dancing</span>
+          <span class="ab-chip">🌊 Outdoors</span>
+          <span class="ab-chip">🎨 Museums</span>
         </div>
       </div>
       <div class="ab-gallery">
@@ -1051,25 +1071,7 @@ body.pal-contact{background-color:#F6FAFF}
 </script>
 
 
-<script>
-  // Life gallery — chip filter (dim non-matching photos)
-  (function(){
-    var chips = document.querySelectorAll('.ab-chip');
-    var photos = document.querySelectorAll('.ab-photo');
-    if (!chips.length || !photos.length) return;
-    chips.forEach(function(chip){
-      chip.addEventListener('click', function(){
-        chips.forEach(c => c.classList.remove('is-active'));
-        chip.classList.add('is-active');
-        var f = chip.dataset.filter;
-        photos.forEach(function(p){
-          if (f === 'all' || p.dataset.cat === f){ p.classList.remove('is-dimmed'); }
-          else { p.classList.add('is-dimmed'); }
-        });
-      });
-    });
-  })();
-</script>
+
 
 
 <script>
@@ -1160,7 +1162,7 @@ body.pal-contact{background-color:#F6FAFF}
       var mode = '';
       if (t.closest('a, button')) mode = 'link';
       else if (t.closest('.ab-photo')) mode = 'photo';
-      else if (t.closest('.ab-chip, .ab-craft__item, .ab-tag')) mode = 'chip';
+      else if (t.closest('.ab-craft__item, .ab-tag')) mode = 'chip';
       cursor.classList.remove('mode-link','mode-photo','mode-chip');
       if (mode) cursor.classList.add('mode-' + mode);
     });

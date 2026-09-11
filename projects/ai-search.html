@@ -3252,6 +3252,29 @@ main section[id]{scroll-margin-top:140px}
 .container > .op-beat > .sec-claim.t-pair,
 .container > .op-beat > .t-claim.t-pair{ margin-top:var(--gap-section); margin-bottom:var(--bind-claim); }
 .container > .op-beat > *:last-child{ margin-bottom:0; }
+.vidsplit--rev{ grid-template-columns:1fr 262px; }
+@media (max-width:800px){ .vidsplit--rev{ grid-template-columns:1fr; } }
+.vidsplit .chainset{ margin:0 0 18px; }
+.pausepair{
+  display:grid; grid-template-columns:1fr 228px 228px; gap:30px; align-items:center;
+  background:var(--c-container-bg); border-radius:16px;
+  padding:28px; margin:26px 0 var(--gap-para);
+}
+.pausepair img,
+.pausepair video{
+  display:block; width:228px; height:auto; border-radius:20px; background:#fff;
+  box-shadow:0 1px 2px rgba(15,24,33,.06), 0 8px 26px -12px rgba(15,24,33,.20);
+}
+.pausepair video{ margin-left:18px; }
+.pausepair .chainset{ margin:0 0 20px; }
+.pausepair .chain{ font-size:17px; }
+.pausepair .p{ margin:0; }
+@media (max-width:1000px){
+  .pausepair{ grid-template-columns:1fr 1fr; gap:24px; }
+  .pausepair__copy{ grid-column:1 / -1; }
+  .pausepair img, .pausepair video{ width:100%; }
+  .pausepair video{ margin-left:0; }
+}
 </style>
 </head>
 
@@ -3638,7 +3661,7 @@ main section[id]{scroll-margin-top:140px}
           <div class="ep-decision">
             <p class="ep-decision__label">What I decided</p>
             <p><strong>Touch pauses generation.</strong> The instant a finger lands on the page, streaming holds. Lift off, and it resumes where it stopped. The page is guaranteed still at exactly the moment someone is trying to use it, and no speed is lost the rest of the time.</p>
-            <p>It was the hardest piece to get built &mdash; it touched rendering, and the estimate came back as &ldquo;this will interfere with both modules.&rdquo; Winning that one took prototyping it myself and sitting with the engineer until the behaviour was obvious. It later became the core claim of an <strong>invention patent I filed as lead applicant.</strong></p>
+            <p>It was the hardest piece to get built &mdash; it touched rendering, and the estimate came back as &ldquo;this will interfere with both modules.&rdquo; Winning that one took prototyping it myself and sitting with the engineer until the behaviour was obvious. It later became the core claim of an <strong>invention patent granted with me as first inventor.</strong></p>
           </div>
           <figure class="ep-fig ep-fig--ph">
             <img loading="lazy" decoding="async" src="../images/epic-10-solution-pause.jpg" alt="Solution — pressing or scrolling the page pauses AI generation so the layout stays stable" />
@@ -3699,7 +3722,7 @@ main section[id]{scroll-margin-top:140px}
           </figcaption>
         </figure>
 
-        <p class="p">It shipped on schedule, and the interaction model outlived the release &mdash; it was filed as an invention patent and reused on later AI surfaces instead of being redesigned each time.</p>
+        <p class="p">It shipped on schedule, and the interaction model outlived the release &mdash; it was granted as an invention patent and reused on later AI surfaces instead of being redesigned each time.</p>
       </div><!-- /op-beat 05 -->
 
       <!-- ---------- 06 Outcome ---------- -->
@@ -4458,37 +4481,29 @@ main section[id]{scroll-margin-top:140px}
           </div>
         </div>
 
-        <h3 class="sec-claim t-pair">Solution &mdash; Make AI generation respond to users</h3>
-        <p class="p"><strong class="dark">When users take control, AI pauses.</strong></p>
+        <h3 class="sec-claim t-pair">Solution &mdash; Put users back in control of generation</h3>
+        <p class="p">AI can keep generating &mdash; but <strong class="dark">user actions always take priority.</strong></p>
 
-        <div class="chainset">
-          <p class="chain">Scroll <span class="chain__s">&rarr;</span> <strong>pause generation</strong></p>
-          <p class="chain">Keep browsing <span class="chain__s">&rarr;</span> <strong>the page stays stable</strong></p>
-          <p class="chain">Return <span class="chain__s">&rarr;</span> <strong>generation resumes</strong></p>
+        <div class="pausepair">
+          <div class="pausepair__copy">
+            <div class="chainset">
+              <p class="chain">Scroll <span class="chain__s">&rarr;</span> <strong>generation pauses</strong></p>
+              <p class="chain">Release <span class="chain__s">&rarr;</span> <strong>generation resumes</strong></p>
+            </div>
+            <p class="p">A finger on the page holds the answer still; lifting it lets AI continue. Instead of asking users to control AI with a button, <strong class="dark">we let natural interaction set the pace.</strong></p>
+          </div>
+          <img loading="lazy" decoding="async" src="../images/epic-05-pause-still.jpg" alt="A finger resting on the results page while the AI answer is still generating &mdash; the answer and the feed below it hold still" />
+          <video src="../videos/epic-05-pause.mp4" poster="../videos/epic-05-pause.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Scrolling the results page pauses the streaming AI answer so the page holds still; releasing lets it continue generating"></video>
         </div>
 
-        <p class="p">The page stays stable. AI can keep thinking; <strong class="dark">users keep navigating.</strong> The traveler keeps the <strong class="dark">pace</strong> &mdash; when the page moves, and when it waits.</p>
+        <p class="p">This interaction had no established pattern to follow &mdash; existing AI Search experiences had not solved the same control challenge well. Turning the concept into a shippable experience required close collaboration with engineering: new constraints emerged during implementation, and we iterated on the behavior until both the interaction and technical feasibility aligned. It shipped on schedule, after one month of closed development.</p>
 
-        <p class="p">Every other product hands the traveler a Stop button &mdash; asking them to interrupt AI in AI&rsquo;s own language. Here, reaching for something already says it.</p>
-
-        <div class="vidstage">
-          <div class="vidslot">[ Interaction &middot; scroll to pause,<br />stop to resume ]</div>
-        </div>
-
-        <p class="p">It was the hardest piece to get built &mdash; it touched rendering, and the estimate came back as &ldquo;this will interfere with both modules.&rdquo; Winning it took prototyping the behaviour myself and sitting with the engineer until it was obvious. It became the core claim of an <strong class="dark">invention patent I filed as lead applicant</strong>, and was reused on later AI surfaces instead of being redesigned each time.</p>
-
-        <h3 class="sec-claim t-pair">Designing AI Search around human agency</h3>
+        <p class="p">The resulting interaction model was granted as an <strong class="dark">invention patent (first inventor)</strong> and later reused across other AI surfaces.</p>
 
         <div class="ruleblock ruleblock--blue">
           <span class="ruleblock__label">Design principle</span>
-          <p class="ruleblock__body">AI should <strong>assist the journey &mdash; never take control of it.</strong></p>
+          <p class="ruleblock__body"><strong>Choice</strong> &mdash; give travelers the choice to engage with AI.<br /><strong>Control</strong> &mdash; give travelers the control to explore at their own pace.</p>
         </div>
-
-        <p class="p">Two framework decisions and two interaction principles produced V1.</p>
-
-        <div class="ph ph--tall">[ V1 &middot; final UI and interaction prototype ]</div>
-
-        <p class="p">It shipped on schedule &mdash; one month of closed development, with no reference pattern for most of it. What mattered in that month was less about frames than about keeping a direction intact while six people took turns arguing with it.</p>
       </div><!-- /05 -->
 
       <div class="op-beat">

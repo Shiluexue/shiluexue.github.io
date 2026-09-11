@@ -29,6 +29,11 @@
   --header-height: 80px;
 }
 * { box-sizing: border-box; }
+html {
+  /* Force vertical scrollbar to always show — matches index.html so viewport
+     width is identical across pages (kills horizontal shake on nav switch). */
+  overflow-y: scroll;
+}
 html, body {
   margin: 0; padding: 0;
   background: var(--color-bg);
@@ -46,13 +51,17 @@ img { max-width: 100%; display: block; }
 
 /* Header */
 .site-header {
-  position: sticky; top: 0;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  width: 100%;
   background: rgba(255,255,255,.94);
   backdrop-filter: saturate(180%) blur(8px);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
   z-index: 100;
   height: var(--header-height);
   display: flex; align-items: center;
 }
+body { padding-top: var(--header-height); }
 .site-header__inner {
   display: flex; align-items: center; justify-content: space-between; width: 100%;
   max-width: 1200px; margin: 0 auto; padding: 0 24px; gap: 16px;
@@ -593,10 +602,10 @@ body.pal-contact{background-color:#F6FAFF}
 /* Site-wide signature stamp (in footer) */
 .wow-sig{font-family:var(--font-sans);font-size:13px;font-weight:700;color:var(--color-text-muted,#4A5868);letter-spacing:0.28em;text-transform:uppercase;margin:0;opacity:0.65;text-align:center}
 
-.site-header{view-transition-name:site-header}
-::view-transition-group(site-header){animation-duration:.01s}
-::view-transition-old(site-header){ animation:none; opacity:0; mix-blend-mode:normal }
-::view-transition-new(site-header){ animation:none; opacity:1; mix-blend-mode:normal }
+
+
+
+
 </style>
 </head>
 <body>

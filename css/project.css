@@ -276,7 +276,12 @@ img { max-width: 100%; display: block; }
 
 
 /* ============ Nav unified — same size/spacing across all pages & breakpoints (kills switch-jitter) ============ */
-.nav{display:flex !important;gap:48px !important;align-items:center !important}
-.nav a{font-size:16px !important;font-weight:500 !important;padding:6px 0 !important}
-@media (max-width:900px){.nav{gap:32px !important}}
-@media (max-width:600px){.nav{gap:20px !important}}
+
+/* ============ Nav unified — matches index.html/resume.html EXACTLY (kills nav shift on view-transition) ============ */
+.nav{display:flex !important; gap:40px !important; align-items:center !important}
+.nav a{font-size:16px !important; font-weight:500 !important; min-height:44px !important}
+@media (max-width:1080px){.nav{gap:34px !important}}
+@media (max-width:900px){.nav{gap:26px !important}}
+@media (max-width:768px){.nav{gap:22px !important}}
+@media (max-width:620px){.nav{gap:20px !important}}
+@media (max-width:420px){.nav{gap:14px !important}}

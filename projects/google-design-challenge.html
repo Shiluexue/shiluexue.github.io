@@ -13,10 +13,11 @@
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
 /* Shared-element transition from the homepage card */
 .cs-hero img { view-transition-name: cover-coreport; }
-.site-header { view-transition-name: site-header; }
+
 ::view-transition-group(*){animation-duration:.46s;animation-timing-function:cubic-bezier(.32,.72,0,1)}
-::view-transition-group(site-header){animation-duration:.01s}
-::view-transition-old(site-header),::view-transition-new(site-header){animation:none}
+
+
+
 @media (prefers-reduced-motion: reduce){ .cs-hero img, .site-header { view-transition-name:none } }
   </style>
 </head>

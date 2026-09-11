@@ -136,7 +136,7 @@ h1, h2, h3, p, span, a { overflow-wrap: break-word; }
   height: var(--header-height);
   display: flex; align-items: center;
   border-bottom: 1px solid transparent;
-  view-transition-name: site-header;
+
 }
 body { padding-top: var(--header-height); }
 /* Kept for JS compat — no visual change on scroll, header stays stable across pages */
@@ -531,9 +531,9 @@ body { padding-top: var(--header-height); }
 @keyframes vt-fade-in { from { opacity: 0 } }
 /* The cover morph gets a longer, softer curve than the page cross-fade. */
 ::view-transition-group(*) { animation-duration: .46s; animation-timing-function: cubic-bezier(.32,.72,0,1); }
-::view-transition-group(site-header) { animation-duration: .01s; }
-::view-transition-old(site-header){ animation:none; opacity:0; mix-blend-mode:normal }
-::view-transition-new(site-header){ animation:none; opacity:1; mix-blend-mode:normal }
+
+
+
 
 /* Scroll progress */
 .wow-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 9999; transition: width .1s ease-out; }

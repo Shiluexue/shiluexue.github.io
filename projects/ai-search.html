@@ -245,10 +245,10 @@ a:hover{opacity:.85;transition:opacity .2s ease}
 img{max-width:100%;display:block}
 
 /* ============ Header ============ */
-.site-header{position:fixed;top:0;left:0;right:0;width:100%;background:transparent;z-index:100;height:var(--header-height);display:flex;align-items:center;border-bottom:1px solid transparent;transition:background-color .35s cubic-bezier(.4,0,.2,1),backdrop-filter .35s cubic-bezier(.4,0,.2,1),-webkit-backdrop-filter .35s cubic-bezier(.4,0,.2,1),border-color .35s cubic-bezier(.4,0,.2,1),box-shadow .35s cubic-bezier(.4,0,.2,1),transform .35s cubic-bezier(.4,0,.2,1)}
+.site-header{position:fixed;top:0;left:0;right:0;width:100%;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(8px);-webkit-backdrop-filter:saturate(180%) blur(8px);z-index:100;height:var(--header-height);display:flex;align-items:center;border-bottom:1px solid transparent;transition:background-color .35s cubic-bezier(.4,0,.2,1),backdrop-filter .35s cubic-bezier(.4,0,.2,1),-webkit-backdrop-filter .35s cubic-bezier(.4,0,.2,1),border-color .35s cubic-bezier(.4,0,.2,1),box-shadow .35s cubic-bezier(.4,0,.2,1),transform .35s cubic-bezier(.4,0,.2,1)}
 .site-header.is-hidden{transform:translateY(-100%)}
 body{padding-top:var(--header-height)}
-.site-header.is-scrolled{background:rgba(255,255,255,.55);backdrop-filter:saturate(160%) blur(28px);-webkit-backdrop-filter:saturate(160%) blur(28px);border-bottom-color:rgba(15,24,33,.08);box-shadow:0 4px 24px -10px rgba(15,24,33,.10)}
+.site-header.is-scrolled{background:rgba(255,255,255,.94)}
 .site-header__inner{display:flex;align-items:center;justify-content:space-between;width:100%}
 .brand{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:700;color:var(--c-text)}
 .brand-avatar{position:relative;width:38px;height:40px;flex-shrink:0}
@@ -1696,12 +1696,16 @@ main section[id]{scroll-margin-top:140px}
 /* ============ Header unified — fixed max-width across all pages (kills nav jitter) ============ */
 .site-header__inner{max-width:1200px !important;margin:0 auto !important;padding:0 24px !important;width:100% !important;box-sizing:border-box}
 
+.nav{display:flex !important; gap:40px !important; align-items:center !important}
+.nav a{font-size:16px !important; font-weight:500 !important; min-height:44px !important}
+@media (max-width:1080px){.nav{gap:34px !important}}
+@media (max-width:900px){.nav{gap:26px !important}}
+@media (max-width:768px){.nav{gap:22px !important}}
+@media (max-width:620px){.nav{gap:20px !important}}
+@media (max-width:420px){.nav{gap:14px !important}}
+
 
 /* ============ Nav unified — same size/spacing across all pages & breakpoints (kills switch-jitter) ============ */
-.nav{display:flex !important;gap:48px !important;align-items:center !important}
-.nav a{font-size:16px !important;font-weight:500 !important;padding:6px 0 !important}
-@media (max-width:900px){.nav{gap:32px !important}}
-@media (max-width:600px){.nav{gap:20px !important}}
 
 
 
@@ -1883,10 +1887,11 @@ main section[id]{scroll-margin-top:140px}
 @media (max-width:720px){.ep-bridge__line{font-size:22px}}
 
 .cs-cover-art { view-transition-name: cover-ai-search; }
-.site-header { view-transition-name: site-header; }
+
 ::view-transition-group(*) { animation-duration:.46s; animation-timing-function:cubic-bezier(.32,.72,0,1); }
-::view-transition-group(site-header){ animation-duration:.01s }
-::view-transition-old(site-header),::view-transition-new(site-header){ animation:none }
+
+
+
 @media (prefers-reduced-motion: reduce){ .cs-cover-art, .site-header { view-transition-name: none; } }
 
 /* ============ Chapter 1 — shared ============ */
@@ -2464,7 +2469,7 @@ main section[id]{scroll-margin-top:140px}
 /* A Challenge/Solution pair is ONE unit — the reader scans 问题 → 解法.
    Same size as the beat's own claim; what marks the beat claim is its
    POSITION (directly under the 40px numeral), not a bigger size. */
-.t-pair{ margin-top:var(--gap-sub); margin-bottom:var(--bind-claim); }
+.t-pair{ margin-top:var(--gap-section); margin-bottom:var(--bind-claim); }
 
 .t-claim,.sec-claim{
   font-size:var(--t-claim-size); font-weight:700; color:var(--c-text-deep);
@@ -3206,7 +3211,8 @@ main section[id]{scroll-margin-top:140px}
 .persona{
   background:var(--c-container-bg); border-radius:16px; padding:26px 24px 24px;
 }
-.persona__av{ position:relative; display:block; width:56px; height:56px; margin-bottom:18px; }
+.persona__av{ position:relative; display:block; width:64px; height:64px; margin-bottom:18px; }
+.persona__av img{ display:block; width:64px; height:64px; border-radius:50%; }
 .persona__badge{
   position:absolute; right:-3px; bottom:-3px;
   width:24px; height:24px; border-radius:50%;
@@ -3219,6 +3225,33 @@ main section[id]{scroll-margin-top:140px}
 }
 .persona__d{ font-size:15px; line-height:1.6; color:var(--c-body); margin:0; }
 @media (max-width:800px){ .personas{ grid-template-columns:1fr; gap:14px; } }
+
+/* ============================================================================
+   RHYTHM — 权威副本，故意放在样式表最后
+   ----------------------------------------------------------------------------
+   上面那段 `.op-beat > *` 是 (0,1,0)。它后面定义的每个组件
+   （.personas{margin:26px…}、.op-caps{margin:24px…}、.vidsplit、.chainset…）
+   特异性完全相同，靠源码顺序就赢了它 —— 所以那条 48px 的「组件换气」
+   从来没真正生效过，整个 beat 一直挤在 24–26px。
+   这里加 `.container` 前缀到 (0,2,0)+，并且放在文件末尾，两条都赢。
+   以后任何 beat 节奏规则写在这里，不要写上面。
+   ============================================================================ */
+.container > .op-beat > *{ margin-top:var(--gap-block); margin-bottom:var(--gap-block); }
+.container > .op-beat > .p{ margin-top:0; margin-bottom:var(--gap-para); }
+.container > .op-beat > .t-beat-head{ margin-top:0; margin-bottom:18px; }
+.container > .op-beat > .t-beat-head + .sec-claim,
+.container > .op-beat > .t-beat-head + .t-claim{ margin-top:0; }
+.container > .op-beat > .t-beat-num--solo{ margin-top:0; margin-bottom:var(--bind-claim); }
+.container > .op-beat > .t-claim,
+.container > .op-beat > .sec-claim{ margin-top:0; margin-bottom:var(--bind-claim); }
+.container > .op-beat > .t-sub,
+.container > .op-beat > .l3{ margin-top:var(--gap-sub); margin-bottom:var(--bind-sub); }
+.container > .op-beat > .b-case{ margin-top:var(--gap-sub); margin-bottom:var(--gap-sub); }
+.container > .op-beat > .cons{ margin-top:var(--gap-sub); margin-bottom:var(--bind-sub); }
+/* 分节：Challenge / Solution / 小节收尾。双类 (0,4,0)，才压得过上面那条 claim 规则 */
+.container > .op-beat > .sec-claim.t-pair,
+.container > .op-beat > .t-claim.t-pair{ margin-top:var(--gap-section); margin-bottom:var(--bind-claim); }
+.container > .op-beat > *:last-child{ margin-bottom:0; }
 </style>
 </head>
 
@@ -4356,11 +4389,7 @@ main section[id]{scroll-margin-top:140px}
         <div class="personas">
           <div class="persona">
             <span class="persona__av">
-              <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true">
-                <circle cx="28" cy="28" r="28" fill="#E6EBF1"/>
-                <circle cx="28" cy="22" r="8.5" fill="#9AA6B3"/>
-                <path d="M11 48c2.8-8.8 9.4-13.2 17-13.2S42.2 39.2 45 48z" fill="#9AA6B3"/>
-              </svg>
+              <img loading="lazy" decoding="async" src="../images/epic-05-persona-1.png" alt="" />
               <span class="persona__badge"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 1.2l1.5 3.9 3.9 1.5-3.9 1.5L8 12l-1.5-3.9L2.6 6.6l3.9-1.5z" fill="#0A66C2"/></svg></span>
             </span>
             <p class="persona__t">Open to AI</p>
@@ -4368,11 +4397,7 @@ main section[id]{scroll-margin-top:140px}
           </div>
           <div class="persona">
             <span class="persona__av">
-              <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true">
-                <circle cx="28" cy="28" r="28" fill="#E6EBF1"/>
-                <circle cx="28" cy="22" r="8.5" fill="#9AA6B3"/>
-                <path d="M11 48c2.8-8.8 9.4-13.2 17-13.2S42.2 39.2 45 48z" fill="#9AA6B3"/>
-              </svg>
+              <img loading="lazy" decoding="async" src="../images/epic-05-persona-2.png" alt="" />
               <span class="persona__badge"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="5.6" fill="none" stroke="#8A96A3" stroke-width="1.8"/><line x1="4.4" y1="11.6" x2="11.6" y2="4.4" stroke="#8A96A3" stroke-width="1.8" stroke-linecap="round"/></svg></span>
             </span>
             <p class="persona__t">Resistant to AI</p>
@@ -4380,11 +4405,7 @@ main section[id]{scroll-margin-top:140px}
           </div>
           <div class="persona">
             <span class="persona__av">
-              <svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true">
-                <circle cx="28" cy="28" r="28" fill="#E6EBF1"/>
-                <circle cx="28" cy="22" r="8.5" fill="#9AA6B3"/>
-                <path d="M11 48c2.8-8.8 9.4-13.2 17-13.2S42.2 39.2 45 48z" fill="#9AA6B3"/>
-              </svg>
+              <img loading="lazy" decoding="async" src="../images/epic-05-persona-3.png" alt="" />
               <span class="persona__badge"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="5.8" fill="none" stroke="#C9863B" stroke-width="1.7"/><path d="M8 4.6V8l2.4 1.6" fill="none" stroke="#C9863B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </span>
             <p class="persona__t">Willing, but impatient</p>
@@ -4422,33 +4443,31 @@ main section[id]{scroll-margin-top:140px}
           <img loading="lazy" decoding="async" src="../images/epic-05-modes.jpg" alt="Four states of the AI module on the Trip.com results page: AI generating at the top of the page, swiped up so the answer condenses to a bar and the feed takes the screen, the bar showing &quot;Completed the answer&quot; as the ready cue, and the full answer returned to with day-by-day itinerary and place cards" />
         </figure>
 
-                <h3 class="sec-claim t-pair">Challenge 02 &mdash; When the page moves while you read</h3>
+                <h3 class="sec-claim t-pair">Challenge 02 &mdash; When AI moves faster than users can follow</h3>
 
-        <p class="p">Once users choose to explore AI, a new problem appears. A traditional results page finishes loading, and then the user decides where to go. <strong class="dark">An AI page never finishes.</strong></p>
+        <p class="p"><strong class="dark">But choice alone was not enough.</strong></p>
 
-        <p class="p">The answer keeps generating while users are reading. The content grows. The layout shifts. The results below keep moving.</p>
-
-        <p class="p">In one session a traveler reached for the same hotel card three times. Each time, the next line pushed it <strong class="dark">200 pixels down the screen.</strong></p>
+        <p class="p">Users swipe up to reach the listings, but the answer keeps generating &mdash; it never condenses, and what they were reaching for ends up <strong class="dark">further away than when they started.</strong></p>
 
         <div class="vidsplit">
           <video src="../videos/epic-05-quark.mp4" poster="../videos/epic-05-quark.jpg" autoplay muted loop playsinline preload="metadata" aria-label="A competitor AI search result page: the answer streams in at the top and the result feed below it is pushed further down the screen with every new line"></video>
           <div class="vidsplit__copy">
             <span class="op-cap__num">Competitor case &middot; Quark</span>
-            <p class="p">Every AI Search product inherits this. The feed slides down faster than a thumb can scroll, and whatever the user was reaching for is already gone.</p>
+            <p class="p">In existing AI Search experiences, generation can outpace scrolling. Users scroll to reach something below, but the page keeps moving before they get there.</p>
             <p class="vidsplit__punch">Users are no longer navigating the page &mdash; <strong>they are chasing it.</strong></p>
           </div>
         </div>
 
         <h3 class="sec-claim t-pair">Solution &mdash; Make AI generation respond to users</h3>
-        <p class="p">AI can keep thinking. <strong class="dark">Users should control the pace.</strong></p>
+        <p class="p"><strong class="dark">When users take control, AI pauses.</strong></p>
 
         <div class="chainset">
           <p class="chain">Scroll <span class="chain__s">&rarr;</span> <strong>pause generation</strong></p>
-          <p class="chain">Hold <span class="chain__s">&rarr;</span> <strong>freeze the stream</strong></p>
-          <p class="chain">Keep browsing <span class="chain__s">&rarr;</span> <strong>resume when ready</strong></p>
+          <p class="chain">Keep browsing <span class="chain__s">&rarr;</span> <strong>the page stays stable</strong></p>
+          <p class="chain">Return <span class="chain__s">&rarr;</span> <strong>generation resumes</strong></p>
         </div>
 
-        <p class="p">The page stays stable. AI follows the user&rsquo;s attention. The traveler keeps the <strong class="dark">pace</strong> &mdash; when the page moves, and when it waits.</p>
+        <p class="p">The page stays stable. AI can keep thinking; <strong class="dark">users keep navigating.</strong> The traveler keeps the <strong class="dark">pace</strong> &mdash; when the page moves, and when it waits.</p>
 
         <p class="p">Every other product hands the traveler a Stop button &mdash; asking them to interrupt AI in AI&rsquo;s own language. Here, reaching for something already says it.</p>
 

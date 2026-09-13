@@ -2052,7 +2052,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
   max-width:70%;
 }
 .fw-zone{ border-radius:12px; padding:10px; display:flex; flex-direction:column; gap:6px; }
-.fw-zone--ai{ background:#EFF4FB; border:1px solid rgba(10,102,194,.14); }
+.fw-zone--ai{ background:rgba(180,206,241,.16); border:none; }
 .fw-zone--results{ background:transparent; padding:2px 0 0; }
 .fw-zone--grow{ flex:1; min-height:0; }
 .fw-tag{
@@ -2468,8 +2468,8 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
 
 /* ---- decision block ---- */
 .decision{
-  background:linear-gradient(180deg,#EFF5FE 0%,#E6EEFB 100%);
-  border:1px solid rgba(10,102,194,.16); border-radius:16px;
+  background:rgba(180,206,241,.16);
+  border:none; border-radius:16px;
   padding:28px 30px; margin:28px 0 var(--gap-para);
 }
 .decision__label{
@@ -2557,7 +2557,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
   color:var(--c-body); opacity:.6; display:block; margin-bottom:10px;
 }
 .ruleblock__body{ font-size:17px; font-weight:600; line-height:1.5; color:var(--c-text-deep); margin:0; }
-.ruleblock--blue{ background:linear-gradient(180deg,#EFF5FE 0%,#E6EEFB 100%); border-color:rgba(10,102,194,.16); }
+.ruleblock--blue{ background:rgba(180,206,241,.16); border-color:transparent; }
 .ruleblock--blue .ruleblock__label{ color:var(--c-blue); opacity:1; }
 
 .b-route{ margin:24px 0 var(--gap-para); border-top:1px solid rgba(15,24,33,.10); }
@@ -3501,6 +3501,30 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
 .qmetric--solo .qmetric__box{ margin-bottom:0; }
 .qmetric--neg .qmetric__v{ color:var(--c-status-limit); }
 .qmetric__ns{ font-weight:700; opacity:.85; }
+
+
+/* ============ 3Cs — Choice / Control / Clarity principles ============ */
+.ruleblock--ccc{ padding:28px 32px; }
+.ccc{ margin:14px 0 0; display:flex; flex-direction:column; gap:16px; }
+.ccc__row{
+  display:grid; grid-template-columns:130px 1fr; gap:24px;
+  align-items:baseline;
+  padding:14px 0;
+  border-top:1px solid rgba(44,97,254,.14);
+}
+.ccc__row:first-child{ border-top:none; padding-top:6px; }
+.ccc__k{
+  font-size:15px; font-weight:700; color:var(--c-text-deep);
+  letter-spacing:.02em; margin:0;
+}
+.ccc__v{
+  font-size:17px; line-height:1.55; color:var(--c-text-deep);
+  font-weight:500; margin:0;
+}
+@media (max-width:720px){
+  .ccc__row{ grid-template-columns:1fr; gap:4px; }
+}
+
 </style>
 </head>
 
@@ -4400,11 +4424,13 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
 
         <h3 class="sec-claim t-pair">Challenge 03 &mdash; When AI has to stand out, without taking over</h3>
 
-        <p class="p">TripGenie already had its own visual language, built for AI-first experiences. Search was different: AI now had to live alongside products, content and an existing information hierarchy &mdash; and bringing the same system over unchanged would either make it <strong class="dark">compete with Search, or disappear inside it.</strong></p>
+        <p class="p">TripGenie&rsquo;s visual language was built for a standalone experience where AI owned the screen. In Search it had to coexist with products, content and an established information hierarchy.</p>
+
+        <p class="p"><strong class="dark">Too strong, and AI competed with Search. Too subtle, and it disappeared inside it.</strong></p>
 
         <h3 class="sec-claim t-pair">Solution &mdash; Adapt the AI language to Search</h3>
 
-        <p class="p">I adapted the existing system across three layers: <strong class="dark">identity, hierarchy and evidence.</strong></p>
+        <p class="p">I translated TripGenie&rsquo;s existing visual language into Search across three moments: <strong class="dark">recognize the AI, read the answer, verify the evidence.</strong></p>
 
         <div class="split2 split2--craft split2--layer">
           <div class="split2__copy">
@@ -4435,7 +4461,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
           <div class="split2__copy">
             <span class="split2__k">02 &mdash; Hierarchy</span>
             <p class="split2__q">Let AI vary. Keep the reading structure stable.</p>
-            <p class="split2__d">In an AI-first experience the answer can own the hierarchy. In Search it has to fit inside one &mdash; <strong class="dark">too many levels inside one module and the answer starts competing with the page.</strong></p>
+            <p class="split2__d">I could not lay out an answer I had not written &mdash; <strong class="dark">I could only set the rules it would be rendered by.</strong> In an AI-first experience the answer can own the hierarchy. In Search it has to fit inside one.</p>
           </div>
           <div class="split2__media">
             <div class="figbox">
@@ -4461,7 +4487,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
           <div class="split2__copy">
             <span class="split2__k">03 &mdash; Evidence</span>
             <p class="split2__q">Bring evidence into the answer.</p>
-            <p class="split2__d">Search gives users visible signals to judge its results &mdash; a price, a rating, a source. A generated answer abstracts all of that away. Sources sit above the answer, not after it: <strong class="dark">the evidence arrives before the answer asks anyone to act on it.</strong></p>
+            <p class="split2__d">Search gives users visible signals to judge its results &mdash; a price, a rating, a source. A generated answer abstracts all of that away. Sources sit above the answer, not after it: <strong class="dark">the evidence arrives before the answer asks anyone to act on it.</strong> Collapsed by default, expanded only when someone wants to check.</p>
             <p class="split2__take">Make the evidence visible, not implicit.</p>
           </div>
           <div class="split2__media">
@@ -4471,9 +4497,22 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
           </div>
         </div>
 
-        <div class="ruleblock ruleblock--blue">
+        <div class="ruleblock ruleblock--blue ruleblock--ccc">
           <span class="ruleblock__label">Design principle</span>
-          <p class="ruleblock__body"><strong>Choice</strong> &mdash; give users the choice to engage with AI.<br /><strong>Control</strong> &mdash; give users the control to explore at their own pace.<br /><strong>Clarity</strong> &mdash; give users the means to judge what the answer is and where it came from.</p>
+          <dl class="ccc">
+            <div class="ccc__row">
+              <dt class="ccc__k">Choice</dt>
+              <dd class="ccc__v">Give users the choice to engage with AI.</dd>
+            </div>
+            <div class="ccc__row">
+              <dt class="ccc__k">Control</dt>
+              <dd class="ccc__v">Give users the control to explore at their own pace.</dd>
+            </div>
+            <div class="ccc__row">
+              <dt class="ccc__k">Clarity</dt>
+              <dd class="ccc__v">Give users the means to judge what the answer is and where it came from.</dd>
+            </div>
+          </dl>
         </div>
       </div><!-- /05 -->
 

@@ -269,14 +269,24 @@ body{padding-top:var(--header-height)}
 .site-header > .container{padding-left:var(--side-pad);padding-right:var(--side-pad)}
 
 /* ============ Anchor scroll offset (account for sticky header + section-nav) ============ */
-main section[id]{scroll-margin-top:140px}
+main section[id], main [id^="beat-"]{scroll-margin-top:140px}
 @media (max-width:768px){main section[id]{scroll-margin-top:110px}}
 
 /* ============ Section navigation (sticky top bar below main header) ============ */
 .section-nav{position:sticky;top:0;z-index:101;background:rgba(255,255,255,.92);backdrop-filter:saturate(160%) blur(20px);-webkit-backdrop-filter:saturate(160%) blur(20px);border-bottom:1px solid rgba(15,24,33,.06);margin:32px 0 0;transition:top .35s cubic-bezier(.4,0,.2,1),box-shadow .3s ease}
 .section-nav.is-stuck{box-shadow:0 4px 20px -8px rgba(15,24,33,.10)}
 .section-nav.below-header{top:var(--header-height)}
-.section-nav__inner{display:flex;align-items:center;justify-content:center;gap:48px;max-width:var(--container-width);margin:0 auto;padding:14px var(--side-pad);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+
+
+/* ============ Section-nav — edge fade shadows + horizontal scroll indicator ============ */
+.section-nav{position:relative}
+.section-nav::before, .section-nav::after{content:"";position:absolute;top:0;bottom:0;width:40px;pointer-events:none;z-index:2;transition:opacity .2s ease}
+.section-nav::before{left:0;background:linear-gradient(90deg, rgba(255,255,255,.98), rgba(255,255,255,0));opacity:0}
+.section-nav::after{right:0;background:linear-gradient(-90deg, rgba(255,255,255,.98), rgba(255,255,255,0));opacity:1}
+.section-nav[data-scroll-left="true"]::before{opacity:1}
+.section-nav[data-scroll-right="false"]::after{opacity:0}
+
+.section-nav__inner{display:flex;align-items:center;justify-content:flex-start;gap:32px;max-width:var(--container-width);margin:0 auto;padding:14px var(--side-pad);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:smooth;position:relative}
 .section-nav__inner::-webkit-scrollbar{display:none}
 .section-nav__link{font-size:13px;font-weight:500;color:var(--c-body);letter-spacing:0.08em;text-transform:uppercase;padding:8px 0;position:relative;transition:color .2s ease;white-space:nowrap;flex-shrink:0}
 .section-nav__link:hover{color:var(--c-text-deep);opacity:1}
@@ -1886,6 +1896,18 @@ main section[id]{scroll-margin-top:140px}
 .ep-bridge__word{font-family:var(--font-sans);font-size:var(--t-movement-size);font-weight:800;color:var(--c-blue);letter-spacing:-0.02em;margin:8px 0 0;line-height:1}
 .ep-bridge__word span{display:block;font-size:15px;font-weight:400;line-height:1.6;letter-spacing:0;color:var(--c-body);margin-top:18px;text-transform:none;max-width:520px}
 @media (max-width:720px){.ep-bridge__line{font-size:22px}}
+.ep-bridge__word span.ep-bridge__punch{display:block;font-size:18px;font-weight:700;line-height:1.5;letter-spacing:0;color:var(--c-text-deep);margin-top:12px;max-width:520px}
+.ep-next{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:56px 0 0;padding:26px 32px;border-radius:18px;background:var(--c-container-bg)}
+.ep-next__copy{min-width:0}
+.ep-next__k{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--c-blue)}
+.ep-next__soon{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:none;color:var(--c-body);opacity:.6;padding:3px 9px;border-radius:999px;border:1px solid rgba(15,24,33,.14)}
+.ep-next__t{font-family:var(--font-sans);font-size:24px;font-weight:800;letter-spacing:-.015em;line-height:1.25;color:var(--c-text-deep);margin:12px 0 0}
+.ep-next__arrow{flex:none;font-size:24px;font-weight:700;color:var(--c-body);opacity:.3}
+@media (max-width:720px){.ep-next{flex-direction:column;align-items:flex-start;gap:14px;padding:22px 22px}.ep-next__t{font-size:20px}}
+.next-case{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:110px;padding-top:26px;border-top:1px solid rgba(15,24,33,.10)}
+.next-case__back{font-size:14px;font-weight:600;color:var(--c-body);opacity:.65;text-decoration:none;transition:opacity .2s}
+.next-case__back:hover{opacity:1}
+@media (max-width:720px){.next-case{margin-top:72px}}
 
 .cs-cover-art { view-transition-name: cover-ai-search; }
 
@@ -3320,8 +3342,71 @@ main section[id]{scroll-margin-top:140px}
 .qpanel__grid .qmetric__d{ font-size:14.5px; }
 .qpanel__sum{ margin:22px 0 0; padding-top:22px; border-top:1px solid rgba(15,24,33,.10); }
 .qrows{ margin:0; }
-.route{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto auto auto auto auto; column-gap:0; row-gap:0; background:var(--c-container-bg); border-radius:18px; padding:32px 34px; margin:26px 0 var(--gap-para); }
-.route__col{ display:grid; grid-row:1 / 6; grid-template-rows:subgrid; padding:0 34px; }
+.split2{ display:grid; grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr); gap:48px; align-items:center; margin:30px 0 var(--gap-para); }
+.split2__k{ display:block; font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--c-blue); opacity:.85; }
+.split2__q{ font-size:22px; font-weight:800; color:var(--c-text-deep); line-height:1.35; letter-spacing:-.015em; margin:12px 0 0; }
+.split2__d{ font-size:15.5px; line-height:1.7; color:var(--c-body); margin:14px 0 0; }
+.split2__media img{ display:block; width:100%; height:auto; border-radius:16px; }
+.split2__media .ph{ margin:0; }
+@media (max-width:800px){
+  .split2{ grid-template-columns:1fr; gap:24px; }
+}
+.trio--2{ grid-template-columns:repeat(2,1fr) !important; }
+.takeaways{ margin:26px 0 var(--gap-para); }
+.takeaway{ display:grid; grid-template-columns:52px 1fr; align-items:start; padding:22px 0; }
+.takeaway + .takeaway{ border-top:1px solid rgba(15,24,33,.10); }
+.takeaway__n{ font-size:12px; font-weight:800; letter-spacing:.06em; color:var(--c-blue); opacity:.5; padding-top:4px; }
+.takeaway__t{ font-size:20px; font-weight:800; color:var(--c-text-deep); line-height:1.32; letter-spacing:-.015em; margin:0; }
+.takeaway__d{ grid-column:2; font-size:15.5px; line-height:1.7; color:var(--c-body); margin:8px 0 0; }
+@media (max-width:800px){ .takeaway{ grid-template-columns:1fr; } .takeaway__d{ grid-column:1; } }
+.band{ display:grid; grid-template-columns:1.902fr 1fr; align-items:stretch; background:#3769FF; overflow:hidden;
+  width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); margin-block:34px var(--gap-block); }
+.band__media{ display:block; font-size:0; line-height:0; background:linear-gradient(90deg,#000 0 57.61%,#3769FF 57.61% 100%); }
+.band__media img{ display:block; width:100%; height:auto; }
+.band__notes{ background:#3769FF; padding:28px clamp(20px,9.375vw,250px) 28px clamp(14px,1.46vw,34px); display:flex; flex-direction:column; justify-content:center; align-items:flex-end; gap:34px; }
+.band__note{ width:clamp(300px,23.6vw,470px); max-width:100%; }
+.band__n{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#fff; color:#3769FF; font-size:11px; font-weight:800; }
+.band__t{ font-size:19px; font-weight:800; color:#fff; line-height:1.32; letter-spacing:-.012em; margin:14px 0 0; }
+.band__d{ font-size:15px; line-height:1.7; color:rgba(255,255,255,.84); margin:10px 0 0; }
+.band__d strong{ color:#fff; font-weight:700; }
+@media (max-width:800px){
+  .band{ grid-template-columns:1fr; }
+  .band__notes{ padding:30px 22px; gap:28px; }
+}
+.fullshot{ margin:26px 0 var(--gap-para); }
+.fullshot img{ display:block; width:100%; height:auto; border-radius:18px; }
+.annot2{ display:grid; grid-template-columns:repeat(2,1fr); grid-template-rows:auto auto auto; column-gap:56px; row-gap:0; margin:0 0 var(--gap-para); }
+.annot2 > .annot__note{ display:grid; grid-row:1 / -1; grid-template-rows:subgrid; }
+.annot__n{ display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:var(--c-blue); color:#fff; font-size:12px; font-weight:800; }
+.annot__t{ font-size:21px; font-weight:800; color:var(--c-text-deep); line-height:1.3; letter-spacing:-.015em; margin:14px 0 0; }
+.annot__d{ font-size:15.5px; line-height:1.7; color:var(--c-body); margin:10px 0 0; }
+@supports not (grid-template-rows: subgrid){
+  .annot2 > .annot__note{ display:flex; flex-direction:column; }
+}
+@media (max-width:800px){
+  .annot2{ grid-template-columns:1fr; grid-template-rows:none; row-gap:26px; }
+  .annot2 > .annot__note{ display:flex; flex-direction:column; grid-row:auto; }
+}
+.trio{ display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:auto auto auto; column-gap:0; row-gap:0; background:var(--c-container-bg); border-radius:18px; padding:32px 34px; margin:26px 0 var(--gap-para); }
+.trio__col{ display:grid; grid-row:1 / -1; grid-template-rows:subgrid; padding:0 30px; }
+.trio__col:first-child{ padding-left:0; }
+.trio__col:last-child{ padding-right:0; }
+.trio__col + .trio__col{ border-left:1px solid rgba(15,24,33,.10); }
+.trio__k{ display:block; font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--c-blue); opacity:.85; }
+.trio__q{ font-size:19px; font-weight:800; color:var(--c-text-deep); line-height:1.35; letter-spacing:-.01em; margin:12px 0 0; }
+.trio__d{ font-size:15px; line-height:1.65; color:var(--c-body); margin:14px 0 0; }
+@supports not (grid-template-rows: subgrid){
+  .trio__col{ display:flex; flex-direction:column; }
+  .trio__d{ margin-top:auto; padding-top:14px; }
+}
+@media (max-width:800px){
+  .trio{ grid-template-columns:1fr; grid-template-rows:none; padding:26px 22px; }
+  .trio__col{ display:flex; flex-direction:column; grid-row:auto; padding:0; }
+  .trio__col + .trio__col{ border-left:0; border-top:1px solid rgba(15,24,33,.10); margin-top:26px; padding-top:26px; }
+  .trio__d{ margin-top:12px; padding-top:0; }
+}
+.route{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto auto; column-gap:0; row-gap:0; background:var(--c-container-bg); border-radius:18px; padding:32px 34px; margin:26px 0 var(--gap-para); }
+.route__col{ display:grid; grid-row:1 / 4; grid-template-rows:subgrid; padding:0 34px; }
 .route__col:first-child{ padding-left:0; }
 .route__col:last-child{ padding-right:0; border-left:1px solid rgba(15,24,33,.10); }
 .route__k{ display:block; font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--c-body); opacity:.5; }
@@ -3331,7 +3416,7 @@ main section[id]{scroll-margin-top:140px}
 .route__lead{ font-size:20px; font-weight:800; color:var(--c-text-deep); letter-spacing:-.01em; line-height:1.3; margin:26px 0 0; }
 .route__col--limit .route__lead{ color:var(--c-status-limit); }
 .route__d{ font-size:15px; line-height:1.6; color:var(--c-body); margin:7px 0 0; }
-.route__sum{ grid-column:1 / -1; grid-row:6; margin:26px 0 0; padding-top:24px; border-top:1px solid rgba(15,24,33,.10); font-size:16px; line-height:1.65; color:var(--c-body); }
+.route__sum{ grid-column:1 / -1; grid-row:4; margin:26px 0 0; padding-top:24px; border-top:1px solid rgba(15,24,33,.10); font-size:16px; line-height:1.65; color:var(--c-body); }
 @supports not (grid-template-rows: subgrid){
   .route__col{ display:flex; flex-direction:column; }
   .route__lead{ margin-top:auto; padding-top:26px; }
@@ -3416,6 +3501,17 @@ main section[id]{scroll-margin-top:140px}
     </div>
   </header>
 
+  <!-- Floating scroll progress + back-to-top -->
+  <button class="scroll-progress" aria-label="Scroll to top" title="Back to top" type="button">
+    <svg class="scroll-progress__ring" viewBox="0 0 52 52" aria-hidden="true">
+      <circle class="scroll-progress__track" cx="26" cy="26" r="24"/>
+      <circle class="scroll-progress__fill" cx="26" cy="26" r="24" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+    </svg>
+    <span class="scroll-progress__button">
+      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 13V3M3 8l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </span>
+  </button>
+
   <main>
 
     <!-- ============ 1. Cover ============ -->
@@ -3477,15 +3573,29 @@ main section[id]{scroll-margin-top:140px}
         </div>
         <div>
           <p class="cs-meta-h">Scope</p>
-          <p class="cs-meta-p">Three staged design initiatives spanning ~2 years — EPIC (complex-intent understanding), Search × AI (unified entry), AI Personalization (decision support).</p>
+          <p class="cs-meta-p">Three new surfaces, built from the ground up and staged over ~2 years — EPIC (complex-intent understanding), Search × AI (unified entry), AI Personalization (decision support).</p>
           <p class="cs-meta-h">Deliverables</p>
           <p class="cs-meta-p">Strategic framing, product flows, interaction models, high-fidelity design, and cross-team alignment across shipped and in-flight surfaces.</p>
         </div>
       </div>
     </section>
 
+    <nav class="section-nav" aria-label="Sections">
+      <div class="section-nav__inner">
+        <a href="#prologue" class="section-nav__link" data-section="prologue">Prologue</a>
+        <a href="#beat-01" class="section-nav__link" data-section="beat-01">Why now</a>
+        <a href="#beat-02" class="section-nav__link" data-section="beat-02">Where retrieval broke</a>
+        <a href="#beat-03" class="section-nav__link" data-section="beat-03">AI&rsquo;s role</a>
+        <a href="#beat-04" class="section-nav__link" data-section="beat-04">Design thinking</a>
+        <a href="#beat-05" class="section-nav__link" data-section="beat-05">User control</a>
+        <a href="#beat-06" class="section-nav__link" data-section="beat-06">Validating</a>
+        <a href="#beat-07" class="section-nav__link" data-section="beat-07">Evolving</a>
+        <a href="#beat-08" class="section-nav__link" data-section="beat-08">Reflection</a>
+      </div>
+    </nav>
+
     <!-- ============ 3. Opening ============ -->
-    <section class="container">
+    <section class="container" id="prologue">
       <p class="t-rail">Prologue</p>
       <h1 class="t-movement">Reframing Search<span class="mark-dot" aria-hidden="true"></span></h1>
       <p class="t-subject">From Query Matching to Travel Decisions</p>
@@ -3493,7 +3603,7 @@ main section[id]{scroll-margin-top:140px}
       <div class="pro-beat pro-beat--lede">
         <p class="t-sub">Premise</p>
         <div class="pro-lede">
-        <p>I lead design for Trip.com Search. Before this case begins, I had already rebuilt the intent-driven results pages &mdash; around 40% of search traffic &mdash; as <strong class="dark">Match &amp; Inspire</strong>: one page doing two jobs, matching the need travelers already express, then inspiring what they might want next.</p>
+        <p>I lead design for Trip.com Search. Before this case begins, I had already rebuilt the intent-driven results pages &mdash; around 40% of search traffic &mdash; as <strong class="dark">Match &amp; Inspire</strong>: one page doing two jobs, matching the need users already express, then inspiring what they might want next.</p>
         <p class="pro-lede__turn">It worked on every need Search could classify. This case is about the ones it couldn&rsquo;t.</p>
         </div>
       </div>
@@ -3535,10 +3645,10 @@ main section[id]{scroll-margin-top:140px}
         <p class="t-sub">The north star</p>
 
           <figure class="opening-quote">
-            <blockquote class="opening-quote__body">Search shouldn&rsquo;t just match what travelers express &mdash; it should help them shape it, and act on it.</blockquote>
+            <blockquote class="opening-quote__body">Search shouldn&rsquo;t just match what users express &mdash; it should help them shape it, and act on it.</blockquote>
           </figure>
 
-          <p class="p">Getting there wasn&rsquo;t one AI feature. AI opened two directions at once &mdash; travelers who say <em>a lot</em>, and travelers who say <em>very little</em>. Serving both raised the question the category still hasn&rsquo;t settled: everywhere, a system decides when to show a short AI answer, but the person still has to go and pick the deeper mode themselves. <strong class="dark">Should a traveler have to know which one they need?</strong></p>
+          <p class="p">Getting there wasn&rsquo;t one AI feature. AI opened two directions at once &mdash; users who say <em>a lot</em>, and users who say <em>very little</em>. Serving both raised the question the category still hasn&rsquo;t settled: everywhere, a system decides when to show a short AI answer, but the person still has to go and pick the deeper mode themselves. <strong class="dark">Should a user have to know which one they need?</strong></p>
 
           <div class="strat" aria-label="Three chapter previews">
             <a class="strat__row" href="#epic">
@@ -3561,362 +3671,17 @@ main section[id]{scroll-margin-top:140px}
     </section>
 
 
-    <div id="epic-a" hidden>
-    <!-- ============ 4. Chapter 02 — EPIC ============ -->
-    <section class="container" id="epic-legacy">
-      <p class="t-rail">Chapter 01 &middot; Explore Intelligent Content (EPIC)</p>
-      <h1 class="t-movement">Extending Search<span class="mark-dot" aria-hidden="true"></span></h1>
-      <h2 class="t-subject">From Keywords to Complex Intent</h2>
 
-      <!-- ---------- 01 Signal ---------- -->
-      <div class="op-beat">
-        <h3 class="sec-claim"><span class="t-beat-num">01</span>The Signal</h3>
-
-        <p class="p">The long queries were already in the log. I hadn&rsquo;t had a reason to look at them separately until I started asking why the unsolved 20% stayed unsolved.</p>
-
-        <p class="p">So I cut results-page traffic by query length. Queries written as full sentences had moved from <strong class="dark">6.3% in Q3&rsquo;23 to 7.8% by Q4&rsquo;24</strong> &mdash; a point and a half in five quarters, rising every quarter in between. A point and a half is not a number that wins a room on its own. What made it arguable was where it came from: travelers were arriving at Trip.com having just asked an LLM something in plain language, and typing the same sentence into our search box out of habit.</p>
-
-        <figure class="ep-fig ep-fig--ph">
-          <img loading="lazy" decoding="async" src="../images/epic-01-signal-longtail.jpg" alt="Long-query share of results-page traffic rising from 6.3% in Q3 2024 to 7.8% in Q4 2025, alongside the shift from short keywords to natural-language input" />
-          <figcaption>
-            <span class="ep-fig__tag">Placeholder</span>
-            <p class="ep-fig__txt">The case I brought to the PM lead: search input is moving from keywords to sentences, LLMs made that shift cheap for users, and the share is climbing. <em>Internal deck slide &mdash; to be redrawn in English.</em></p>
-          </figcaption>
-        </figure>
-
-        <p class="p">Then I read a few thousand of those queries by hand. They weren&rsquo;t one behaviour. They sorted into three, and only one of them was what everyone assumed &ldquo;long-tail&rdquo; meant.</p>
-
-        <div class="ep-types" aria-label="Three shapes of natural-language travel query">
-          <article class="ep-type">
-            <p class="ep-type__kind">Transaction, written out</p>
-            <p class="ep-type__q">&ldquo;What five-star hotels are there in Tokyo?&rdquo;</p>
-            <p class="ep-type__note">A filter set expressed as a sentence. Search could serve this once it parsed the constraints out.</p>
-          </article>
-          <article class="ep-type">
-            <p class="ep-type__kind">Fact lookup</p>
-            <p class="ep-type__q">&ldquo;What time does Universal Studios Japan open?&rdquo;</p>
-            <p class="ep-type__note">One correct answer exists. It sits three taps deep, in a chip row on a detail page.</p>
-          </article>
-          <article class="ep-type ep-type--focus">
-            <p class="ep-type__kind">Open-ended planning</p>
-            <p class="ep-type__q">&ldquo;Shanghai&ndash;Osaka, five days, shopping on the last day&rdquo;</p>
-            <p class="ep-type__note">A task with three constraints and an implied order. Retrieval can match the words. It has nothing to return that <em>is</em> the answer.</p>
-          </article>
-        </div>
-
-        <p class="op-punch">Keyword retrieval could find results for all three.<br/>It could <strong>answer</strong> none of them.</p>
-      </div><!-- /op-beat 01 -->
-
-      <!-- ---------- 02 Problem ---------- -->
-      <div class="op-beat">
-        <h3 class="sec-claim"><span class="t-beat-num">02</span>What Actually Broke</h3>
-
-        <p class="p">I walked both failing cases end to end on my own phone before writing a single frame. The failure looked different each time, and the diagnosis turned out to be the same one.</p>
-
-        <h3 class="l3">Case one &mdash; the answer exists, and it is buried</h3>
-        <p class="p">&ldquo;What time does Universal Studios Japan open?&rdquo; returned a normal results page: tickets, guides, user moments. The opening hours were on the page &mdash; two levels down, inside the attraction detail, in a row of status chips under the hero image.</p>
-        <p class="p">Four moves to reach one line of text: scan a mixed feed, guess which card holds the answer, open it, scroll until you find it. Every one of those moves is a place to give up, and the query was a ten-second question.</p>
-
-        <figure class="ep-fig ep-fig--ph">
-          <img loading="lazy" decoding="async" src="../images/epic-02-before-lookup.jpg" alt="Before state — a fact-lookup query returns a mixed results feed; the opening hours are buried inside the attraction detail page" />
-          <figcaption>
-            <span class="ep-fig__tag">Placeholder</span>
-            <p class="ep-fig__txt">Before: the path from question to answer. Long route, and no signal about which card is carrying the answer. <em>Internal deck slide &mdash; English screens to replace.</em></p>
-          </figcaption>
-        </figure>
-
-        <h3 class="l3">Case two &mdash; the answer doesn&rsquo;t exist as a product</h3>
-        <p class="p">&ldquo;Tokyo 5-day 4-night itinerary, shopping on the last day&rdquo; carries three constraints and a sequence. Search matched <em>Tokyo</em>, <em>5-day</em> and <em>shopping</em> as separate tokens and returned tours that each satisfied one of them. One tour was explicitly labelled <em>No Shopping</em>.</p>
-        <p class="p">Nothing in our inventory was the trip this person described. We were handing over raw material and leaving the assembly to them.</p>
-
-        <figure class="ep-fig ep-fig--ph">
-          <img loading="lazy" decoding="async" src="../images/epic-03-before-planning.jpg" alt="Before state — an itinerary query is decomposed into keyword matches and returns fragmented tour products, none of which match the full request" />
-          <figcaption>
-            <span class="ep-fig__tag">Placeholder</span>
-            <p class="ep-fig__txt">Before: a whole task broken into fragments. The words matched. The trip did not exist. <em>Internal deck slide &mdash; English screens to replace.</em></p>
-          </figcaption>
-        </figure>
-
-        <p class="p">Both cases pointed at the same thing, and it wasn&rsquo;t recall quality. Retrieval was working. What the page never did was <strong class="dark">assemble</strong> &mdash; read the goal behind the sentence, and organise what we already had into a shape the traveler could use.</p>
-      </div><!-- /op-beat 02 -->
-
-      <!-- ---------- 03 Hypothesis ---------- -->
-      <div class="op-beat">
-        <h3 class="sec-claim"><span class="t-beat-num">03</span>The Bet</h3>
-
-        <figure class="opening-quote">
-          <blockquote class="opening-quote__body">If AI can read the goal behind a sentence and organise what we already hold into guidance a traveler can act on, Search can serve the needs a results page was never shaped to carry.</blockquote>
-        </figure>
-
-        <p class="p">I took that to the PM lead as a proposal rather than a request. It came back with a date attached: <strong class="dark">one month, closed development, one surface</strong> &mdash; the comprehensive results page. That became EPIC.</p>
-
-        <p class="p">Everything after that was a sequence of arguments about placement, length, control, and who the page belongs to while an AI is talking on it.</p>
-      </div><!-- /op-beat 03 -->
-
-      <!-- ---------- 04 Design ---------- -->
-      <div class="op-beat">
-        <h3 class="sec-claim"><span class="t-beat-num">04</span>The Decisions</h3>
-
-        <p class="p">There was no settled pattern to copy. The market had split into two camps and neither had been running long enough to call a winner &mdash; Google, RED and WeChat were pinning the answer into a fixed-height block above results; Quark and Baidu were letting it stream in place and push the page down as it went.</p>
-
-        <figure class="ep-fig ep-fig--ph">
-          <img loading="lazy" decoding="async" src="../images/epic-04-industry-trend.jpg" alt="Industry scan — fixed-height AI answer blocks versus streaming in-place expansion across competing search products" />
-          <figcaption>
-            <span class="ep-fig__tag">Placeholder</span>
-            <p class="ep-fig__txt">Industry scan, early 2025. Two live answers to the same question, and a reason to pick rather than copy. <em>Internal deck slide.</em></p>
-          </figcaption>
-        </figure>
-
-        <!-- Decision 1 -->
-        <div class="challenge-block">
-          <p class="challenge-block__overline">Decision 01</p>
-          <h3 class="challenge-block__title">Where an answer lives on a page that also has to sell</h3>
-          <div class="challenge-block__body">
-            <p>The comprehensive results page is where transaction happens. Give the whole page to AI and we lose the surface that pays for it. Bolt AI on as one more card in the feed and it becomes ignorable furniture.</p>
-          </div>
-          <div class="ep-decision">
-            <p class="ep-decision__label">What I decided</p>
-            <p>AI takes <strong>position one, as an integration layer</strong> &mdash; the single slot most likely to hit the intent &mdash; and the results feed stays completely intact underneath it. The answer resolves the question; the feed keeps carrying exploration and conversion.</p>
-          </div>
-          <figure class="ep-fig ep-fig--ph">
-            <img loading="lazy" decoding="async" src="../images/epic-05-decision-layer.jpg" alt="Design decision — AI answer as an integration layer at position one, with the full results feed preserved below" />
-            <figcaption>
-              <span class="ep-fig__tag">Placeholder</span>
-              <p class="ep-fig__txt">Answer on top, feed untouched below. The page gains a job without losing the one it had. <em>Internal deck slide.</em></p>
-            </figcaption>
-          </figure>
-        </div>
-
-        <!-- Decision 2 -->
-        <div class="challenge-block">
-          <p class="challenge-block__overline">Decision 02</p>
-          <h3 class="challenge-block__title">Cap the answer, or let it run</h3>
-          <div class="challenge-block__body">
-            <p>This was the argument that took longest. A fixed-height block is well behaved: the page never moves, engineering loves it, and the feed sits at a predictable scroll depth. Letting the answer run full-length costs all of that.</p>
-          </div>
-
-          <div class="ep-tradeoff" aria-label="Fixed-height answer versus full in-place output">
-            <article class="ep-opt">
-              <div class="ep-opt__head">
-                <p class="ep-opt__name">Fixed-height block</p>
-                <span class="ep-opt__verdict">Not taken</span>
-              </div>
-              <dl>
-                <dt>Answer</dt><dd><strong>Truncated.</strong> Long replies get cut mid-thought</dd>
-                <dt>Feed</dt><dd>Less visible while the answer loads</dd>
-                <dt>Page</dt><dd>Stable throughout</dd>
-              </dl>
-            </article>
-            <article class="ep-opt ep-opt--chosen">
-              <div class="ep-opt__head">
-                <p class="ep-opt__name">Full output, in place</p>
-                <span class="ep-opt__verdict">Shipped</span>
-              </div>
-              <dl>
-                <dt>Answer</dt><dd><strong>Complete</strong>, with follow-up questions carrying the next step</dd>
-                <dt>Feed</dt><dd>More exposure during the loading window</dd>
-                <dt>Page</dt><dd>Moves as content streams in</dd>
-              </dl>
-            </article>
-          </div>
-
-          <div class="ep-decision">
-            <p class="ep-decision__label">What I decided</p>
-            <p>Full output. A truncated AI answer is worse than no AI answer &mdash; the traveler can&rsquo;t judge whether it was any good, so they have no reason to try it a second time. <strong>Completeness is what buys the second use.</strong></p>
-            <p>That meant accepting a page that jumps while it writes. I took the instability as a design problem to solve rather than a reason to back off, which is what Decision 04 turned into.</p>
-          </div>
-          <figure class="ep-fig ep-fig--ph">
-            <img loading="lazy" decoding="async" src="../images/epic-06-decision-fullbleed.jpg" alt="Design decision — comparison of truncated fixed-height answer against full in-place output on answer completeness, feed visibility and page stability" />
-            <figcaption>
-              <span class="ep-fig__tag">Placeholder</span>
-              <p class="ep-fig__txt">The trade-off laid out for the room, with the cost of the choice stated rather than hidden. <em>Internal deck slide.</em></p>
-            </figcaption>
-          </figure>
-        </div>
-
-        <!-- Decision 3 -->
-        <div class="challenge-block">
-          <p class="challenge-block__overline">Decision 03</p>
-          <h3 class="challenge-block__title">Two audiences, one page</h3>
-          <div class="challenge-block__body">
-            <p>Early sessions split cleanly. One group read the answer properly and asked a follow-up. The other scrolled straight past it to the listings, the way they always had. Optimise the layout for either group and you tax the other on every single search.</p>
-            <p>A toggle would have been the easy answer, and the wrong one. Nobody wants to declare a preference before they know what the answer says.</p>
-          </div>
-
-          <figure class="ep-fig ep-fig--ph">
-            <img loading="lazy" decoding="async" src="../images/epic-07-challenge-two-audiences.jpg" alt="Challenge — users who read the AI answer closely versus users who scroll straight to the feed" />
-            <figcaption>
-              <span class="ep-fig__tag">Placeholder</span>
-              <p class="ep-fig__txt">Same page, two opposite reading behaviours. <em>Internal deck slide.</em></p>
-            </figcaption>
-          </figure>
-
-          <div class="ep-decision">
-            <p class="ep-decision__label">What I decided</p>
-            <p>Make the choice continuous instead of binary. The AI module <strong>condenses into a sticky bar as you scroll down</strong>, handing the screen to the feed; scroll back up and it expands again. Either audience gets what it came for, in either direction, without ever selecting a mode.</p>
-          </div>
-          <figure class="ep-fig ep-fig--ph">
-            <img loading="lazy" decoding="async" src="../images/epic-08-solution-sticky.jpg" alt="Solution — the AI module collapses into a sticky bar on scroll down and re-expands on scroll up" />
-            <figcaption>
-              <span class="ep-fig__tag">Placeholder</span>
-              <p class="ep-fig__txt">Sticky, reversible, always available. Control stays with the reader. <em>Internal deck slide &mdash; a short screen recording would carry this better than a still.</em></p>
-            </figcaption>
-          </figure>
-        </div>
-
-        <!-- Decision 4 -->
-        <div class="challenge-block">
-          <p class="challenge-block__overline">Decision 04</p>
-          <h3 class="challenge-block__title">Generation outran the reader</h3>
-          <div class="challenge-block__body">
-            <p>The first build shipped the instability I&rsquo;d agreed to accept, and it was worse in the hand than on paper. Tokens arrived faster than people scrolled. Content kept inserting above the viewport, and the page slid under the thumb.</p>
-            <p>I watched a session where someone reached for a card and it moved 200 pixels before the tap landed. They tried twice, then left. That recording ended the argument for me.</p>
-          </div>
-
-          <figure class="ep-fig ep-fig--ph">
-            <img loading="lazy" decoding="async" src="../images/epic-09-challenge-generation-speed.jpg" alt="Challenge — AI generation speed exceeds the user's scrolling speed, so the page shifts under them" />
-            <figcaption>
-              <span class="ep-fig__tag">Placeholder</span>
-              <p class="ep-fig__txt">Streaming faster than a human reads is a stability bug wearing a performance costume. <em>Internal deck slide.</em></p>
-            </figcaption>
-          </figure>
-
-          <div class="ep-decision">
-            <p class="ep-decision__label">What I decided</p>
-            <p><strong>Touch pauses generation.</strong> The instant a finger lands on the page, streaming holds. Lift off, and it resumes where it stopped. The page is guaranteed still at exactly the moment someone is trying to use it, and no speed is lost the rest of the time.</p>
-            <p>It was the hardest piece to get built &mdash; it touched rendering, and the estimate came back as &ldquo;this will interfere with both modules.&rdquo; Winning that one took prototyping it myself and sitting with the engineer until the behaviour was obvious. It later became the core claim of an <strong>invention patent granted with me as first inventor.</strong></p>
-          </div>
-          <figure class="ep-fig ep-fig--ph">
-            <img loading="lazy" decoding="async" src="../images/epic-10-solution-pause.jpg" alt="Solution — pressing or scrolling the page pauses AI generation so the layout stays stable" />
-            <figcaption>
-              <span class="ep-fig__tag">Placeholder</span>
-              <p class="ep-fig__txt">Press to pause, release to resume. <em>Internal deck slide &mdash; this one really wants a GIF.</em></p>
-            </figcaption>
-          </figure>
-        </div>
-
-        <!-- Decision 5 -->
-        <div class="challenge-block">
-          <p class="challenge-block__overline">Decision 05</p>
-          <h3 class="challenge-block__title">The wait</h3>
-          <div class="challenge-block__body">
-            <p>First token took a few seconds. A full planning answer could take close to ninety. On a results page people expect to be instant, that is a very long time to hold someone with a spinner.</p>
-          </div>
-          <div class="ep-decision">
-            <p class="ep-decision__label">What I decided</p>
-            <p>Stop treating the wait as dead time. The feed renders first and is <strong>fully browsable while the answer is still being written</strong> &mdash; so the loading window costs the traveler nothing, and the AI module announces its state (searching, reading, generating) in place rather than blocking the page behind it.</p>
-            <p>It also flipped the argument about full-length output: the longer the answer takes, the more feed the traveler sees on the way.</p>
-          </div>
-          <figure class="ep-fig ep-fig--ph">
-            <img loading="lazy" decoding="async" src="../images/epic-08-solution-sticky.jpg" alt="Placeholder — loading and streaming states of the AI module while the results feed stays browsable" />
-            <figcaption>
-              <span class="ep-fig__tag">Placeholder</span>
-              <p class="ep-fig__txt"><strong>Needs a dedicated asset:</strong> the loading-state sequence &mdash; searching &rarr; reading sources &rarr; generating &rarr; complete &mdash; with the feed live underneath. Currently reusing the sticky-state slide.</p>
-            </figcaption>
-          </figure>
-        </div>
-
-        <!-- Decision 6 -->
-        <div class="challenge-block">
-          <p class="challenge-block__overline">Decision 06</p>
-          <h3 class="challenge-block__title">An answer that reads well and sells nothing</h3>
-          <div class="challenge-block__body">
-            <p>The one I only got halfway. A good AI answer is a satisfying dead end: the traveler gets what they asked for and has no particular reason to keep going. On a page whose job is booking, that&rsquo;s a real cost.</p>
-          </div>
-          <div class="ep-decision">
-            <p class="ep-decision__label">What I decided</p>
-            <p>Every place the answer names becomes a link into the product for it, and the follow-up questions underneath route back into the feed rather than deeper into chat. The answer is built to <strong>end somewhere, not just to end.</strong></p>
-            <p>It was the right direction and it wasn&rsquo;t enough, which the numbers said plainly a month later.</p>
-          </div>
-        </div>
-      </div><!-- /op-beat 04 -->
-
-      <!-- ---------- 05 Shipping ---------- -->
-      <div class="op-beat">
-        <h3 class="sec-claim"><span class="t-beat-num">05</span>Getting It Out</h3>
-
-        <p class="p">A month of closed development, no reference pattern for most of it, and an interaction model that engineering had good reasons to push back on. The work that mattered here was less about frames and more about keeping a direction intact while six people took turns arguing with it.</p>
-
-        <figure class="ep-fig ep-fig--ph">
-          <img loading="lazy" decoding="async" src="../images/epic-11-constraints-outcome.jpg" alt="Project constraints and outcome — one-month closed development, no established pattern, high implementation difficulty; shipped on time and consolidated into a patented solution" />
-          <figcaption>
-            <span class="ep-fig__tag">Placeholder</span>
-            <p class="ep-fig__txt">Three constraints, and what came out the other side. <em>Internal deck slide.</em></p>
-          </figcaption>
-        </figure>
-
-        <p class="p">It shipped on schedule, and the interaction model outlived the release &mdash; it was granted as an invention patent and reused on later AI surfaces instead of being redesigned each time.</p>
-      </div><!-- /op-beat 05 -->
-
-      <!-- ---------- 06 Outcome ---------- -->
-      <div class="op-beat">
-        <h3 class="sec-claim"><span class="t-beat-num">06</span>What Came Back</h3>
-
-        <p class="p">Retention moved in the right direction across every window. At EPIC&rsquo;s own sample size, none of those moves cleared significance on their own &mdash; the longer-running AI-on / AI-off experiment is what confirmed the direction was real.</p>
-
-        <div class="ep-metrics" aria-label="EPIC outcome metrics">
-          <article class="ep-metric">
-            <p class="ep-metric__delta">+5.04%</p>
-            <p class="ep-metric__label">Day-3 retention</p>
-            <p class="ep-metric__base">37.3% base &middot; Day-1 +3.08%, Day-7 +0.99%</p>
-            <p class="ep-metric__sig">Not significant</p>
-          </article>
-          <article class="ep-metric ep-metric--sig">
-            <p class="ep-metric__delta">+0.57%</p>
-            <p class="ep-metric__label">Day-7 retention, long-run AI on/off</p>
-            <p class="ep-metric__base">42.54 base &middot; measured over a much longer window</p>
-            <p class="ep-metric__sig">Significant</p>
-          </article>
-          <article class="ep-metric">
-            <p class="ep-metric__delta">+0.16%</p>
-            <p class="ep-metric__label">Results-page orders</p>
-            <p class="ep-metric__base">25,519 base</p>
-            <p class="ep-metric__sig">Not significant</p>
-          </article>
-        </div>
-
-        <div class="ep-readout">
-          <p><strong>People came back.</strong> Across every retention window, more of them returned to Search than to the version without it.</p>
-          <p><strong>The effect held over time.</strong> The long-run experiment separated AI&rsquo;s contribution from launch novelty and it stayed positive.</p>
-          <p><strong>They didn&rsquo;t buy more.</strong> Orders were flat. Understanding the question got us a better answer and stopped there.</p>
-        </div>
-
-        <figure class="ep-fig ep-fig--ph">
-          <img loading="lazy" decoding="async" src="../images/epic-12-impact.jpg" alt="Impact figures — retention lifts across Day-1, Day-3 and Day-7, a significant long-run retention gain, and flat results-page orders" />
-          <figcaption>
-            <span class="ep-fig__tag">Placeholder</span>
-            <p class="ep-fig__txt">Reported as measured, including the parts that didn&rsquo;t move. <em>Internal deck slide.</em></p>
-          </figcaption>
-        </figure>
-
-        <h3 class="l3">What I took from it</h3>
-        <p class="p"><strong class="dark">Completeness is what earns the second visit.</strong> The instinct to cap the answer for layout safety would have cost the only thing that made travelers come back.</p>
-        <p class="p"><strong class="dark">Control is a feature, not a fix.</strong> Pause-on-touch started as damage repair for a decision I&rsquo;d made and ended up being the piece of EPIC worth patenting. When AI holds the page, giving the page back on demand is the design.</p>
-        <p class="p"><strong class="dark">A good answer is not a decision.</strong> EPIC read complicated sentences well. It sent people away satisfied and unbooked. That gap is where the next chapter started.</p>
-      </div><!-- /op-beat 06 -->
-
-      <!-- ---------- Bridge into 03 ---------- -->
-      <div class="ep-bridge">
-        <p class="ep-bridge__line">EPIC proved AI could help when intent was complex. <em>Complexity wasn&rsquo;t the only gap.</em></p>
-        <p class="ep-bridge__body">While EPIC was live, I went back to the conversion data looking for the next long sentence to solve. The worst-performing queries on the results page weren&rsquo;t long at all. They were the shortest ones we had &mdash; broad interest words with real traffic, an order conversion of <strong>2.53% against a 5.91% page average</strong>, and travelers rewriting their query twice as often as anywhere else.</p>
-        <p class="ep-bridge__word">&ldquo;Skiing&rdquo;<span>One word. No destination, no dates, no budget &mdash; and no idea where to begin.</span></p>
-      </div>
-    </section>
-
-    </div><!-- /epic-a -->
-
-    <!-- ============ Chapter 1 · EPIC — VERSION B ============ -->
-    <div id="epic-b">
     <section class="container" id="epic">
       <p class="t-rail">Chapter 01 &middot; Explore Intelligent Content (EPIC)</p>
       <h1 class="t-movement">Extending Search<span class="mark-dot" aria-hidden="true"></span></h1>
       <h2 class="t-subject">From Keywords to Complex Intent</h2>
 
-      <div class="op-beat">
+      <div class="op-beat" id="beat-01">
         <p class="t-beat-head"><span class="t-beat-num">01</span><span class="t-beat-name">Why now</span></p>
         <h3 class="sec-claim">Search was entering a new era</h3>
 
-        <p class="p">Search was good at structured intents &mdash; a destination, an attraction, a hotel. Then the shape of what travelers typed started to change: <strong class="dark">questions, constraints and whole travel tasks</strong> where a keyword used to be.</p>
+        <p class="p">Search was good at structured intents &mdash; a destination, an attraction, a hotel. Then the shape of what users typed started to change: <strong class="dark">questions, constraints and whole travel tasks</strong> where a keyword used to be.</p>
 
         <div class="evi" aria-label="Why now — behaviour, capability, and the data">
           <div class="evi__col">
@@ -3948,7 +3713,7 @@ main section[id]{scroll-margin-top:140px}
               <img class="evi__logo evi__logo--4" src="../images/models/deepseek.png" alt="" loading="lazy" decoding="async"/>
             </div>
             <span class="evi__link-k">Why it changed</span>
-            <p class="evi__link-v">The tools that taught travelers to ask this way.</p>
+            <p class="evi__link-v">The tools that taught users to ask this way.</p>
           </div>
 
           <div class="evi__col">
@@ -3988,15 +3753,15 @@ main section[id]{scroll-margin-top:140px}
           </div>
         </div>
 
-        <p class="p">AI chat tools had changed how people ask, everywhere. We saw it on <strong class="dark">Trip.com</strong> in both directions &mdash; in what travelers typed, and in how fast that share was growing: <strong class="dark">up 24%.</strong></p>
+        <p class="p">AI chat tools had changed how people ask, everywhere. We saw it on <strong class="dark">Trip.com</strong> in both directions &mdash; in what users typed, and in how fast that share was growing: <strong class="dark">up 24%.</strong></p>
 
         <div class="ruleblock ruleblock--blue">
           <span class="ruleblock__label">Core signal</span>
-          <p class="ruleblock__body">Search was no longer only about finding existing results. It was becoming a place where travelers <em>express</em> and <em>solve</em> travel tasks.</p>
+          <p class="ruleblock__body">Search was no longer only about finding existing results. It was becoming a place where users <em>express</em> and <em>solve</em> travel tasks.</p>
         </div>
       </div><!-- /01 -->
 
-      <div class="op-beat">
+      <div class="op-beat" id="beat-02">
         <p class="t-beat-head"><span class="t-beat-num">02</span><span class="t-beat-name">Where traditional Search broke</span></p>
         <h3 class="sec-claim">Keyword matching reached its limit</h3>
 
@@ -4052,13 +3817,13 @@ main section[id]{scroll-margin-top:140px}
         <p class="p">Retrieval could only surface what already existed. <strong class="dark">LLMs brought two things it never had &mdash; intent understanding and generation:</strong> read the task behind the query, then write the thing that isn&rsquo;t on any page.</p>
       </div><!-- /02 -->
 
-      <div class="op-beat">
+      <div class="op-beat" id="beat-03">
         <p class="t-beat-head"><span class="t-beat-num">03</span><span class="t-beat-name">Defining AI&rsquo;s role in Search</span></p>
         <h3 class="sec-claim">AI could answer every query. The hard part was knowing when it shouldn&rsquo;t.</h3>
 
         <p class="p">TripGenie had already shown AI could handle complex travel decisions. The question stopped being <em>can AI answer this</em> and became <strong class="dark">should it.</strong></p>
 
-        <p class="p">Travelers aren&rsquo;t always looking for an answer. Often they want a choice, an action, a booking &mdash; and for those, an AI answer doesn&rsquo;t reduce the effort. <strong class="dark">It adds a layer between the traveler and what they came for.</strong></p>
+        <p class="p">Users aren&rsquo;t always looking for an answer. Often they want a choice, an action, a booking &mdash; and for those, an AI answer doesn&rsquo;t reduce the effort. <strong class="dark">It adds a layer between the user and what they came for.</strong></p>
 
         <div class="cons"><p class="cons__t">The answer has to match the task</p></div>
         <p class="p"><strong class="dark">A query is not the task.</strong> The same words can carry very different needs. Here is one query, answered two ways:</p>
@@ -4084,13 +3849,13 @@ main section[id]{scroll-margin-top:140px}
 
         <div class="ruleblock">
           <span class="ruleblock__label">For a structured intent</span>
-          <p class="ruleblock__body">The results page is <strong>already the shortest path to action.</strong> An answer laid on top of it costs a screen and returns nothing the traveler came for.</p>
+          <p class="ruleblock__body">The results page is <strong>already the shortest path to action.</strong> An answer laid on top of it costs a screen and returns nothing the user came for.</p>
         </div>
 
         <div class="cons"><p class="cons__t">Four jobs behind the queries</p></div>
         <p class="p">Search returned something every time. The question was whether what came back was <strong class="dark">what the job needed.</strong></p>
 
-        <div class="vd" aria-label="Four traveler jobs, and what Search and AI each return">
+        <div class="vd" aria-label="Four user jobs, and what Search and AI each return">
           <div class="vd__head">
             <p class="vd__h">The job</p>
             <p class="vd__h">Search returns</p>
@@ -4138,7 +3903,7 @@ main section[id]{scroll-margin-top:140px}
 
         <div class="ruleblock ruleblock--blue">
           <span class="ruleblock__label">Design principle</span>
-          <p class="ruleblock__body">Search helps travelers <strong>find and act.</strong> AI helps them <strong>understand and decide.</strong> The work is knowing which one should lead.</p>
+          <p class="ruleblock__body">Search helps users <strong>find and act.</strong> AI helps them <strong>understand and decide.</strong> The work is knowing which one should lead.</p>
         </div>
 
         <p class="p">I reframed this into a broader Search evolution proposal &mdash; <strong class="dark">a scope covering about one in five searches on the page</strong> &mdash; and brought it to leadership. The response was clear: <strong class="dark">one month, closed development, the comprehensive results page.</strong> That became <strong class="dark">EPIC</strong> &mdash; Explore Intelligent Content.</p>
@@ -4147,7 +3912,7 @@ main section[id]{scroll-margin-top:140px}
 
       </div><!-- /03 -->
 
-      <div class="op-beat">
+      <div class="op-beat" id="beat-04">
         <p class="t-beat-head"><span class="t-beat-num">04</span><span class="t-beat-name">Design thinking</span></p>
         <h3 class="sec-claim">AI answer, or AI + Search?</h3>
 
@@ -4157,7 +3922,7 @@ main section[id]{scroll-margin-top:140px}
           <div class="lat-fig__text">
             <p>In Search, <strong>the wait is part of the experience</strong> &mdash; and an AI-only page opens with a gap in it.</p>
             <p class="chain">Query <span class="chain__s">&rarr;</span> <span class="chain__cost">Wait<span class="chain__dots" aria-hidden="true"><i></i><i></i><i></i></span></span> <span class="chain__s">&rarr;</span> Answer</p>
-            <p>For a search user, it&rsquo;s a blank page &mdash; <strong>nothing to read, nowhere to tap.</strong> Five seconds of that isn&rsquo;t a loading state. <strong>It&rsquo;s when they leave.</strong></p>
+            <p>For a user, it&rsquo;s a blank page &mdash; <strong>nothing to read, nowhere to tap.</strong> Five seconds of that isn&rsquo;t a loading state. <strong>It&rsquo;s when they leave.</strong></p>
           </div>
 
           <div class="lat-fig__chart" role="img" aria-label="Search returns in ~500ms; AI first token in ~5s; AI answer fully streamed by ~10s">
@@ -4512,25 +4277,17 @@ main section[id]{scroll-margin-top:140px}
 
         <p class="p"><strong class="dark">The trade-off: the page grows as AI writes.</strong></p>
 
-        <p class="p">This introduced a new interaction challenge: how can users stay in control when the experience is still evolving?</p>
-
       </div><!-- /04 -->
 
-      <div class="op-beat">
+      <div class="op-beat" id="beat-05">
         <p class="t-beat-head"><span class="t-beat-num">05</span><span class="t-beat-name">Designing for user control</span></p>
         <h3 class="sec-claim">AI doesn&rsquo;t ask for the page. It takes it the moment it starts writing.</h3>
 
-        <p class="p">Search used to be predictable. Users scroll when they want. They pause when they need.</p>
-
-        <p class="p">AI changes that. While users explore, <strong class="dark">the page keeps moving as the answer streams in.</strong></p>
-
-        <p class="p">The experience is no longer controlled by the traveler &mdash; <strong class="dark">it is controlled by generation.</strong></p>
-
-        <p class="p">Two things had slipped out of the traveler&rsquo;s hands: <strong class="dark">what the page shows, and when it moves.</strong></p>
+        <p class="p">Search used to be predictable: users scroll when they want, and pause when they need. While the answer streams in, the page moves on its own. Two things had slipped out of the user&rsquo;s hands: <strong class="dark">what the page shows, and when it moves.</strong></p>
 
         <h3 class="sec-claim t-pair">Challenge 01 &mdash; One AI experience cannot fit every moment</h3>
 
-        <p class="p">Once AI became the answer layer for complex queries, a new challenge emerged. <strong class="dark">Not every traveler feels the same way about AI.</strong></p>
+        <p class="p"><strong class="dark">Not every user feels the same way about AI.</strong></p>
 
         <div class="personas">
           <div class="persona">
@@ -4559,7 +4316,7 @@ main section[id]{scroll-margin-top:140px}
           </div>
         </div>
 
-        <p class="p">A fixed AI experience could not adapt to different moments of the journey. How can we give users the value of AI, <strong class="dark">while letting them stay in control?</strong></p>
+        <p class="p"><strong class="dark">A fixed AI experience could not adapt to different moments of the journey.</strong></p>
 
         <h3 class="sec-claim t-pair">Solution &mdash; Make AI available, never mandatory</h3>
         <p class="p">Instead of choosing AI or Search for users, we let users switch based on their moment.</p>
@@ -4570,7 +4327,7 @@ main section[id]{scroll-margin-top:140px}
             <p class="op-cap__title">Stay with the answer</p>
             <p class="op-cap__desc">The module holds the top of the page and keeps writing.</p>
             <div class="vidstage">
-              <video src="../videos/epic-05-mode-a.mp4" poster="../videos/epic-05-mode-a.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The AI module stays expanded at the top of the results page and keeps streaming the answer while the traveler reads"></video>
+              <video src="../videos/epic-05-mode-a.mp4" poster="../videos/epic-05-mode-a.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The AI module stays expanded at the top of the results page and keeps streaming the answer while the user reads"></video>
             </div>
           </div>
           <div class="op-cap">
@@ -4583,7 +4340,7 @@ main section[id]{scroll-margin-top:140px}
           </div>
         </div>
 
-        <p class="p">The traveler keeps the <strong class="dark">choice</strong> &mdash; whether AI leads, or the feed does.</p>
+        <p class="p">The user keeps the <strong class="dark">choice</strong> &mdash; whether AI leads, or the feed does.</p>
 
         <figure class="wideshot">
           <img loading="lazy" decoding="async" src="../images/epic-05-modes.jpg" alt="Four states of the AI module on the Trip.com results page: AI generating at the top of the page, swiped up so the answer condenses to a bar and the feed takes the screen, the bar showing &quot;Completed the answer&quot; as the ready cue, and the full answer returned to with day-by-day itinerary and place cards" />
@@ -4619,17 +4376,58 @@ main section[id]{scroll-margin-top:140px}
           <video src="../videos/epic-05-pause.mp4" poster="../videos/epic-05-pause.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Scrolling the results page pauses the streaming AI answer so the page holds still; releasing lets it continue generating"></video>
         </div>
 
-        <p class="p">This interaction had no established pattern to follow &mdash; existing AI Search experiences had not solved the same control challenge well. Turning the concept into a shippable experience required close collaboration with engineering: new constraints emerged during implementation, and we iterated on the behavior until both the interaction and technical feasibility aligned. It shipped on schedule, after one month of closed development.</p>
+        <p class="p">No existing AI Search experience had solved this, so there was no pattern to follow. Making it shippable took close work with engineering &mdash; iterating on the behavior until the interaction and the technical constraints agreed. It shipped on schedule, in one month of closed development.</p>
 
         <p class="p">The resulting interaction model was granted as an <strong class="dark">invention patent (first inventor)</strong> and later reused across other AI surfaces.</p>
 
+        <h3 class="sec-claim t-pair">Challenge 03 &mdash; When AI answers are hard to understand and trust</h3>
+
+        <p class="p">Search results came with their own credibility &mdash; a price, a rating, a source you could see. <strong class="dark">A generated answer arrives with all of that stripped out.</strong></p>
+
+        <h3 class="sec-claim t-pair">Solution &mdash; Make AI understandable and trustworthy</h3>
+
+        <div class="split2">
+          <div class="split2__copy">
+            <span class="split2__k">Recognize</span>
+            <p class="split2__q">&ldquo;Am I talking to AI?&rdquo;</p>
+            <p class="split2__d">TripGenie was designed for a surface it owned &mdash; full screen, its own background, the gradient as atmosphere. On the results page it was a guest. <strong class="dark">The identity had to stop being an environment and become a marker</strong>, and still hold up in a dense feed, in dark mode, at 16px.</p>
+            <p class="split2__d">Two gradient sets, one for light and one for dark, so the signal reads at the same strength on both &mdash; and a monochrome fallback for the cases where legibility beats brand. The brand&rsquo;s own clear-space rule had to be resolved against a module header a fraction of its height. On the results page the gradient is <strong class="dark">reserved: the one thing retrieved content never uses.</strong></p>
+          </div>
+          <div class="split2__media">
+            <div class="ph">[ -- Identity board &middot; owned surface &rarr; guest surface, and the marker on white, on dark, over imagery, at 16px ]</div>
+          </div>
+        </div>
+
+        <div class="split2">
+          <div class="split2__copy">
+            <span class="split2__k">Trust</span>
+            <p class="split2__q">&ldquo;Where did this come from?&rdquo;</p>
+            <p class="split2__d">Sources sit above the answer, not after it &mdash; <strong class="dark">the evidence arrives before the answer asks anyone to act on it.</strong> On a page this tight, they compete with the answer for the same pixels.</p>
+          </div>
+          <div class="split2__media">
+            <div class="ph">[ -- Sources &middot; collapsed and expanded, and where the evidence sits relative to the answer ]</div>
+          </div>
+        </div>
+
+        <div class="split2">
+          <div class="split2__copy">
+            <span class="split2__k">Navigate</span>
+            <p class="split2__q">&ldquo;Where am I in this answer?&rdquo;</p>
+            <p class="split2__d">Type scale, heading mappings, paragraph and list spacing &mdash; the structure that lets a long answer be skimmed instead of read start to finish. I could not lay out an answer I had not written. <strong class="dark">I could only set the rules it would be rendered by.</strong></p>
+            <p class="split2__d">Markdown offered three heading levels. The module took two: the largest type in a generated answer <strong class="dark">could not outrank the results page&rsquo;s own hierarchy</strong>, or the block would read as a new page instead of a part of this one.</p>
+          </div>
+          <div class="split2__media">
+            <div class="ph">[ -- Rendering rules &middot; type scale, heading mappings, spacing tokens, applied to a real generated answer ]</div>
+          </div>
+        </div>
+
         <div class="ruleblock ruleblock--blue">
           <span class="ruleblock__label">Design principle</span>
-          <p class="ruleblock__body"><strong>Choice</strong> &mdash; give travelers the choice to engage with AI.<br /><strong>Control</strong> &mdash; give travelers the control to explore at their own pace.</p>
+          <p class="ruleblock__body"><strong>Choice</strong> &mdash; give users the choice to engage with AI.<br /><strong>Control</strong> &mdash; give users the control to explore at their own pace.<br /><strong>Clarity</strong> &mdash; give users the means to judge what the answer is and where it came from.</p>
         </div>
       </div><!-- /05 -->
 
-      <div class="op-beat">
+      <div class="op-beat" id="beat-06">
         <p class="t-beat-head"><span class="t-beat-num">06</span><span class="t-beat-name">Validating AI&rsquo;s value</span></p>
         <h3 class="sec-claim">Success could no longer be measured only by clicks or orders.</h3>
 
@@ -4648,7 +4446,7 @@ main section[id]{scroll-margin-top:140px}
               </div>
               <div class="qrow__c">
                 <p class="qrow__t">Reduced search friction</p>
-                <p class="qrow__d">Travelers needed fewer attempts to express and refine their intent.</p>
+                <p class="qrow__d">Users needed fewer attempts to express and refine their intent.</p>
               </div>
             </div>
             <div class="qrow">
@@ -4659,8 +4457,8 @@ main section[id]{scroll-margin-top:140px}
                 <p class="qrow__sub"><strong>78.5%</strong> on route planning</p>
               </div>
               <div class="qrow__c">
-                <p class="qrow__t">Captured initial attention</p>
-                <p class="qrow__d">AI earned its place on the Search page &mdash; especially for planning tasks, where travelers needed more than a list of results.</p>
+                <p class="qrow__t">Engagement held up</p>
+                <p class="qrow__d">Most users stayed with the answer rather than scrolling past it &mdash; and willingness was strongest on route planning.</p>
               </div>
             </div>
             <div class="qrow">
@@ -4671,8 +4469,8 @@ main section[id]{scroll-margin-top:140px}
                 <p class="qrow__sub">of the ~75% who started reading</p>
               </div>
               <div class="qrow__c">
-                <p class="qrow__t">Revealed a new consumption pattern</p>
-                <p class="qrow__d">Travelers did not always consume AI answers linearly &mdash; complex decisions required more than one step.</p>
+                <p class="qrow__t">Revealed how answers were used</p>
+                <p class="qrow__d">Users were not reading a finished answer &mdash; they took the part they needed and moved on.</p>
               </div>
             </div>
             <div class="qrow">
@@ -4684,35 +4482,29 @@ main section[id]{scroll-margin-top:140px}
               </div>
               <div class="qrow__c">
                 <p class="qrow__t">Created long-term value</p>
-                <p class="qrow__d">AI increased travelers&rsquo; likelihood to return to Search beyond a single session.</p>
+                <p class="qrow__d">AI increased users&rsquo; likelihood to return to Search beyond a single session.</p>
               </div>
             </div>
           </div>
-          <p class="p qpanel__sum">Traditional retrieval remained strong for direct actions. AI expanded Search into three harder jobs &mdash; Know, Plan and Decide. Completion revealed something else: travelers were not reading a finished answer &mdash; they were <strong class="dark">taking the part they needed and moving on.</strong></p>
         </div>
 
         <h3 class="sec-claim t-pair">Insight 2 &mdash; AI could lead the page without breaking the Search journey</h3>
 
         <p class="p">Orders remained flat. Putting AI above the results <strong class="dark">did not measurably hurt the core Search journey</strong> &mdash; AI could take the lead while Search continued to perform.</p>
 
-        <p class="p">With one exception &mdash; and it was not the one we expected. Day-tour searches lost orders. But a query like <em>three days in Japan</em> can mean an itinerary or a day-tour product, and <strong class="dark">nothing in the query tells you which</strong>. AI had not served the wrong job. It had covered the day-tour cards in the feed &mdash; pushing them off the first screen for everyone, including the travelers who came for exactly those.</p>
+        <p class="p">With one exception &mdash; and it was not the one we expected. Day-tour searches lost orders. But a query like <em>three days in Japan</em> can mean an itinerary or a day-tour product, and <strong class="dark">nothing in the query tells you which</strong>. AI had not served the wrong job. It had covered the day-tour cards in the feed &mdash; pushing them off the first screen for everyone, including the users who came for exactly those.</p>
 
         <div class="route">
           <div class="route__col">
             <span class="route__k">Overall results page</span>
             <p class="route__v">+0.16%</p>
             <p class="route__sub">25,519 base &middot; <strong>Not significant</strong></p>
-            <p class="route__lead">No measurable cost</p>
-            <p class="route__d">Across the page as a whole, putting AI first did not change the core journey.</p>
-          </div>
+            </div>
           <div class="route__col route__col--limit">
             <span class="route__k">Day-tour orders</span>
             <p class="route__v">&minus;8%</p>
             <p class="route__sub"><strong>&asymp;&thinsp;80 orders a day</strong></p>
-            <p class="route__lead">A real cost</p>
-            <p class="route__d">Concentrated on queries that also carry product intent &mdash; where the answer sat on top of the cards that served it.</p>
-          </div>
-          <p class="route__sum">Intent was not readable from the query, so routing was never the lever. <strong class="dark">The lever was screen occupancy</strong> &mdash; how much of the first screen a generated answer is allowed to hold.</p>
+            </div>
         </div>
 
         <h3 class="sec-claim t-pair">Insight 3 &mdash; Not every query ends with an answer</h3>
@@ -4722,7 +4514,7 @@ main section[id]{scroll-margin-top:140px}
           <div class="resplit__copy">
             <span class="op-cap__num">User research &middot; 3 AI Search scenarios</span>
             <p class="p">Research explained what the metrics could not.</p>
-            <p class="p">Complex travel decisions rarely had one perfect answer. The first response was not the destination &mdash; travelers wanted to <strong class="dark">add constraints, refine preferences and explore alternatives.</strong></p>
+            <p class="p">Complex travel decisions rarely had one perfect answer. The first response was not the destination &mdash; users wanted to <strong class="dark">add constraints, refine preferences and explore alternatives.</strong></p>
           </div>
         </div>
 
@@ -4731,12 +4523,12 @@ main section[id]{scroll-margin-top:140px}
           <div class="quote">
             <span class="quote__k">Plan &middot; Refine</span>
             <p class="quote__t">&ldquo;Make it more kid-friendly.&rdquo;<br />&ldquo;Less walking.&rdquo;</p>
-            <p class="quote__c">After receiving a 3-day Tokyo itinerary, travelers added their own constraints.</p>
+            <p class="quote__c">After receiving a 3-day Tokyo itinerary, users added their own constraints.</p>
           </div>
           <div class="quote">
             <span class="quote__k">Decide &middot; Explore</span>
             <p class="quote__t">&ldquo;Somewhere quieter.&rdquo;<br />&ldquo;More relaxing.&rdquo;</p>
-            <p class="quote__c">After seeing winter destination options, travelers explored a different direction.</p>
+            <p class="quote__c">After seeing winter destination options, users explored a different direction.</p>
           </div>
           <div class="quote">
             <span class="quote__k">Know &middot; Complete</span>
@@ -4748,71 +4540,122 @@ main section[id]{scroll-margin-top:140px}
         <p class="p">The pattern followed the job behind the query. Knowing needed an answer. <strong class="dark">Planning and deciding needed a conversation.</strong></p>
       </div><!-- /06 -->
 
-      <div class="op-beat">
-        <p class="t-beat-head"><span class="t-beat-num">07</span><span class="t-beat-name">Iteration</span></p>
-        <h3 class="sec-claim">How much AI is enough?</h3>
+      <div class="op-beat" id="beat-07">
+        <p class="t-beat-head"><span class="t-beat-num">07</span><span class="t-beat-name">Evolving AI Search</span></p>
+        <h3 class="sec-claim">The first answer needed to do less &mdash; and lead somewhere deeper.</h3>
 
-        <p class="p"><em>From a fully expanded answer to a fixed-height experiment.</em></p>
-
-        <p class="p">The value question was settled: a complete answer brought people back. That made a question askable that hadn&rsquo;t been before &mdash; <strong class="dark">not whether AI belonged on the page, but how much of the page it should have.</strong> We had shipped the maximal version deliberately. Now we could see what it cost.</p>
-
-        <div class="ph">[ Post-launch occupancy &middot; average AI height, first-screen result visibility, feed impressions ]</div>
-
-        <p class="p">Three costs showed up in the post-launch data:</p>
-
-        <ul class="fw-why">
-          <li>Long, dense answers lowered completion &mdash; people stopped reading before the end.</li>
-          <li>Product and UGC exposure on the first screen dropped.</li>
-          <li>High-intent travelers had a longer path to the thing they came to book.</li>
-        </ul>
-
-        <div class="ruleblock">
-          <span class="ruleblock__label">Hypothesis</span>
-          <p class="ruleblock__body">If the answer&rsquo;s default height is capped while the full version stays one tap away, can we keep what brings travelers back and still put results in front of them sooner?</p>
+        <div class="trio trio--2">
+          <div class="trio__col">
+            <span class="trio__k">Conversion</span>
+            <p class="trio__q">Some queries still carried booking intent.</p>
+            <p class="trio__d">A full AI answer pushed products down &mdash; even when users were ready to book.</p>
+          </div>
+          <div class="trio__col">
+            <span class="trio__k">Refinement</span>
+            <p class="trio__q">The first answer was often just a starting point.</p>
+            <p class="trio__d">Planning and inspiration needed a next step, not a longer answer.</p>
+          </div>
         </div>
 
-        <div class="ph ph--tall">[ Experiment &middot; fixed-height AI &mdash; design and screens ]</div>
+        <h3 class="sec-claim t-pair">Solution &mdash; Show less by default. Let users go deeper when they need more.</h3>
+
+        <p class="p">Before, Search tried to do both: show the full answer and support follow-up on the same page. <strong class="dark">We separated the two.</strong></p>
+
+        <div class="band">
+          <div class="band__media">
+            <img loading="lazy" decoding="async" src="../images/epic-07-beforeafter.jpg" alt="Before and after. Before: one phone showing a fully expanded AI itinerary with three related-query suggestions below the whole answer. After: the answer capped at a fixed height with a View full itinerary button, and a dedicated itinerary page with an open input reading Ask anything about the trip" />
+          </div>
+          <div class="band__notes">
+            <div class="band__note">
+              <span class="band__n">01</span>
+              <p class="band__t">Keep the first answer compact</p>
+              <p class="band__d">Cap the default height so Search results stay within reach.</p>
+            </div>
+            <div class="band__note">
+              <span class="band__n">02</span>
+              <p class="band__t">Move deeper exploration into AI</p>
+              <p class="band__d">View More opens the full answer and lets users refine it through follow-up.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sec-claim t-pair">Testing the new balance</h3>
+
+        <p class="p"><strong class="dark">Could we show less AI without losing its value?</strong> We tested the capped answer against the fully expanded version.</p>
+
+        <div class="trio trio--2">
+          <div class="trio__col">
+            <span class="trio__k">Planning</span>
+            <p class="trio__q">50% entered AI &middot; 98% read the full itinerary</p>
+          </div>
+          <div class="trio__col">
+            <span class="trio__k">Fact-seeking</span>
+            <p class="trio__q">20% viewed more &middot; 88% completed the answer</p>
+          </div>
+        </div>
+
+        <p class="p">Capping the answer did not cost depth &mdash; <strong class="dark">the users who wanted more reliably went and got it.</strong></p>
 
         <div class="op-metrics op-metrics--2">
           <div class="op-metric">
             <span class="op-metric__value">+6.17%</span>
-            <span class="op-metric__label">Diversion into the feed</span>
-            <span class="op-metric__note">capped height vs. fully expanded</span>
+            <span class="op-metric__label">Diversion into the product lines</span>
+            <span class="op-metric__note">capped vs. fully expanded</span>
           </div>
           <div class="op-metric">
             <span class="op-metric__value">+2.13%</span>
             <span class="op-metric__label">Results-page orders</span>
-            <span class="op-metric__note">capped height vs. fully expanded</span>
+            <span class="op-metric__note">capped vs. fully expanded</span>
             <span class="op-metric__sig">Not significant</span>
           </div>
         </div>
 
-        <div class="decision">
-          <span class="decision__label">Decision</span>
-          <p class="decision__head">Cap the default height. Keep the whole answer one tap away.</p>
-          <p class="decision__body">Travelers reached the feed sooner and orders moved with it, without giving up the completeness that brought them back. <strong>The answer was never the thing to remove &mdash; only the amount of it you have to scroll past.</strong></p>
-        </div>
-
-        <h3 class="l3">What I took from it</h3>
-        <p class="p"><strong class="dark">Completeness is what earns the second visit.</strong> The instinct to cap the answer for layout safety would have cost the only thing that made travelers come back.</p>
-        <p class="p"><strong class="dark">Control is the design, not the patch.</strong> Pause-on-touch began as repair for a problem my own decision created, and became a principle: when AI holds the page, handing it back on demand <em>is</em> the design. It is the piece of EPIC worth patenting.</p>
-        <p class="p"><strong class="dark">Satisfaction is not a decision.</strong> EPIC read complicated sentences well. It sent people away satisfied and unbooked. That gap is where the next chapter started.</p>
+        <p class="p"><strong class="dark">Less space. More engagement. No cost to conversion.</strong></p>
       </div><!-- /07 -->
+
+      <div class="op-beat" id="beat-08">
+        <p class="t-beat-head"><span class="t-beat-num">08</span><span class="t-beat-name">Reflection</span></p>
+        <h3 class="sec-claim">The hardest part of AI Search was not making AI smarter. It was knowing when to let it lead &mdash; and when to get out of the way.</h3>
+
+        <div class="takeaways">
+          <div class="takeaway">
+            <span class="takeaway__n">01</span>
+            <p class="takeaway__t">More AI was rarely the answer.</p>
+            <p class="takeaway__d">We started by asking where AI could help. We ended up learning where it should stop.</p>
+          </div>
+          <div class="takeaway">
+            <span class="takeaway__n">02</span>
+            <p class="takeaway__t">Control mattered more as AI became more capable.</p>
+            <p class="takeaway__d">The better AI got at taking over the task, the more important it became to let users take it back.</p>
+          </div>
+          <div class="takeaway">
+            <span class="takeaway__n">03</span>
+            <p class="takeaway__t">A good answer does not have to be a complete one.</p>
+            <p class="takeaway__d">The best experience was not the one that answered everything upfront. It gave users enough to move forward &mdash; and room to shape what came next.</p>
+          </div>
+        </div>
+      </div><!-- /08 -->
 
       <!-- ---------- Bridge into Chapter 2 ---------- -->
       <div class="ep-bridge">
-        <p class="ep-bridge__line">EPIC proved AI could help when intent was complex. <em>Complexity wasn&rsquo;t the only gap.</em></p>
-        <p class="ep-bridge__body">While EPIC was live, I went back to the conversion data looking for the next long sentence to solve. The worst-performing queries on the results page weren&rsquo;t long at all. They were the shortest ones we had &mdash; broad interest words with real traffic, an order conversion of <strong>2.53% against a 5.91% page average</strong>, and travelers rewriting their query twice as often as anywhere else.</p>
-        <p class="ep-bridge__word">&ldquo;Skiing&rdquo;<span>One word. No destination, no dates, no budget &mdash; and no idea where to begin.</span></p>
+        <p class="ep-bridge__line">EPIC proved AI could answer what Search couldn&rsquo;t. <em>But what if users didn&rsquo;t know what to ask for yet?</em></p>
+        <p class="ep-bridge__body">Broad-intent queries had real demand &mdash; but converted at just <strong>2.53% vs. a 5.91% Search average</strong>.</p>
+        <p class="ep-bridge__word">&ldquo;Skiing&rdquo;<span>One word. No destination, dates, or budget.</span><span class="ep-bridge__punch">The need was there. The direction wasn&rsquo;t.</span></p>
+
+        <div class="ep-next">
+          <div class="ep-next__copy">
+            <span class="ep-next__k">Next chapter<span class="ep-next__soon">Coming soon</span></span>
+            <p class="ep-next__t">From answers to personalized decisions</p>
+          </div>
+          <span class="ep-next__arrow" aria-hidden="true">&rarr;</span>
+        </div>
       </div>
     </section>
-    </div><!-- /epic-b -->
 
     <!-- ============ Footer nav placeholder for now ============ -->
     <section class="container">
       <nav class="next-case" aria-label="Case navigation">
-        <a href="../index.html" class="next-case__back">← All projects</a>
-        <span class="next-case__next" style="opacity:.5;pointer-events:none;">More sections coming soon…</span>
+        <a href="../index.html" class="next-case__back">&larr; All projects</a>
       </nav>
     </section>
 
@@ -4837,7 +4680,7 @@ main section[id]{scroll-margin-top:140px}
       onScroll();
 
       // Section nav active-section highlight
-      const sections = document.querySelectorAll('main section[id]');
+      const sections = document.querySelectorAll('main section[id], main [id^="beat-"], main #prologue');
       const dots = document.querySelectorAll('.section-nav__link[data-section]');
       const updateActiveSection = () => {
         const scrollPos = window.scrollY + window.innerHeight * 0.4;
@@ -4983,25 +4826,72 @@ main section[id]{scroll-margin-top:140px}
 })();
 </script>
 
-  <script>
+
+
+<script>
+  // Case-study scroll reveal — auto-tag major content blocks, then observe
   (function(){
-    var sw = document.getElementById('ab-switch');
-    if(!sw) return;
-    var a = document.getElementById('epic-a'), b = document.getElementById('epic-b');
-    sw.addEventListener('click', function(e){
-      var btn = e.target.closest('[data-ab]'); if(!btn) return;
-      var showB = btn.getAttribute('data-ab') === 'b';
-      a.hidden = showB; b.hidden = !showB;
-      sw.querySelectorAll('[data-ab]').forEach(function(x){
-        x.setAttribute('aria-pressed', String((x.getAttribute('data-ab')==='b') === showB));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var selectors = [
+      '.container > h1.l1','.container > h2.l1','.container > h3.l2','.container > h4.l3',
+      '.container > .p','.container > p.p','.container > .p--muted',
+      '.container > .op-beat','.container > .pro-beat',
+      '.container > .evi','.container > .cmp','.container > .spec','.container > .lat','.container > .exh',
+      '.container > .ruleblock','.container > .cons','.container > .cs-meta-box',
+      '.container > .img','.container > .highlight-center','.container > .quote-box',
+      '.container > .op-queries','.container > .op-traffic','.container > .strat',
+      '.container > .opening-quote','.container > .opening-shifts','.container > .op-shifts-viz',
+      '.container > .op-preview','.container > .op-roadmap','.container > .op-two-dir',
+      '.container > figure','.container > blockquote',
+      '.cs-cover-art'
+    ];
+    var els = document.querySelectorAll(selectors.join(','));
+    if (!els.length) return;
+    els.forEach(function(el){ el.classList.add('cs-reveal'); });
+    if (!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
       });
-      var n = document.getElementById('ab-note');
-      if(n) n.innerHTML = showB
-        ? 'Behavior &rarr; Break &rarr; <strong>Boundary</strong> &rarr; Framework &rarr; Interaction &rarr; Ship &rarr; Learn &rarr; <strong>Iterate</strong>'
-        : 'Signal &rarr; Broke &rarr; Bet &rarr; <strong>six Decisions</strong> &rarr; Ship &rarr; Results';
-      sw.scrollIntoView({block:'start'});
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+
+
+<script>
+  // Section-nav: auto-scroll active link into view + toggle edge fade shadows
+  (function(){
+    var nav = document.querySelector('.section-nav');
+    var inner = document.querySelector('.section-nav__inner');
+    if (!nav || !inner) return;
+    function updateShadows(){
+      var maxScroll = inner.scrollWidth - inner.clientWidth;
+      nav.dataset.scrollLeft = (inner.scrollLeft > 4) ? 'true' : 'false';
+      nav.dataset.scrollRight = (inner.scrollLeft < maxScroll - 4) ? 'true' : 'false';
+    }
+    inner.addEventListener('scroll', updateShadows, { passive: true });
+    window.addEventListener('resize', updateShadows);
+    updateShadows();
+    // Scroll active into view whenever a link becomes active
+    var mo = new MutationObserver(function(){
+      var active = inner.querySelector('.section-nav__link.is-active');
+      if (!active) return;
+      var innerRect = inner.getBoundingClientRect();
+      var linkRect = active.getBoundingClientRect();
+      if (linkRect.left < innerRect.left + 40 || linkRect.right > innerRect.right - 40){
+        var offset = linkRect.left - innerRect.left - (innerRect.width - linkRect.width) / 2;
+        inner.scrollTo({ left: inner.scrollLeft + offset, behavior: 'smooth' });
+      }
+    });
+    inner.querySelectorAll('.section-nav__link').forEach(function(a){
+      mo.observe(a, { attributes: true, attributeFilter: ['class'] });
     });
   })();
-  </script>
+</script>
+
 </body>
 </html>

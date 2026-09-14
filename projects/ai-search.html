@@ -4934,16 +4934,26 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
   (function(){
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var selectors = [
+      // top-level headings & prose
       '.container > h1.l1','.container > h2.l1','.container > h3.l2','.container > h4.l3',
-      '.container > .p','.container > p.p','.container > .p--muted',
-      '.container > .op-beat','.container > .pro-beat',
-      '.container > .evi','.container > .cmp','.container > .spec','.container > .lat','.container > .exh',
-      '.container > .ruleblock','.container > .cons','.container > .cs-meta-box',
-      '.container > .img','.container > .highlight-center','.container > .quote-box',
-      '.container > .op-queries','.container > .op-traffic','.container > .strat',
-      '.container > .opening-quote','.container > .opening-shifts','.container > .op-shifts-viz',
-      '.container > .op-preview','.container > .op-roadmap','.container > .op-two-dir',
-      '.container > figure','.container > blockquote',
+      '.container > .p','.container > p.p','.container > .p--muted','.container > .t-movement','.container > .t-subject','.container > .t-rail',
+      '.container > .cs-meta-box','.container > .meta-badge',
+      // beat containers (Prologue + Chapter beats)
+      '.op-beat','.pro-beat','.op-beat > *','.pro-beat > *',
+      // content blocks anywhere in the case body
+      '.evi','.cmp','.spec','.lat','.exh','.strat',
+      '.ruleblock','.cons','.decision','.layer','.psy',
+      '.op-queries','.op-traffic','.op-shifts-viz','.op-preview','.op-roadmap','.op-two-dir',
+      '.op-hero-query','.op-mi','.op-directions','.op-gateway',
+      '.opening-quote','.opening-shifts',
+      '.split','.split2','.two-col','.b-route','.b-type','.ep-type',
+      '.fw-opt','.fw-zone--ai','.figbox','.ccc',
+      '.pullq','.op-punch','.op-stairs','.op-two-dir',
+      // sub-headings and prose inside beats
+      '.op-beat h3','.op-beat h4','.op-beat > .p','.pro-beat > .p',
+      '.sec-claim','.t-beat-head',
+      // images and cover
+      '.container > figure','.container > blockquote','.container > img','.container > .img',
       '.cs-cover-art'
     ];
     var els = document.querySelectorAll(selectors.join(','));

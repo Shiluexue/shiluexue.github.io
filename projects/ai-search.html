@@ -1337,6 +1337,9 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
 .cs-meta-h{font-size:15px;font-weight:700;color:var(--c-text-deep);margin:24px 0 8px;letter-spacing:0.02em}
 .cs-meta-h:first-child{margin-top:0}
 .cs-meta-p{font-size:15px;line-height:1.6;color:var(--c-body);margin:0 0 8px;font-weight:400}
+.cs-meta-link{color:inherit;text-decoration:none;border-bottom:1px solid rgba(15,24,33,.28);transition:border-color .2s ease,color .2s ease}
+.cs-meta-link:hover{color:var(--c-blue);border-bottom-color:currentColor}
+#pause-demo{scroll-margin-top:96px}
 .cs-meta-list{list-style:disc;padding-left:22px;margin:0;font-size:15px;line-height:1.8;color:var(--c-body);font-weight:400}
 
 /* Skip hint — inline pill (contextual, sits after mini-program explanation) */
@@ -2658,6 +2661,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
   display:flex; flex-direction:column;
   border-top:1px solid rgba(15,24,33,.14);
 }
+.strat__q{ display:block; font-size:13.5px; font-weight:500; line-height:1.45; letter-spacing:0; color:var(--c-body); opacity:.8; margin-top:6px; max-width:34ch; }
 .strat__row{
   display:grid;
   grid-template-columns:44px 1fr auto;
@@ -3618,6 +3622,8 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
           <p class="cs-meta-p">Three new surfaces, built from the ground up and staged over ~2 years — EPIC (complex-intent understanding), Search × AI (unified entry), AI Personalization (decision support).</p>
           <p class="cs-meta-h">Deliverables</p>
           <p class="cs-meta-p">Strategic framing, product flows, interaction models, high-fidelity design, and cross-team alignment across shipped and in-flight surfaces.</p>
+          <p class="cs-meta-h">Recognition</p>
+          <p class="cs-meta-p"><strong class="dark">Invention patent (CNIPA), first inventor</strong> &mdash; <a class="cs-meta-link" href="#pause-demo">scroll-to-pause generation</a>, now reused wherever an agent reply meets a list.</p>
         </div>
       </div>
     </section>
@@ -3690,7 +3696,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
             <blockquote class="opening-quote__body">Search shouldn&rsquo;t just match what users express &mdash; it should help them shape it, and act on it.</blockquote>
           </figure>
 
-          <p class="p">Getting there wasn&rsquo;t one AI feature. AI opened two directions at once &mdash; users who say <em>a lot</em>, and users who say <em>very little</em>. Serving both raised the question the category still hasn&rsquo;t settled: everywhere, a system decides when to show a short AI answer, but the person still has to go and pick the deeper mode themselves. <strong class="dark">Should a user have to know which one they need?</strong></p>
+          <p class="p">Getting there wasn&rsquo;t one AI feature. AI opened two directions at once &mdash; users who say <em>a lot</em>, and users who say <em>very little</em>. Serving both raised the question the category still hasn&rsquo;t settled: everywhere, a system decides when to show a short AI answer, but the person still has to go and pick the deeper mode themselves.</p>
 
           <div class="strat" aria-label="Three chapter previews">
             <a class="strat__row" href="#epic">
@@ -3705,7 +3711,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
             </div>
             <div class="strat__row strat__row--soon" aria-disabled="true">
               <span class="strat__n">03</span>
-              <span class="strat__h">Decide how each intent is served</span>
+              <span class="strat__h">Decide how each intent is served<span class="strat__q">Should a user have to know which mode they need?</span></span>
               <span class="strat__tag"><span class="strat__soon">Coming soon</span>Search &times; AI</span>
             </div>
           </div>
@@ -3738,7 +3744,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
               <div class="evi__grp evi__grp--now">
                 <span class="evi__grp-k">Natural language</span>
                 <span class="evi__q"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.7"/><line x1="10.9" y1="10.9" x2="14" y2="14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>&ldquo;What time does Universal Studios Japan open?&rdquo;</span></span>
-                <span class="evi__q"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.7"/><line x1="10.9" y1="10.9" x2="14" y2="14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>&ldquo;Tokyo &amp; Osaka 5-day family trip with shopping&rdquo;</span></span>
+                <span class="evi__q"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.7"/><line x1="10.9" y1="10.9" x2="14" y2="14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>&ldquo;Tokyo 5-day 4-night itinerary, last day shopping&rdquo;</span></span>
               </div>
               <p class="evi__cap">A whole task, handed to a search box.</p>
             </div>
@@ -3948,7 +3954,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
           <p class="ruleblock__body">Search helps users <strong>find and act.</strong> AI helps them <strong>understand and decide.</strong> The work is knowing which one should lead.</p>
         </div>
 
-        <p class="p">I reframed this into a broader Search evolution proposal &mdash; <strong class="dark">a scope covering about one in five searches on the page</strong> &mdash; and brought it to leadership. The response was clear: <strong class="dark">one month, closed development, the comprehensive results page.</strong> That became <strong class="dark">EPIC</strong> &mdash; Explore Intelligent Content.</p>
+        <p class="p">I reframed this into a broader Search evolution proposal &mdash; <strong class="dark">a scope covering about one in five searches on the page</strong> &mdash; and brought it to leadership. The response: <strong class="dark">one month of closed development on the comprehensive results page</strong> &mdash; the format Trip.com reserves for getting to market first. That became <strong class="dark">EPIC</strong> &mdash; Explore Intelligent Content.</p>
 
         <p class="p">Everything after that was an argument about the design frame and the interactions it complicated &mdash; placement, length, control.</p>
 
@@ -4392,7 +4398,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
 
         <p class="p"><strong class="dark">But choice alone was not enough.</strong></p>
 
-        <p class="p">Users swipe up to reach the listings, but the answer keeps generating &mdash; it never condenses, and what they were reaching for ends up <strong class="dark">further away than when they started.</strong></p>
+        <p class="p">A user who asked for that Tokyo itinerary swipes up to reach the listings, but the answer keeps generating &mdash; it never condenses, and what they were reaching for ends up <strong class="dark">further away than when they started.</strong></p>
 
         <div class="vidsplit">
           <video src="../videos/epic-05-quark.mp4" poster="../videos/epic-05-quark.jpg" autoplay muted loop playsinline preload="metadata" aria-label="A competitor AI search result page: the answer streams in at the top and the result feed below it is pushed further down the screen with every new line"></video>
@@ -4406,7 +4412,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
         <h3 class="sec-claim t-pair">Solution &mdash; Put users back in control of generation</h3>
         <p class="p">AI can keep generating &mdash; but <strong class="dark">user actions always take priority.</strong></p>
 
-        <div class="pausepair">
+        <div class="pausepair" id="pause-demo">
           <div class="pausepair__copy">
             <div class="chainset">
               <p class="chain">Scroll <span class="chain__s">&rarr;</span> <strong>generation pauses</strong></p>
@@ -4420,7 +4426,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
 
         <p class="p">No existing AI Search experience had solved this, so there was no pattern to follow. Making it shippable took close work with engineering &mdash; iterating on the behavior until the interaction and the technical constraints agreed. It shipped on schedule, in one month of closed development.</p>
 
-        <p class="p">The resulting interaction model was granted as an <strong class="dark">invention patent (first inventor)</strong> and later reused across other AI surfaces.</p>
+        <p class="p">The interaction model was reused across Trip.com&rsquo;s product lines, wherever an agent reply has to coexist with a list, and <strong class="dark">granted as an invention patent with me as first inventor.</strong></p>
 
         <h3 class="sec-claim t-pair">Challenge 03 &mdash; When AI has to stand out, without taking over</h3>
 
@@ -4441,7 +4447,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
           </div>
           <div class="split2__media">
             <div class="figbox">
-              <img loading="lazy" decoding="async" src="../images/epic-05-identity.png" width="2203" height="725" alt="TripGenie identity adapted for Search: the AI-first character mark on the left, the compact icon-plus-wordmark lockup on the right, set on its clear-space grid" />
+              <img loading="lazy" decoding="async" src="../images/epic-05-identity-v3.png" width="2203" height="725" alt="TripGenie identity adapted for Search: the AI-first character mark on the left, the compact icon-plus-wordmark lockup on the right, set on its clear-space grid" />
             </div>
           </div>
         </div>
@@ -4534,6 +4540,8 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
 
         <p class="p">AI Search introduced a new question. We needed to prove two things: <strong class="dark">could AI solve problems Search could not</strong>, and <strong class="dark">could AI coexist with Search without hurting the core journey?</strong></p>
 
+        <p class="p">Every figure below comes from a live A/B test on the comprehensive results page, across the complex queries EPIC serves &mdash; about one in ten searches.</p>
+
         <h3 class="sec-claim t-pair">Insight 1 &mdash; AI expanded what Search could solve</h3>
 
         <div class="qpanel">
@@ -4624,7 +4632,7 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
           <div class="quote">
             <span class="quote__k">Plan &middot; Refine</span>
             <p class="quote__t">&ldquo;Make it more kid-friendly.&rdquo;<br />&ldquo;Less walking.&rdquo;</p>
-            <p class="quote__c">After receiving a 3-day Tokyo itinerary, users added their own constraints.</p>
+            <p class="quote__c">After receiving the 5-day Tokyo itinerary, users added their own constraints.</p>
           </div>
           <div class="quote">
             <span class="quote__k">Decide &middot; Explore</span>
@@ -4712,6 +4720,8 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
         </div>
 
         <p class="p"><strong class="dark">Less space. More engagement. No cost to conversion.</strong></p>
+
+        <p class="p">Both changes shipped to the comprehensive results page, where EPIC runs today.</p>
       </div><!-- /07 -->
 
       <div class="op-beat" id="beat-08">
@@ -4733,6 +4743,11 @@ main section[id], main [id^="beat-"]{scroll-margin-top:140px}
             <span class="takeaway__n">03</span>
             <p class="takeaway__t">A good answer does not have to be a complete one.</p>
             <p class="takeaway__d">The best experience was not the one that answered everything upfront. It gave users enough to move forward &mdash; and room to shape what came next.</p>
+          </div>
+          <div class="takeaway">
+            <span class="takeaway__n">04</span>
+            <p class="takeaway__t">The same words do not carry the same intent.</p>
+            <p class="takeaway__d">I chose full expansion so an answer would never be cut short. What I underestimated was how often one query carries two intents &mdash; and that a full-height answer serves one of them by burying the other. Day-tour orders fell 8%.</p>
           </div>
         </div>
       </div><!-- /08 -->
